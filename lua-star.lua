@@ -66,7 +66,7 @@ local function listItem(list, item)
 end
 
 -- (Internal) Requests adjacent map values around the given node.
-local function getAdjacent(width, height, node, positionIsOpenFunc, includeDiagonals)
+local function getAdjacent(max_x, max_y, node, positionIsOpenFunc, includeDiagonals)
 
     local result = { }
 
@@ -91,8 +91,8 @@ local function getAdjacent(width, height, node, positionIsOpenFunc, includeDiago
     end
 
     for _, point in ipairs(positions) do
-        local px = clamp(node.x + point.x, 1, width)
-        local py = clamp(node.y + point.y, 1, height)
+        local px = clamp(node.x + point.x, 0, max_x)
+        local py = clamp(node.y + point.y, 0, max_y)
         local value = positionIsOpenFunc( px, py )
         if value then
             add(result, { x = px, y = py  } )
@@ -104,7 +104,7 @@ local function getAdjacent(width, height, node, positionIsOpenFunc, includeDiago
 end
 
 -- Returns the path from start to goal, or false if no path exists.
-function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiagonalMoving)
+function module:find(max_x, max_y, start, goal, positionIsOpenFunc, excludeDiagonalMoving)
     local success = false
     local open = { }
     local closed = { }
@@ -128,7 +128,7 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
 
         if not success then
 
-            local adjacentList = getAdjacent(width, height, current, positionIsOpenFunc, not excludeDiagonalMoving)
+            local adjacentList = getAdjacent(max_x, max_y, current, positionIsOpenFunc, not excludeDiagonalMoving)
 
             for _, adjacent in ipairs(adjacentList) do
 

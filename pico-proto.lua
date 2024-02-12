@@ -79,7 +79,7 @@ function _update()
     end
 
     excludeDiagonalMoving = true
-    path = module:find(map_width - 1, map_height - 1, start, goal, is_coord_reachable, excludeDiagonalMoving)
+    path = module:find(max_x, max_y, start, goal, is_coord_reachable, excludeDiagonalMoving)
   end
 end
 

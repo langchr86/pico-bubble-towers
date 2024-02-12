@@ -86,7 +86,7 @@ local function getAdjacent(width, height, node, positionIsOpenFunc, includeDiago
         }
 
         for _, value in ipairs(diagonalMovements) do
-            table.insert(positions, value)
+            add(positions, value)
         end
     end
 
@@ -95,7 +95,7 @@ local function getAdjacent(width, height, node, positionIsOpenFunc, includeDiago
         local py = clamp(node.y + point.y, 1, height)
         local value = positionIsOpenFunc( px, py )
         if value then
-            table.insert( result, { x = px, y = py  } )
+            add(result, { x = px, y = py  } )
         end
     end
 
@@ -113,16 +113,16 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
     start.G = 0
     start.H = distance(start.x, start.y, goal.x, goal.y)
     start.parent = { x = -1, y = -1 }
-    table.insert(open, start)
+    add(open, start)
 
     while not success and #open > 0 do
 
         -- sort by score: high to low
         table.sort(open, function(a, b) return a.score > b.score end)
 
-        local current = table.remove(open)
+        local current = deli(open)
 
-        table.insert(closed, current)
+        add(closed, current)
 
         success = listContains(closed, goal)
 
@@ -138,7 +138,7 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
 
                         adjacent.score = calculateScore(current, adjacent, goal)
                         adjacent.parent = current
-                        table.insert(open, adjacent)
+                        add(open, adjacent)
 
                     end
 
@@ -161,7 +161,7 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
 
     iter = 1
     while node do
-        table.insert(path, 1, { x = node.x, y = node.y } )
+        add(path, { x = node.x, y = node.y }, 1 )
         node = listItem(closed, node.parent)
         iter += 1
         

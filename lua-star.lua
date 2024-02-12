@@ -19,31 +19,6 @@
 
 local module = {}
 
---- Clears all cached paths.
-function module:clearCached()
-    module.cache = nil
-end
-
--- (Internal) Returns a unique key for the start and end points.
-local function keyOf(start, goal)
-    return string.format("%d,%d>%d,%d", start.x, start.y, goal.x, goal.y)
-end
-
--- (Internal) Returns the cached path for start and end points.
-local function getCached(start, goal)
-    if module.cache then
-        local key = keyOf(start, goal)
-        return module.cache[key]
-    end
-end
-
--- (Internal) Saves a path to the cache.
-local function saveCached(start, goal, path)
-    module.cache = module.cache or { }
-    local key = keyOf(start, goal)
-    module.cache[key] = path
-end
-
 -- (Internal) Return the distance between two points.
 -- This method doesn't bother getting the square root of s, it is faster
 -- and it still works for our use.
@@ -129,15 +104,7 @@ local function getAdjacent(width, height, node, positionIsOpenFunc, includeDiago
 end
 
 -- Returns the path from start to goal, or false if no path exists.
-function module:find(width, height, start, goal, positionIsOpenFunc, useCache, excludeDiagonalMoving)
-
-    if useCache then
-        local cachedPath = getCached(start, goal)
-        if cachedPath then
-            return cachedPath
-        end
-    end
-
+function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiagonalMoving)
     local success = false
     local open = { }
     local closed = { }
@@ -209,10 +176,6 @@ function module:find(width, height, start, goal, positionIsOpenFunc, useCache, e
     end
 
     print ("reversed path")
-
-    if useCache then
-        saveCached(start, goal, path)
-    end
 
     -- reverse the closed list to get the solution
     return path

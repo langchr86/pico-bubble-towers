@@ -78,9 +78,8 @@ function _update()
       return true
     end
 
-    useCache = false
     excludeDiagonalMoving = true
-    path = module:find(map_width - 1, map_height - 1, start, goal, is_coord_reachable, useCache, excludeDiagonalMoving)
+    path = module:find(map_width - 1, map_height - 1, start, goal, is_coord_reachable, excludeDiagonalMoving)
   end
 
   --if path == false then

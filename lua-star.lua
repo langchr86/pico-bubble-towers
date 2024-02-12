@@ -65,29 +65,32 @@ local function listItem(list, item)
     end
 end
 
+local positions_straight = {
+    { x = 0, y = -1 },  -- top
+    { x = -1, y = 0 },  -- left
+    { x = 0, y = 1 },   -- bottom
+    { x = 1, y = 0 },   -- right
+}
+
+local positions_diagonal = {
+    { x = 0, y = -1 },  -- top
+    { x = -1, y = 0 },  -- left
+    { x = 0, y = 1 },   -- bottom
+    { x = 1, y = 0 },   -- right
+    { x = -1, y = -1 },   -- top left
+    { x = 1, y = -1 },   -- top right
+    { x = -1, y = 1 },   -- bot left
+    { x = 1, y = 1 },   -- bot right
+}
+
 -- (Internal) Requests adjacent map values around the given node.
 local function getAdjacent(max_x, max_y, node, positionIsOpenFunc, includeDiagonals)
 
     local result = { }
 
-    local positions = {
-        { x = 0, y = -1 },  -- top
-        { x = -1, y = 0 },  -- left
-        { x = 0, y = 1 },   -- bottom
-        { x = 1, y = 0 },   -- right
-    }
-
+    local positions = positions_straight
     if includeDiagonals then
-        local diagonalMovements = {
-            { x = -1, y = -1 },   -- top left
-            { x = 1, y = -1 },   -- top right
-            { x = -1, y = 1 },   -- bot left
-            { x = 1, y = 1 },   -- bot right
-        }
-
-        for _, value in ipairs(diagonalMovements) do
-            add(positions, value)
-        end
+        positions = positions_diagonal
     end
 
     for _, point in ipairs(positions) do

@@ -126,3 +126,14 @@ function table.sort (arr, comp)
   return quicksort(arr, 1, #arr)
 end
 -- END pico8-missing-builtins v0.1.3
+
+
+function table.isort(arr, comp)
+  for i=1,#arr do
+      local j = i
+      while j > 1 and not comp(arr[j-1], arr[j]) do
+        arr[j],arr[j-1] = arr[j-1],arr[j]
+          j = j - 1
+      end
+  end
+end

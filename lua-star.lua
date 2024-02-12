@@ -118,7 +118,7 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
     while not success and #open > 0 do
 
         -- sort by score: high to low
-        table.sort(open, function(a, b) return a.score > b.score end)
+        table.isort(open, function(a, b) return a.score > b.score end)
 
         local current = deli(open)
 

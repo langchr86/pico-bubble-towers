@@ -117,7 +117,6 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
 
     while not success and #open > 0 do
 
-        print ("a star iteration")
         -- sort by score: high to low
         table.sort(open, function(a, b) return a.score > b.score end)
 
@@ -151,7 +150,6 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
 
     end
 
-    print ("finished search")
 
     if not success then
         return false
@@ -161,21 +159,14 @@ function module:find(width, height, start, goal, positionIsOpenFunc, excludeDiag
     local node = listItem(closed, closed[#closed])
     local path = { }
 
-    --print ("finished listItem")
-
     iter = 1
     while node do
-        --print ("reverse path iteration")
-        --print (iter)
-        --print (node.x)
-        --print (node.y)
         table.insert(path, 1, { x = node.x, y = node.y } )
         node = listItem(closed, node.parent)
         iter += 1
         
     end
 
-    print ("reversed path")
 
     -- reverse the closed list to get the solution
     return path

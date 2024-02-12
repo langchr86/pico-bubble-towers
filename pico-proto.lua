@@ -81,29 +81,10 @@ function _update()
     excludeDiagonalMoving = true
     path = module:find(map_width - 1, map_height - 1, start, goal, is_coord_reachable, excludeDiagonalMoving)
   end
-
-  --if path == false then
-  --  print ("no path found")
-  --else
-  --  print ("path found")
-  --  for i=1,#path do
-  --    print (path[i].x)
-  --    print (path[i].y)
-  --  end
-  --end
-
 end
 
 function _draw()
   cls()
-
-  --for x=0,width do
-  --  for y=0,height do
-  --    local cx = x * 8
-  --    local cy = y * 8
-  --    spr(2, x, y)
-  --  end
-  --end
 
   for value in all(object_map) do
     spr(1, value.x * field_width, value.y * field_height)

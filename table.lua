@@ -1,3 +1,5 @@
+-- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
+
 -- table sort algorithms based on https://www.lexaloffle.com/bbs/?pid=50453
 
 table = {}

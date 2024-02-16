@@ -21,6 +21,8 @@ goal = {x = 15, y = 8}
 object_map = {}
 path = false
 
+enemy = {pos = false, last_path_index = 1}
+
 sw_algo = 0
 
 
@@ -69,6 +71,63 @@ function draw_path()
   end
 end
 
+function convert_field_to_pixel(field)
+  return {px = field.x * 8, py = field.y * 8}
+end
+
+function draw_enemy_on_path()
+  if path == false then
+    reset_enemy()
+    spr(7, goal.x * field_width, goal.y * field_height)
+  else
+    for i = enemy.last_path_index, #path do
+      if move_enemy(path[i]) == true then
+        draw_enemy()
+        enemy.last_path_index = i
+        return
+      end
+    end
+
+    -- no next field -> reached goal
+    reset_enemy()
+  end
+end
+
+function draw_enemy()
+  if enemy.pos == false then
+    return
+  end
+
+  spr(2, enemy.pos.px, enemy.pos.py)
+end
+
+function move_enemy(next_field)
+  local function move_pixel(current, destination)
+    difference = destination - current
+    if difference < 0 then
+      return -1
+    elseif difference > 0 then
+      return 1
+    else
+      return 0
+    end
+  end
+
+  field = convert_field_to_pixel(next_field)
+  moved_x = move_pixel(enemy.pos.px, field.px)
+  moved_y = move_pixel(enemy.pos.py, field.py)
+
+  enemy.pos.px += moved_x
+  enemy.pos.py += moved_y
+
+  return moved_x != 0 or moved_y != 0
+end
+
+function reset_enemy()
+  enemy.pos = convert_field_to_pixel(start)
+  enemy.last_path_index = 1
+end
+
 function _update()
   if btnp(⬆️) then
     cursor.y -= 1
@@ -103,6 +162,7 @@ function _update()
 
   if btnp(❎) then
     tower_placement()
+    reset_enemy()
     path_calculation()
   end
 
@@ -120,12 +180,9 @@ function _draw()
   spr(6, cursor.x * field_width, cursor.y * field_height)
 
   draw_path()
+  draw_enemy_on_path()
 
   fps = stat(7)
   print(fps, 120, 0, 10)
   print(sw_algo, 0, 0, 10)
-
-  --map()
-  --pset(b1.x, b1.y, 12)
-  --spr(2, b1.x, b1.y)
 end

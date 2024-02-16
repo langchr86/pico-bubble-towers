@@ -21,7 +21,7 @@ goal = {x = 15, y = 8}
 object_map = {}
 path = false
 
-btn_up = false
+sw_algo = 0
 
 function _update()
   if btnp(⬆️) then
@@ -80,7 +80,9 @@ function _update()
       return true
     end
 
+    sw_algo = stat(1)
     path = module:find(max_x, max_y, start, goal, is_coord_reachable)
+    sw_algo = stat(1) - sw_algo
   end
 end
 
@@ -104,6 +106,11 @@ function _draw()
       spr(5, x, y)
     end
   end
+
+  fps = stat(7)
+  print(fps, 120, 0, 10)
+  print(sw_algo, 0, 0, 10)
+
   --map()
   --pset(b1.x, b1.y, 12)
   --spr(2, b1.x, b1.y)

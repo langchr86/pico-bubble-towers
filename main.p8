@@ -4,7 +4,7 @@ __lua__
 -- pico-proto
 -- by langchr86
 
-#include missing.lua
+#include table.lua
 #include lua-star.lua
 #include pico-proto.lua
 __gfx__

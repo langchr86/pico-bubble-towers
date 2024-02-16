@@ -4,7 +4,10 @@ __lua__
 -- pico-proto
 -- by langchr86
 
--- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
+-- copyright 2024
+-- by christian lang
+-- is licensed under
+-- cc by-nc-sa 4.0
 
 #include table.lua
 #include lua-star.lua

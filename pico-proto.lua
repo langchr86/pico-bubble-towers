@@ -25,7 +25,7 @@ goal = {x = 15, y = 8}
 object_map = {}
 path = false
 
-enemy = {pos = false, last_path_index = 1}
+enemy = {pos = false, last_path_index = 1, speed = 1}
 
 sw_algo = 0
 
@@ -85,7 +85,7 @@ function draw_enemy_on_path()
     spr(7, goal.x * field_width, goal.y * field_height)
   else
     for i = enemy.last_path_index, #path do
-      if move_enemy(path[i]) == true then
+      if move_enemy(path[i], enemy.speed) == true then
         draw_enemy()
         enemy.last_path_index = i
         return
@@ -105,21 +105,21 @@ function draw_enemy()
   spr(2, enemy.pos.px, enemy.pos.py)
 end
 
-function move_enemy(next_field)
-  local function move_pixel(current, destination)
+function move_enemy(next_field, speed)
+  local function move_pixel(current, destination, speed)
     difference = destination - current
     if difference < 0 then
-      return -1
+      return -speed
     elseif difference > 0 then
-      return 1
+      return speed
     else
       return 0
     end
   end
 
   field = convert_field_to_pixel(next_field)
-  moved_x = move_pixel(enemy.pos.px, field.px)
-  moved_y = move_pixel(enemy.pos.py, field.py)
+  moved_x = move_pixel(enemy.pos.px, field.px, speed)
+  moved_y = move_pixel(enemy.pos.py, field.py, speed)
 
   enemy.pos.px += moved_x
   enemy.pos.py += moved_y

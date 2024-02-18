@@ -9,6 +9,8 @@ __lua__
 -- is licensed under
 -- cc by-nc-sa 4.0
 
+#include point.lua
+#include enemy.lua
 #include table.lua
 #include lua-star.lua
 #include pico-proto.lua

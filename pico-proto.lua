@@ -20,12 +20,12 @@ max_x = map_width - 1
 max_y = map_height - 1
 
 field = {}
-start = {x = 0, y = 7}
-goal = {x = 15, y = 8}
+start = Point:New(0, 7)
+goal = Point:New(15, 8)
 object_map = {}
 path = false
 
-enemy = {pos = false, last_path_index = 1, speed = 1}
+enemy = Enemy:New(start)
 
 sw_algo = 0
 
@@ -76,7 +76,7 @@ function draw_path()
 end
 
 function convert_field_to_pixel(field)
-  return {px = field.x * 8, py = field.y * 8}
+  return {x = field.x * 8, y = field.y * 8}
 end
 
 function draw_enemy_on_path()
@@ -102,7 +102,7 @@ function draw_enemy()
     return
   end
 
-  spr(2, enemy.pos.px, enemy.pos.py)
+  spr(2, enemy.pos.x, enemy.pos.y)
 end
 
 function move_enemy(next_field, speed)
@@ -118,11 +118,11 @@ function move_enemy(next_field, speed)
   end
 
   field = convert_field_to_pixel(next_field)
-  moved_x = move_pixel(enemy.pos.px, field.px, speed)
-  moved_y = move_pixel(enemy.pos.py, field.py, speed)
+  moved_x = move_pixel(enemy.pos.x, field.x, speed)
+  moved_y = move_pixel(enemy.pos.y, field.y, speed)
 
-  enemy.pos.px += moved_x
-  enemy.pos.py += moved_y
+  enemy.pos.x += moved_x
+  enemy.pos.y += moved_y
 
   return moved_x != 0 or moved_y != 0
 end

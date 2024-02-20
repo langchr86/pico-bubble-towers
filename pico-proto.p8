@@ -10,6 +10,7 @@ __lua__
 -- cc by-nc-sa 4.0
 
 #include point.lua
+#include cursor.lua
 #include enemy.lua
 #include table.lua
 #include lua-star.lua

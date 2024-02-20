@@ -8,7 +8,12 @@ function _init()
   poke(0x5f5d, 2) -- set the repeating delay.
 end
 
-cursor = {x=0, y=0}
+screen_max = Point:New(128, 128)
+field_size = 8
+cursor_min = Point:New(field_size, field_size)
+cursor_max = screen_max - cursor_min - cursor_min
+cursor = Cursor:New(cursor_min, cursor_min, cursor_max, field_size)
+
 field_width = 8
 field_height = 8
 map_width = 16
@@ -31,7 +36,7 @@ sw_algo = 0
 
 
 function tower_placement()
-  current = { x = cursor.x, y = cursor.y }
+  current = convert_pixel_to_field(cursor.pos)
 
   removed = false
   for value in all(object_map) do
@@ -76,7 +81,11 @@ function draw_path()
 end
 
 function convert_field_to_pixel(field)
-  return Point:New(field.x * 8, field.y * 8)
+  return Point:New(field.x * field_size, field.y * field_size)
+end
+
+function convert_pixel_to_field(pos)
+  return Point:New(pos.x / field_size, pos.y / field_size)
 end
 
 function draw_enemy()
@@ -110,31 +119,19 @@ end
 
 function _update()
   if btnp(⬆️) then
-    cursor.y -= 1
-    if cursor.y < min_y then
-      cursor.y = min_y
-    end
+    cursor:MoveUp()
   end
 
   if btnp(⬇️) then
-    cursor.y += 1
-    if cursor.y > max_y then
-      cursor.y = max_y
-    end
+    cursor:MoveDown()
   end
 
   if btnp(⬅️) then
-    cursor.x -= 1
-    if cursor.x < min_x then
-      cursor.x = min_x
-    end
+    cursor:MoveLeft()
   end
 
   if btnp(➡️) then
-    cursor.x += 1
-    if cursor.x > max_x then
-      cursor.x = max_x
-    end
+    cursor:MoveRight()
   end
 
   if btnp(🅾️) then
@@ -158,10 +155,10 @@ function _draw()
 
   spr(3, start.x * field_width, start.y * field_height)
   spr(4, goal.x * field_width, goal.y * field_height)
-  spr(6, cursor.x * field_width, cursor.y * field_height)
 
   draw_path()
   draw_enemy()
+  cursor:Draw()
 
   fps = stat(7)
   print(fps, 120, 0, 10)

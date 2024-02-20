@@ -13,3 +13,11 @@ function Point:New(init_x, init_y)
   }
   return setmetatable(o, self)
 end
+
+function Point:Clone()
+    return Point:New(self.x, self.y)
+  end
+
+function Point.__sub(lhs, rhs)
+  return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
+end

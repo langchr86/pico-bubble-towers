@@ -150,6 +150,7 @@ end
 
 function _draw()
   cls()
+  map()
 
   for value in all(object_map) do
     spr(1, value.x * field_width, value.y * field_height)

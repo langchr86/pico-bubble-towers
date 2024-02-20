@@ -11,11 +11,7 @@ Enemy.__index = Enemy
 
 function Enemy:New(init_pos)
   o = {
-    sprite_n=Enemy.sprite_n,
     pos=init_pos,
-    dest_pos=Enemy.dest_pos,
-    speed=Enemy.speed,
-    last_path_index=Enemy.last_path_index,
   }
   return setmetatable(o, self)
 end

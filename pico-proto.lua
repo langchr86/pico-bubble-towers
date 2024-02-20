@@ -76,61 +76,37 @@ function draw_path()
 end
 
 function convert_field_to_pixel(field)
-  return {x = field.x * 8, y = field.y * 8}
+  return Point:New(field.x * 8, field.y * 8)
 end
 
 function draw_enemy_on_path()
   if path == false then
-    reset_enemy()
-    spr(7, goal.x * field_width, goal.y * field_height)
-  else
-    for i = enemy.last_path_index, #path do
-      if move_enemy(path[i], enemy.speed) == true then
-        draw_enemy()
-        enemy.last_path_index = i
-        return
-      end
-    end
-
-    -- no next field -> reached goal
-    reset_enemy()
-  end
-end
-
-function draw_enemy()
-  if enemy.pos == false then
+    enemy:Reset(convert_field_to_pixel(start))
     return
   end
 
-  spr(2, enemy.pos.x, enemy.pos.y)
-end
+  next_field = path[enemy.last_path_index]
+  current_dest = convert_field_to_pixel(next_field)
 
-function move_enemy(next_field, speed)
-  local function move_pixel(current, destination, speed)
-    difference = destination - current
-    if difference < 0 then
-      return -speed
-    elseif difference > 0 then
-      return speed
-    else
-      return 0
+  if not enemy:DefineMoveDestination(current_dest) then
+    enemy.last_path_index += 1
+
+    if enemy.last_path_index > #path then
+      -- no next field -> reached goal
+      enemy:Reset(convert_field_to_pixel(start))
+      return
     end
+
+    next_field = path[enemy.last_path_index]
+    current_dest = convert_field_to_pixel(next_field)
+    enemy:DefineMoveDestination(current_dest)
   end
 
-  field = convert_field_to_pixel(next_field)
-  moved_x = move_pixel(enemy.pos.x, field.x, speed)
-  moved_y = move_pixel(enemy.pos.y, field.y, speed)
-
-  enemy.pos.x += moved_x
-  enemy.pos.y += moved_y
-
-  return moved_x != 0 or moved_y != 0
+  enemy:Move()
+  enemy:Draw()
 end
 
-function reset_enemy()
-  enemy.pos = convert_field_to_pixel(start)
-  enemy.last_path_index = 1
-end
+
 
 function _update()
   if btnp(⬆️) then
@@ -166,7 +142,7 @@ function _update()
 
   if btnp(❎) then
     tower_placement()
-    reset_enemy()
+    enemy:Reset(convert_field_to_pixel(start))
     path_calculation()
   end
 

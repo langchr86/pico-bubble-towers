@@ -21,3 +21,7 @@ function Point:Clone()
 function Point.__sub(lhs, rhs)
   return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
 end
+
+function Point.__eq(lhs, rhs)
+    return lhs.x == rhs.x and lhs.y == rhs.y
+  end

@@ -27,36 +27,37 @@ max_y = map_height - 1
 field = {}
 start = Point:New(0, 7)
 goal = Point:New(15, 8)
-object_map = {}
 path = false
 
+tower_list = {}
 enemy = Enemy:New(start)
 
 sw_algo = 0
 
 
 function tower_placement()
-  current = convert_pixel_to_field(cursor.pos)
+  current = cursor.pos
 
   removed = false
-  for value in all(object_map) do
-    if value.x == current.x and value.y == current.y then
-      del(object_map, value)
+  for tower in all(tower_list) do
+    if tower.pos == current then
+      del(tower_list, tower)
       removed = true
       break
     end
   end
 
   if removed == false then
-    add(object_map, current)
+    add(tower_list, Tower:New(current))
   end
 end
 
 function path_calculation()
   local function is_coord_reachable(x, y)
     -- should return true if the position is open to walk
-    for _, value in pairs(object_map) do
-      if value.x == x and value.y == y then
+    for tower in all(tower_list) do
+      field_pos = convert_pixel_to_field(tower.pos)
+      if field_pos.x == x and field_pos.y == y then
         return false
       end
     end
@@ -70,7 +71,8 @@ end
 
 function draw_path()
   if path == false then
-    spr(7, goal.x * field_width, goal.y * field_height)
+    path_pos = convert_field_to_pixel(goal)
+    spr(7, path_pos.x, path_pos.y)
     return
   end
 
@@ -149,8 +151,8 @@ function _draw()
   cls()
   map()
 
-  for value in all(object_map) do
-    spr(1, value.x * field_width, value.y * field_height)
+  for tower in all(tower_list) do
+    tower:Draw()
   end
 
   spr(3, start.x * field_width, start.y * field_height)

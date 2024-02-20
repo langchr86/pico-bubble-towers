@@ -17,9 +17,9 @@ function Enemy:New(init_pos)
 end
 
 function Enemy:Reset(start)
-  enemy.pos = start
-  enemy.dest_pos = nil
-  enemy.last_path_index = 1
+  self.pos = start
+  self.dest_pos = nil
+  self.last_path_index = 1
 end
 
 function Enemy:DefineMoveDestination(dest)

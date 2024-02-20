@@ -66,12 +66,12 @@ end
 function draw_path()
   if path == false then
     spr(7, goal.x * field_width, goal.y * field_height)
-  else
-    for i = 1, #path do
-      local x = path[i].x * field_width
-      local y = path[i].y * field_height
-      spr(5, x, y)
-    end
+    return
+  end
+
+  for i = 1, #path do
+    local pos = convert_field_to_pixel(path[i])
+    spr(5, pos.x, pos.y)
   end
 end
 
@@ -79,7 +79,7 @@ function convert_field_to_pixel(field)
   return Point:New(field.x * 8, field.y * 8)
 end
 
-function draw_enemy_on_path()
+function draw_enemy()
   if path == false then
     enemy:Reset(convert_field_to_pixel(start))
     return
@@ -160,7 +160,7 @@ function _draw()
   spr(6, cursor.x * field_width, cursor.y * field_height)
 
   draw_path()
-  draw_enemy_on_path()
+  draw_enemy()
 
   fps = stat(7)
   print(fps, 120, 0, 10)

@@ -1,11 +1,15 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
+menu = Menu:New()
+
 function _init()
   cls()
 
   -- custom cursor speed for btnp()
   poke(0x5f5c, 8) -- set the initial delay before repeating. 255 means never repeat.
   poke(0x5f5d, 2) -- set the repeating delay.
+
+  menu:Update()
 end
 
 screen_max = Point:New(128, 128)
@@ -113,7 +117,6 @@ function draw_enemy()
     enemy:DefineMoveDestination(current_dest)
   end
 
-  enemy:Move()
   enemy:Draw()
 end
 
@@ -136,7 +139,10 @@ function _update()
     cursor:MoveRight()
   end
 
-  if btnp(🅾️) then
+  if btn(🅾️) then
+    if not menu.running then
+      enemy:Move()
+    end
   end
 
   if btnp(❎) then
@@ -145,6 +151,9 @@ function _update()
     path_calculation()
   end
 
+  if menu.running then
+    enemy:Move()
+  end
 end
 
 function _draw()

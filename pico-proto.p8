@@ -9,6 +9,7 @@ __lua__
 -- is licensed under
 -- cc by-nc-sa 4.0
 
+#include menu.lua
 #include point.lua
 #include cursor.lua
 #include enemy.lua

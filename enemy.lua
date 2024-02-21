@@ -31,6 +31,10 @@ function Enemy:DefineMoveDestination(dest)
 end
 
 function Enemy:Move()
+  if not self.dest_pos then
+    return
+  end
+
   local function move_pixel(current, destination, speed)
     difference = destination - current
     if difference < 0 then

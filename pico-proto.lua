@@ -120,8 +120,6 @@ function draw_enemy()
   enemy:Draw()
 end
 
-
-
 function _update()
   if btnp(⬆️) then
     cursor:MoveUp()
@@ -160,15 +158,18 @@ function _draw()
   cls()
   map()
 
+  draw_path()
+  draw_enemy()
+
   for tower in all(tower_list) do
     tower:Draw()
+    enemy_list = {enemy}
+    tower:ShotOnNearestEnemy(enemy_list)
   end
 
   spr(3, start.x * field_width, start.y * field_height)
   spr(4, goal.x * field_width, goal.y * field_height)
 
-  draw_path()
-  draw_enemy()
   cursor:Draw()
 
   fps = stat(7)

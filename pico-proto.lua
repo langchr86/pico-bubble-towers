@@ -34,7 +34,7 @@ goal = Point:New(15, 8)
 path = false
 
 tower_list = {}
-enemy = Enemy:New(start)
+enemy_list = {}
 
 sw_algo = 0
 
@@ -73,6 +73,26 @@ function path_calculation()
   sw_algo = stat(1) - sw_algo
 end
 
+function enemy_creation()
+  enemy_list = {}
+
+  start_point = convert_field_to_pixel(start)
+  diff_point = Point:New(16, 0)
+
+  for i=1,4 do
+    enemy = Enemy:New(start_point)
+    add(enemy_list, enemy)
+
+    start_point = start_point - diff_point
+  end
+end
+
+function move_enemies()
+  for enemy in all(enemy_list) do
+    enemy:Move()
+  end
+end
+
 function draw_path()
   if path == false then
     path_pos = convert_field_to_pixel(goal)
@@ -94,12 +114,7 @@ function convert_pixel_to_field(pos)
   return Point:New(pos.x / field_size, pos.y / field_size)
 end
 
-function draw_enemy()
-  if path == false then
-    enemy:Reset(convert_field_to_pixel(start))
-    return
-  end
-
+function draw_enemy(enemy)
   next_field = path[enemy.last_path_index]
   current_dest = convert_field_to_pixel(next_field)
 
@@ -139,18 +154,18 @@ function _update()
 
   if btn(🅾️) then
     if not menu.running then
-      enemy:Move()
+      move_enemies()
     end
   end
 
   if btnp(❎) then
     tower_placement()
-    enemy:Reset(convert_field_to_pixel(start))
     path_calculation()
+    enemy_creation()
   end
 
   if menu.running then
-    enemy:Move()
+    move_enemies()
   end
 end
 
@@ -159,11 +174,13 @@ function _draw()
   map()
 
   draw_path()
-  draw_enemy()
+
+  for enemy in all(enemy_list) do
+    draw_enemy(enemy)
+  end
 
   for tower in all(tower_list) do
     tower:Draw()
-    enemy_list = {enemy}
     tower:ShotOnNearestEnemy(enemy_list)
   end
 

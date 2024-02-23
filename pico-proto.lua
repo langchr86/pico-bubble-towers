@@ -179,12 +179,12 @@ function _draw()
 
   draw_path()
 
-  for enemy in all(enemy_list) do
-    draw_enemy(enemy)
-  end
-
   for tower in all(tower_list) do
     tower:Draw()
+  end
+
+  for enemy in all(enemy_list) do
+    draw_enemy(enemy)
   end
 
   spr(3, start.x * field_width, start.y * field_height)

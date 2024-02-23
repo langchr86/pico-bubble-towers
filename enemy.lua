@@ -37,6 +37,7 @@ end
 
 function Enemy:Draw()
   if self.pos then
-    spr(self.sprite_n, self.pos.x, self.pos.y)
+    local rounded = self.pos:Floor()
+    spr(self.sprite_n, rounded.x, rounded.y)
   end
 end

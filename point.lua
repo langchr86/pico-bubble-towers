@@ -27,6 +27,10 @@ function Point:Move(dest, speed)
   self.y += cos(0.25 - alpha) * speed
 end
 
+function Point:Floor()
+  return Point:New(flr(self.x), flr(self.y))
+end
+
 function Point.__sub(lhs, rhs)
   return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
 end

@@ -30,7 +30,7 @@ function Enemy:DefineMoveDestination(dest)
   return true
 end
 
-function Enemy:Move()
+function Enemy:Update()
   if (not self.dest_pos) return
   self.pos:Move(self.dest_pos, self.speed)
 end

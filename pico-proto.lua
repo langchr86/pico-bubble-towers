@@ -87,9 +87,13 @@ function enemy_creation()
   end
 end
 
-function move_enemies()
+function UpdateObjects()
   for enemy in all(enemy_list) do
-    enemy:Move()
+    enemy:Update()
+  end
+
+  for tower in all(tower_list) do
+    tower:Update(enemy_list)
   end
 end
 
@@ -154,7 +158,7 @@ function _update()
 
   if btn(🅾️) then
     if not menu.running then
-      move_enemies()
+      UpdateObjects()
     end
   end
 
@@ -165,7 +169,7 @@ function _update()
   end
 
   if menu.running then
-    move_enemies()
+    UpdateObjects()
   end
 end
 
@@ -181,7 +185,6 @@ function _draw()
 
   for tower in all(tower_list) do
     tower:Draw()
-    tower:ShotOnNearestEnemy(enemy_list)
   end
 
   spr(3, start.x * field_width, start.y * field_height)

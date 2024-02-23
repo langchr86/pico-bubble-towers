@@ -31,6 +31,11 @@ function Point:Floor()
   return Point:New(flr(self.x), flr(self.y))
 end
 
+function Point:Distance(other)
+  local diff = other - self
+  return sqrt(diff.x * diff.x + diff.y * diff.y)
+end
+
 function Point.__sub(lhs, rhs)
   return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
 end

@@ -35,17 +35,15 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   nearest_distance = nil
 
   for enemy in all(enemy_list) do
-    distance = enemy.pos - self.pos
 
-    quad_dist = distance.x * distance.x + distance.y * distance.y
-    quad_radius = self.radius * self.radius
+    local distance = self.pos:Distance(enemy.pos)
 
-    if quad_dist <= quad_radius then
+    if distance <= self.radius then
       if not nearest_distance then
-        nearest_distance = quad_dist
+        nearest_distance = distance
         self.nearest_enemy_in_reach = enemy.pos
-      elseif quad_dist < nearest_distance then
-        nearest_distance = quad_dist
+      elseif distance < nearest_distance then
+        nearest_distance = distance
         self.nearest_enemy_in_reach = enemy.pos
       end
     end

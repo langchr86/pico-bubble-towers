@@ -23,7 +23,7 @@ function Enemy:Reset(start)
 end
 
 function Enemy:DefineMoveDestination(dest)
-  if self.pos and self.pos.x == dest.x and self.pos.y == dest.y then
+  if self.pos and self.pos == dest then
     return false
   end
   self.dest_pos = dest

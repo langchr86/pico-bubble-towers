@@ -1,6 +1,10 @@
 pico-bubble-towers
 ==================
 
+Tower Defense Game for Pico-8.
+
+![Draft](https://img.shields.io/badge/Warning-This_is_an_early_Draft-red)
+
 
 Inspiration
 -----------

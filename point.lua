@@ -18,6 +18,15 @@ function Point:Clone()
   return Point:New(self.x, self.y)
 end
 
+function Point:Move(dest, speed)
+  local diff = dest - self
+
+  local alpha = atan2(diff.x, -diff.y)
+
+  self.x += cos(alpha) * speed
+  self.y += cos(0.25 - alpha) * speed
+end
+
 function Point.__sub(lhs, rhs)
   return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
 end

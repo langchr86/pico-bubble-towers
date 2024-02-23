@@ -4,14 +4,15 @@ Tower = {
   sprite_n=8,
   pos=nil,
   radius=16,
-  shot_interval=30,
-  nearest_enemy_in_reach=nil,
+  charge_threshold=20,
+  charge_level=0,
 }
 Tower.__index = Tower
 
 function Tower:New(pos)
   o = {
     pos=pos:Clone(),
+    charge_level=self.charge_threshold,
   }
   return setmetatable(o, self)
 end
@@ -23,29 +24,34 @@ end
 function Tower:Draw()
   spr(self.sprite_n, self.pos.x, self.pos.y)
   --circ(self.pos.x + 4, self.pos.y + 4, self.radius, 8)
-
-  if self.nearest_enemy_in_reach then
-    circfill(self.pos.x + 4, self.pos.y + 4, 2, 8)
-    line(self.pos.x + 4, self.pos.y + 4,self. nearest_enemy_in_reach.x + 4, self.nearest_enemy_in_reach.y + 4, 8)
-  end
 end
 
 function Tower:ShotOnNearestEnemy(enemy_list)
-  self.nearest_enemy_in_reach = nil
-  nearest_distance = nil
+  if self.charge_level < self.charge_threshold then
+    self.charge_level += 1
+    return
+  end
+
+  local nearest_enemy_in_reach = nil
+  local nearest_distance = nil
 
   for enemy in all(enemy_list) do
-
     local distance = self.pos:Distance(enemy.pos)
 
     if distance <= self.radius then
       if not nearest_distance then
         nearest_distance = distance
-        self.nearest_enemy_in_reach = enemy.pos
+        nearest_enemy_in_reach = enemy
       elseif distance < nearest_distance then
         nearest_distance = distance
-        self.nearest_enemy_in_reach = enemy.pos
+        nearest_enemy_in_reach = enemy
       end
     end
+  end
+
+  if nearest_enemy_in_reach then
+    local bullet = Bullet:New(self.pos, nearest_enemy_in_reach.pos)
+    nearest_enemy_in_reach:Shot(bullet)
+    self.charge_level = 0
   end
 end

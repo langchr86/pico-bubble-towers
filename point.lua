@@ -31,6 +31,10 @@ function Point:Floor()
   return Point:New(flr(self.x), flr(self.y))
 end
 
+function Point:IsNear(other, radius)
+  return self:Distance(other) <= radius
+end
+
 function Point:Distance(other)
   local diff = other - self
   return sqrt(diff.x * diff.x + diff.y * diff.y)

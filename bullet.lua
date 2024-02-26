@@ -21,13 +21,10 @@ function Bullet:InTarget()
 end
 
 function Bullet:Update()
-  if (not self.pos) return
   self.pos:Move(self.dest, self.speed)
 end
 
 function Bullet:Draw()
-  if self.pos then
-    local rounded = self.pos:Floor()
-    spr(self.sprite, rounded.x, rounded.y)
-  end
+  local rounded = self.pos:Floor()
+  spr(self.sprite, rounded.x, rounded.y)
 end

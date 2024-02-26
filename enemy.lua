@@ -25,7 +25,7 @@ function Enemy:Reset(start)
 end
 
 function Enemy:DefineMoveDestination(dest)
-  if self.pos and self.pos == dest then
+  if self.pos == dest then
     return false
   end
   self.dest_pos = dest
@@ -51,10 +51,8 @@ function Enemy:Update()
 end
 
 function Enemy:Draw()
-  if self.pos then
-    local rounded = self.pos:Floor()
-    spr(self.sprite_n, rounded.x, rounded.y)
-  end
+  local rounded = self.pos:Floor()
+  spr(self.sprite_n, rounded.x, rounded.y)
 
   for bullet in all(self.bullet_list) do
     bullet:Draw()

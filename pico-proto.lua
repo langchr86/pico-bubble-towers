@@ -90,6 +90,9 @@ end
 function UpdateObjects()
   for enemy in all(enemy_list) do
     enemy:Update()
+    if enemy:IsDead() then
+      del(enemy_list, enemy)
+    end
   end
 
   for tower in all(tower_list) do

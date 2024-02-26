@@ -5,6 +5,7 @@ Bullet = {
   dest=nil,
   sprite=9,
   speed=3,
+  damage=10,
 }
 Bullet.__index = Bullet
 

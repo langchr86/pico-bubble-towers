@@ -40,12 +40,10 @@ enemy_list = {}
 sw_algo = 0
 
 
-function tower_placement()
-  current = cursor.pos
-
-  removed = false
+function TowerPlacement()
+  local removed = false
   for tower in all(tower_list) do
-    if tower.pos == current then
+    if tower.pos == cursor.pos then
       del(tower_list, tower)
       removed = true
       break
@@ -53,15 +51,15 @@ function tower_placement()
   end
 
   if removed == false then
-    add(tower_list, Tower:New(current))
+    add(tower_list, Tower:New(cursor.pos))
   end
 end
 
-function path_calculation()
+function PathCalculation()
   local function is_coord_reachable(x, y)
     -- should return true if the position is open to walk
     for tower in all(tower_list) do
-      field_pos = convert_pixel_to_field(tower.pos)
+      field_pos = ConvertPixelToField(tower.pos)
       if field_pos.x == x and field_pos.y == y then
         return false
       end
@@ -77,7 +75,7 @@ function path_calculation()
 
   real_path = {}
   for pos in all(path) do
-    local pos = convert_field_to_pixel(pos)
+    local pos = ConvertFieldToPixel(pos)
     add(real_path, pos)
   end
 end
@@ -90,8 +88,8 @@ end
 function CreateEnemiesIfNeeded()
   if (#real_path == 0) return
 
-  local start_point = convert_field_to_pixel(start)
-  diff_point = Point:New(16, 0)
+  local start_point = ConvertFieldToPixel(start)
+  local diff_point = Point:New(16, 0)
 
   for i=#enemy_list,3 do
     enemy = Enemy:New(start_point, real_path)
@@ -116,9 +114,9 @@ function UpdateObjects()
   end
 end
 
-function draw_path()
+function DrawPath()
   if path == false then
-    path_pos = convert_field_to_pixel(goal)
+    path_pos = ConvertFieldToPixel(goal)
     spr(7, path_pos.x, path_pos.y)
     return
   end
@@ -128,11 +126,11 @@ function draw_path()
   end
 end
 
-function convert_field_to_pixel(field)
+function ConvertFieldToPixel(field)
   return Point:New(field.x * field_size, field.y * field_size)
 end
 
-function convert_pixel_to_field(pos)
+function ConvertPixelToField(pos)
   return Point:New(pos.x / field_size, pos.y / field_size)
 end
 
@@ -160,8 +158,8 @@ function _update()
   end
 
   if btnp(❎) then
-    tower_placement()
-    path_calculation()
+    TowerPlacement()
+    PathCalculation()
     ResetEnemies()
   end
 
@@ -174,7 +172,7 @@ function _draw()
   cls()
   map()
 
-  draw_path()
+  DrawPath()
 
   for tower in all(tower_list) do
     tower:Draw()

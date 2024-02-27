@@ -3,34 +3,24 @@
 Enemy = {
   sprite_n=2,
   pos=nil,
-  dest_pos=nil,
+  path=nil,
+  next_pos=nil,
+  next_pos_index=1,
   speed=1,
   life=100,
-  last_path_index=1,
   bullet_list={},
 }
 Enemy.__index = Enemy
 
-function Enemy:New(init_pos)
+function Enemy:New(init_pos, path)
   o = {
     pos=init_pos,
+    path=path,
+    next_pos=path[1],
+    next_pos_index=1,
     bullet_list={},
   }
   return setmetatable(o, self)
-end
-
-function Enemy:Reset(start)
-  self.pos = start
-  self.dest_pos = nil
-  self.last_path_index = 1
-end
-
-function Enemy:DefineMoveDestination(dest)
-  if self.pos == dest then
-    return false
-  end
-  self.dest_pos = dest
-  return true
 end
 
 function Enemy:Shot(bullet)
@@ -46,9 +36,19 @@ function Enemy:IsDead()
   return self.life <= 0
 end
 
+function Enemy:InTarget()
+  return self.pos == self.path[#self.path]
+end
+
 function Enemy:Update()
-  if (not self.dest_pos) return
-  self.pos:Move(self.dest_pos, self.speed)
+  if (self:InTarget()) return
+
+  if self.pos == self.next_pos then
+    self.next_pos_index += 1
+    self.next_pos = self.path[self.next_pos_index]
+  end
+
+  self.pos:Move(self.next_pos, self.speed)
 
   for bullet in all(self.bullet_list) do
     if bullet:InTarget() then

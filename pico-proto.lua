@@ -32,6 +32,7 @@ field = {}
 start = Point:New(0, 7)
 goal = Point:New(15, 8)
 path = false
+real_path = {}
 
 tower_list = {}
 enemy_list = {}
@@ -71,16 +72,29 @@ function path_calculation()
   sw_algo = stat(1)
   path = module:find(max_x, max_y, start, goal, is_coord_reachable)
   sw_algo = stat(1) - sw_algo
+
+  if (path == false) return
+
+  real_path = {}
+  for pos in all(path) do
+    local pos = convert_field_to_pixel(pos)
+    add(real_path, pos)
+  end
 end
 
-function enemy_creation()
+function ResetEnemies()
   enemy_list = {}
+  CreateEnemiesIfNeeded()
+end
 
-  start_point = convert_field_to_pixel(start)
+function CreateEnemiesIfNeeded()
+  if (#real_path == 0) return
+
+  local start_point = convert_field_to_pixel(start)
   diff_point = Point:New(16, 0)
 
-  for i=1,4 do
-    enemy = Enemy:New(start_point)
+  for i=#enemy_list,3 do
+    enemy = Enemy:New(start_point, real_path)
     add(enemy_list, enemy)
 
     start_point = start_point - diff_point
@@ -90,10 +104,12 @@ end
 function UpdateObjects()
   for enemy in all(enemy_list) do
     enemy:Update()
-    if enemy:IsDead() then
+    if enemy:IsDead() or enemy:InTarget() then
       del(enemy_list, enemy)
     end
   end
+
+  CreateEnemiesIfNeeded()
 
   for tower in all(tower_list) do
     tower:Update(enemy_list)
@@ -107,8 +123,7 @@ function draw_path()
     return
   end
 
-  for i = 1, #path do
-    local pos = convert_field_to_pixel(path[i])
+  for pos in all(real_path) do
     spr(5, pos.x, pos.y)
   end
 end
@@ -119,27 +134,6 @@ end
 
 function convert_pixel_to_field(pos)
   return Point:New(pos.x / field_size, pos.y / field_size)
-end
-
-function draw_enemy(enemy)
-  next_field = path[enemy.last_path_index]
-  current_dest = convert_field_to_pixel(next_field)
-
-  if not enemy:DefineMoveDestination(current_dest) then
-    enemy.last_path_index += 1
-
-    if enemy.last_path_index > #path then
-      -- no next field -> reached goal
-      enemy:Reset(convert_field_to_pixel(start))
-      return
-    end
-
-    next_field = path[enemy.last_path_index]
-    current_dest = convert_field_to_pixel(next_field)
-    enemy:DefineMoveDestination(current_dest)
-  end
-
-  enemy:Draw()
 end
 
 function _update()
@@ -168,7 +162,7 @@ function _update()
   if btnp(❎) then
     tower_placement()
     path_calculation()
-    enemy_creation()
+    ResetEnemies()
   end
 
   if menu.running then
@@ -187,7 +181,7 @@ function _draw()
   end
 
   for enemy in all(enemy_list) do
-    draw_enemy(enemy)
+    enemy:Draw()
   end
 
   spr(3, start.x * field_width, start.y * field_height)

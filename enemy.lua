@@ -7,7 +7,8 @@ Enemy = {
   next_pos=nil,
   next_pos_index=1,
   speed=1,
-  life=100,
+  max_life=100,
+  life=0,
   bullet_list={},
 }
 Enemy.__index = Enemy
@@ -18,6 +19,7 @@ function Enemy:New(init_pos, path)
     path=path,
     next_pos=path[1],
     next_pos_index=1,
+    life=self.max_life,
     bullet_list={},
   }
   return setmetatable(o, self)
@@ -30,6 +32,9 @@ end
 function Enemy:Hit(bullet)
   del(self.bullet_list, bullet)
   self.life -= bullet.damage
+  if self.life < 0 then
+    self.life = 0
+  end
 end
 
 function Enemy:IsDead()
@@ -63,8 +68,11 @@ function Enemy:Draw()
   local rounded = self.pos:Floor()
   spr(self.sprite_n, rounded.x, rounded.y)
 
-  local life_bar = self.life / 100 * 6
-  line(self.pos.x + 1, self.pos.y, self.pos.x + life_bar, self.pos.y, 12)
+  local life_bar_length = 5
+  local life_bar = self.life / self.max_life * life_bar_length
+  local start_x = self.pos.x + 1
+  line(start_x, self.pos.y, start_x + life_bar_length, self.pos.y, 8)
+  line(start_x, self.pos.y, start_x + life_bar, self.pos.y, 12)
 
   for bullet in all(self.bullet_list) do
     bullet:Draw()

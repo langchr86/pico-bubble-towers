@@ -14,7 +14,12 @@ function Tower:New(pos)
     pos=pos:Clone(),
     charge_level=self.charge_threshold,
   }
+  mset(pos.x / 8, pos.y / 8, self.sprite_n)
   return setmetatable(o, self)
+end
+
+function Tower:Destroy()
+  mset(self.pos.x / 8, self.pos.y / 8, 0)
 end
 
 function Tower:Update(enemy_list)
@@ -22,7 +27,7 @@ function Tower:Update(enemy_list)
 end
 
 function Tower:Draw()
-  spr(self.sprite_n, self.pos.x, self.pos.y)
+  --spr(self.sprite_n, self.pos.x, self.pos.y)
   --circ(self.pos.x + 4, self.pos.y + 4, self.radius, 8)
 end
 

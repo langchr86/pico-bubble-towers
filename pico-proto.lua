@@ -14,8 +14,8 @@ end
 
 screen_max = Point:New(128, 128)
 field_size = 8
-cursor_min = Point:New(field_size, field_size)
-cursor_max = screen_max - cursor_min - cursor_min
+cursor_min = Point:New(0, 0)
+cursor_max = screen_max
 cursor = Cursor:New(cursor_min, cursor_min, cursor_max, field_size)
 
 field_width = 8
@@ -44,6 +44,7 @@ function TowerPlacement()
   local removed = false
   for tower in all(tower_list) do
     if tower.pos == cursor.pos then
+      tower:Destroy()
       del(tower_list, tower)
       removed = true
       break
@@ -58,22 +59,18 @@ end
 function PathCalculation()
   local function is_coord_reachable(x, y)
     -- should return true if the position is open to walk
-    for tower in all(tower_list) do
-      field_pos = ConvertPixelToField(tower.pos)
-      if field_pos.x == x and field_pos.y == y then
-        return false
-      end
-    end
-    return true
+    local sprite = mget(x, y)
+    local massive = fget(sprite, 0)
+    return not massive
   end
 
   sw_algo = stat(1)
   path = module:find(max_x, max_y, start, goal, is_coord_reachable)
   sw_algo = stat(1) - sw_algo
 
+  real_path = {}
   if (path == false) return
 
-  real_path = {}
   for pos in all(path) do
     local pos = ConvertFieldToPixel(pos)
     add(real_path, pos)
@@ -190,4 +187,8 @@ function _draw()
   fps = stat(7)
   print(fps, 120, 0, 10)
   print(sw_algo, 0, 0, 10)
+
+  cursor_sprite = mget(cursor.pos.x / field_width, cursor.pos.y / field_width)
+  print(cursor_sprite, 1, 121, 10)
+  print(fget(cursor_sprite, 0), 17, 121, 10)
 end

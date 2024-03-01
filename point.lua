@@ -45,6 +45,10 @@ function Point:Distance(other)
   return sqrt(diff.x * diff.x + diff.y * diff.y)
 end
 
+function Point.__add(lhs, rhs)
+  return Point:New(lhs.x + rhs.x, lhs.y + rhs.y)
+end
+
 function Point.__sub(lhs, rhs)
   return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
 end

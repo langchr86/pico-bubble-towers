@@ -70,9 +70,9 @@ function Enemy:Draw()
 
   local life_bar_length = 5
   local life_bar = self.life / self.max_life * life_bar_length
-  local start_x = self.pos.x + 1
-  line(start_x, self.pos.y, start_x + life_bar_length, self.pos.y, 8)
-  line(start_x, self.pos.y, start_x + life_bar, self.pos.y, 12)
+  local start_x = rounded.x + 1
+  line(start_x, rounded.y, start_x + life_bar_length, rounded.y, 8)
+  line(start_x, rounded.y, start_x + life_bar, rounded.y, 12)
 
   for bullet in all(self.bullet_list) do
     bullet:Draw()

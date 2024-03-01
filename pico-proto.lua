@@ -46,14 +46,15 @@ function TowerPlacement()
     if tower.pos == cursor.pos then
       tower:Destroy()
       del(tower_list, tower)
-      removed = true
-      break
+      return
+    end
+
+    if tower:PlacedOn(cursor.pos) then
+      return
     end
   end
 
-  if removed == false then
-    add(tower_list, Tower:New(cursor.pos))
-  end
+  add(tower_list, Tower:New(cursor.pos))
 end
 
 function PathCalculation()

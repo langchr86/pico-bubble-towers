@@ -45,6 +45,13 @@ function Point:Distance(other)
   return sqrt(diff.x * diff.x + diff.y * diff.y)
 end
 
+function Point:IsColliding(other, size)
+  return self.x < other.x + size
+    and self.x + size > other.x
+    and self.y < other.y + size
+    and self.y + size > other.y
+end
+
 function Point.__add(lhs, rhs)
   return Point:New(lhs.x + rhs.x, lhs.y + rhs.y)
 end

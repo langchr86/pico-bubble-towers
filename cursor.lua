@@ -1,7 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 Cursor = {
-  sprite_n=6,
+  sprite=16,
   pos=nil,
   min=nil,
   max=nil,
@@ -53,6 +53,6 @@ end
 
 function Cursor:Draw()
   if self.pos then
-    spr(self.sprite_n, self.pos.x, self.pos.y)
+    spr(self.sprite, self.pos.x, self.pos.y, 2, 2)
   end
 end

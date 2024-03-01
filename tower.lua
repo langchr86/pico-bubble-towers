@@ -1,4 +1,4 @@
--- Copyright 2024 by Christian Lang is lluaTowericensed under CC BY-NC-SA 4.0
+-- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 Tower = {
   sprite_n=8,

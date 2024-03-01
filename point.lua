@@ -18,6 +18,11 @@ function Point:Clone()
   return Point:New(self.x, self.y)
 end
 
+function Point:Assign(other)
+  self.x = other.x
+  self.y = other.y
+end
+
 function Point:Move(dest, speed)
   local diff = dest - self
 

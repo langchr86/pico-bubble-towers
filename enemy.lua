@@ -15,7 +15,7 @@ Enemy.__index = Enemy
 
 function Enemy:New(init_pos, path)
   o = {
-    pos=init_pos,
+    pos=init_pos:Clone(),
     path=path,
     next_pos=path[1],
     next_pos_index=1,
@@ -42,13 +42,14 @@ function Enemy:IsDead()
 end
 
 function Enemy:InTarget()
-  return self.pos == self.path[#self.path]
+  return self.pos:IsNear(self.path[#self.path], 0.5)
 end
 
 function Enemy:Update()
   if (self:InTarget()) return
 
-  if self.pos == self.next_pos then
+  if self.pos:IsNear(self.next_pos, 0.5) then
+    self.pos:Assign(self.next_pos)
     self.next_pos_index += 1
     self.next_pos = self.path[self.next_pos_index]
   end

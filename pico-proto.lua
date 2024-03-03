@@ -188,8 +188,4 @@ function _draw()
   fps = stat(7)
   print(fps, 120, 0, 10)
   print(sw_algo, 0, 0, 10)
-
-  cursor_sprite = mget(cursor.pos.x / field_width, cursor.pos.y / field_width)
-  print(cursor_sprite, 1, 121, 10)
-  print(fget(cursor_sprite, 0), 17, 121, 10)
 end

@@ -48,10 +48,10 @@ function TowerPlacement()
       del(tower_list, tower)
       return
     end
+  end
 
-    if tower:PlacedOn(cursor.pos) then
-      return
-    end
+  if not cursor:IsFree() then
+    return
   end
 
   add(tower_list, Tower:New(cursor.pos))

@@ -51,6 +51,20 @@ function Cursor:MoveRight()
   end
 end
 
+function Cursor:IsFree()
+  local function IsTileFree(tile_pos)
+    local massive = fget(mget(tile_pos.x, tile_pos.y), 0)
+    return not massive
+  end
+
+  local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
+
+  return IsTileFree(tile_pos)
+    and IsTileFree(tile_pos + Point:New(1, 0))
+    and IsTileFree(tile_pos + Point:New(0, 1))
+    and IsTileFree(tile_pos + Point:New(1, 1))
+end
+
 function Cursor:Draw()
   if self.pos then
     spr(self.sprite, self.pos.x, self.pos.y, 2, 2)

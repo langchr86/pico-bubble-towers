@@ -32,6 +32,8 @@ real_path = {}
 tower_list = {}
 enemy_list = {}
 
+player_life = 20
+
 sw_algo = 0
 
 
@@ -107,8 +109,12 @@ end
 function UpdateObjects()
   for enemy in all(enemy_list) do
     enemy:Update()
-    if enemy:IsDead() or enemy:InTarget() then
+    if enemy:IsDead() then
       del(enemy_list, enemy)
+    end
+    if enemy:InTarget() then
+      del(enemy_list, enemy)
+      player_life -= 1
     end
   end
 
@@ -159,6 +165,12 @@ end
 
 function _draw()
   cls()
+
+  if player_life <= 0 then
+    map(0, 16)
+    return
+  end
+
   map()
 
   DrawPath()
@@ -177,6 +189,7 @@ function _draw()
   cursor:Draw()
 
   fps = stat(7)
+  print(player_life, 0, 0, 10)
+  print(sw_algo, 90, 0, 10)
   print(fps, 120, 0, 10)
-  print(sw_algo, 0, 0, 10)
 end

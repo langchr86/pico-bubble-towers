@@ -13,13 +13,10 @@ function _init()
 end
 
 screen_max = Point:New(128, 128)
-field_size = 8
 cursor_min = Point:New(0, 0)
 cursor_max = screen_max
-cursor = Cursor:New(cursor_min, cursor_min, cursor_max, field_size)
+cursor = Cursor:New(cursor_min, cursor_min, cursor_max, kTileSize)
 
-field_width = 8
-field_height = 8
 map_width = 16
 map_height = 16
 
@@ -73,7 +70,7 @@ function PathCalculation()
   if (path == false) return
 
   for pos in all(path) do
-    local pos = ConvertFieldToPixel(pos)
+    local pos = ConvertTileToPixel(pos)
     add(real_path, pos)
   end
 end
@@ -86,7 +83,7 @@ end
 function CreateEnemiesIfNeeded()
   if (#real_path == 0) return
 
-  local start_point = ConvertFieldToPixel(start)
+  local start_point = ConvertTileToPixel(start)
   local diff_point = Point:New(16, 0)
 
   for i=#enemy_list,3 do
@@ -114,7 +111,7 @@ end
 
 function DrawPath()
   if path == false then
-    path_pos = ConvertFieldToPixel(goal)
+    path_pos = ConvertTileToPixel(goal)
     spr(7, path_pos.x, path_pos.y)
     return
   end
@@ -122,14 +119,6 @@ function DrawPath()
   for pos in all(real_path) do
     spr(5, pos.x, pos.y)
   end
-end
-
-function ConvertFieldToPixel(field)
-  return Point:New(field.x * field_size, field.y * field_size)
-end
-
-function ConvertPixelToField(pos)
-  return Point:New(pos.x / field_size, pos.y / field_size)
 end
 
 function _update()
@@ -180,8 +169,8 @@ function _draw()
     enemy:Draw()
   end
 
-  spr(3, start.x * field_width, start.y * field_height)
-  spr(4, goal.x * field_width, goal.y * field_height)
+  spr(3, start.x * kTileSize, start.y * kTileSize)
+  spr(4, goal.x * kTileSize, goal.y * kTileSize)
 
   cursor:Draw()
 

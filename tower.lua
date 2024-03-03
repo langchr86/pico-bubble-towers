@@ -5,8 +5,8 @@ Tower = {
   pos=nil,
   logical_pos=nil,
   radius=16,
-  charge_threshold=20,
-  charge_level=0,
+  reload_threshold=20,
+  reload_level=0,
 }
 Tower.__index = Tower
 
@@ -14,7 +14,7 @@ function Tower:New(pos)
   o = {
     pos=pos:Clone(),
     logical_pos=pos+Point:New(4, 4),
-    charge_level=self.charge_threshold,
+    reload_level=self.reload_threshold,
   }
 
   local x = pos.x / 8
@@ -50,8 +50,8 @@ function Tower:PlacedOn(other)
 end
 
 function Tower:ShotOnNearestEnemy(enemy_list)
-  if self.charge_level < self.charge_threshold then
-    self.charge_level += 1
+  if self.reload_level < self.reload_threshold then
+    self.reload_level += 1
     return
   end
 
@@ -75,6 +75,6 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   if nearest_enemy_in_reach then
     local bullet = Bullet:New(self.logical_pos, nearest_enemy_in_reach.pos)
     nearest_enemy_in_reach:Shot(bullet)
-    self.charge_level = 0
+    self.reload_level = 0
   end
 end

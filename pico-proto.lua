@@ -25,10 +25,8 @@ min_y = 0
 max_x = map_width - 1
 max_y = map_height - 1
 
-field = {}
 start = Point:New(0, 7)
 goal = Point:New(15, 8)
-path = false
 real_path = {}
 
 tower_list = {}
@@ -43,6 +41,8 @@ function TowerPlacement()
     if tower.pos == cursor.pos then
       tower:Destroy()
       del(tower_list, tower)
+      real_path = PathCalculation()
+      ResetEnemies()
       return
     end
   end
@@ -51,7 +51,15 @@ function TowerPlacement()
     return
   end
 
-  add(tower_list, Tower:New(cursor.pos))
+  local new_tower = Tower:New(cursor.pos)
+  local new_path = PathCalculation()
+  if #new_path > 0 then
+    add(tower_list, new_tower)
+    real_path = new_path
+    ResetEnemies()
+  else
+    new_tower:Destroy()
+  end
 end
 
 function PathCalculation()
@@ -63,16 +71,18 @@ function PathCalculation()
   end
 
   sw_algo = stat(1)
-  path = module:find(max_x, max_y, start, goal, is_coord_reachable)
+  local path = module:find(max_x, max_y, start, goal, is_coord_reachable)
   sw_algo = stat(1) - sw_algo
 
-  real_path = {}
-  if (path == false) return
+  local real_path = {}
+  if (path == false) return {}
 
   for pos in all(path) do
     local pos = ConvertTileToPixel(pos)
     add(real_path, pos)
   end
+
+  return real_path
 end
 
 function ResetEnemies()
@@ -110,12 +120,6 @@ function UpdateObjects()
 end
 
 function DrawPath()
-  if path == false then
-    path_pos = ConvertTileToPixel(goal)
-    spr(7, path_pos.x, path_pos.y)
-    return
-  end
-
   for pos in all(real_path) do
     spr(5, pos.x, pos.y)
   end
@@ -146,8 +150,6 @@ function _update()
 
   if btnp(❎) then
     TowerPlacement()
-    PathCalculation()
-    ResetEnemies()
   end
 
   if menu.running then

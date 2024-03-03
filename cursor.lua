@@ -5,16 +5,16 @@ Cursor = {
   pos=nil,
   min=nil,
   max=nil,
-  increment=1,
+  inc=0,
 }
 Cursor.__index = Cursor
 
-function Cursor:New(pos, min, max, increment)
+function Cursor:New(pos, min, max, inc)
   o = {
     pos=pos:Clone(),
     min=min:Clone(),
     max=max:Clone(),
-    increment=increment,
+    inc=inc,
   }
   return setmetatable(o, self)
 end
@@ -24,28 +24,28 @@ function Cursor:Set(pos)
 end
 
 function Cursor:MoveUp()
-  self.pos.y -= self.increment
+  self.pos.y -= self.inc
   if (self.pos.y < self.min.y) then
     self.pos.y = self.min.y
   end
 end
 
 function Cursor:MoveDown()
-  self.pos.y += self.increment
+  self.pos.y += self.inc
   if (self.pos.y > self.max.y) then
     self.pos.y = self.max.y
   end
 end
 
 function Cursor:MoveLeft()
-  self.pos.x -= self.increment
+  self.pos.x -= self.inc
   if (self.pos.x < self.min.x) then
     self.pos.x = self.min.x
   end
 end
 
 function Cursor:MoveRight()
-  self.pos.x += self.increment
+  self.pos.x += self.inc
   if (self.pos.x > self.max.x) then
     self.pos.x = self.max.x
   end

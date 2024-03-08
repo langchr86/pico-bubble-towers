@@ -12,8 +12,11 @@ function _init()
   menu:Update()
 end
 
+map_index = 2
+Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles))
+
 wave_list = CreateWaveList(5)
-session = Session:New(0, wave_list)
+session = Session:New(wave_list)
 session:Init()
 cursor = Cursor:New()
 

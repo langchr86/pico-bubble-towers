@@ -17,23 +17,17 @@ function Tower:New(pos)
     reload_level=self.reload_threshold,
   }
 
-  local x = pos.x / 8
-  local y = pos.y / 8
-  mset(x, y, self.sprite)
-  mset(x + 1, y, self.sprite + 1)
-  mset(x, y + 1, self.sprite + 16)
-  mset(x + 1, y + 1, self.sprite + 17)
-
   return setmetatable(o, self)
 end
 
+function Tower:Init()
+  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
+  Map:TileSet4(tile_pos, self.sprite)
+end
+
 function Tower:Destroy()
-  local x = self.pos.x / 8
-  local y = self.pos.y / 8
-  mset(x, y, 10)
-  mset(x + 1, y, 10)
-  mset(x, y + 1, 10)
-  mset(x + 1, y + 1, 10)
+  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
+  Map:TileClear4(tile_pos, 10)
 end
 
 function Tower:Update(enemy_list)

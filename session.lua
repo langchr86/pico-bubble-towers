@@ -1,7 +1,6 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 Session = {
-  map_index=0,
   start=nil,
   goal=nil,
   enemy_path={},
@@ -14,9 +13,8 @@ Session = {
 }
 Session.__index = Session
 
-function Session:New(map_index, wave_list)
+function Session:New(wave_list)
   o = {
-    map_index=map_index,
     start=Point:New(0, 0),
     goal=Point:New(0, 0),
     enemy_path={},
@@ -40,9 +38,9 @@ function Session:SearchSpecialPoints()
   for x=0,kMapSizeInTiles do
     for y=0,kMapSizeInTiles do
       local tile_pos = Point:New(x, y)
-      if fget(mget(x, y), 6) then
+      if Map:IsTileStart(tile_pos) then
         self.start = tile_pos
-      elseif fget(mget(x, y), 7) then
+      elseif Map:IsTileGoal(tile_pos) then
         self.goal = tile_pos
       end
     end
@@ -67,6 +65,7 @@ function Session:PlaceTower(cursor)
   end
 
   local new_tower = Tower:New(cursor.pos)
+  new_tower:Init()
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
   else
@@ -112,7 +111,8 @@ end
 
 function Session:CalculateNewPath()
   local function is_coord_reachable(x, y)
-    return IsTileFree(Point:New(x, y))
+    local tile_pos = Point:New(x, y)
+    return Map:IsTileFree(tile_pos)
   end
 
   local path = module:find(15, 15, self.start, self.goal, is_coord_reachable)
@@ -136,7 +136,7 @@ function Session:DrawMapBorder()
 end
 
 function Session:DrawMap()
-  map(self.map_index * kMapSizeInTiles, 0)
+  Map:Draw()
 end
 
 function Session:DrawPath()

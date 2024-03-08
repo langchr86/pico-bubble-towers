@@ -16,9 +16,14 @@ function Wave:New(enemy_count, enemy_type)
 end
 
 function CreateWaveList(wave_count)
+  local type = 0
   local list = {}
   for i=1,wave_count do
-    add(list, Wave:New(4, 0))
+    add(list, Wave:New(4, type))
+    type += 1
+    if type > 1 then
+      type = 0
+    end
   end
   return list
 end

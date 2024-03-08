@@ -13,8 +13,9 @@ Enemy = {
 }
 Enemy.__index = Enemy
 
-function Enemy:New(init_pos, path)
+function Enemy:New(init_pos, path, type)
   o = {
+    sprite=self.sprite + type,
     pos=init_pos:Clone(),
     path=path,
     next_pos=path[1],

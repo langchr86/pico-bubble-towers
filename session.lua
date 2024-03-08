@@ -82,7 +82,7 @@ function Session:StartNextWave()
   local diff_point = Point:New(16, 0)
 
   for i=1,next_wave.enemy_count do
-    enemy = Enemy:New(start_point, self.enemy_path)
+    enemy = Enemy:New(start_point, self.enemy_path, next_wave.enemy_type)
     add(self.enemy_list, enemy)
 
     start_point = start_point - diff_point

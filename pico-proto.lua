@@ -12,7 +12,7 @@ function _init()
   menu:Update()
 end
 
-wave_list = CreateWaveList(3)
+wave_list = CreateWaveList(5)
 session = Session:New(0, wave_list)
 cursor = Cursor:New()
 

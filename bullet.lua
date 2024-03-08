@@ -3,7 +3,7 @@
 Bullet = {
   pos=nil,
   dest=nil,
-  sprite=9,
+  sprite=48,
   speed=3,
   damage=10,
 }

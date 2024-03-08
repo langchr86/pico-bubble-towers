@@ -1,7 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 Cursor = {
-  sprite=16,
+  sprite=64,
   pos=nil,
   min=nil,
   max=nil,

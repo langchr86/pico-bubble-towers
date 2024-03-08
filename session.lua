@@ -90,7 +90,7 @@ end
 
 function Session:DrawPath()
   for pos in all(self.enemy_path) do
-    spr(5, pos.x, pos.y)
+    spr(16, pos.x, pos.y)
   end
 end
 
@@ -131,8 +131,8 @@ function Session:Draw()
     enemy:Draw()
   end
 
-  spr(3, self.start.x * kTileSize, self.start.y * kTileSize)
-  spr(4, self.goal.x * kTileSize, self.goal.y * kTileSize)
+  spr(17, self.start.x * kTileSize, self.start.y * kTileSize)
+  spr(18, self.goal.x * kTileSize, self.goal.y * kTileSize)
 
   print(self.player_life, 0, 0, 10)
 end

@@ -1,7 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 Tower = {
-  sprite=18,
+  sprite=128,
   pos=nil,
   logical_pos=nil,
   radius=16,
@@ -41,7 +41,6 @@ function Tower:Update(enemy_list)
 end
 
 function Tower:Draw()
-  --spr(self.sprite_n, self.pos.x, self.pos.y)
   --circ(self.pos.x + 4, self.pos.y + 4, self.radius, 8)
 end
 

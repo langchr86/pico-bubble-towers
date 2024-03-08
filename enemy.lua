@@ -1,7 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 Enemy = {
-  sprite_n=2,
+  sprite=32,
   pos=nil,
   path=nil,
   next_pos=nil,
@@ -67,7 +67,7 @@ end
 
 function Enemy:Draw()
   local rounded = self.pos:Floor()
-  spr(self.sprite_n, rounded.x, rounded.y)
+  spr(self.sprite, rounded.x, rounded.y)
 
   local life_bar_length = 5
   local life_bar = self.life / self.max_life * life_bar_length

@@ -77,7 +77,7 @@ function Session:CalculateNewPath()
     return IsTileFree(Point:New(x, y))
   end
 
-  local path = module:find(max_x, max_y, self.start, self.goal, is_coord_reachable)
+  local path = module:find(15, 15, self.start, self.goal, is_coord_reachable)
 
   local real_path = {}
   if (path == false) return {}

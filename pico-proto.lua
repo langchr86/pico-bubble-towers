@@ -15,14 +15,6 @@ end
 session = Session:New(0)
 cursor = Cursor:New()
 
-map_width = 16
-map_height = 16
-
-min_x = 0
-min_y = 0
-max_x = map_width - 1
-max_y = map_height - 1
-
 function _update()
   if btnp(⬆️) then
     cursor:MoveUp()

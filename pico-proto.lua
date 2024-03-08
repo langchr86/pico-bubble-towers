@@ -66,5 +66,5 @@ function _draw()
   cursor:Draw()
 
   fps = stat(7)
-  print(fps, 120, 0, 10)
+  print(fps, 119, 121, 10)
 end

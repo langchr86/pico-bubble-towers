@@ -108,6 +108,13 @@ function Session:CreateEnemiesIfNeeded()
   end
 end
 
+function Session:DrawMapBorder()
+  local border_color = 6
+  line(0, kTileSize, 0, 127, border_color)
+  line(127, kTileSize, 127, 127, border_color)
+  line(0, 127, 127, 127, border_color)
+end
+
 function Session:DrawMap()
   map(self.map_index * kMapSizeInTiles, 0)
 end
@@ -144,6 +151,7 @@ function Session:Draw()
   end
 
   self:DrawMap()
+  self:DrawMapBorder()
   self:DrawPath()
 
   for tower in all(self.tower_list) do

@@ -65,7 +65,7 @@ function Cursor:Draw()
     spr(self.sprite, self.pos.x, self.pos.y, 2, 2)
 
     cursor_sprite = mget(self.pos.x / self.inc, self.pos.y / self.inc)
-    print(cursor_sprite, 1, 121, 10)
+    print(cursor_sprite, 2, 121, 10)
     print(fget(cursor_sprite, 0), 17, 121, 10)
   end
 end

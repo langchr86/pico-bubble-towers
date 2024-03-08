@@ -12,7 +12,8 @@ function _init()
   menu:Update()
 end
 
-session = Session:New(0)
+wave_list = CreateWaveList(3)
+session = Session:New(0, wave_list)
 cursor = Cursor:New()
 
 function _update()
@@ -36,6 +37,10 @@ function _update()
     if not menu.running then
       session:Update()
     end
+  end
+
+  if btnp(🅾️) then
+    session:StartNextWave()
   end
 
   if btnp(❎) then

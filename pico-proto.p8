@@ -18,6 +18,7 @@ __lua__
 #include bullet.lua
 #include tower.lua
 #include lua-star.lua
+#include wave.lua
 #include session.lua
 #include pico-proto.lua
 __gfx__

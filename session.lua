@@ -7,12 +7,13 @@ Session = {
   enemy_path={},
   tower_list={},
   enemy_list={},
+  wave_list={},
   cash=9999,
   player_life=0,
 }
 Session.__index = Session
 
-function Session:New(map_index)
+function Session:New(map_index, wave_list)
   o = {
     map_index=map_index,
     start=Point:New(0, 0),
@@ -20,6 +21,7 @@ function Session:New(map_index)
     enemy_path={},
     tower_list={},
     enemy_list={},
+    wave_list=wave_list,
     player_life=20,
   }
 
@@ -52,7 +54,6 @@ function Session:PlaceTower(cursor)
       tower:Destroy()
       del(self.tower_list, tower)
       self.enemy_path = self:CalculateNewPath()
-      self:ResetEnemies()
       return
     end
   end
@@ -66,9 +67,25 @@ function Session:PlaceTower(cursor)
   if #new_path > 0 then
     add(self.tower_list, new_tower)
     self.enemy_path = new_path
-    self:ResetEnemies()
   else
     new_tower:Destroy()
+  end
+end
+
+function Session:StartNextWave()
+  if (#self.enemy_path == 0) return
+  if (#self.wave_list == 0) return
+
+  local next_wave = deli(wave_list, 1)
+
+  local start_point = ConvertTileToPixel(self.start)
+  local diff_point = Point:New(16, 0)
+
+  for i=1,next_wave.enemy_count do
+    enemy = Enemy:New(start_point, self.enemy_path)
+    add(self.enemy_list, enemy)
+
+    start_point = start_point - diff_point
   end
 end
 
@@ -88,25 +105,6 @@ function Session:CalculateNewPath()
   end
 
   return real_path
-end
-
-function Session:ResetEnemies()
-  self.enemy_list = {}
-  self:CreateEnemiesIfNeeded()
-end
-
-function Session:CreateEnemiesIfNeeded()
-  if (#self.enemy_path == 0) return
-
-  local start_point = ConvertTileToPixel(self.start)
-  local diff_point = Point:New(16, 0)
-
-  for i=#self.enemy_list,3 do
-    enemy = Enemy:New(start_point, self.enemy_path)
-    add(self.enemy_list, enemy)
-
-    start_point = start_point - diff_point
-  end
 end
 
 function Session:DrawMapBorder()
@@ -136,10 +134,11 @@ function Session:DrawStats()
   print(self.cash, 21, 1, 7)
 
   print("next: ", 43, 1, 12)
-  local next_enemy_sprite = {32, 33, 32, 33}
   local x = 62
-  for enemy in all(next_enemy_sprite) do
-    spr(enemy, x, 0)
+  for i=1,min(4, #self.wave_list) do
+    local wave = self.wave_list[i]
+    local enemy_sprite = 32 + wave.enemy_type
+    spr(enemy_sprite, x, 0)
     x += 8
   end
 
@@ -158,8 +157,6 @@ function Session:Update()
       self.player_life -= 1
     end
   end
-
-  self:CreateEnemiesIfNeeded()
 
   for tower in all(self.tower_list) do
     tower:Update(self.enemy_list)

@@ -128,6 +128,10 @@ function Session:DrawPath()
 end
 
 function Session:DrawStats()
+  for x=0,15 do
+    spr(9, x * kTileSize, 0)
+  end
+
   print("cash: ", 1, 1, 12)
   print(self.cash, 21, 1, 7)
 
@@ -162,22 +166,23 @@ function Session:Update()
   end
 end
 
-function Session:Draw()
+function Session:Draw(cursor)
   if self.player_life <= 0 then
     map(0, 16)
     return
   end
 
   self:DrawMap()
-  self:DrawMapBorder()
   self:DrawPath()
-  self:DrawStats()
 
   for tower in all(self.tower_list) do
-    tower:Draw()
+    tower:Draw(cursor)
   end
 
   for enemy in all(self.enemy_list) do
     enemy:Draw()
   end
+
+  self:DrawMapBorder()
+  self:DrawStats()
 end

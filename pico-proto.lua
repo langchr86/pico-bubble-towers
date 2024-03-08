@@ -50,7 +50,7 @@ end
 function _draw()
   cls()
 
-  session:Draw()
+  session:Draw(cursor)
   cursor:Draw()
 
   fps = stat(7)

@@ -40,8 +40,10 @@ function Tower:Update(enemy_list)
   self:ShotOnNearestEnemy(enemy_list)
 end
 
-function Tower:Draw()
-  --circ(self.pos.x + 4, self.pos.y + 4, self.radius, 8)
+function Tower:Draw(cursor)
+  if cursor.pos == self.pos then
+    circ(self.pos.x + kTileSize, self.pos.y + kTileSize, self.radius, 5)
+  end
 end
 
 function Tower:PlacedOn(other)

@@ -14,14 +14,34 @@ Session.__index = Session
 function Session:New(map_index)
   o = {
     map_index=map_index,
-    start=Point:New(0, 7),
-    goal=Point:New(15, 8),
+    start=Point:New(0, 0),
+    goal=Point:New(0, 0),
     enemy_path={},
     tower_list={},
     enemy_list={},
     player_life=20,
   }
-  return setmetatable(o, self)
+
+  setmetatable(o, self)
+  o:SearchSpecialPoints()
+
+  return o
+end
+
+function Session:SearchSpecialPoints()
+  self:DrawMap()
+
+  for x=0,kMapSizeInTiles do
+    for y=0,kMapSizeInTiles do
+      if fget(mget(x, y), 6) then
+        self.start.x = x
+        self.start.y = y
+      elseif fget(mget(x, y), 7) then
+        self.goal.x = x
+        self.goal.y = y
+      end
+    end
+  end
 end
 
 function Session:PlaceTower(cursor)
@@ -133,9 +153,6 @@ function Session:Draw()
   for enemy in all(self.enemy_list) do
     enemy:Draw()
   end
-
-  spr(17, self.start.x * kTileSize, self.start.y * kTileSize)
-  spr(18, self.goal.x * kTileSize, self.goal.y * kTileSize)
 
   print(self.player_life, 0, 0, 10)
 end

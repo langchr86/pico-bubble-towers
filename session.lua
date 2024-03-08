@@ -88,6 +88,10 @@ function Session:CreateEnemiesIfNeeded()
   end
 end
 
+function Session:DrawMap()
+  map(self.map_index * kMapSizeInTiles, 0)
+end
+
 function Session:DrawPath()
   for pos in all(self.enemy_path) do
     spr(16, pos.x, pos.y)
@@ -119,8 +123,7 @@ function Session:Draw()
     return
   end
 
-  map(self.map_index * kMapSizeInTiles, 0)
-
+  self:DrawMap()
   self:DrawPath()
 
   for tower in all(self.tower_list) do

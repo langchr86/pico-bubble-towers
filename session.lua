@@ -77,7 +77,7 @@ function Session:StartNextWave()
   if (#self.enemy_path == 0) return
   if (#self.wave_list == 0) return
 
-  local next_wave = deli(wave_list, 1)
+  local next_wave = deli(self.wave_list, 1)
   local start_point = ConvertTileToPixel(self.start)
 
   for i=1,next_wave.enemy_count do

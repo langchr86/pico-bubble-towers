@@ -2,19 +2,15 @@
 
 Cursor = {
   sprite=64,
-  pos=nil,
-  min=nil,
-  max=nil,
-  inc=0,
+  pos=Point:New(8, 16),
+  min=Point:New(0, 8),
+  max=Point:New(112, 112),
+  inc=kTileSize,
 }
 Cursor.__index = Cursor
 
-function Cursor:New(pos, min, max, inc)
+function Cursor:New()
   o = {
-    pos=pos:Clone(),
-    min=min:Clone(),
-    max=max:Clone(),
-    inc=inc,
   }
   return setmetatable(o, self)
 end

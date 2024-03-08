@@ -13,11 +13,7 @@ function _init()
 end
 
 session = Session:New(0)
-
-screen_max = Point:New(128, 128)
-cursor_min = Point:New(0, 0)
-cursor_max = screen_max
-cursor = Cursor:New(cursor_min, cursor_min, cursor_max, kTileSize)
+cursor = Cursor:New()
 
 map_width = 16
 map_height = 16

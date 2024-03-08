@@ -30,10 +30,10 @@ end
 function Tower:Destroy()
   local x = self.pos.x / 8
   local y = self.pos.y / 8
-  mset(x, y, 0)
-  mset(x + 1, y, 0)
-  mset(x, y + 1, 0)
-  mset(x + 1, y + 1, 0)
+  mset(x, y, 10)
+  mset(x + 1, y, 10)
+  mset(x, y + 1, 10)
+  mset(x + 1, y + 1, 10)
 end
 
 function Tower:Update(enemy_list)

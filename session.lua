@@ -25,10 +25,11 @@ function Session:New(map_index, wave_list)
     player_life=20,
   }
 
-  setmetatable(o, self)
-  o:SearchSpecialPoints()
+  return setmetatable(o, self)
+end
 
-  return o
+function Session:Init()
+  self:SearchSpecialPoints()
 end
 
 function Session:SearchSpecialPoints()
@@ -36,12 +37,11 @@ function Session:SearchSpecialPoints()
 
   for x=0,kMapSizeInTiles do
     for y=0,kMapSizeInTiles do
+      local tile_pos = Point:New(x, y)
       if fget(mget(x, y), 6) then
-        self.start.x = x
-        self.start.y = y
+        self.start = tile_pos
       elseif fget(mget(x, y), 7) then
-        self.goal.x = x
-        self.goal.y = y
+        self.goal = tile_pos
       end
     end
   end

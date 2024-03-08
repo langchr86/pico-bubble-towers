@@ -14,6 +14,7 @@ end
 
 wave_list = CreateWaveList(5)
 session = Session:New(0, wave_list)
+session:Init()
 cursor = Cursor:New()
 
 function _update()

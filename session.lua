@@ -7,6 +7,7 @@ Session = {
   enemy_path={},
   tower_list={},
   enemy_list={},
+  cash=9999,
   player_life=0,
 }
 Session.__index = Session
@@ -125,6 +126,22 @@ function Session:DrawPath()
   end
 end
 
+function Session:DrawStats()
+  print("cash: ", 1, 1, 12)
+  print(self.cash, 21, 1, 7)
+
+  print("next: ", 43, 1, 12)
+  local next_enemy_sprite = {32, 33, 32, 33}
+  local x = 62
+  for enemy in all(next_enemy_sprite) do
+    spr(enemy, x, 0)
+    x += 8
+  end
+
+  print("life: ", 100, 1, 12)
+  print(self.player_life, 120, 1, 7)
+end
+
 function Session:Update()
   for enemy in all(self.enemy_list) do
     enemy:Update()
@@ -153,6 +170,7 @@ function Session:Draw()
   self:DrawMap()
   self:DrawMapBorder()
   self:DrawPath()
+  self:DrawStats()
 
   for tower in all(self.tower_list) do
     tower:Draw()
@@ -161,6 +179,4 @@ function Session:Draw()
   for enemy in all(self.enemy_list) do
     enemy:Draw()
   end
-
-  print(self.player_life, 0, 0, 10)
 end

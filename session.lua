@@ -7,6 +7,7 @@ Session = {
   enemy_path={},
   tower_list={},
   enemy_list={},
+  baby_list={},
   wave_list={},
   cash=9999,
   player_life=0,
@@ -78,15 +79,30 @@ function Session:StartNextWave()
   if (#self.wave_list == 0) return
 
   local next_wave = deli(wave_list, 1)
-
   local start_point = ConvertTileToPixel(self.start)
-  local diff_point = Point:New(16, 0)
 
   for i=1,next_wave.enemy_count do
-    enemy = Enemy:New(start_point, self.enemy_path, next_wave.enemy_type)
-    add(self.enemy_list, enemy)
+    local enemy = Enemy:New(start_point, self.enemy_path, next_wave.enemy_type)
+    add(self.baby_list, enemy)
+  end
+end
 
-    start_point = start_point - diff_point
+function Session:TrySpawnEnemy()
+  if (#self.baby_list == 0) return
+
+  local function SpawnEnemy()
+    local new_enemy = deli(self.baby_list, 1)
+    add(self.enemy_list, new_enemy)
+  end
+
+  if #self.enemy_list == 0 then
+    SpawnEnemy()
+  end
+
+  local last_enemy = self.enemy_list[#self.enemy_list]
+  local new_enemy = self.baby_list[1]
+  if not last_enemy.pos:IsNear(new_enemy.pos, 8) then
+    SpawnEnemy()
   end
 end
 
@@ -151,6 +167,8 @@ function Session:DrawStats()
 end
 
 function Session:Update()
+  self:TrySpawnEnemy()
+
   for enemy in all(self.enemy_list) do
     enemy:Update()
     if enemy:IsDead() then

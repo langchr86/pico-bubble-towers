@@ -35,8 +35,8 @@ end
 function Session:SearchSpecialPoints()
   self:DrawMap()
 
-  for x=0,kMapSizeInTiles do
-    for y=0,kMapSizeInTiles do
+  for x=0,kMapSizeInTiles-1 do
+    for y=0,kMapSizeInTiles-1 do
       local tile_pos = Point:New(x, y)
       if Map:IsTileStart(tile_pos) then
         self.start = tile_pos

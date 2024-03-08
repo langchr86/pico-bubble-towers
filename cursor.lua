@@ -49,7 +49,7 @@ end
 
 function Cursor:IsFree()
   local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
-  return Map:IsTileFree4(tile_pos)
+  return Map:CanBuildOnTile4(tile_pos)
 end
 
 function Cursor:Draw()

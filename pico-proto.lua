@@ -12,7 +12,7 @@ function _init()
   menu:Update()
 end
 
-map_index = 2
+map_index = 0
 Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles))
 
 wave_list = CreateWaveList(5)

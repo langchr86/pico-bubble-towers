@@ -30,11 +30,19 @@ function Map:IsTileFree(tile_pos)
   return not massive
 end
 
-function Map:IsTileFree4(tile_pos)
+function Map:CanBuildOnTile4(tile_pos)
   return self:IsTileFree(tile_pos)
   and self:IsTileFree(tile_pos + Point:New(1, 0))
   and self:IsTileFree(tile_pos + Point:New(0, 1))
   and self:IsTileFree(tile_pos + Point:New(1, 1))
+  and not self:IsTileStart(tile_pos)
+  and not self:IsTileStart(tile_pos + Point:New(1, 0))
+  and not self:IsTileStart(tile_pos + Point:New(0, 1))
+  and not self:IsTileStart(tile_pos + Point:New(1, 1))
+  and not self:IsTileGoal(tile_pos)
+  and not self:IsTileGoal(tile_pos + Point:New(1, 0))
+  and not self:IsTileGoal(tile_pos + Point:New(0, 1))
+  and not self:IsTileGoal(tile_pos + Point:New(1, 1))
 end
 
 function Map:IsTileStart(tile_pos)

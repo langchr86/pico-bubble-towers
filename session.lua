@@ -55,7 +55,7 @@ function Session:PlaceTower(cursor)
     if tower.pos == cursor.pos then
       tower:Destroy()
       del(self.tower_list, tower)
-      self.enemy_path = self:CalculateNewPath()
+      self:CalculateNewPath()
       return
     end
   end
@@ -65,10 +65,8 @@ function Session:PlaceTower(cursor)
   end
 
   local new_tower = Tower:New(cursor.pos)
-  local new_path = self:CalculateNewPath()
-  if #new_path > 0 then
+  if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
-    self.enemy_path = new_path
   else
     new_tower:Destroy()
   end
@@ -101,16 +99,15 @@ function Session:CalculateNewPath()
   end
 
   local path = module:find(15, 15, self.start, self.goal, is_coord_reachable)
+  if (path == false) return false
 
-  local real_path = {}
-  if (path == false) return {}
-
+  self.enemy_path = {}
   for pos in all(path) do
     local pos = ConvertTileToPixel(pos)
-    add(real_path, pos)
+    add(self.enemy_path, pos)
   end
 
-  return real_path
+  return true
 end
 
 function Session:DrawMapBorder()

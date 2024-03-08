@@ -48,6 +48,8 @@ function Session:SearchSpecialPoints()
 end
 
 function Session:PlaceTower(cursor)
+  if (self:AnyEnemies()) return
+
   local removed = false
   for tower in all(self.tower_list) do
     if tower.pos == cursor.pos then
@@ -87,6 +89,10 @@ function Session:StartNextWave()
 
     start_point = start_point - diff_point
   end
+end
+
+function Session:AnyEnemies()
+  return #self.enemy_list > 0
 end
 
 function Session:CalculateNewPath()

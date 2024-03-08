@@ -2,6 +2,7 @@
 
 Menu = {
   running = true,
+  wave_handler = nil,
 }
 Menu.__index = Menu
 
@@ -9,6 +10,10 @@ function Menu:New()
   o = {
   }
   return setmetatable(o, self)
+end
+
+function Menu:SetWaveHandler(wave_handler)
+  self.wave_handler = wave_handler
 end
 
 function Menu:Update()
@@ -21,6 +26,8 @@ function Menu:Update()
   else
     menuitem(1, "start animation", HandleRunningWrapper)
   end
+
+  menuitem(2, "add waves", self.wave_handler)
 end
 
 function Menu:HandleRunning()

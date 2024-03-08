@@ -13,14 +13,14 @@ Session = {
 }
 Session.__index = Session
 
-function Session:New(wave_list)
+function Session:New()
   o = {
     start=Point:New(0, 0),
     goal=Point:New(0, 0),
     enemy_path={},
     tower_list={},
     enemy_list={},
-    wave_list=wave_list,
+    wave_list={},
     player_life=20,
   }
 
@@ -30,6 +30,12 @@ end
 function Session:Init()
   self:SearchSpecialPoints()
   self:CalculateNewPath()
+end
+
+function Session:AddWaves(wave_list)
+  for wave in all(wave_list) do
+    add(self.wave_list, wave)
+  end
 end
 
 function Session:SearchSpecialPoints()

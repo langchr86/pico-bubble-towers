@@ -15,10 +15,15 @@ end
 map_index = 0
 Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles))
 
-wave_list = CreateWaveList(5)
-session = Session:New(wave_list)
+session = Session:New()
 session:Init()
+session:AddWaves(CreateWaveList(5))
 cursor = Cursor:New()
+
+local function AddNewWaves()
+  session:AddWaves(CreateWaveList(5))
+end
+menu:SetWaveHandler(AddNewWaves)
 
 function _update()
   if btnp(⬆️) then

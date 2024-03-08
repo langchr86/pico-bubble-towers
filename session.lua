@@ -30,6 +30,7 @@ end
 
 function Session:Init()
   self:SearchSpecialPoints()
+  self:CalculateNewPath()
 end
 
 function Session:SearchSpecialPoints()

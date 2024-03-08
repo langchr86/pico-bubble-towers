@@ -12,6 +12,8 @@ function _init()
   menu:Update()
 end
 
+session = Session:New(0)
+
 screen_max = Point:New(128, 128)
 cursor_min = Point:New(0, 0)
 cursor_max = screen_max
@@ -24,112 +26,6 @@ min_x = 0
 min_y = 0
 max_x = map_width - 1
 max_y = map_height - 1
-
-start = Point:New(0, 7)
-goal = Point:New(15, 8)
-real_path = {}
-
-tower_list = {}
-enemy_list = {}
-
-player_life = 20
-
-sw_algo = 0
-
-
-function TowerPlacement()
-  local removed = false
-  for tower in all(tower_list) do
-    if tower.pos == cursor.pos then
-      tower:Destroy()
-      del(tower_list, tower)
-      real_path = PathCalculation()
-      ResetEnemies()
-      return
-    end
-  end
-
-  if not cursor:IsFree() then
-    return
-  end
-
-  local new_tower = Tower:New(cursor.pos)
-  local new_path = PathCalculation()
-  if #new_path > 0 then
-    add(tower_list, new_tower)
-    real_path = new_path
-    ResetEnemies()
-  else
-    new_tower:Destroy()
-  end
-end
-
-function PathCalculation()
-  local function is_coord_reachable(x, y)
-    -- should return true if the position is open to walk
-    local sprite = mget(x, y)
-    local massive = fget(sprite, 0)
-    return not massive
-  end
-
-  sw_algo = stat(1)
-  local path = module:find(max_x, max_y, start, goal, is_coord_reachable)
-  sw_algo = stat(1) - sw_algo
-
-  local real_path = {}
-  if (path == false) return {}
-
-  for pos in all(path) do
-    local pos = ConvertTileToPixel(pos)
-    add(real_path, pos)
-  end
-
-  return real_path
-end
-
-function ResetEnemies()
-  enemy_list = {}
-  CreateEnemiesIfNeeded()
-end
-
-function CreateEnemiesIfNeeded()
-  if (#real_path == 0) return
-
-  local start_point = ConvertTileToPixel(start)
-  local diff_point = Point:New(16, 0)
-
-  for i=#enemy_list,3 do
-    enemy = Enemy:New(start_point, real_path)
-    add(enemy_list, enemy)
-
-    start_point = start_point - diff_point
-  end
-end
-
-function UpdateObjects()
-  for enemy in all(enemy_list) do
-    enemy:Update()
-    if enemy:IsDead() then
-      del(enemy_list, enemy)
-    end
-    if enemy:InTarget() then
-      del(enemy_list, enemy)
-      player_life -= 1
-    end
-  end
-
-  CreateEnemiesIfNeeded()
-
-  for tower in all(tower_list) do
-    tower:Update(enemy_list)
-  end
-end
-
-function DrawPath()
-  for pos in all(real_path) do
-    spr(5, pos.x, pos.y)
-  end
-end
 
 function _update()
   if btnp(⬆️) then
@@ -150,46 +46,25 @@ function _update()
 
   if btn(🅾️) then
     if not menu.running then
-      UpdateObjects()
+      session:Update()
     end
   end
 
   if btnp(❎) then
-    TowerPlacement()
+    session:PlaceTower(cursor)
   end
 
   if menu.running then
-    UpdateObjects()
+    session:Update()
   end
 end
 
 function _draw()
   cls()
 
-  if player_life <= 0 then
-    map(0, 16)
-    return
-  end
-
-  map()
-
-  DrawPath()
-
-  for tower in all(tower_list) do
-    tower:Draw()
-  end
-
-  for enemy in all(enemy_list) do
-    enemy:Draw()
-  end
-
-  spr(3, start.x * kTileSize, start.y * kTileSize)
-  spr(4, goal.x * kTileSize, goal.y * kTileSize)
-
+  session:Draw()
   cursor:Draw()
 
   fps = stat(7)
-  print(player_life, 0, 0, 10)
-  print(sw_algo, 90, 0, 10)
   print(fps, 120, 0, 10)
 end

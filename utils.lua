@@ -1,6 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 kTileSize = 8
+kMapSizeInTiles = 16
 
 function ConvertTileToPixel(tile_pos)
   return Point:New(tile_pos.x * kTileSize, tile_pos.y * kTileSize)

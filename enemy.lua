@@ -47,7 +47,9 @@ function Enemy:InTarget()
 end
 
 function Enemy:Update()
-  if (self:InTarget()) return
+  if self:InTarget() then
+    return
+  end
 
   if self.pos:IsNear(self.next_pos, 0.5) then
     self.pos:Assign(self.next_pos)

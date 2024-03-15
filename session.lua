@@ -54,7 +54,9 @@ function Session:SearchSpecialPoints()
 end
 
 function Session:PlaceTower(cursor)
-  if (self:AnyEnemies()) return
+  if self:AnyEnemies() then
+    return
+  end
 
   local removed = false
   for tower in all(self.tower_list) do
@@ -80,8 +82,9 @@ function Session:PlaceTower(cursor)
 end
 
 function Session:StartNextWave()
-  if (#self.enemy_path == 0) return
-  if (#self.wave_list == 0) return
+  if #self.enemy_path == 0 or #self.wave_list == 0 then
+    return
+  end
 
   local next_wave = deli(self.wave_list, 1)
   local start_point = ConvertTileToPixel(self.start)
@@ -93,7 +96,9 @@ function Session:StartNextWave()
 end
 
 function Session:TrySpawnEnemy()
-  if (#self.baby_list == 0) return
+  if #self.baby_list == 0 then
+    return
+  end
 
   local function SpawnEnemy()
     local new_enemy = deli(self.baby_list, 1)
@@ -122,7 +127,9 @@ function Session:CalculateNewPath()
   end
 
   local path = module:find(15, 15, self.start, self.goal, is_coord_reachable)
-  if (path == false) return false
+  if path == false then
+   return false
+  end
 
   self.enemy_path = {}
   for pos in all(path) do

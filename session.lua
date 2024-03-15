@@ -23,7 +23,7 @@ function Session:New()
     enemy_list={},
     baby_list={},
     wave_list={},
-    cash=0,
+    cash=300,
     player_life=20,
   }
 
@@ -67,6 +67,7 @@ function Session:PlaceTower(cursor)
     if tower.pos == cursor.pos then
       tower:Destroy()
       del(self.tower_list, tower)
+      self.cash = self.cash + tower:GetValue()
       self:CalculateNewPath()
       return
     end
@@ -77,9 +78,16 @@ function Session:PlaceTower(cursor)
   end
 
   local new_tower = Tower:New(cursor.pos)
+  ---@type number
+  local cost = new_tower:GetCost()
+  if self.cash < cost then
+    return
+  end
+
   new_tower:Init()
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
+    self.cash = self.cash - cost
   else
     new_tower:Destroy()
   end

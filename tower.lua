@@ -35,6 +35,16 @@ function Tower:Destroy()
   Map:TileClear4(tile_pos, 10)
 end
 
+---@return number
+function Tower:GetCost()
+  return 20
+end
+
+---@return number
+function Tower:GetValue()
+  return 15
+end
+
 function Tower:Update(enemy_list)
   self:ShotOnNearestEnemy(enemy_list)
 end

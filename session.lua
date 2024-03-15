@@ -227,6 +227,11 @@ function Session:Draw(cursor)
     return
   end
 
+  if #self.wave_list == 0 and self:AnyEnemies() == false then
+    map(16, 16)
+    return
+  end
+
   self:DrawMap()
   self:DrawPath()
 

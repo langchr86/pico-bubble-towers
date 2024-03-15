@@ -23,7 +23,7 @@ function Session:New()
     enemy_list={},
     baby_list={},
     wave_list={},
-    cash=9999,
+    cash=0,
     player_life=20,
   }
 
@@ -200,6 +200,7 @@ function Session:Update()
     enemy:Update()
     if enemy:IsDead() then
       del(self.enemy_list, enemy)
+      self.cash = self.cash + enemy:GetValue()
     end
     if enemy:InTarget() then
       del(self.enemy_list, enemy)

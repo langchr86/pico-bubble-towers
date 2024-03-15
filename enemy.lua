@@ -9,6 +9,7 @@
 ---@field speed number
 ---@field max_life number
 ---@field life number
+---@field value number
 ---@field bullet_list Bullet[]
 Enemy = {}
 Enemy.__index = Enemy
@@ -29,6 +30,7 @@ function Enemy:New(pos, path, type)
     speed=1,
     max_life=100,
     life=100,
+    value=20,
     bullet_list={},
   }
   return --[[---@type Enemy]] setmetatable(o, self)
@@ -55,6 +57,11 @@ end
 ---@return boolean
 function Enemy:InTarget()
   return self.pos:IsNear(self.path[#self.path], 0.5)
+end
+
+---@return number
+function Enemy:GetValue()
+  return self.value
 end
 
 function Enemy:Update()

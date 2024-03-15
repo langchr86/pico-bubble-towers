@@ -177,11 +177,11 @@ function Session:DrawStats()
     spr(9, x * kTileSize, 0)
   end
 
-  print("cash: ", 1, 1, 12)
-  print(self.cash, 21, 1, 7)
+  print("life: ", 1, 1, 12)
+  print(self.player_life, 21, 1, 7)
 
-  print("next: ", 43, 1, 12)
-  local x = 62
+  print("next: ", 35, 1, 12)
+  local x = 54
   for i=1,min(4, #self.wave_list) do
     local wave = self.wave_list[i]
     local enemy_sprite = 32 + wave.enemy_type
@@ -189,8 +189,8 @@ function Session:DrawStats()
     x = x + 8
   end
 
-  print("life: ", 100, 1, 12)
-  print(self.player_life, 120, 1, 7)
+  print("cash: ", 92, 1, 12)
+  print(self.cash, 112, 1, 7)
 end
 
 function Session:Update()

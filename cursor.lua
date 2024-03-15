@@ -15,10 +15,6 @@ function Cursor:New()
   return setmetatable(o, self)
 end
 
-function Cursor:Set(pos)
-  self.pos = pos
-end
-
 function Cursor:MoveUp()
   self.pos.y -= self.inc
   if (self.pos.y < self.min.y) then

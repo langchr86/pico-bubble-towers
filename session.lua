@@ -58,7 +58,6 @@ function Session:PlaceTower(cursor)
     return
   end
 
-  local removed = false
   for tower in all(self.tower_list) do
     if tower.pos == cursor.pos then
       tower:Destroy()

@@ -1,15 +1,18 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-Menu = {
-  running = true,
-  wave_handler = nil,
-}
+---@class Menu
+---@field running boolean
+---@field wave_handler function
+Menu = {}
 Menu.__index = Menu
 
+---@return Menu
 function Menu:New()
-  o = {
+  local o = {
+    running=true,
+    wave_handler=nil,
   }
-  return setmetatable(o, self)
+  return --[[---@type Menu]] setmetatable(o, self)
 end
 
 function Menu:SetWaveHandler(wave_handler)

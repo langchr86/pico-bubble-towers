@@ -1,23 +1,28 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-Tower = {
-  sprite=128,
-  pos=nil,
-  logical_pos=nil,
-  radius=16,
-  reload_threshold=20,
-  reload_level=0,
-}
+---@class Tower
+---@field sprite number
+---@field pos Point
+---@field logical_pos Point
+---@field radius number
+---@field reload_threshold number
+---@field reload_level number
+Tower = {}
 Tower.__index = Tower
 
+---@param pos Point
+---@return Tower
 function Tower:New(pos)
-  o = {
+  local o = {
+    sprite=128,
     pos=pos:Clone(),
     logical_pos=pos+Point:New(4, 4),
-    reload_level=self.reload_threshold,
+    radius=16,
+    reload_threshold=20,
+    reload_level=0,
   }
 
-  return setmetatable(o, self)
+  return --[[---@type Tower]] setmetatable(o, self)
 end
 
 function Tower:Init()
@@ -40,6 +45,7 @@ function Tower:Draw(cursor)
   end
 end
 
+---@return boolean
 function Tower:PlacedOn(other)
   return self.pos:IsColliding(other, 16)
 end
@@ -50,8 +56,10 @@ function Tower:ShotOnNearestEnemy(enemy_list)
     return
   end
 
-  local nearest_enemy_in_reach = nil
-  local nearest_distance = nil
+  ---@type Enemy
+  local nearest_enemy_in_reach
+  ---@type number
+  local nearest_distance
 
   for enemy in all(enemy_list) do
     local distance = self.logical_pos:Distance(enemy.pos)

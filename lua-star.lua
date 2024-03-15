@@ -17,7 +17,8 @@
 --- Provides easy A* path finding.
 -- @module lua-star
 
-local module = {}
+LuaStar = {}
+LuaStar.__index = LuaStar
 
 -- (Internal) Return the distance between two points.
 -- This method doesn't bother getting the square root of s, it is faster
@@ -92,7 +93,13 @@ local function getAdjacent(max_x, max_y, node, positionIsOpenFunc)
 end
 
 -- Returns the path from start to goal, or false if no path exists.
-function module:find(max_x, max_y, start, goal, positionIsOpenFunc)
+---@param max_x number
+---@param max_y number
+---@param start Point
+---@param goal Point
+---@param positionIsOpenFunc function
+---@return Point[]|boolean
+function LuaStar:Find(max_x, max_y, start, goal, positionIsOpenFunc)
     local success = false
     local open = { }
     local closed = { }

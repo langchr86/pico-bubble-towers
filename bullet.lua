@@ -1,22 +1,29 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-Bullet = {
-  pos=nil,
-  dest=nil,
-  sprite=48,
-  speed=3,
-  damage=10,
-}
+---@class Bullet
+---@field pos Point
+---@field dest Point
+---@field sprite number
+---@field speed number
+---@field damage number
+Bullet = {}
 Bullet.__index = Bullet
 
+---@param pos Point
+---@param dest Point
+---@return Bullet
 function Bullet:New(pos, dest)
-  o = {
+  local o = {
     pos=pos:Clone(),
     dest=dest,  -- this is a always updated reference to the target
+    sprite=48,
+    speed=3,
+    damage=10,
   }
-  return setmetatable(o, self)
+  return --[[---@type Bullet]] setmetatable(o, self)
 end
 
+---@return boolean
 function Bullet:InTarget()
   return self.pos:IsNear(self.dest, 2)
 end
@@ -26,6 +33,7 @@ function Bullet:Update()
 end
 
 function Bullet:Draw()
+  ---@type Point
   local rounded = self.pos:Floor()
   spr(self.sprite, rounded.x, rounded.y)
 end

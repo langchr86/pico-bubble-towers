@@ -1,5 +1,11 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
+---@class Cursor
+---@field sprite number
+---@field pos Point
+---@field min Point
+---@field max Point
+---@field inc number
 Cursor = {
   sprite=64,
   pos=Point:New(8, 16),
@@ -9,10 +15,11 @@ Cursor = {
 }
 Cursor.__index = Cursor
 
+---@return Cursor
 function Cursor:New()
-  o = {
+  local o = {
   }
-  return setmetatable(o, self)
+  return --[[---@type Cursor]] setmetatable(o, self)
 end
 
 function Cursor:MoveUp()
@@ -43,6 +50,7 @@ function Cursor:MoveRight()
   end
 end
 
+---@return boolean
 function Cursor:IsFree()
   local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
   return Map:CanBuildOnTile4(tile_pos)
@@ -52,6 +60,7 @@ function Cursor:Draw()
   if self.pos then
     spr(self.sprite, self.pos.x, self.pos.y, 2, 2)
 
+    ---@type number
     cursor_sprite = Map:GetSprite(Point:New(self.pos.x / self.inc, self.pos.y / self.inc))
     print(cursor_sprite, 2, 121, 10)
     print(fget(cursor_sprite, 0), 17, 121, 10)

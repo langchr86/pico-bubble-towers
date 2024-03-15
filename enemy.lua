@@ -1,35 +1,44 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-Enemy = {
-  sprite=32,
-  pos=nil,
-  path=nil,
-  next_pos=nil,
-  next_pos_index=1,
-  speed=1,
-  max_life=100,
-  life=0,
-  bullet_list={},
-}
+---@class Enemy
+---@field sprite number
+---@field pos Point
+---@field path Point[]
+---@field next_pos Point
+---@field next_pos_index number
+---@field speed number
+---@field max_life number
+---@field life number
+---@field bullet_list Bullet[]
+Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy:New(init_pos, path, type)
-  o = {
-    sprite=self.sprite + type,
-    pos=init_pos:Clone(),
+---@param pos Point
+---@param path Point[]
+---@param type number
+---@return Enemy
+function Enemy:New(pos, path, type)
+  ---@type number
+  local base_sprite = 32
+  local o = {
+    sprite=base_sprite+type,
+    pos=pos:Clone(),
     path=path,
     next_pos=path[1],
     next_pos_index=1,
-    life=self.max_life,
+    speed=1,
+    max_life=100,
+    life=100,
     bullet_list={},
   }
-  return setmetatable(o, self)
+  return --[[---@type Enemy]] setmetatable(o, self)
 end
 
 function Enemy:Shot(bullet)
   add(self.bullet_list, bullet)
 end
 
+---@param bullet Bullet
 function Enemy:Hit(bullet)
   del(self.bullet_list, bullet)
   self.life -= bullet.damage
@@ -38,10 +47,12 @@ function Enemy:Hit(bullet)
   end
 end
 
+---@return boolean
 function Enemy:IsDead()
   return self.life <= 0
 end
 
+---@return boolean
 function Enemy:InTarget()
   return self.pos:IsNear(self.path[#self.path], 0.5)
 end
@@ -69,6 +80,7 @@ function Enemy:Update()
 end
 
 function Enemy:Draw()
+  ---@type Point
   local rounded = self.pos:Floor()
   spr(self.sprite, rounded.x, rounded.y)
 

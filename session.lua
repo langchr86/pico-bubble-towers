@@ -1,30 +1,33 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-Session = {
-  start=nil,
-  goal=nil,
-  enemy_path={},
-  tower_list={},
-  enemy_list={},
-  baby_list={},
-  wave_list={},
-  cash=9999,
-  player_life=0,
-}
+---@class Session
+---@field start Point
+---@field goal Point
+---@field enemy_path Point[]
+---@field tower_list Tower[]
+---@field enemy_list Enemy[]
+---@field baby_list Enemy[]
+---@field wave_list Wave[]
+---@field cash number
+---@field player_life number
+Session = {}
 Session.__index = Session
 
+---@return Session
 function Session:New()
-  o = {
+  local o = {
     start=Point:New(0, 0),
     goal=Point:New(0, 0),
     enemy_path={},
     tower_list={},
     enemy_list={},
+    baby_list={},
     wave_list={},
+    cash=9999,
     player_life=20,
   }
 
-  return setmetatable(o, self)
+  return --[[---@type Session]] setmetatable(o, self)
 end
 
 function Session:Init()
@@ -32,6 +35,7 @@ function Session:Init()
   self:CalculateNewPath()
 end
 
+---@param wave_list Wave[]
 function Session:AddWaves(wave_list)
   for wave in all(wave_list) do
     add(self.wave_list, wave)
@@ -53,6 +57,7 @@ function Session:SearchSpecialPoints()
   end
 end
 
+---@param cursor Cursor
 function Session:PlaceTower(cursor)
   if self:AnyEnemies() then
     return
@@ -85,7 +90,9 @@ function Session:StartNextWave()
     return
   end
 
+  ---@type Wave
   local next_wave = deli(self.wave_list, 1)
+  ---@type Point
   local start_point = ConvertTileToPixel(self.start)
 
   for i=1,next_wave.enemy_count do
@@ -100,6 +107,7 @@ function Session:TrySpawnEnemy()
   end
 
   local function SpawnEnemy()
+    ---@type Enemy
     local new_enemy = deli(self.baby_list, 1)
     add(self.enemy_list, new_enemy)
   end
@@ -108,38 +116,45 @@ function Session:TrySpawnEnemy()
     SpawnEnemy()
   end
 
+  ---@type Enemy
   local last_enemy = self.enemy_list[#self.enemy_list]
+  ---@type Enemy
   local new_enemy = self.baby_list[1]
   if not last_enemy.pos:IsNear(new_enemy.pos, 8) then
     SpawnEnemy()
   end
 end
 
+---@return boolean
 function Session:AnyEnemies()
   return #self.enemy_list > 0
 end
 
+---@return boolean
 function Session:CalculateNewPath()
   local function is_coord_reachable(x, y)
     local tile_pos = Point:New(x, y)
     return Map:IsTileFree(tile_pos)
   end
 
-  local path = module:find(15, 15, self.start, self.goal, is_coord_reachable)
+  ---@type Point[]|boolean
+  local path = LuaStar:Find(15, 15, self.start, self.goal, is_coord_reachable)
   if path == false then
    return false
   end
 
   self.enemy_path = {}
   for pos in all(path) do
-    local pos = ConvertTileToPixel(pos)
-    add(self.enemy_path, pos)
+    ---@type Point
+    local pixel_pos = ConvertTileToPixel(pos)
+    add(self.enemy_path, pixel_pos)
   end
 
   return true
 end
 
 function Session:DrawMapBorder()
+  ---@type number
   local border_color = 6
   line(0, kTileSize, 127, kTileSize, border_color)
   line(0, kTileSize, 0, 127, border_color)

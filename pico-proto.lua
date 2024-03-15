@@ -16,7 +16,6 @@ map_index = 0
 Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles))
 
 session = Session:New()
-session:Init()
 session:AddWaves(CreateWaveList(5))
 cursor = Cursor:New()
 

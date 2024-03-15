@@ -22,12 +22,12 @@ function Tower:New(pos)
     reload_level=0,
   }
 
-  return --[[---@type Tower]] setmetatable(o, self)
-end
+  local instance = --[[---@type Tower]] setmetatable(o, self)
 
-function Tower:Init()
-  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
-  Map:TileSet4(tile_pos, self.sprite)
+  local tile_pos = Point:New(instance.pos.x / kTileSize, instance.pos.y / kTileSize)
+  Map:TileSet4(tile_pos, instance.sprite)
+
+  return instance
 end
 
 function Tower:Destroy()

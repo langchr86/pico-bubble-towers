@@ -27,12 +27,12 @@ function Session:New()
     player_life=20,
   }
 
-  return --[[---@type Session]] setmetatable(o, self)
-end
+  local instance = --[[---@type Session]] setmetatable(o, self)
 
-function Session:Init()
-  self:SearchSpecialPoints()
-  self:CalculateNewPath()
+  instance:SearchSpecialPoints()
+  instance:CalculateNewPath()
+
+  return instance
 end
 
 ---@param wave_list Wave[]
@@ -81,10 +81,10 @@ function Session:PlaceTower(cursor)
   ---@type number
   local cost = new_tower:GetCost()
   if self.cash < cost then
+    new_tower:Destroy()
     return
   end
 
-  new_tower:Init()
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
     self.cash = self.cash - cost

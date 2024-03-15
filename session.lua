@@ -186,7 +186,7 @@ function Session:DrawStats()
     local wave = self.wave_list[i]
     local enemy_sprite = 32 + wave.enemy_type
     spr(enemy_sprite, x, 0)
-    x += 8
+    x = x + 8
   end
 
   print("life: ", 100, 1, 12)
@@ -203,7 +203,7 @@ function Session:Update()
     end
     if enemy:InTarget() then
       del(self.enemy_list, enemy)
-      self.player_life -= 1
+      self.player_life = self.player_life - 1
     end
   end
 

@@ -27,7 +27,7 @@ function CreateWaveList(wave_count)
   local list = {}
   for i=1,wave_count do
     add(list, Wave:New(4, type))
-    type += 1
+    type = type + 1
     if type > 1 then
       type = 0
     end

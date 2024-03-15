@@ -41,7 +41,7 @@ end
 ---@param bullet Bullet
 function Enemy:Hit(bullet)
   del(self.bullet_list, bullet)
-  self.life -= bullet.damage
+  self.life = self.life - bullet.damage
   if self.life < 0 then
     self.life = 0
   end
@@ -64,7 +64,7 @@ function Enemy:Update()
 
   if self.pos:IsNear(self.next_pos, 0.5) then
     self.pos:Assign(self.next_pos)
-    self.next_pos_index += 1
+    self.next_pos_index = self.next_pos_index + 1
     self.next_pos = self.path[self.next_pos_index]
   end
 

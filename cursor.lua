@@ -23,28 +23,28 @@ function Cursor:New()
 end
 
 function Cursor:MoveUp()
-  self.pos.y -= self.inc
+  self.pos.y = self.pos.y - self.inc
   if (self.pos.y < self.min.y) then
     self.pos.y = self.min.y
   end
 end
 
 function Cursor:MoveDown()
-  self.pos.y += self.inc
+  self.pos.y = self.pos.y + self.inc
   if (self.pos.y > self.max.y) then
     self.pos.y = self.max.y
   end
 end
 
 function Cursor:MoveLeft()
-  self.pos.x -= self.inc
+  self.pos.x = self.pos.x - self.inc
   if (self.pos.x < self.min.x) then
     self.pos.x = self.min.x
   end
 end
 
 function Cursor:MoveRight()
-  self.pos.x += self.inc
+  self.pos.x = self.pos.x + self.inc
   if (self.pos.x > self.max.x) then
     self.pos.x = self.max.x
   end

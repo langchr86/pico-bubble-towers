@@ -52,7 +52,7 @@ end
 
 function Tower:ShotOnNearestEnemy(enemy_list)
   if self.reload_level < self.reload_threshold then
-    self.reload_level += 1
+    self.reload_level = self.reload_level + 1
     return
   end
 

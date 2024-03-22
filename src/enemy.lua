@@ -37,7 +37,7 @@ function Enemy:New(type, life)
     speed=1,
     max_life=life,
     life=life,
-    value=20,
+    value=10,
     bullet_list={},
   }
 
@@ -48,11 +48,13 @@ function Enemy:New(type, life)
     e.sprite_count = 2
     e.frame_count = 10
     e.speed = 1.0
+    e.value = flr(e.speed * e.life / 10)
   elseif type == 1 then
     e.sprite = 34
     e.sprite_count = 4
     e.frame_count = 6
     e.speed = 1.4
+    e.value = flr(e.speed * e.life / 10)
   end
 
   return setmetatable(e, self)

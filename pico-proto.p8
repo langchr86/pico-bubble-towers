@@ -9,18 +9,20 @@ __lua__
 -- is licensed under
 -- cc by-nc-sa 4.0
 
-#include utils.lua
-#include menu.lua
-#include point.lua
-#include cursor.lua
-#include enemy.lua
-#include table.lua
-#include bullet.lua
-#include tower.lua
-#include lua-star.lua
-#include wave.lua
-#include session.lua
-#include pico-proto.lua
+#include libs/table.lua
+#include libs/lua-star.lua
+
+#include src/utils.lua
+#include src/menu.lua
+#include src/point.lua
+#include src/cursor.lua
+#include src/enemy.lua
+#include src/bullet.lua
+#include src/tower.lua
+#include src/wave.lua
+#include src/session.lua
+#include src/pico-proto.lua
+
 __gfx__
 00000000666666666dddddddddddddddddddddd66dddddddddddddd6666666666666666611111111dddddddd0000000000000000000000000000000000000000
 00000000dddddddd6dddddddddddddddddddddd66dddddddddddddd66dddddddddddddd611111111dddddddd0000000000000000000000000000000000000000

@@ -3,6 +3,7 @@
 ---@class Wave
 ---@field enemy_count number
 ---@field enemy_template Enemy
+---@field baby_list Enemy[]
 Wave = {}
 Wave.__index = Wave
 
@@ -13,9 +14,47 @@ function Wave:New(enemy_count, enemy_template)
   local o = {
     enemy_count=enemy_count,
     enemy_template=enemy_template,
+    baby_list={},
   }
 
   return --[[---@type Wave]] setmetatable(o, self)
+end
+
+---@param start Point
+---@param enemy_path Point[]
+function Wave:Start(start, enemy_path)
+  for i=1, self.enemy_count do
+    local enemy = self.enemy_template:Clone()
+    enemy:Activate(start, enemy_path)
+    add(self.baby_list, enemy)
+  end
+end
+
+---@return boolean
+function Wave:IsActive()
+  return #self.baby_list > 0
+end
+
+---@param existing_enemies Enemy[]
+function Wave:TrySpawnBaby(existing_enemies)
+  local function SpawnEnemy()
+    ---@type Enemy
+    local new_enemy = deli(self.baby_list, 1)
+    add(existing_enemies, new_enemy)
+  end
+
+  if #existing_enemies == 0 then
+    SpawnEnemy()
+    return
+  end
+
+  ---@type Enemy
+  local last_enemy = existing_enemies[#existing_enemies]
+  ---@type Enemy
+  local new_enemy = self.baby_list[1]
+  if not last_enemy.pos:IsNear(new_enemy.pos, 8) then
+    SpawnEnemy()
+  end
 end
 
 ---@param wave_count number

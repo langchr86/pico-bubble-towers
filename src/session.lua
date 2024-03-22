@@ -6,8 +6,8 @@
 ---@field enemy_path Point[]
 ---@field tower_list Tower[]
 ---@field enemy_list Enemy[]
----@field baby_list Enemy[]
 ---@field wave_list Wave[]
+---@field active_wave Wave
 ---@field cash number
 ---@field player_life number
 Session = {}
@@ -21,8 +21,8 @@ function Session:New()
     enemy_path={},
     tower_list={},
     enemy_list={},
-    baby_list={},
     wave_list={},
+    active_wave=nil,
     cash=300,
     player_life=20,
   }
@@ -94,45 +94,28 @@ function Session:PlaceTower(cursor)
 end
 
 function Session:StartNextWave()
-  if #self.enemy_path == 0 or #self.wave_list == 0 then
+  if #self.enemy_path == 0 or #self.wave_list == 0 or self.active_wave then
     return
   end
 
-  ---@type Wave
-  local next_wave = deli(self.wave_list, 1)
   ---@type Point
   local start_point = ConvertTileToPixel(self.start)
 
-  for i=1,next_wave.enemy_count do
-    local enemy = next_wave.enemy_template:Clone()
-    enemy:Activate(start_point, self.enemy_path)
-    add(self.baby_list, enemy)
-  end
+  self.active_wave = deli(self.wave_list, 1)
+  self.active_wave:Start(start_point, self.enemy_path)
 end
 
 function Session:TrySpawnEnemy()
-  if #self.baby_list == 0 then
+  if not self.active_wave then
     return
   end
 
-  local function SpawnEnemy()
-    ---@type Enemy
-    local new_enemy = deli(self.baby_list, 1)
-    add(self.enemy_list, new_enemy)
-  end
-
-  if #self.enemy_list == 0 then
-    SpawnEnemy()
+  if not self.active_wave:IsActive() then
+    self.active_wave = nil
     return
   end
 
-  ---@type Enemy
-  local last_enemy = self.enemy_list[#self.enemy_list]
-  ---@type Enemy
-  local new_enemy = self.baby_list[1]
-  if not last_enemy.pos:IsNear(new_enemy.pos, 8) then
-    SpawnEnemy()
-  end
+  self.active_wave:TrySpawnBaby(self.enemy_list)
 end
 
 ---@return boolean

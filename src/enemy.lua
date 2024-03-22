@@ -1,6 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 ---@class Enemy
+---@field type number
 ---@field sprite number
 ---@field sprite_count number
 ---@field sprite_index number
@@ -18,20 +19,19 @@
 Enemy = {}
 Enemy.__index = Enemy
 
----@param pos Point
----@param path Point[]
 ---@param type number
 ---@return Enemy
-function Enemy:New(pos, path, type)
+function Enemy:New(type)
   local o = {
+    type=type,
     sprite=0,
     sprite_count=1,
     sprite_index=0,
     frame_count=10,
     frame_index=0,
-    pos=pos:Clone(),
-    path=path,
-    next_pos=path[1],
+    pos=Point:Zero(),
+    path={},
+    next_pos=pos,
     next_pos_index=1,
     speed=1,
     max_life=100,
@@ -55,6 +55,19 @@ function Enemy:New(pos, path, type)
   end
 
   return setmetatable(e, self)
+end
+
+---@return Enemy
+function Enemy:Clone()
+  return Enemy:New(self.type)
+end
+
+---@param pos Point
+---@param path Point[]
+function Enemy:Activate(pos, path)
+  self.pos = pos:Clone()
+  self.path = path
+  self.next_pos = path[1]
 end
 
 function Enemy:Shot(bullet)

@@ -104,7 +104,8 @@ function Session:StartNextWave()
   local start_point = ConvertTileToPixel(self.start)
 
   for i=1,next_wave.enemy_count do
-    local enemy = Enemy:New(start_point, self.enemy_path, next_wave.enemy_type)
+    local enemy = next_wave.enemy_template:Clone()
+    enemy:Activate(start_point, self.enemy_path)
     add(self.baby_list, enemy)
   end
 end
@@ -192,16 +193,7 @@ function Session:DrawStats()
   local x = 54
   for i=1,min(4, #self.wave_list) do
     local wave = self.wave_list[i]
-
-    ---@type number
-    local enemy_sprite
-    if wave.enemy_type == 0 then
-      enemy_sprite = 32
-    elseif wave.enemy_type == 1 then
-      enemy_sprite = 34
-    end
-
-    spr(enemy_sprite, x, 0)
+    spr(wave.enemy_template.sprite, x, 0)
     x = x + 8
   end
 

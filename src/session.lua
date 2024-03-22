@@ -7,7 +7,7 @@
 ---@field tower_list Tower[]
 ---@field enemy_list Enemy[]
 ---@field wave_list Wave[]
----@field active_wave Wave
+---@field active_wave_list Wave[]
 ---@field cash number
 ---@field player_life number
 Session = {}
@@ -22,7 +22,7 @@ function Session:New()
     tower_list={},
     enemy_list={},
     wave_list={},
-    active_wave=nil,
+    active_wave_list={},
     cash=300,
     player_life=20,
   }
@@ -94,28 +94,27 @@ function Session:PlaceTower(cursor)
 end
 
 function Session:StartNextWave()
-  if #self.enemy_path == 0 or #self.wave_list == 0 or self.active_wave then
+  if #self.enemy_path == 0 or #self.wave_list == 0 then
     return
   end
 
   ---@type Point
   local start_point = ConvertTileToPixel(self.start)
 
-  self.active_wave = deli(self.wave_list, 1)
-  self.active_wave:Start(start_point, self.enemy_path)
+  local next_wave = deli(self.wave_list, 1)
+  next_wave:Start(start_point, self.enemy_path)
+
+  add(self.active_wave_list, next_wave)
 end
 
 function Session:TrySpawnEnemy()
-  if not self.active_wave then
-    return
+  for wave in all(self.active_wave_list) do
+    if not wave:IsActive() then
+      del(self.active_wave_list, wave)
+    else
+      wave:TrySpawnBaby(self.enemy_list)
+    end
   end
-
-  if not self.active_wave:IsActive() then
-    self.active_wave = nil
-    return
-  end
-
-  self.active_wave:TrySpawnBaby(self.enemy_list)
 end
 
 ---@return boolean

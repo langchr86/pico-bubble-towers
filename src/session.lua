@@ -123,6 +123,7 @@ function Session:TrySpawnEnemy()
 
   if #self.enemy_list == 0 then
     SpawnEnemy()
+    return
   end
 
   ---@type Enemy

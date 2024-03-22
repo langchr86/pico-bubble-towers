@@ -2,6 +2,10 @@
 
 ---@class Enemy
 ---@field sprite number
+---@field sprite_count number
+---@field sprite_index number
+---@field frame_count number
+---@field frame_index number
 ---@field pos Point
 ---@field path Point[]
 ---@field next_pos Point
@@ -19,10 +23,12 @@ Enemy.__index = Enemy
 ---@param type number
 ---@return Enemy
 function Enemy:New(pos, path, type)
-  ---@type number
-  local base_sprite = 32
   local o = {
-    sprite=base_sprite+type,
+    sprite=0,
+    sprite_count=1,
+    sprite_index=0,
+    frame_count=10,
+    frame_index=0,
     pos=pos:Clone(),
     path=path,
     next_pos=path[1],
@@ -33,7 +39,22 @@ function Enemy:New(pos, path, type)
     value=20,
     bullet_list={},
   }
-  return --[[---@type Enemy]] setmetatable(o, self)
+
+  local e = --[[---@type Enemy]] o
+
+  if type == 0 then
+    e.sprite = 32
+    e.sprite_count = 2
+    e.frame_count = 10
+    e.speed = 1.0
+  elseif type == 1 then
+    e.sprite = 34
+    e.sprite_count = 4
+    e.frame_count = 6
+    e.speed = 1.4
+  end
+
+  return setmetatable(e, self)
 end
 
 function Enemy:Shot(bullet)
@@ -89,7 +110,7 @@ end
 function Enemy:Draw()
   ---@type Point
   local rounded = self.pos:Floor()
-  spr(self.sprite, rounded.x, rounded.y)
+  spr(self:Animate(), rounded.x, rounded.y)
 
   local life_bar_length = 5
   local life_bar = self.life / self.max_life * life_bar_length
@@ -100,4 +121,17 @@ function Enemy:Draw()
   for bullet in all(self.bullet_list) do
     bullet:Draw()
   end
+end
+
+---@return number
+function Enemy:Animate()
+  self.frame_index = self.frame_index + 1
+  if self.frame_index >= self.frame_count then
+    self.frame_index = 0
+    self.sprite_index = self.sprite_index + 1
+    if self.sprite_index >= self.sprite_count then
+      self.sprite_index = 0
+    end
+  end
+  return self.sprite + self.sprite_index
 end

@@ -20,8 +20,9 @@ Enemy = {}
 Enemy.__index = Enemy
 
 ---@param type number
+---@param life number
 ---@return Enemy
-function Enemy:New(type)
+function Enemy:New(type, life)
   local o = {
     type=type,
     sprite=0,
@@ -34,8 +35,8 @@ function Enemy:New(type)
     next_pos=pos,
     next_pos_index=1,
     speed=1,
-    max_life=100,
-    life=100,
+    max_life=life,
+    life=life,
     value=20,
     bullet_list={},
   }
@@ -59,7 +60,7 @@ end
 
 ---@return Enemy
 function Enemy:Clone()
-  return Enemy:New(self.type)
+  return Enemy:New(self.type, self.life)
 end
 
 ---@param pos Point

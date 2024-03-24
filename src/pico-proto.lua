@@ -19,6 +19,29 @@ session = Session:New()
 session:AddWaves(CreateWaveList(5))
 cursor = Cursor:New()
 
+---@param selected_menu number
+local function CursorMenuHandler(menu_index)
+  if menu_index == 0 then
+    session:PlaceTower(cursor)
+  end
+end
+
+local function CursorMenuSpriteGetter(menu_index)
+  if menu_index == 0 then
+    return 128
+  elseif menu_index == 1 then
+    return 66
+  elseif menu_index == 2 then
+    return 67
+  elseif menu_index == 3 then
+    return 68
+  elseif menu_index == 4 then
+    return 69
+  end
+end
+
+cursor:RegisterMenuHandler(CursorMenuHandler, CursorMenuSpriteGetter)
+
 local function AddNewWaves()
   session:AddWaves(CreateWaveList(5))
 end
@@ -52,7 +75,7 @@ function _update()
   end
 
   if btnp(❎) then
-    session:PlaceTower(cursor)
+    cursor:Press()
   end
 
   if menu.running then

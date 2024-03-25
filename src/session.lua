@@ -79,7 +79,7 @@ function Session:PlaceTower(cursor)
 
   local new_tower = Tower:New(cursor.pos)
   ---@type number
-  local cost = new_tower:GetCost()
+  local cost = new_tower:GetBuyCost()
   if self.cash < cost then
     new_tower:Destroy()
     return

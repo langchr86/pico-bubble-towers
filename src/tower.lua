@@ -4,6 +4,7 @@
 ---@field sprite number
 ---@field pos Point
 ---@field logical_pos Point
+---@field spent_cash number
 ---@field radius number
 ---@field reload_threshold number
 ---@field reload_level number
@@ -17,6 +18,7 @@ function Tower:New(pos)
     sprite=128,
     pos=pos:Clone(),
     logical_pos=pos+Point:New(4, 4),
+    spent_cash=10,
     radius=16,
     reload_threshold=20,
     reload_level=0,
@@ -36,13 +38,18 @@ function Tower:Destroy()
 end
 
 ---@return number
-function Tower:GetCost()
-  return 20
+function Tower:GetBuyCost()
+  return 10
+end
+
+---@return number
+function Tower:GetUpgradeCost()
+  return 10
 end
 
 ---@return number
 function Tower:GetValue()
-  return 15
+  return self.spent_cash
 end
 
 function Tower:Update(enemy_list)

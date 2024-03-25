@@ -26,8 +26,7 @@ function Tower:New(pos)
 
   local instance = --[[---@type Tower]] setmetatable(o, self)
 
-  local tile_pos = Point:New(instance.pos.x / kTileSize, instance.pos.y / kTileSize)
-  Map:TileSet4(tile_pos, instance.sprite)
+  instance:UpdateMap()
 
   return instance
 end
@@ -54,6 +53,11 @@ end
 
 function Tower:Update(enemy_list)
   self:ShotOnNearestEnemy(enemy_list)
+end
+
+function Tower:UpdateMap()
+  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
+  Map:TileSet4(tile_pos, self.sprite)
 end
 
 function Tower:Draw(cursor)

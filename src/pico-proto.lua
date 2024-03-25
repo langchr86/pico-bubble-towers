@@ -22,8 +22,11 @@ cursor = Cursor:New()
 ---@param selected_menu number
 local function CursorMenuHandler(menu_index)
   if menu_index == 0 then
-    session:PlaceTower(cursor)
+    return session:PlaceTower(cursor)
+  elseif menu_index == 1 then
+    return false
   end
+  return true
 end
 
 local function CursorMenuSpriteGetter(menu_index)

@@ -58,9 +58,10 @@ function Session:SearchSpecialPoints()
 end
 
 ---@param cursor Cursor
+---@return boolean
 function Session:PlaceTower(cursor)
   if self:AnyEnemies() then
-    return
+    return false
   end
 
   for tower in all(self.tower_list) do
@@ -69,12 +70,12 @@ function Session:PlaceTower(cursor)
       del(self.tower_list, tower)
       self.cash = self.cash + tower:GetValue()
       self:CalculateNewPath()
-      return
+      return true
     end
   end
 
   if not cursor:IsFree() then
-    return
+    return false
   end
 
   local new_tower = Tower:New(cursor.pos)
@@ -82,15 +83,17 @@ function Session:PlaceTower(cursor)
   local cost = new_tower:GetBuyCost()
   if self.cash < cost then
     new_tower:Destroy()
-    return
+    return false
   end
 
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
     self.cash = self.cash - cost
-  else
-    new_tower:Destroy()
+    return true
   end
+
+  new_tower:Destroy()
+  return false
 end
 
 function Session:StartNextWave()

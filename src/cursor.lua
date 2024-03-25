@@ -111,9 +111,10 @@ function Cursor:Press()
   if self.show_menu then
     local handler = self.menu_handler
     if handler then
-      handler(self.menu_index)
+      if handler(self.menu_index) then
+        self:HideMenu()
+      end
     end
-    self:HideMenu()
   else
     self:ShowMenu()
   end

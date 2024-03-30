@@ -1,10 +1,12 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 ---@class Session
+---@field cursor Cursor
 ---@field start Point
 ---@field goal Point
 ---@field enemy_path Point[]
 ---@field tower_list Tower[]
+---@field tower_selected Tower|nil
 ---@field enemy_list Enemy[]
 ---@field wave_list Wave[]
 ---@field active_wave_list Wave[]
@@ -13,13 +15,16 @@
 Session = {}
 Session.__index = Session
 
+---@param cursor Cursor
 ---@return Session
-function Session:New()
+function Session:New(cursor)
   local o = {
+    cursor=cursor,
     start=Point:New(0, 0),
     goal=Point:New(0, 0),
     enemy_path={},
     tower_list={},
+    tower_selected=nil,
     enemy_list={},
     wave_list={},
     active_wave_list={},
@@ -31,6 +36,7 @@ function Session:New()
 
   instance:SearchSpecialPoints()
   instance:CalculateNewPath()
+  instance:PrepareCursorMenu()
 
   return instance
 end
@@ -57,15 +63,14 @@ function Session:SearchSpecialPoints()
   end
 end
 
----@param cursor Cursor
 ---@return boolean
-function Session:PlaceTower(cursor)
+function Session:PlaceTower()
   if self:AnyEnemies() then
     return false
   end
 
   for tower in all(self.tower_list) do
-    if tower.pos == cursor.pos then
+    if tower.pos == self.cursor.pos then
       tower:Destroy()
       del(self.tower_list, tower)
       self.cash = self.cash + tower:GetValue()
@@ -74,7 +79,7 @@ function Session:PlaceTower(cursor)
     end
   end
 
-  if not cursor:IsFree() then
+  if not self.cursor:IsFree() then
     return false
   end
 
@@ -94,6 +99,61 @@ function Session:PlaceTower(cursor)
 
   new_tower:Destroy()
   return false
+end
+
+function Session:PrepareCursorMenu()
+  ---@param menu_index number
+  local function CursorMenuHandler(menu_index)
+    if menu_index == 0 then
+      return self:PlaceTower()
+    end
+
+    return self:UpgradeTower(menu_index)
+  end
+
+  ---@param menu_index number
+  local function CursorMenuSpriteGetter(menu_index)
+    if self.tower_selected == nil then
+      if menu_index == 0 then
+        return Tower.GetCreateSprite()
+      end
+      return 0
+    end
+
+    if menu_index == 0 then
+      return Tower.GetDestroySprite()
+    end
+
+    local tower = --[[---@type Tower]] self.tower_selected
+    local menu = tower:GetUpgradeMenu()
+
+    if menu[menu_index] then
+      local upgrade = --[[---@type TowerMenu]] menu[menu_index]
+      return upgrade.sprite
+    end
+
+    return 0
+  end
+
+  self.cursor:RegisterMenuHandler(CursorMenuHandler, CursorMenuSpriteGetter)
+end
+
+---@param menu_index number
+function Session:UpgradeTower(menu_index)
+  local tower = --[[---@type Tower]] self.tower_selected
+  assert(tower)
+
+  local menu = tower:GetUpgradeMenu()
+  local upgrade = --[[---@type TowerMenu]] menu[menu_index]
+
+  if upgrade.cost > self.cash then
+    ---TODO: user feedback: too low on cash
+    return false
+  end
+
+  self.cash = self.cash - upgrade.cost
+  tower:Upgrade(upgrade.type)
+  return true
 end
 
 function Session:StartNextWave()
@@ -202,8 +262,12 @@ function Session:Update()
     end
   end
 
+  self.tower_selected = nil
   for tower in all(self.tower_list) do
     tower:Update(self.enemy_list)
+    if tower.pos == self.cursor.pos then
+      self.tower_selected = tower
+    end
   end
 end
 

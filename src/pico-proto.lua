@@ -15,35 +15,9 @@ end
 map_index = 0
 Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles))
 
-session = Session:New()
-session:AddWaves(CreateWaveList(5))
 cursor = Cursor:New()
-
----@param selected_menu number
-local function CursorMenuHandler(menu_index)
-  if menu_index == 0 then
-    return session:PlaceTower(cursor)
-  elseif menu_index == 1 then
-    return false
-  end
-  return true
-end
-
-local function CursorMenuSpriteGetter(menu_index)
-  if menu_index == 0 then
-    return 128
-  elseif menu_index == 1 then
-    return 66
-  elseif menu_index == 2 then
-    return 67
-  elseif menu_index == 3 then
-    return 68
-  elseif menu_index == 4 then
-    return 69
-  end
-end
-
-cursor:RegisterMenuHandler(CursorMenuHandler, CursorMenuSpriteGetter)
+session = Session:New(cursor)
+session:AddWaves(CreateWaveList(5))
 
 local function AddNewWaves()
   session:AddWaves(CreateWaveList(5))

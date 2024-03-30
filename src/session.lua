@@ -69,17 +69,15 @@ function Session:PlaceTower()
     return false
   end
 
-  local new_tower = Tower:New(self.cursor.pos)
-  ---@type number
-  local cost = new_tower:GetBuyCost()
-  if self.cash < cost then
-    new_tower:Destroy()
+  if self.cash < Tower.BuyCost then
     return false
   end
 
+  local new_tower = Tower:New(self.cursor.pos)
+
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
-    self.cash = self.cash - cost
+    self.cash = self.cash - Tower.BuyCost
     return true
   end
 

@@ -13,6 +13,9 @@
 Tower = {}
 Tower.__index = Tower
 
+---@type number
+Tower.BuyCost = 10
+
 ---@param pos Point
 ---@return Tower
 function Tower:New(pos)
@@ -53,11 +56,6 @@ function Tower:Upgrade(upgrade_type)
   self.spent_cash = self.spent_cash + flr(upgrade.cost * 0.75)
 
   self:UpdateMap()
-end
-
----@return number
-function Tower:GetBuyCost()
-  return 10
 end
 
 ---@class TowerMenu

@@ -69,20 +69,6 @@ function Session:PlaceTower()
     return false
   end
 
-  for tower in all(self.tower_list) do
-    if tower.pos == self.cursor.pos then
-      tower:Destroy()
-      del(self.tower_list, tower)
-      self.cash = self.cash + tower:GetValue()
-      self:CalculateNewPath()
-      return true
-    end
-  end
-
-  if not self.cursor:IsFree() then
-    return false
-  end
-
   local new_tower = Tower:New(cursor.pos)
   ---@type number
   local cost = new_tower:GetBuyCost()
@@ -101,11 +87,20 @@ function Session:PlaceTower()
   return false
 end
 
+function Session:RemoveTower()
+  local tower = --[[---@type Tower]] self.tower_selected
+  tower:Destroy()
+  del(self.tower_list, tower)
+  self.cash = self.cash + tower:GetValue()
+  self:CalculateNewPath()
+end
+
 function Session:PrepareCursorMenu()
   ---@param menu_index number
   local function CursorMenuHandler(menu_index)
     if menu_index == 0 then
-      return self:PlaceTower()
+      self:RemoveTower()
+      return true
     end
 
     return self:UpgradeTower(menu_index)

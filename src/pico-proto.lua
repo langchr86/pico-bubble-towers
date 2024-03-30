@@ -1,6 +1,6 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-menu = Menu:New()
+local menu = Menu:New()
 
 function _init()
   cls()
@@ -15,8 +15,8 @@ end
 map_index = 0
 Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles))
 
-cursor = Cursor:New()
-session = Session:New(cursor)
+local cursor = Cursor:New()
+local session = Session:New(cursor)
 session:AddWaves(CreateWaveList(5))
 
 local function AddNewWaves()

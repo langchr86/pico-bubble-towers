@@ -132,7 +132,7 @@ function Session:PrepareCursorMenu()
       return upgrade.sprite
     end
 
-    return 0
+    return Cursor.ShowNoSprite
   end
 
   self.cursor:RegisterMenuHandler(CursorMenuHandler, CursorMenuSpriteGetter)

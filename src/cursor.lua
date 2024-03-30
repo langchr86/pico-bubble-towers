@@ -28,6 +28,8 @@ Cursor = {
 Cursor.__index = Cursor
 
 ---@type number
+Cursor.ShowNoSprite = 0
+---@type number
 Cursor.AbortShowMenu = 255
 
 ---@return Cursor
@@ -90,7 +92,7 @@ end
 function Cursor:HandleMenuSelect(move_direction, opposite_direction)
     if self.menu_index == opposite_direction then
       self.menu_index = 0
-    elseif self.menu_sprite_list[move_direction] ~= 0 then
+    elseif self.menu_sprite_list[move_direction] ~= Cursor.ShowNoSprite then
       self.menu_index = move_direction
     else
       --- do not change anything

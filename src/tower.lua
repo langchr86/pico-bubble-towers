@@ -97,11 +97,6 @@ function Tower:GetUpgradeMenu()
 end
 
 ---@return number
-function Tower.GetCreateSprite()
-  return 142
-end
-
----@return number
 function Tower.GetDestroySprite()
   return 160
 end

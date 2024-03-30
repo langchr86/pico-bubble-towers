@@ -27,6 +27,9 @@ Cursor = {
 }
 Cursor.__index = Cursor
 
+---@type number
+Cursor.AbortShowMenu = 255
+
 ---@return Cursor
 function Cursor:New()
   local o = {
@@ -122,9 +125,13 @@ end
 
 function Cursor:ShowMenu()
   self.show_menu = true
-  self.menu_index = 0
-  self.menu_sprite_list={}
   self.menu_sprite_list[0] = self.menu_sprite_getter(0)
+
+  if self.menu_sprite_list[0] == Cursor.AbortShowMenu then
+    self:HideMenu()
+    return
+  end
+
   self.menu_sprite_list[1] = self.menu_sprite_getter(1)
   self.menu_sprite_list[2] = self.menu_sprite_getter(2)
   self.menu_sprite_list[3] = self.menu_sprite_getter(3)
@@ -133,6 +140,8 @@ end
 
 function Cursor:HideMenu()
   self.show_menu = false
+  self.menu_sprite_list={}
+  self.menu_index = 0
 end
 
 function Cursor:Draw()

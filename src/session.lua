@@ -114,10 +114,10 @@ function Session:PrepareCursorMenu()
   ---@param menu_index number
   local function CursorMenuSpriteGetter(menu_index)
     if self.tower_selected == nil then
-      if menu_index == 0 then
-        return Tower.GetCreateSprite()
+      if self.cursor:IsFree() then
+        self:PlaceTower()
       end
-      return 0
+      return Cursor.AbortShowMenu
     end
 
     if menu_index == 0 then

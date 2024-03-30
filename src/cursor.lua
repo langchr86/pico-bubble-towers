@@ -13,17 +13,17 @@
 ---@field menu_handler function
 ---@field menu_sprite_getter function
 Cursor = {
-  sprite=64,
-  small_sprite=96,
-  pos=Point:New(8, 16),
-  min=Point:New(0, 8),
-  max=Point:New(112, 112),
-  inc=kTileSize,
-  show_menu=false,
-  menu_index=0,
-  menu_sprite_list={},
-  menu_handler=nil,
-  menu_sprite_getter=nil,
+  sprite = 64,
+  small_sprite = 96,
+  pos = Point:New(8, 16),
+  min = Point:New(0, 8),
+  max = Point:New(112, 112),
+  inc = kTileSize,
+  show_menu = false,
+  menu_index = 0,
+  menu_sprite_list = {},
+  menu_handler = nil,
+  menu_sprite_getter = nil,
 }
 Cursor.__index = Cursor
 
@@ -90,13 +90,13 @@ end
 ---@param move_direction number
 ---@param opposite_direction number
 function Cursor:HandleMenuSelect(move_direction, opposite_direction)
-    if self.menu_index == opposite_direction then
-      self.menu_index = 0
-    elseif self.menu_sprite_list[move_direction] ~= Cursor.ShowNoSprite then
-      self.menu_index = move_direction
-    else
-      --- do not change anything
-    end
+  if self.menu_index == opposite_direction then
+    self.menu_index = 0
+  elseif self.menu_sprite_list[move_direction] ~= Cursor.ShowNoSprite then
+    self.menu_index = move_direction
+  else
+    --- do not change anything
+  end
 end
 
 ---@return boolean
@@ -142,7 +142,7 @@ end
 
 function Cursor:HideMenu()
   self.show_menu = false
-  self.menu_sprite_list={}
+  self.menu_sprite_list = {}
   self.menu_index = 0
 end
 

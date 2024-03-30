@@ -11,8 +11,8 @@ Point.__index = Point
 ---@return Point
 function Point:New(x, y)
   local o = {
-    x=x;
-    y=y;
+    x = x;
+    y = y;
   }
   return --[[---@type Point]] setmetatable(o, self)
 end
@@ -69,9 +69,9 @@ end
 ---@return boolean
 function Point:IsColliding(other, size)
   return self.x < other.x + size
-    and self.x + size > other.x
-    and self.y < other.y + size
-    and self.y + size > other.y
+      and self.x + size > other.x
+      and self.y < other.y + size
+      and self.y + size > other.y
 end
 
 ---@param lhs Point

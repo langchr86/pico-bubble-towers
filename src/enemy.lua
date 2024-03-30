@@ -24,21 +24,21 @@ Enemy.__index = Enemy
 ---@return Enemy
 function Enemy:New(type, life)
   local o = {
-    type=type,
-    sprite=0,
-    sprite_count=1,
-    sprite_index=0,
-    frame_count=10,
-    frame_index=0,
-    pos=Point:Zero(),
-    path={},
-    next_pos=pos,
-    next_pos_index=1,
-    speed=1,
-    max_life=life,
-    life=life,
-    value=10,
-    bullet_list={},
+    type = type,
+    sprite = 0,
+    sprite_count = 1,
+    sprite_index = 0,
+    frame_count = 10,
+    frame_index = 0,
+    pos = Point:Zero(),
+    path = {},
+    next_pos = pos,
+    next_pos_index = 1,
+    speed = 1,
+    max_life = life,
+    life = life,
+    value = 10,
+    bullet_list = {},
   }
 
   local e = --[[---@type Enemy]] o

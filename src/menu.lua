@@ -9,8 +9,8 @@ Menu.__index = Menu
 ---@return Menu
 function Menu:New()
   local o = {
-    running=true,
-    wave_handler=nil,
+    running = true,
+    wave_handler = nil,
   }
   return --[[---@type Menu]] setmetatable(o, self)
 end

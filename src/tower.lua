@@ -17,15 +17,15 @@ Tower.__index = Tower
 ---@return Tower
 function Tower:New(pos)
   local o = {
-    sprite=128,
-    pos=pos:Clone(),
-    logical_pos=pos+Point:New(4, 4),
-    type=TowerType.BASE,
-    level=0,
-    spent_cash=10,
-    radius=16,
-    reload_threshold=20,
-    reload_level=0,
+    sprite = 128,
+    pos = pos:Clone(),
+    logical_pos = pos + Point:New(4, 4),
+    type = TowerType.BASE,
+    level = 0,
+    spent_cash = 10,
+    radius = 16,
+    reload_threshold = 20,
+    reload_level = 0,
   }
 
   local instance = --[[---@type Tower]] setmetatable(o, self)

@@ -19,17 +19,17 @@ Session.__index = Session
 ---@return Session
 function Session:New(cursor)
   local o = {
-    cursor=cursor,
-    start=Point:New(0, 0),
-    goal=Point:New(0, 0),
-    enemy_path={},
-    tower_list={},
-    tower_selected=nil,
-    enemy_list={},
-    wave_list={},
-    active_wave_list={},
-    cash=300,
-    player_life=20,
+    cursor = cursor,
+    start = Point:New(0, 0),
+    goal = Point:New(0, 0),
+    enemy_path = {},
+    tower_list = {},
+    tower_selected = nil,
+    enemy_list = {},
+    wave_list = {},
+    active_wave_list = {},
+    cash = 300,
+    player_life = 20,
   }
 
   local instance = --[[---@type Session]] setmetatable(o, self)
@@ -51,8 +51,8 @@ end
 function Session:SearchSpecialPoints()
   self:DrawMap()
 
-  for x=0,kMapSizeInTiles-1 do
-    for y=0,kMapSizeInTiles-1 do
+  for x = 0, kMapSizeInTiles - 1 do
+    for y = 0, kMapSizeInTiles - 1 do
       local tile_pos = Point:New(x, y)
       if Map:IsTileStart(tile_pos) then
         self.start = tile_pos
@@ -195,7 +195,7 @@ function Session:CalculateNewPath()
   ---@type Point[]|boolean
   local path = LuaStar:Find(15, 15, self.start, self.goal, is_coord_reachable)
   if path == false then
-   return false
+    return false
   end
 
   self.enemy_path = {}
@@ -228,7 +228,7 @@ function Session:DrawPath()
 end
 
 function Session:DrawStats()
-  for x=0,15 do
+  for x = 0, 15 do
     spr(9, x * kTileSize, 0)
   end
 
@@ -237,7 +237,7 @@ function Session:DrawStats()
 
   print("next: ", 35, 1, 12)
   local x = 54
-  for i=1,min(4, #self.wave_list) do
+  for i = 1, min(4, #self.wave_list) do
     local wave = self.wave_list[i]
     spr(wave.enemy_template.sprite, x, 0)
     x = x + 8

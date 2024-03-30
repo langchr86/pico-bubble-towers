@@ -13,10 +13,10 @@ Wave.__index = Wave
 ---@return Wave
 function Wave:New(enemy_count, enemy_template)
   local o = {
-    enemy_count=enemy_count,
-    enemy_template=enemy_template,
-    baby_list={},
-    active_list={},
+    enemy_count = enemy_count,
+    enemy_template = enemy_template,
+    baby_list = {},
+    active_list = {},
   }
 
   return --[[---@type Wave]] setmetatable(o, self)
@@ -25,7 +25,7 @@ end
 ---@param start Point
 ---@param enemy_path Point[]
 function Wave:Start(start, enemy_path)
-  for i=1, self.enemy_count do
+  for i = 1, self.enemy_count do
     local enemy = self.enemy_template:Clone()
     enemy:Activate(start, enemy_path)
     add(self.baby_list, enemy)
@@ -67,7 +67,7 @@ function CreateWaveList(wave_count)
   local type = 0
   ---@type Wave[]
   local list = {}
-  for i=1,wave_count do
+  for i = 1, wave_count do
     add(list, Wave:New(4, Enemy:New(type, 100)))
     type = type + 1
     if type > 1 then

@@ -22,6 +22,13 @@ function PrintRight(text, x, y, color)
   print(text, x - length, y, color)
 end
 
+---@param center Point
+---@param radius number
+---@param color number
+function DrawRealCircle(center, radius, color)
+  oval(center.x - radius - 1, center.y - radius - 1, center.x + radius, center.y + radius, color)
+end
+
 ---@class Map
 ---@field offset Point
 Map = {

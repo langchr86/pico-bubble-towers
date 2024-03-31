@@ -112,8 +112,9 @@ function Tower:UpdateMap()
 end
 
 function Tower:Draw(cursor)
+  local center = self.pos + Point:New(kTileSize, kTileSize)
   if cursor.pos == self.pos then
-    circ(self.pos.x + kTileSize, self.pos.y + kTileSize, self.radius, 5)
+    DrawRealCircle(center, self.radius, 5)
   end
 end
 

@@ -67,6 +67,9 @@ function Tower:Upgrade(upgrade_type)
   if upgrade.reload then
     self.reload_threshold = upgrade.reload
   end
+  if upgrade.damage then
+    self.damage = upgrade.damage
+  end
 
   self:UpdateMap()
 end

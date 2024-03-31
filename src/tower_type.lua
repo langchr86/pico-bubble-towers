@@ -50,6 +50,7 @@ TowerType = {
 ---@field cost number
 ---@field radius number
 ---@field reload number
+---@field damage number
 
 ---@alias TowerUpgradeMap TowerUpgrade[]
 
@@ -94,6 +95,7 @@ UPGRADE_TABLE = {
     [TowerType.NORMAL_SPLASH_L2] = {
       preview_sprite = 183,
       cost = 32,
+      damage = 15,
     },
   },
   [TowerType.NORMAL_SNIPER_L2] = {
@@ -128,12 +130,14 @@ UPGRADE_TABLE = {
     [TowerType.NORMAL_SPLASH_L3] = {
       preview_sprite = 183,
       cost = 32,
+      damage = 20,
     },
   },
   [TowerType.NORMAL_SPLASH_L3] = {
     [TowerType.NORMAL_SPLASH_L4] = {
       preview_sprite = 183,
       cost = 32,
+      damage = 30,
     },
   },
   [TowerType.GHOST_SNIPER_L1] = {},

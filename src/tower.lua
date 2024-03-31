@@ -11,6 +11,8 @@
 ---@field reload_threshold number
 ---@field reload_level number
 ---@field damage number
+---@field weaken_factor number
+---@field slow_down_factor number
 ---@field is_area boolean
 ---@field area_animation TowerAreaAnimation
 Tower = {}
@@ -36,6 +38,8 @@ function Tower:New(pos)
     reload_threshold = 20,
     reload_level = 0,
     damage = 10,
+    weaken_factor = 0,
+    slow_down_factor = 0,
     is_area = false,
     area_animation = TowerAreaAnimation:New(),
   }
@@ -72,6 +76,12 @@ function Tower:Upgrade(upgrade_type)
   end
   if upgrade.damage then
     self.damage = upgrade.damage
+  end
+  if upgrade.weaken_factor then
+    self.weaken_factor = upgrade.weaken_factor
+  end
+  if upgrade.slow_down_factor then
+    self.slow_down_factor = upgrade.slow_down_factor
   end
   if upgrade.is_area then
     self.is_area = upgrade.is_area
@@ -128,7 +138,11 @@ end
 
 ---@param enemy_list Enemy[]
 function Tower:Update(enemy_list)
-  self:Shot(enemy_list)
+  if self.weaken_factor ~= 0 or self.slow_down_factor ~= 0 then
+    self:ModifyEnemies(enemy_list)
+  else
+    self:Shot(enemy_list)
+  end
 end
 
 function Tower:UpdateMap()
@@ -156,6 +170,21 @@ end
 ---@return boolean
 function Tower:PlacedOn(other)
   return self.pos:IsColliding(other, 16)
+end
+
+---@param enemy_list Enemy[]
+function Tower:ModifyEnemies(enemy_list)
+  for enemy in all(enemy_list) do
+    local distance = self.logical_pos:Distance(enemy.pos)
+    if distance <= self.radius then
+      if self.weaken_factor ~= 0 then
+        enemy:Weaken(self.weaken_factor)
+      end
+      if self.slow_down_factor ~= 0 then
+        enemy:SlowDown(self.slow_down_factor)
+      end
+    end
+  end
 end
 
 ---@param enemy_list Enemy[]

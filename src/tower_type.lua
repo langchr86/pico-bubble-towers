@@ -51,6 +51,8 @@ TowerType = {
 ---@field radius number
 ---@field reload number
 ---@field damage number
+---@field weaken_factor number
+---@field slow_down_factor number
 ---@field is_area boolean
 
 ---@alias TowerUpgradeMap TowerUpgrade[]
@@ -149,6 +151,18 @@ UPGRADE_TABLE = {
       cost = 32,
       radius = 20,
     },
+    [TowerType.AREA_SLOW_L2] = {
+      preview_sprite = 182,
+      cost = 32,
+      sprite = 140,
+      slow_down_factor = 0.9,
+    },
+    [TowerType.AREA_WEAK_L2] = {
+      preview_sprite = 184,
+      cost = 32,
+      sprite = 138,
+      weaken_factor = 1.5,
+    },
   },
   [TowerType.AREA_SNIPER_L2] = {
     [TowerType.AREA_SNIPER_L3] = {
@@ -162,6 +176,38 @@ UPGRADE_TABLE = {
       preview_sprite = 179,
       cost = 250,
       radius = 40,
+    },
+  },
+  [TowerType.AREA_SLOW_L2] = {
+    [TowerType.AREA_SLOW_L3] = {
+      preview_sprite = 182,
+      cost = 90,
+      radius = 30,
+      slow_down_factor = 0.7,
+    },
+  },
+  [TowerType.AREA_SLOW_L3] = {
+    [TowerType.AREA_SLOW_L4] = {
+      preview_sprite = 182,
+      cost = 250,
+      radius = 40,
+      slow_down_factor = 0.5,
+    },
+  },
+  [TowerType.AREA_WEAK_L2] = {
+    [TowerType.AREA_WEAK_L3] = {
+      preview_sprite = 184,
+      cost = 90,
+      radius = 30,
+      weaken_factor = 2,
+    },
+  },
+  [TowerType.AREA_WEAK_L3] = {
+    [TowerType.AREA_WEAK_L4] = {
+      preview_sprite = 184,
+      cost = 250,
+      radius = 40,
+      weaken_factor = 3,
     },
   },
   [TowerType.BOOST_DAMAGE_L1] = {},

@@ -84,13 +84,11 @@ function Tower:GetUpgradeMenu()
       menu_index = flr(type % 100 / 10)
     end
 
-    print(menu_index)
     assert(menu_index < 5)
 
     list[menu_index] = menu
   end
 
-  print("list end")
   return list
 end
 

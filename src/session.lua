@@ -28,7 +28,7 @@ function Session:New(cursor)
     enemy_list = {},
     wave_list = {},
     active_wave_list = {},
-    cash = 300,
+    cash = 5000,
     player_life = 20,
   }
 

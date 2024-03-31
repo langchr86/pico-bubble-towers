@@ -100,7 +100,7 @@ function Tower:GetValue()
 end
 
 function Tower:Update(enemy_list)
-  self:ShotOnNearestEnemy(enemy_list)
+  self:Shot(enemy_list)
 end
 
 function Tower:UpdateMap()
@@ -119,12 +119,21 @@ function Tower:PlacedOn(other)
   return self.pos:IsColliding(other, 16)
 end
 
-function Tower:ShotOnNearestEnemy(enemy_list)
+function Tower:Shot(enemy_list)
   if self.reload_level < self.reload_threshold then
     self.reload_level = self.reload_level + 1
     return
   end
 
+  local triggered = self:ShotOnNearestEnemy(enemy_list)
+
+  if triggered then
+    self.reload_level = 0
+  end
+end
+
+---@return boolean
+function Tower:ShotOnNearestEnemy(enemy_list)
   ---@type Enemy
   local nearest_enemy_in_reach
   ---@type number
@@ -147,6 +156,8 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   if nearest_enemy_in_reach then
     local bullet = Bullet:New(self.logical_pos, nearest_enemy_in_reach.pos)
     nearest_enemy_in_reach:Shot(bullet)
-    self.reload_level = 0
+    return true
   end
+
+  return false
 end

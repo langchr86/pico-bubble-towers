@@ -19,6 +19,9 @@ Tower.__index = Tower
 ---@type number
 Tower.BuyCost = 10
 
+---@type number
+Tower.MaxLevel = 4
+
 ---@param pos Point
 ---@return Tower
 function Tower:New(pos)
@@ -75,6 +78,11 @@ function Tower:Upgrade(upgrade_type)
   end
 
   self:UpdateMap()
+end
+
+---@return boolean
+function Tower:HasMaxLevel()
+  return self.level >= Tower.MaxLevel
 end
 
 ---@class TowerMenu

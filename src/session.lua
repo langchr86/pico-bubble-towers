@@ -113,13 +113,16 @@ function Session:PrepareCursorMenu()
       return Cursor.AbortShowMenu
     end
 
+    local tower = --[[---@type Tower]] self.tower_selected
+    if tower:HasMaxLevel() then
+      return Cursor.AbortShowMenu
+    end
+
     if menu_index == 0 then
       return Tower.GetDestroySprite()
     end
 
-    local tower = --[[---@type Tower]] self.tower_selected
     local menu_entry = tower:GetUpgradeMenuEntry(menu_index)
-
     if menu_entry then
       local upgrade = --[[---@type TowerMenu]] menu_entry
       return upgrade.sprite

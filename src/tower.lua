@@ -10,6 +10,7 @@
 ---@field radius number
 ---@field reload_threshold number
 ---@field reload_level number
+---@field damage number
 Tower = {}
 Tower.__index = Tower
 
@@ -29,6 +30,7 @@ function Tower:New(pos)
     radius = 16,
     reload_threshold = 20,
     reload_level = 0,
+    damage = 10,
   }
 
   local instance = --[[---@type Tower]] setmetatable(o, self)
@@ -157,7 +159,7 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   end
 
   if nearest_enemy_in_reach then
-    local bullet = Bullet:New(self.logical_pos, nearest_enemy_in_reach.pos)
+    local bullet = Bullet:New(self.logical_pos, nearest_enemy_in_reach.pos, self.damage)
     nearest_enemy_in_reach:Shot(bullet)
     return true
   end

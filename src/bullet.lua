@@ -11,14 +11,15 @@ Bullet.__index = Bullet
 
 ---@param pos Point
 ---@param dest Point
+---@param damage number
 ---@return Bullet
-function Bullet:New(pos, dest)
+function Bullet:New(pos, dest, damage)
   local o = {
     pos = pos:Clone(),
     dest = dest, -- this is a always updated reference to the target
     sprite = 48,
     speed = 3,
-    damage = 10,
+    damage = damage,
   }
   return --[[---@type Bullet]] setmetatable(o, self)
 end

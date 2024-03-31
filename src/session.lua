@@ -118,10 +118,10 @@ function Session:PrepareCursorMenu()
     end
 
     local tower = --[[---@type Tower]] self.tower_selected
-    local menu = tower:GetUpgradeMenu()
+    local menu_entry = tower:GetUpgradeMenuEntry(menu_index)
 
-    if menu[menu_index] then
-      local upgrade = --[[---@type TowerMenu]] menu[menu_index]
+    if menu_entry then
+      local upgrade = --[[---@type TowerMenu]] menu_entry
       return upgrade.sprite
     end
 
@@ -136,8 +136,8 @@ function Session:UpgradeTower(menu_index)
   local tower = --[[---@type Tower]] self.tower_selected
   assert(tower)
 
-  local menu = tower:GetUpgradeMenu()
-  local upgrade = --[[---@type TowerMenu]] menu[menu_index]
+  local menu_entry = tower:GetUpgradeMenuEntry(menu_index)
+  local upgrade = --[[---@type TowerMenu]] menu_entry
 
   if upgrade.cost > self.cash then
     ---TODO: user feedback: too low on cash

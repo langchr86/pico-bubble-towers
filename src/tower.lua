@@ -63,33 +63,30 @@ end
 ---@field sprite number
 ---@field type TowerType
 
----@alias OptionalTowerMenu TowerMenu|nil
-
----@return OptionalTowerMenu[]
-function Tower:GetUpgradeMenu()
-  ---@type OptionalTowerMenu[]
-  local list = { nil, nil, nil, nil }
+---@param menu_index number
+---@return TowerMenu|nil
+function Tower:GetUpgradeMenuEntry(menu_index)
+  assert(menu_index < 5)
 
   for type, upgrade in pairs(UPGRADE_TABLE[self.type]) do
-    local menu = --[[---@type TowerMenu]] {
-      cost = upgrade.cost,
-      sprite = upgrade.preview_sprite,
-      type = type,
-    }
-
-    local menu_index = 0
+    local calculated_menu_index = 0
     if self.type == TowerType.BASE then
-      menu_index = flr(type / 100)
+      calculated_menu_index = flr(type / 100)
     else
-      menu_index = flr(type % 100 / 10)
+      calculated_menu_index = flr(type % 100 / 10)
     end
 
-    assert(menu_index < 5)
-
-    list[menu_index] = menu
+    if calculated_menu_index == menu_index then
+      local menu = --[[---@type TowerMenu]] {
+        cost = upgrade.cost,
+        sprite = upgrade.preview_sprite,
+        type = type,
+      }
+      return menu
+    end
   end
 
-  return list
+  return nil
 end
 
 ---@return number

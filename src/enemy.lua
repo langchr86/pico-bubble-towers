@@ -80,7 +80,12 @@ end
 ---@param bullet Bullet
 function Enemy:Hit(bullet)
   del(self.bullet_list, bullet)
-  self.life = self.life - bullet.damage
+  self:Damage(bullet.damage)
+end
+
+---@param damage number
+function Enemy:Damage(damage)
+  self.life = self.life - damage
   if self.life < 0 then
     self.life = 0
   end

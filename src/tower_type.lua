@@ -51,6 +51,7 @@ TowerType = {
 ---@field radius number
 ---@field reload number
 ---@field damage number
+---@field is_area boolean
 
 ---@alias TowerUpgradeMap TowerUpgrade[]
 
@@ -74,6 +75,7 @@ UPGRADE_TABLE = {
       preview_sprite = 164,
       cost = 35,
       sprite = 132,
+      is_area = true,
     },
     [TowerType.BOOST_DAMAGE_L1] = {
       preview_sprite = 168,
@@ -141,6 +143,26 @@ UPGRADE_TABLE = {
     },
   },
   [TowerType.GHOST_SNIPER_L1] = {},
-  [TowerType.AREA_SNIPER_L1] = {},
+  [TowerType.AREA_SNIPER_L1] = {
+    [TowerType.AREA_SNIPER_L2] = {
+      preview_sprite = 179,
+      cost = 32,
+      radius = 20,
+    },
+  },
+  [TowerType.AREA_SNIPER_L2] = {
+    [TowerType.AREA_SNIPER_L3] = {
+      preview_sprite = 179,
+      cost = 90,
+      radius = 30,
+    },
+  },
+  [TowerType.AREA_SNIPER_L3] = {
+    [TowerType.AREA_SNIPER_L4] = {
+      preview_sprite = 179,
+      cost = 250,
+      radius = 40,
+    },
+  },
   [TowerType.BOOST_DAMAGE_L1] = {},
 }

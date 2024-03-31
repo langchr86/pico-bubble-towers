@@ -70,6 +70,9 @@ function Tower:Upgrade(upgrade_type)
   if upgrade.damage then
     self.damage = upgrade.damage
   end
+  if upgrade.is_area then
+    self.is_area = upgrade.is_area
+  end
 
   self:UpdateMap()
 end

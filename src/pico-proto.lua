@@ -13,7 +13,7 @@ function _init()
 end
 
 map_index = 0
-Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles))
+Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_index / kMapRowSize) * kMapSizeInTiles))
 
 local cursor = Cursor:New()
 local session = Session:New(cursor)

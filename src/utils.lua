@@ -3,6 +3,7 @@
 kTileSize = 8
 kMapSizeInTiles = 16
 kMapRowSize = 8
+kTopRowYCoordinate = 8
 
 ---@param tile_pos Point
 ---@return Point

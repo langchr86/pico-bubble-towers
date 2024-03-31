@@ -130,9 +130,15 @@ function Enemy:Draw()
 
   local life_bar_length = 5
   local life_bar = self.life / self.max_life * life_bar_length
+
   local start_x = rounded.x + 1
-  line(start_x, rounded.y, start_x + life_bar_length, rounded.y, 8)
-  line(start_x, rounded.y, start_x + life_bar, rounded.y, 12)
+  local corrected_y = rounded.y
+  if corrected_y == kTopRowYCoordinate then
+    corrected_y = kTopRowYCoordinate + 1
+  end
+
+  line(start_x, corrected_y, start_x + life_bar_length, corrected_y, 8)
+  line(start_x, corrected_y, start_x + life_bar, corrected_y, 12)
 
   for bullet in all(self.bullet_list) do
     bullet:Draw()

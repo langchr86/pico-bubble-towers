@@ -226,7 +226,7 @@ function Session:DrawStats()
   end
 
   print("life: ", 1, 1, 12)
-  print(self.player_life, 21, 1, 7)
+  PrintRight(self.player_life, 29, 1, 7)
 
   print("next: ", 35, 1, 12)
   local x = 54
@@ -237,7 +237,7 @@ function Session:DrawStats()
   end
 
   print("cash: ", 92, 1, 12)
-  print(self.cash, 112, 1, 7)
+  PrintRight(self.cash, 128, 1, 7)
 end
 
 function Session:Update()

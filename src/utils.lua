@@ -17,6 +17,11 @@ function ConvertPixelToTile(pos)
   return Point:New(pos.x / kTileSize, pos.y / kTileSize)
 end
 
+function PrintRight(text, x, y, color)
+  local length = print(text, 0, -kTileSize)
+  print(text, x - length, y, color)
+end
+
 ---@class Map
 ---@field offset Point
 Map = {

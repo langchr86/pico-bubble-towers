@@ -11,6 +11,8 @@
 ---@field reload_threshold number
 ---@field reload_level number
 ---@field damage number
+---@field is_area boolean
+---@field area_animation TowerAreaAnimation
 Tower = {}
 Tower.__index = Tower
 
@@ -31,6 +33,8 @@ function Tower:New(pos)
     reload_threshold = 20,
     reload_level = 0,
     damage = 10,
+    is_area = false,
+    area_animation = TowerAreaAnimation:New(),
   }
 
   local instance = --[[---@type Tower]] setmetatable(o, self)
@@ -116,6 +120,8 @@ function Tower:Draw(cursor)
   if cursor.pos == self.pos then
     DrawRealCircle(center, self.radius, 5)
   end
+
+  self.area_animation:Animate(center)
 end
 
 ---@return boolean
@@ -130,7 +136,15 @@ function Tower:Shot(enemy_list)
     return
   end
 
-  local triggered = self:ShotOnNearestEnemy(enemy_list)
+  local triggered = false
+  if self.is_area then
+    triggered = self:DamageEnemiesInRange(enemy_list)
+    if triggered then
+      self.area_animation:Start(self.radius)
+    end
+  else
+    triggered = self:ShotOnNearestEnemy(enemy_list)
+  end
 
   if triggered then
     self.reload_level = 0
@@ -166,4 +180,21 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   end
 
   return false
+end
+
+---@param enemy_list Enemy[]
+---@return boolean
+function Tower:DamageEnemiesInRange(enemy_list)
+  local triggered = false
+
+  for enemy in all(enemy_list) do
+    local distance = self.logical_pos:Distance(enemy.pos)
+
+    if distance <= self.radius then
+      enemy:Damage(self.damage)
+      triggered = true
+    end
+  end
+
+  return triggered
 end

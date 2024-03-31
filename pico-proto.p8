@@ -19,6 +19,7 @@ __lua__
 #include src/enemy.lua
 #include src/bullet.lua
 #include src/tower_type.lua
+#include src/tower_area_animation.lua
 #include src/tower.lua
 #include src/wave.lua
 #include src/session.lua

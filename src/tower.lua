@@ -142,6 +142,14 @@ function Tower:Draw(cursor)
     DrawRealCircle(center, self.radius, 5)
   end
 
+  if self.level > 0 then
+    local x = self.pos.x + 5
+    local y = self.pos.y + 14
+    for i = 1, self.level do
+      pset(x + i, y, 1)
+    end
+  end
+
   self.area_animation:Animate(center)
 end
 

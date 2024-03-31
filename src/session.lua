@@ -267,6 +267,7 @@ function Session:Update()
   end
 end
 
+---@param cursor Cursor
 function Session:Draw(cursor)
   if self.player_life <= 0 then
     map(0, 16)

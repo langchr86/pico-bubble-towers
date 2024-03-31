@@ -59,110 +59,81 @@ TowerType = {
 UPGRADE_TABLE = {
   [TowerType.BASE] = {
     [TowerType.NORMAL_SNIPER_L1] = {
-      sprite = 130,
       preview_sprite = 162,
       cost = 18,
+      sprite = 130,
       radius = 20,
-      reload = 20,
     },
     [TowerType.GHOST_SNIPER_L1] = {
-      sprite = 134,
       preview_sprite = 166,
       cost = 20,
-      radius = 20,
-      reload = 20,
+      sprite = 134,
     },
     [TowerType.AREA_SNIPER_L1] = {
-      sprite = 132,
       preview_sprite = 164,
       cost = 35,
-      radius = 20,
-      reload = 20,
+      sprite = 132,
     },
     [TowerType.BOOST_DAMAGE_L1] = {
-      sprite = 136,
       preview_sprite = 168,
       cost = 40,
-      radius = 20,
-      reload = 20,
+      sprite = 136,
     },
   },
   [TowerType.NORMAL_SNIPER_L1] = {
     [TowerType.NORMAL_SNIPER_L2] = {
-      sprite = 130,
       preview_sprite = 179,
       cost = 32,
       radius = 30,
-      reload = 20,
-
     },
     [TowerType.NORMAL_FAST_L2] = {
-      sprite = 130,
       preview_sprite = 181,
       cost = 32,
-      radius = 30,
       reload = 10,
     },
     [TowerType.NORMAL_SPLASH_L2] = {
-      sprite = 130,
       preview_sprite = 183,
       cost = 32,
-      radius = 30,
-      reload = 10,
     },
   },
   [TowerType.NORMAL_SNIPER_L2] = {
     [TowerType.NORMAL_SNIPER_L3] = {
-      sprite = 130,
       preview_sprite = 179,
       cost = 90,
       radius = 40,
-      reload = 20,
     },
   },
   [TowerType.NORMAL_SNIPER_L3] = {
     [TowerType.NORMAL_SNIPER_L4] = {
-      sprite = 130,
       preview_sprite = 179,
       cost = 225,
       radius = 70,
-      reload = 20,
     },
   },
   [TowerType.NORMAL_FAST_L2] = {
     [TowerType.NORMAL_FAST_L3] = {
-      sprite = 130,
       preview_sprite = 181,
       cost = 32,
-      radius = 30,
-      reload = 5,
+      reload = 7,
     },
   },
   [TowerType.NORMAL_FAST_L3] = {
     [TowerType.NORMAL_FAST_L4] = {
-      sprite = 130,
       preview_sprite = 181,
       cost = 32,
-      radius = 30,
-      reload = 5,
+      reload = 4,
     },
   },
   [TowerType.NORMAL_SPLASH_L2] = {
     [TowerType.NORMAL_SPLASH_L3] = {
-      sprite = 130,
       preview_sprite = 183,
       cost = 32,
-      radius = 30,
-      reload = 5,
     },
   },
   [TowerType.NORMAL_SPLASH_L3] = {
     [TowerType.NORMAL_SPLASH_L4] = {
-      sprite = 130,
       preview_sprite = 183,
       cost = 32,
-      radius = 30,
-      reload = 5,
     },
   },
   [TowerType.GHOST_SNIPER_L1] = {},

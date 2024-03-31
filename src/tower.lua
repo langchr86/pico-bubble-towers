@@ -56,10 +56,17 @@ function Tower:Upgrade(upgrade_type)
 
   self.type = upgrade_type
   self.level = self.level + 1
-  self.sprite = upgrade.sprite
-  self.radius = upgrade.radius
-  self.reload_threshold = upgrade.reload
   self.spent_cash = self.spent_cash + flr(upgrade.cost * 0.75)
+
+  if upgrade.sprite then
+    self.sprite = upgrade.sprite
+  end
+  if upgrade.radius then
+    self.radius = upgrade.radius
+  end
+  if upgrade.reload then
+    self.reload_threshold = upgrade.reload
+  end
 
   self:UpdateMap()
 end

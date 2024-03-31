@@ -99,6 +99,7 @@ function Tower:GetValue()
   return self.spent_cash
 end
 
+---@param enemy_list Enemy[]
 function Tower:Update(enemy_list)
   self:Shot(enemy_list)
 end
@@ -119,6 +120,7 @@ function Tower:PlacedOn(other)
   return self.pos:IsColliding(other, 16)
 end
 
+---@param enemy_list Enemy[]
 function Tower:Shot(enemy_list)
   if self.reload_level < self.reload_threshold then
     self.reload_level = self.reload_level + 1
@@ -132,6 +134,7 @@ function Tower:Shot(enemy_list)
   end
 end
 
+---@param enemy_list Enemy[]
 ---@return boolean
 function Tower:ShotOnNearestEnemy(enemy_list)
   ---@type Enemy

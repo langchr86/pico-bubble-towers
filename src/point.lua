@@ -64,16 +64,6 @@ function Point:Distance(other)
   return sqrt(diff.x * diff.x + diff.y * diff.y)
 end
 
----@param other Point
----@param size number
----@return boolean
-function Point:IsColliding(other, size)
-  return self.x < other.x + size
-      and self.x + size > other.x
-      and self.y < other.y + size
-      and self.y + size > other.y
-end
-
 ---@param lhs Point
 ---@param rhs Point
 ---@return Point

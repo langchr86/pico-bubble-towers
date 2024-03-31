@@ -167,11 +167,6 @@ function Tower:Draw(cursor)
   self.area_animation:Animate(center)
 end
 
----@return boolean
-function Tower:PlacedOn(other)
-  return self.pos:IsColliding(other, 16)
-end
-
 ---@param enemy_list Enemy[]
 function Tower:ModifyEnemies(enemy_list)
   for enemy in all(enemy_list) do

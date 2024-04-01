@@ -56,6 +56,14 @@ function Point:IsNear(other, radius)
   return self:Distance(other) <= radius
 end
 
+---@return boolean
+function Point:Is8Adjacent(other, distance)
+  return self.x <= other.x + distance
+      and self.x >= other.x - distance
+      and self.y <= other.y + distance
+      and self.y >= other.y - distance
+end
+
 ---@param other Point
 ---@return number
 function Point:Distance(other)

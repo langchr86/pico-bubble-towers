@@ -6,6 +6,7 @@
 ---@field goal Point
 ---@field enemy_path Point[]
 ---@field tower_list Tower[]
+---@field modifier_tower_list Tower[]
 ---@field tower_selected Tower|nil
 ---@field enemy_list Enemy[]
 ---@field wave_list Wave[]
@@ -24,6 +25,7 @@ function Session:New(cursor)
     goal = Point:New(0, 0),
     enemy_path = {},
     tower_list = {},
+    modifier_tower_list = {},
     tower_selected = nil,
     enemy_list = {},
     wave_list = {},
@@ -89,6 +91,7 @@ function Session:RemoveTower()
   local tower = --[[---@type Tower]] self.tower_selected
   tower:Destroy()
   del(self.tower_list, tower)
+  del(self.modifier_tower_list, tower)
   self.cash = self.cash + tower:GetValue()
   self:CalculateNewPath()
 end
@@ -149,6 +152,12 @@ function Session:UpgradeTower(menu_index)
 
   self.cash = self.cash - upgrade.cost
   tower:Upgrade(upgrade.type)
+
+  if IsTowerModifierUpgrade(upgrade.type) then
+    del(self.tower_list, tower)
+    add(self.modifier_tower_list, tower)
+  end
+
   return true
 end
 
@@ -259,6 +268,12 @@ function Session:Update()
   end
 
   self.tower_selected = nil
+  for tower in all(self.modifier_tower_list) do
+    tower:ModifyTowers(self.tower_list)
+    if tower.pos == self.cursor.pos then
+      self.tower_selected = tower
+    end
+  end
   for tower in all(self.tower_list) do
     tower:Update(self.enemy_list)
     if tower.pos == self.cursor.pos then
@@ -282,6 +297,9 @@ function Session:Draw(cursor)
   self:DrawMap()
   self:DrawPath()
 
+  for tower in all(self.modifier_tower_list) do
+    tower:Draw(cursor)
+  end
   for tower in all(self.tower_list) do
     tower:Draw(cursor)
   end

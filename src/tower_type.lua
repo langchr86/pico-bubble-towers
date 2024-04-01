@@ -44,6 +44,12 @@ TowerType = {
   BOOST_RANGE_L4 = 434,
 }
 
+---@param type TowerType
+---@return boolean
+function IsTowerModifierUpgrade(type)
+  return type == TowerType.BOOST_DAMAGE_L1
+end
+
 ---@class TowerUpgrade
 ---@field sprite number
 ---@field preview_sprite number
@@ -53,6 +59,7 @@ TowerType = {
 ---@field damage number
 ---@field weaken_factor number
 ---@field slow_down_factor number
+---@field damage_factor number
 ---@field is_area boolean
 
 ---@alias TowerUpgradeMap TowerUpgrade[]
@@ -83,6 +90,7 @@ UPGRADE_TABLE = {
       preview_sprite = 168,
       cost = 40,
       sprite = 136,
+      damage_factor = 2,
     },
   },
   [TowerType.NORMAL_SNIPER_L1] = {
@@ -210,5 +218,25 @@ UPGRADE_TABLE = {
       weaken_factor = 3,
     },
   },
-  [TowerType.BOOST_DAMAGE_L1] = {},
+  [TowerType.BOOST_DAMAGE_L1] = {
+    [TowerType.BOOST_DAMAGE_L2] = {
+      preview_sprite = 168,
+      cost = 70,
+      damage_factor = 3,
+    },
+  },
+  [TowerType.BOOST_DAMAGE_L2] = {
+    [TowerType.BOOST_DAMAGE_L3] = {
+      preview_sprite = 168,
+      cost = 150,
+      damage_factor = 4,
+    },
+  },
+  [TowerType.BOOST_DAMAGE_L3] = {
+    [TowerType.BOOST_DAMAGE_L4] = {
+      preview_sprite = 168,
+      cost = 250,
+      damage_factor = 5,
+    },
+  },
 }

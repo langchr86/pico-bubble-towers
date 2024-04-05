@@ -10,8 +10,7 @@
 ---@field radius number
 ---@field reload_threshold number
 ---@field reload_level number
----@field base_damage number
----@field damage number
+---@field damage ModifiableValue
 ---@field weaken_factor number
 ---@field slow_down_factor number
 ---@field damage_factor number
@@ -39,8 +38,7 @@ function Tower:New(pos)
     radius = 16,
     reload_threshold = 20,
     reload_level = 0,
-    base_damage = 10,
-    damage = 10,
+    damage = ModifiableValue:New(10),
     weaken_factor = 0,
     slow_down_factor = 0,
     damage_factor = 0,
@@ -79,8 +77,7 @@ function Tower:Upgrade(upgrade_type)
     self.reload_threshold = upgrade.reload
   end
   if upgrade.damage then
-    self.damage = upgrade.damage
-    self.base_damage = upgrade.damage
+    self.damage:SetBase(upgrade.damage)
   end
   if upgrade.weaken_factor then
     self.weaken_factor = upgrade.weaken_factor
@@ -156,7 +153,7 @@ function Tower:Update(enemy_list)
 end
 
 function Tower:ClearModification()
-  self.damage = self.base_damage
+  self.damage:Reset()
 end
 
 function Tower:UpdateMap()
@@ -201,16 +198,10 @@ function Tower:ModifyTowers(tower_list)
   for tower in all(tower_list) do
     if tower.pos:Is8Adjacent(self.pos, kTowerSize) then
       if self.damage_factor ~= 0 then
-        tower:ImproveDamage(self.damage_factor)
+        tower.damage:Multiply(self.damage_factor)
       end
     end
   end
-end
-
----@param damage_factor number
-function Tower:ImproveDamage(damage_factor)
-  self.damage = self.damage * damage_factor
-  assert(self.damage > 0)
 end
 
 ---@param enemy_list Enemy[]
@@ -258,7 +249,7 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   end
 
   if nearest_enemy_in_reach then
-    local bullet = Bullet:New(self.logical_pos, nearest_enemy_in_reach.pos, self.damage)
+    local bullet = Bullet:New(self.logical_pos, nearest_enemy_in_reach.pos, self.damage:Get())
     nearest_enemy_in_reach:Shot(bullet)
     return true
   end
@@ -275,7 +266,7 @@ function Tower:DamageEnemiesInRange(enemy_list)
     local distance = self.logical_pos:Distance(enemy.pos)
 
     if distance <= self.radius then
-      enemy:Damage(self.damage)
+      enemy:Damage(self.damage:Get())
       triggered = true
     end
   end

@@ -187,15 +187,9 @@ end
 
 ---@param modifiers TowerModifiers
 function Tower:Modify(modifiers)
-  if modifiers.damage ~= 0 then
-    self.damage:Multiply(modifiers.damage)
-  end
-  if modifiers.range ~= 0 then
-    self.range:Multiply(modifiers.range)
-  end
-  if modifiers.reload ~= 0 then
-    self.reload:Multiply(modifiers.reload)
-  end
+  self.damage:Modify(modifiers.damage)
+  self.range:Modify(modifiers.range)
+  self.reload:Modify(modifiers.reload)
 end
 
 ---@param enemy_list Enemy[]

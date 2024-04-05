@@ -134,12 +134,8 @@ end
 
 ---@param modifiers TowerModifiers
 function Enemy:Modify(modifiers)
-  if modifiers.weaken ~= 0 then
-    self.damage_factor:Multiply(modifiers.weaken)
-  end
-  if modifiers.slow_down ~= 0 then
-    self.speed_factor:Multiply(modifiers.slow_down)
-  end
+  self.damage_factor:Modify(modifiers.weaken)
+  self.speed_factor:Modify(modifiers.slow_down)
 end
 
 function Enemy:ClearModifications()

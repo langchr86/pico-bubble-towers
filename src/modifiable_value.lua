@@ -31,9 +31,10 @@ function ModifiableValue:SetBase(base)
 end
 
 ---@param factor number
-function ModifiableValue:Multiply(factor)
-  assert(factor > 0)
-  self.current = self.current * factor
+function ModifiableValue:Modify(factor)
+  if factor > 0 then
+    self.current = self.current * factor
+  end
   assert(self.current > 0)
 end
 

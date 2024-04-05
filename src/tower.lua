@@ -7,13 +7,15 @@
 ---@field type TowerType
 ---@field level number
 ---@field spent_cash number
----@field radius number
----@field reload_threshold number
+---@field radius ModifiableValue
+---@field reload_threshold ModifiableValue
 ---@field reload_level number
 ---@field damage ModifiableValue
 ---@field weaken_factor number
 ---@field slow_down_factor number
 ---@field damage_factor number
+---@field reload_factor number
+---@field range_factor number
 ---@field is_area boolean
 ---@field area_animation TowerAreaAnimation
 Tower = {}
@@ -35,13 +37,15 @@ function Tower:New(pos)
     type = TowerType.BASE,
     level = 0,
     spent_cash = 10,
-    radius = 16,
-    reload_threshold = 20,
+    radius = ModifiableValue:New(16),
+    reload_threshold = ModifiableValue:New(20),
     reload_level = 0,
     damage = ModifiableValue:New(10),
     weaken_factor = 0,
     slow_down_factor = 0,
     damage_factor = 0,
+    reload_factor = 0,
+    range_factor = 0,
     is_area = false,
     area_animation = TowerAreaAnimation:New(),
   }
@@ -71,10 +75,10 @@ function Tower:Upgrade(upgrade_type)
     self.sprite = upgrade.sprite
   end
   if upgrade.radius then
-    self.radius = upgrade.radius
+    self.radius:SetBase(upgrade.radius)
   end
   if upgrade.reload then
-    self.reload_threshold = upgrade.reload
+    self.reload_threshold:SetBase(upgrade.reload)
   end
   if upgrade.damage then
     self.damage:SetBase(upgrade.damage)
@@ -87,6 +91,12 @@ function Tower:Upgrade(upgrade_type)
   end
   if upgrade.damage_factor then
     self.damage_factor = upgrade.damage_factor
+  end
+  if upgrade.reload_factor then
+    self.reload_factor = upgrade.reload_factor
+  end
+  if upgrade.range_factor then
+    self.range_factor = upgrade.range_factor
   end
   if upgrade.is_area then
     self.is_area = upgrade.is_area
@@ -152,6 +162,8 @@ end
 
 function Tower:ClearModifications()
   self.damage:Reset()
+  self.reload_threshold:Reset()
+  self.radius:Reset()
 end
 
 function Tower:UpdateMap()
@@ -162,7 +174,7 @@ end
 function Tower:Draw(cursor)
   local center = self.pos + Point:New(kTileSize, kTileSize)
   if cursor.pos == self.pos then
-    DrawRealCircle(center, self.radius, 5)
+    DrawRealCircle(center, self.radius:Get(), 5)
   end
 
   if self.level > 0 then
@@ -179,7 +191,7 @@ end
 ---@param enemy_list Enemy[]
 function Tower:ModifyEnemies(enemy_list)
   for enemy in all(enemy_list) do
-    if self.logical_pos:IsNear(enemy.pos, self.radius) then
+    if self.logical_pos:IsNear(enemy.pos, self.radius:Get()) then
       if self.weaken_factor ~= 0 then
         enemy:Weaken(self.weaken_factor)
       end
@@ -197,13 +209,19 @@ function Tower:ModifyTowers(tower_list)
       if self.damage_factor ~= 0 then
         tower.damage:Multiply(self.damage_factor)
       end
+      if self.reload_factor ~= 0 then
+        tower.reload_threshold:Multiply(self.reload_factor)
+      end
+      if self.range_factor ~= 0 then
+        tower.radius:Multiply(self.range_factor)
+      end
     end
   end
 end
 
 ---@param enemy_list Enemy[]
 function Tower:Shot(enemy_list)
-  if self.reload_level < self.reload_threshold then
+  if self.reload_level < self.reload_threshold:Get() then
     self.reload_level = self.reload_level + 1
     return
   end
@@ -212,7 +230,7 @@ function Tower:Shot(enemy_list)
   if self.is_area then
     triggered = self:DamageEnemiesInRange(enemy_list)
     if triggered then
-      self.area_animation:Start(self.radius)
+      self.area_animation:Start(self.radius:Get())
     end
   else
     triggered = self:ShotOnNearestEnemy(enemy_list)
@@ -234,7 +252,7 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   for enemy in all(enemy_list) do
     local distance = self.logical_pos:Distance(enemy.pos)
 
-    if distance <= self.radius then
+    if distance <= self.radius:Get() then
       if not nearest_distance then
         nearest_distance = distance
         nearest_enemy_in_reach = enemy
@@ -260,7 +278,7 @@ function Tower:DamageEnemiesInRange(enemy_list)
   local triggered = false
 
   for enemy in all(enemy_list) do
-    if self.logical_pos:IsNear(enemy.pos, self.radius) then
+    if self.logical_pos:IsNear(enemy.pos, self.radius:Get()) then
       enemy:Damage(self.damage:Get())
       triggered = true
     end

@@ -60,6 +60,8 @@ end
 ---@field weaken_factor number
 ---@field slow_down_factor number
 ---@field damage_factor number
+---@field reload_factor number
+---@field range_factor number
 ---@field is_area boolean
 
 ---@alias TowerUpgradeMap TowerUpgrade[]
@@ -224,6 +226,16 @@ UPGRADE_TABLE = {
       cost = 70,
       damage_factor = 3,
     },
+    [TowerType.BOOST_FAST_L2] = {
+      preview_sprite = 181,
+      cost = 70,
+      reload_factor = 0.8,
+    },
+    [TowerType.BOOST_RANGE_L2] = {
+      preview_sprite = 179,
+      cost = 70,
+      range_factor = 1.3,
+    },
   },
   [TowerType.BOOST_DAMAGE_L2] = {
     [TowerType.BOOST_DAMAGE_L3] = {
@@ -237,6 +249,34 @@ UPGRADE_TABLE = {
       preview_sprite = 168,
       cost = 250,
       damage_factor = 5,
+    },
+  },
+  [TowerType.BOOST_FAST_L2] = {
+    [TowerType.BOOST_FAST_L3] = {
+      preview_sprite = 181,
+      cost = 150,
+      reload_factor = 0.5,
+    },
+  },
+  [TowerType.BOOST_FAST_L3] = {
+    [TowerType.BOOST_FAST_L4] = {
+      preview_sprite = 181,
+      cost = 250,
+      reload_factor = 0.2,
+    },
+  },
+  [TowerType.BOOST_RANGE_L2] = {
+    [TowerType.BOOST_RANGE_L3] = {
+      preview_sprite = 179,
+      cost = 150,
+      range_factor = 1.7,
+    },
+  },
+  [TowerType.BOOST_RANGE_L3] = {
+    [TowerType.BOOST_RANGE_L4] = {
+      preview_sprite = 179,
+      cost = 250,
+      range_factor = 2.0,
     },
   },
 }

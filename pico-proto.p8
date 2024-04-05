@@ -17,6 +17,7 @@ __lua__
 #include src/point.lua
 #include src/cursor.lua
 #include src/modifiable_value.lua
+#include src/tower_modifiers.lua
 #include src/enemy.lua
 #include src/bullet.lua
 #include src/tower_type.lua

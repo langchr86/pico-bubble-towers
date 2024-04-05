@@ -11,11 +11,7 @@
 ---@field range ModifiableValue
 ---@field reload ModifiableValue
 ---@field reload_level number
----@field weaken_factor number
----@field slow_down_factor number
----@field damage_factor number
----@field reload_factor number
----@field range_factor number
+---@field modifiers TowerModifiers
 ---@field is_area boolean
 ---@field area_animation TowerAreaAnimation
 Tower = {}
@@ -41,11 +37,7 @@ function Tower:New(pos)
     range = ModifiableValue:New(16),
     reload = ModifiableValue:New(20),
     reload_level = 0,
-    weaken_factor = 0,
-    slow_down_factor = 0,
-    damage_factor = 0,
-    reload_factor = 0,
-    range_factor = 0,
+    modifiers = TowerModifiers:New(),
     is_area = false,
     area_animation = TowerAreaAnimation:New(),
   }
@@ -83,24 +75,11 @@ function Tower:Upgrade(upgrade_type)
   if upgrade.reload then
     self.reload:SetBase(upgrade.reload)
   end
-  if upgrade.weaken_factor then
-    self.weaken_factor = upgrade.weaken_factor
-  end
-  if upgrade.slow_down_factor then
-    self.slow_down_factor = upgrade.slow_down_factor
-  end
-  if upgrade.damage_factor then
-    self.damage_factor = upgrade.damage_factor
-  end
-  if upgrade.reload_factor then
-    self.reload_factor = upgrade.reload_factor
-  end
-  if upgrade.range_factor then
-    self.range_factor = upgrade.range_factor
-  end
   if upgrade.is_area then
     self.is_area = upgrade.is_area
   end
+
+  self.modifiers:Upgrade(upgrade)
 
   self:UpdateMap()
 end
@@ -153,7 +132,7 @@ end
 
 ---@param enemy_list Enemy[]
 function Tower:Update(enemy_list)
-  if self.weaken_factor ~= 0 or self.slow_down_factor ~= 0 then
+  if self.modifiers:HasEnemyModifications() then
     self:ModifyEnemies(enemy_list)
   else
     self:Shot(enemy_list)
@@ -192,12 +171,7 @@ end
 function Tower:ModifyEnemies(enemy_list)
   for enemy in all(enemy_list) do
     if self.logical_pos:IsNear(enemy.pos, self.range:Get()) then
-      if self.weaken_factor ~= 0 then
-        enemy.damage_factor:Multiply(self.weaken_factor)
-      end
-      if self.slow_down_factor ~= 0 then
-        enemy.speed_factor:Multiply(self.slow_down_factor)
-      end
+      enemy:Modify(self.modifiers)
     end
   end
 end
@@ -206,16 +180,21 @@ end
 function Tower:ModifyTowers(tower_list)
   for tower in all(tower_list) do
     if tower.pos:Is8Adjacent(self.pos, kTowerSize) then
-      if self.damage_factor ~= 0 then
-        tower.damage:Multiply(self.damage_factor)
-      end
-      if self.range_factor ~= 0 then
-        tower.range:Multiply(self.range_factor)
-      end
-      if self.reload_factor ~= 0 then
-        tower.reload_threshold:Multiply(self.reload_factor)
-      end
+      tower:Modify(self.modifiers)
     end
+  end
+end
+
+---@param modifiers TowerModifiers
+function Tower:Modify(modifiers)
+  if modifiers.damage ~= 0 then
+    self.damage:Multiply(modifiers.damage)
+  end
+  if modifiers.range ~= 0 then
+    self.range:Multiply(modifiers.range)
+  end
+  if modifiers.reload ~= 0 then
+    self.reload:Multiply(modifiers.reload)
   end
 end
 

@@ -132,6 +132,16 @@ function Enemy:Update()
   end
 end
 
+---@param modifiers TowerModifiers
+function Enemy:Modify(modifiers)
+  if modifiers.weaken ~= 0 then
+    self.damage_factor:Multiply(modifiers.weaken)
+  end
+  if modifiers.slow_down ~= 0 then
+    self.speed_factor:Multiply(modifiers.slow_down)
+  end
+end
+
 function Enemy:ClearModifications()
   self.speed_factor:Reset()
   self.damage_factor:Reset()

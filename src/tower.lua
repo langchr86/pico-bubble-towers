@@ -193,10 +193,10 @@ function Tower:ModifyEnemies(enemy_list)
   for enemy in all(enemy_list) do
     if self.logical_pos:IsNear(enemy.pos, self.range:Get()) then
       if self.weaken_factor ~= 0 then
-        enemy:Weaken(self.weaken_factor)
+        enemy.damage_factor:Multiply(self.weaken_factor)
       end
       if self.slow_down_factor ~= 0 then
-        enemy:SlowDown(self.slow_down_factor)
+        enemy.speed_factor:Multiply(self.slow_down_factor)
       end
     end
   end

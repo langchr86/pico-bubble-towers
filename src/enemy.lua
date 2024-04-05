@@ -14,8 +14,8 @@
 ---@field speed number
 ---@field max_life number
 ---@field life number
----@field damage_factor number
----@field speed_factor number
+---@field damage_factor ModifiableValue
+---@field speed_factor ModifiableValue
 ---@field value number
 ---@field bullet_list Bullet[]
 Enemy = {}
@@ -39,8 +39,8 @@ function Enemy:New(type, life)
     speed = 1,
     max_life = life,
     life = life,
-    damage_factor = 1,
-    speed_factor = 1,
+    damage_factor = ModifiableValue:New(1),
+    speed_factor = ModifiableValue:New(1),
     value = 10,
     bullet_list = {},
   }
@@ -89,20 +89,10 @@ end
 
 ---@param damage number
 function Enemy:Damage(damage)
-  self.life = self.life - damage * self.damage_factor
+  self.life = self.life - damage * self.damage_factor:Get()
   if self.life < 0 then
     self.life = 0
   end
-end
-
----@param factor number
-function Enemy:Weaken(factor)
-  self.damage_factor = self.damage_factor * factor
-end
-
----@param factor number
-function Enemy:SlowDown(factor)
-  self.speed_factor = self.speed_factor * factor
 end
 
 ---@return boolean
@@ -131,7 +121,7 @@ function Enemy:Update()
     self.next_pos = self.path[self.next_pos_index]
   end
 
-  self.pos:Move(self.next_pos, self.speed * self.speed_factor)
+  self.pos:Move(self.next_pos, self.speed * self.speed_factor:Get())
 
   for bullet in all(self.bullet_list) do
     if bullet:InTarget() then
@@ -143,8 +133,8 @@ function Enemy:Update()
 end
 
 function Enemy:ClearModifications()
-  self.speed_factor = 1
-  self.damage_factor = 1
+  self.speed_factor:Reset()
+  self.damage_factor:Reset()
 end
 
 function Enemy:Draw()

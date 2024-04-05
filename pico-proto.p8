@@ -16,9 +16,9 @@ __lua__
 #include src/menu.lua
 #include src/point.lua
 #include src/cursor.lua
+#include src/modifiable_value.lua
 #include src/enemy.lua
 #include src/bullet.lua
-#include src/modifiable_value.lua
 #include src/tower_type.lua
 #include src/tower_area_animation.lua
 #include src/tower.lua

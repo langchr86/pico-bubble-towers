@@ -50,6 +50,12 @@ function IsTowerModifierUpgrade(type)
   return type == TowerType.BOOST_DAMAGE_L1
 end
 
+---@param type TowerType
+---@return boolean
+function IsAreaDamageUpgrade(type)
+  return type == TowerType.AREA_SNIPER_L1
+end
+
 ---@class TowerUpgrade
 ---@field sprite number
 ---@field preview_sprite number
@@ -62,7 +68,6 @@ end
 ---@field damage_factor number
 ---@field reload_factor number
 ---@field range_factor number
----@field is_area boolean
 
 ---@alias TowerUpgradeMap TowerUpgrade[]
 
@@ -86,7 +91,6 @@ UPGRADE_TABLE = {
       preview_sprite = 164,
       cost = 35,
       sprite = 132,
-      is_area = true,
     },
     [TowerType.BOOST_DAMAGE_L1] = {
       preview_sprite = 168,

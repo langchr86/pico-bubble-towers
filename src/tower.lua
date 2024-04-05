@@ -12,7 +12,7 @@
 ---@field reload ModifiableValue
 ---@field reload_level number
 ---@field modifiers TowerModifiers
----@field is_area boolean
+---@field is_area_damage boolean
 ---@field area_animation TowerAreaAnimation
 Tower = {}
 Tower.__index = Tower
@@ -38,7 +38,7 @@ function Tower:New(pos)
     reload = ModifiableValue:New(20),
     reload_level = 0,
     modifiers = TowerModifiers:New(),
-    is_area = false,
+    is_area_damage = false,
     area_animation = TowerAreaAnimation:New(),
   }
 
@@ -66,6 +66,7 @@ function Tower:Upgrade(upgrade_type)
   if upgrade.sprite then
     self.sprite = upgrade.sprite
   end
+
   if upgrade.damage then
     self.damage:SetBase(upgrade.damage)
   end
@@ -75,8 +76,9 @@ function Tower:Upgrade(upgrade_type)
   if upgrade.reload then
     self.reload:SetBase(upgrade.reload)
   end
-  if upgrade.is_area then
-    self.is_area = upgrade.is_area
+
+  if IsAreaDamageUpgrade(upgrade_type) then
+    self.is_area_damage = true
   end
 
   self.modifiers:Upgrade(upgrade)
@@ -238,7 +240,7 @@ function Tower:Shot(enemy_list)
   end
 
   local triggered = false
-  if self.is_area then
+  if self.is_area_damage then
     triggered = self:DamageEnemiesInRange(enemy_list)
     if triggered then
       self.area_animation:Start(self.range:Get())

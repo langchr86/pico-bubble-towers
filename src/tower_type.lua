@@ -229,11 +229,13 @@ UPGRADE_TABLE = {
     [TowerType.BOOST_FAST_L2] = {
       preview_sprite = 181,
       cost = 70,
+      damage_factor = 0,
       reload_factor = 0.8,
     },
     [TowerType.BOOST_RANGE_L2] = {
       preview_sprite = 179,
       cost = 70,
+      damage_factor = 0,
       range_factor = 1.3,
     },
   },

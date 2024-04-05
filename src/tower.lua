@@ -9,7 +9,7 @@
 ---@field spent_cash number
 ---@field damage ModifiableValue
 ---@field radius ModifiableValue
----@field reload_threshold ModifiableValue
+---@field reload ModifiableValue
 ---@field reload_level number
 ---@field weaken_factor number
 ---@field slow_down_factor number
@@ -39,7 +39,7 @@ function Tower:New(pos)
     spent_cash = 10,
     damage = ModifiableValue:New(10),
     radius = ModifiableValue:New(16),
-    reload_threshold = ModifiableValue:New(20),
+    reload = ModifiableValue:New(20),
     reload_level = 0,
     weaken_factor = 0,
     slow_down_factor = 0,
@@ -81,7 +81,7 @@ function Tower:Upgrade(upgrade_type)
     self.radius:SetBase(upgrade.radius)
   end
   if upgrade.reload then
-    self.reload_threshold:SetBase(upgrade.reload)
+    self.reload:SetBase(upgrade.reload)
   end
   if upgrade.weaken_factor then
     self.weaken_factor = upgrade.weaken_factor
@@ -163,7 +163,7 @@ end
 function Tower:ClearModifications()
   self.damage:Reset()
   self.radius:Reset()
-  self.reload_threshold:Reset()
+  self.reload:Reset()
 end
 
 function Tower:UpdateMap()
@@ -221,7 +221,7 @@ end
 
 ---@param enemy_list Enemy[]
 function Tower:Shot(enemy_list)
-  if self.reload_level < self.reload_threshold:Get() then
+  if self.reload_level < self.reload:Get() then
     self.reload_level = self.reload_level + 1
     return
   end

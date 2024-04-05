@@ -154,6 +154,7 @@ function Tower:Draw(cursor)
   local center = self.pos + Point:New(kTileSize, kTileSize)
   if cursor.pos == self.pos then
     DrawRealCircle(center, self.range:Get(), 5)
+    self:DrawDebug()
   end
 
   if self.level > 0 then
@@ -165,6 +166,43 @@ function Tower:Draw(cursor)
   end
 
   self.area_animation:Animate(center)
+end
+
+function Tower:DrawDebug()
+  if not g_show_debug_info then
+    return
+  end
+
+  local x = 2
+  local y = 86
+  x = print("damg: ", x, y, 6)
+  x = print(self.damage:Get(), x, y, 6)
+  x = print(" *", x, y, 6)
+  x = print(self.modifiers.damage, x, y, 6)
+
+  x = 2
+  y = 93
+  x = print("rang: ", x, y, 6)
+  x = print(self.range:Get(), x, y, 6)
+  x = print(" *", x, y, 6)
+  x = print(self.modifiers.range, x, y, 6)
+
+  x = 2
+  y = 100
+  x = print("reld: ", x, y, 6)
+  x = print(self.reload:Get(), x, y, 6)
+  x = print(" *", x, y, 6)
+  x = print(self.modifiers.reload, x, y, 6)
+
+  x = 2
+  y = 107
+  x = print("weak: ", x, y, 6)
+  x = print(self.modifiers.weaken, x, y, 6)
+
+  x = 2
+  y = 114
+  x = print("slow: ", x, y, 6)
+  x = print(self.modifiers.slow_down, x, y, 6)
 end
 
 ---@param enemy_list Enemy[]

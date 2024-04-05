@@ -179,8 +179,7 @@ end
 ---@param enemy_list Enemy[]
 function Tower:ModifyEnemies(enemy_list)
   for enemy in all(enemy_list) do
-    local distance = self.logical_pos:Distance(enemy.pos)
-    if distance <= self.radius then
+    if self.logical_pos:IsNear(enemy.pos, self.radius) then
       if self.weaken_factor ~= 0 then
         enemy:Weaken(self.weaken_factor)
       end
@@ -261,9 +260,7 @@ function Tower:DamageEnemiesInRange(enemy_list)
   local triggered = false
 
   for enemy in all(enemy_list) do
-    local distance = self.logical_pos:Distance(enemy.pos)
-
-    if distance <= self.radius then
+    if self.logical_pos:IsNear(enemy.pos, self.radius) then
       enemy:Damage(self.damage:Get())
       triggered = true
     end

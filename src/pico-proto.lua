@@ -24,6 +24,13 @@ local function AddNewWaves()
 end
 menu:SetWaveHandler(AddNewWaves)
 
+---@type boolean
+g_show_debug_info = false
+local function ToggleDebugInfo()
+  g_show_debug_info = not g_show_debug_info
+end
+menu:SetDebugInfoHandler(ToggleDebugInfo)
+
 function _update()
   if btnp(⬆️) then
     cursor:MoveUp()
@@ -65,6 +72,10 @@ function _draw()
 
   session:Draw(cursor)
   cursor:Draw()
+
+  if not g_show_debug_info then
+    return
+  end
 
   fps = stat(7)
   print(fps, 119, 121, 10)

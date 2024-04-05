@@ -3,6 +3,7 @@
 ---@class Menu
 ---@field running boolean
 ---@field wave_handler function
+---@field debug_info_handler function
 Menu = {}
 Menu.__index = Menu
 
@@ -11,12 +12,17 @@ function Menu:New()
   local o = {
     running = true,
     wave_handler = nil,
+    debug_info_handler = nil,
   }
   return --[[---@type Menu]] setmetatable(o, self)
 end
 
 function Menu:SetWaveHandler(wave_handler)
   self.wave_handler = wave_handler
+end
+
+function Menu:SetDebugInfoHandler(debug_info_handler)
+  self.debug_info_handler = debug_info_handler
 end
 
 function Menu:Update()
@@ -31,6 +37,7 @@ function Menu:Update()
   end
 
   menuitem(2, "add waves", self.wave_handler)
+  menuitem(3, "toggle debg info", self.debug_info_handler)
 end
 
 function Menu:HandleRunning()

@@ -172,6 +172,14 @@ function Cursor:Draw()
 
   spr(self.sprite, self.pos.x, self.pos.y, 2, 2)
 
+  self:DrawDebug()
+end
+
+function Cursor:DrawDebug()
+  if not g_show_debug_info then
+    return
+  end
+
   ---@type number
   cursor_sprite = Map:GetSprite(Point:New(self.pos.x / self.inc, self.pos.y / self.inc))
   print(cursor_sprite, 2, 121, 10)

@@ -227,6 +227,10 @@ function Session:DrawMap()
 end
 
 function Session:DrawPath()
+  if not g_show_debug_info then
+    return
+  end
+
   for pos in all(self.enemy_path) do
     spr(16, pos.x, pos.y)
   end

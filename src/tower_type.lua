@@ -54,7 +54,7 @@ end
 ---@field sprite number
 ---@field preview_sprite number
 ---@field cost number
----@field radius number
+---@field range number
 ---@field reload number
 ---@field damage number
 ---@field weaken_factor number
@@ -75,7 +75,7 @@ UPGRADE_TABLE = {
       preview_sprite = 162,
       cost = 18,
       sprite = 130,
-      radius = 20,
+      range = 20,
     },
     [TowerType.GHOST_SNIPER_L1] = {
       preview_sprite = 166,
@@ -99,7 +99,7 @@ UPGRADE_TABLE = {
     [TowerType.NORMAL_SNIPER_L2] = {
       preview_sprite = 179,
       cost = 32,
-      radius = 30,
+      range = 30,
     },
     [TowerType.NORMAL_FAST_L2] = {
       preview_sprite = 181,
@@ -116,14 +116,14 @@ UPGRADE_TABLE = {
     [TowerType.NORMAL_SNIPER_L3] = {
       preview_sprite = 179,
       cost = 90,
-      radius = 40,
+      range = 40,
     },
   },
   [TowerType.NORMAL_SNIPER_L3] = {
     [TowerType.NORMAL_SNIPER_L4] = {
       preview_sprite = 179,
       cost = 225,
-      radius = 70,
+      range = 70,
     },
   },
   [TowerType.NORMAL_FAST_L2] = {
@@ -159,7 +159,7 @@ UPGRADE_TABLE = {
     [TowerType.AREA_SNIPER_L2] = {
       preview_sprite = 179,
       cost = 32,
-      radius = 20,
+      range = 20,
     },
     [TowerType.AREA_SLOW_L2] = {
       preview_sprite = 182,
@@ -178,21 +178,21 @@ UPGRADE_TABLE = {
     [TowerType.AREA_SNIPER_L3] = {
       preview_sprite = 179,
       cost = 90,
-      radius = 30,
+      range = 30,
     },
   },
   [TowerType.AREA_SNIPER_L3] = {
     [TowerType.AREA_SNIPER_L4] = {
       preview_sprite = 179,
       cost = 250,
-      radius = 40,
+      range = 40,
     },
   },
   [TowerType.AREA_SLOW_L2] = {
     [TowerType.AREA_SLOW_L3] = {
       preview_sprite = 182,
       cost = 90,
-      radius = 30,
+      range = 30,
       slow_down_factor = 0.7,
     },
   },
@@ -200,7 +200,7 @@ UPGRADE_TABLE = {
     [TowerType.AREA_SLOW_L4] = {
       preview_sprite = 182,
       cost = 250,
-      radius = 40,
+      range = 40,
       slow_down_factor = 0.5,
     },
   },
@@ -208,7 +208,7 @@ UPGRADE_TABLE = {
     [TowerType.AREA_WEAK_L3] = {
       preview_sprite = 184,
       cost = 90,
-      radius = 30,
+      range = 30,
       weaken_factor = 2,
     },
   },
@@ -216,7 +216,7 @@ UPGRADE_TABLE = {
     [TowerType.AREA_WEAK_L4] = {
       preview_sprite = 184,
       cost = 250,
-      radius = 40,
+      range = 40,
       weaken_factor = 3,
     },
   },

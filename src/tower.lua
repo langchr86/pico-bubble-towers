@@ -8,7 +8,7 @@
 ---@field level number
 ---@field spent_cash number
 ---@field damage ModifiableValue
----@field radius ModifiableValue
+---@field range ModifiableValue
 ---@field reload ModifiableValue
 ---@field reload_level number
 ---@field weaken_factor number
@@ -38,7 +38,7 @@ function Tower:New(pos)
     level = 0,
     spent_cash = 10,
     damage = ModifiableValue:New(10),
-    radius = ModifiableValue:New(16),
+    range = ModifiableValue:New(16),
     reload = ModifiableValue:New(20),
     reload_level = 0,
     weaken_factor = 0,
@@ -77,8 +77,8 @@ function Tower:Upgrade(upgrade_type)
   if upgrade.damage then
     self.damage:SetBase(upgrade.damage)
   end
-  if upgrade.radius then
-    self.radius:SetBase(upgrade.radius)
+  if upgrade.range then
+    self.range:SetBase(upgrade.range)
   end
   if upgrade.reload then
     self.reload:SetBase(upgrade.reload)
@@ -162,7 +162,7 @@ end
 
 function Tower:ClearModifications()
   self.damage:Reset()
-  self.radius:Reset()
+  self.range:Reset()
   self.reload:Reset()
 end
 
@@ -174,7 +174,7 @@ end
 function Tower:Draw(cursor)
   local center = self.pos + Point:New(kTileSize, kTileSize)
   if cursor.pos == self.pos then
-    DrawRealCircle(center, self.radius:Get(), 5)
+    DrawRealCircle(center, self.range:Get(), 5)
   end
 
   if self.level > 0 then
@@ -191,7 +191,7 @@ end
 ---@param enemy_list Enemy[]
 function Tower:ModifyEnemies(enemy_list)
   for enemy in all(enemy_list) do
-    if self.logical_pos:IsNear(enemy.pos, self.radius:Get()) then
+    if self.logical_pos:IsNear(enemy.pos, self.range:Get()) then
       if self.weaken_factor ~= 0 then
         enemy:Weaken(self.weaken_factor)
       end
@@ -210,7 +210,7 @@ function Tower:ModifyTowers(tower_list)
         tower.damage:Multiply(self.damage_factor)
       end
       if self.range_factor ~= 0 then
-        tower.radius:Multiply(self.range_factor)
+        tower.range:Multiply(self.range_factor)
       end
       if self.reload_factor ~= 0 then
         tower.reload_threshold:Multiply(self.reload_factor)
@@ -230,7 +230,7 @@ function Tower:Shot(enemy_list)
   if self.is_area then
     triggered = self:DamageEnemiesInRange(enemy_list)
     if triggered then
-      self.area_animation:Start(self.radius:Get())
+      self.area_animation:Start(self.range:Get())
     end
   else
     triggered = self:ShotOnNearestEnemy(enemy_list)
@@ -252,7 +252,7 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   for enemy in all(enemy_list) do
     local distance = self.logical_pos:Distance(enemy.pos)
 
-    if distance <= self.radius:Get() then
+    if distance <= self.range:Get() then
       if not nearest_distance then
         nearest_distance = distance
         nearest_enemy_in_reach = enemy
@@ -278,7 +278,7 @@ function Tower:DamageEnemiesInRange(enemy_list)
   local triggered = false
 
   for enemy in all(enemy_list) do
-    if self.logical_pos:IsNear(enemy.pos, self.radius:Get()) then
+    if self.logical_pos:IsNear(enemy.pos, self.range:Get()) then
       enemy:Damage(self.damage:Get())
       triggered = true
     end

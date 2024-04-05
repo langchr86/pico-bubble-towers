@@ -148,11 +148,9 @@ function Tower:Update(enemy_list)
   else
     self:Shot(enemy_list)
   end
-
-  self:ClearModification()
 end
 
-function Tower:ClearModification()
+function Tower:ClearModifications()
   self.damage:Reset()
 end
 

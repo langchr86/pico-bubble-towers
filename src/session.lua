@@ -253,7 +253,23 @@ function Session:DrawStats()
 end
 
 function Session:Update()
+  self:ClearModifications()
   self:TrySpawnEnemy()
+
+  self.tower_selected = nil
+  for tower in all(self.modifier_tower_list) do
+    tower:ModifyTowers(self.tower_list)
+    if tower.pos == self.cursor.pos then
+      self.tower_selected = tower
+    end
+  end
+
+  for tower in all(self.tower_list) do
+    tower:Update(self.enemy_list)
+    if tower.pos == self.cursor.pos then
+      self.tower_selected = tower
+    end
+  end
 
   for enemy in all(self.enemy_list) do
     enemy:Update()
@@ -266,19 +282,14 @@ function Session:Update()
       self.player_life = self.player_life - 1
     end
   end
+end
 
-  self.tower_selected = nil
-  for tower in all(self.modifier_tower_list) do
-    tower:ModifyTowers(self.tower_list)
-    if tower.pos == self.cursor.pos then
-      self.tower_selected = tower
-    end
-  end
+function Session:ClearModifications()
   for tower in all(self.tower_list) do
-    tower:Update(self.enemy_list)
-    if tower.pos == self.cursor.pos then
-      self.tower_selected = tower
-    end
+    tower:ClearModifications()
+  end
+  for enemy in all(self.enemy_list) do
+    enemy:ClearModifications()
   end
 end
 

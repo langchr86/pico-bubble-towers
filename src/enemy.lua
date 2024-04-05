@@ -140,11 +140,9 @@ function Enemy:Update()
       bullet:Update()
     end
   end
-
-  self:ClearModification()
 end
 
-function Enemy:ClearModification()
+function Enemy:ClearModifications()
   self.speed_factor = 1
   self.damage_factor = 1
 end

@@ -7,10 +7,10 @@
 ---@field type TowerType
 ---@field level number
 ---@field spent_cash number
+---@field damage ModifiableValue
 ---@field radius ModifiableValue
 ---@field reload_threshold ModifiableValue
 ---@field reload_level number
----@field damage ModifiableValue
 ---@field weaken_factor number
 ---@field slow_down_factor number
 ---@field damage_factor number
@@ -37,10 +37,10 @@ function Tower:New(pos)
     type = TowerType.BASE,
     level = 0,
     spent_cash = 10,
+    damage = ModifiableValue:New(10),
     radius = ModifiableValue:New(16),
     reload_threshold = ModifiableValue:New(20),
     reload_level = 0,
-    damage = ModifiableValue:New(10),
     weaken_factor = 0,
     slow_down_factor = 0,
     damage_factor = 0,
@@ -74,14 +74,14 @@ function Tower:Upgrade(upgrade_type)
   if upgrade.sprite then
     self.sprite = upgrade.sprite
   end
+  if upgrade.damage then
+    self.damage:SetBase(upgrade.damage)
+  end
   if upgrade.radius then
     self.radius:SetBase(upgrade.radius)
   end
   if upgrade.reload then
     self.reload_threshold:SetBase(upgrade.reload)
-  end
-  if upgrade.damage then
-    self.damage:SetBase(upgrade.damage)
   end
   if upgrade.weaken_factor then
     self.weaken_factor = upgrade.weaken_factor
@@ -162,8 +162,8 @@ end
 
 function Tower:ClearModifications()
   self.damage:Reset()
-  self.reload_threshold:Reset()
   self.radius:Reset()
+  self.reload_threshold:Reset()
 end
 
 function Tower:UpdateMap()
@@ -209,11 +209,11 @@ function Tower:ModifyTowers(tower_list)
       if self.damage_factor ~= 0 then
         tower.damage:Multiply(self.damage_factor)
       end
-      if self.reload_factor ~= 0 then
-        tower.reload_threshold:Multiply(self.reload_factor)
-      end
       if self.range_factor ~= 0 then
         tower.radius:Multiply(self.range_factor)
+      end
+      if self.reload_factor ~= 0 then
+        tower.reload_threshold:Multiply(self.reload_factor)
       end
     end
   end

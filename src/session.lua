@@ -110,7 +110,7 @@ function Session:PrepareCursorMenu()
   ---@param menu_index number
   local function CursorMenuSpriteGetter(menu_index)
     if self.tower_selected == nil then
-      if self.cursor:IsFree() then
+      if self.cursor:IsFreeToBuildTower() then
         self:PlaceTower()
       end
       return Cursor.AbortShowMenu
@@ -194,7 +194,7 @@ end
 function Session:CalculateNewPath()
   local function is_coord_reachable(x, y)
     local tile_pos = Point:New(x, y)
-    return Map:IsTileFree(tile_pos)
+    return Map:IsTileWalkable(tile_pos)
   end
 
   ---@type Point[]|boolean

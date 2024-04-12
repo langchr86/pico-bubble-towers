@@ -100,7 +100,7 @@ function Cursor:HandleMenuSelect(move_direction, opposite_direction)
 end
 
 ---@return boolean
-function Cursor:IsFree()
+function Cursor:IsFreeToBuildTower()
   local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
   return Map:CanBuildOnTile4(tile_pos)
 end

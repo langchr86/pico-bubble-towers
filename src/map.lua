@@ -18,7 +18,14 @@ end
 
 ---@param tile_pos Point
 ---@return boolean
-function Map:IsTileFree(tile_pos)
+function Map:IsTileWalkable(tile_pos)
+  local massive = fget(Map:GetSprite(tile_pos), 0)
+  return not massive
+end
+
+---@param tile_pos Point
+---@return boolean
+function Map:IsTileBuildable(tile_pos)
   local massive = fget(Map:GetSprite(tile_pos), 0)
   return not massive
 end
@@ -26,10 +33,10 @@ end
 ---@param tile_pos Point
 ---@return boolean
 function Map:CanBuildOnTile4(tile_pos)
-  return self:IsTileFree(tile_pos)
-      and self:IsTileFree(tile_pos + Point:New(1, 0))
-      and self:IsTileFree(tile_pos + Point:New(0, 1))
-      and self:IsTileFree(tile_pos + Point:New(1, 1))
+  return self:IsTileBuildable(tile_pos)
+      and self:IsTileBuildable(tile_pos + Point:New(1, 0))
+      and self:IsTileBuildable(tile_pos + Point:New(0, 1))
+      and self:IsTileBuildable(tile_pos + Point:New(1, 1))
       and not self:IsTileStart(tile_pos)
       and not self:IsTileStart(tile_pos + Point:New(1, 0))
       and not self:IsTileStart(tile_pos + Point:New(0, 1))

@@ -314,6 +314,8 @@ function GameSession:Update()
       self.player_life = self.player_life - 1
     end
   end
+
+  return self
 end
 
 function GameSession:ClearModifications()

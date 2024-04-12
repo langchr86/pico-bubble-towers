@@ -15,8 +15,8 @@ end
 map_index = 0
 Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_index / kMapRowSize) * kMapSizeInTiles))
 
-local session = GameSession:New()
-session:AddWaves(CreateWaveList(100))
+local active_session = GameSession:New()
+active_session:AddWaves(CreateWaveList(100))
 
 ---@type boolean
 g_show_debug_info = false
@@ -27,44 +27,44 @@ menu:SetDebugInfoHandler(ToggleDebugInfo)
 
 function _update()
   if btnp(⬆️) then
-    session:MoveUp()
+    active_session:MoveUp()
   end
 
   if btnp(⬇️) then
-    session:MoveDown()
+    active_session:MoveDown()
   end
 
   if btnp(⬅️) then
-    session:MoveLeft()
+    active_session:MoveLeft()
   end
 
   if btnp(➡️) then
-    session:MoveRight()
+    active_session:MoveRight()
   end
 
   if btn(🅾️) then
     if not menu.running then
-      session:Update()
+      active_session:Update()
     end
   end
 
   if btnp(🅾️) then
-    session:PressO()
+    active_session:PressO()
   end
 
   if btnp(❎) then
-    session:PressX()
+    active_session:PressX()
   end
 
   if menu.running then
-    session:Update()
+    active_session = active_session:Update()
   end
 end
 
 function _draw()
   cls()
 
-  session:Draw()
+  active_session:Draw()
 
   if not g_show_debug_info then
     return

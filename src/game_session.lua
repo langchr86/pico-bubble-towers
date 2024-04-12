@@ -1,6 +1,6 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
----@class Session
+---@class GameSession
 ---@field cursor Cursor
 ---@field start Point
 ---@field goal Point
@@ -13,11 +13,11 @@
 ---@field active_wave_list Wave[]
 ---@field cash number
 ---@field player_life number
-Session = {}
-Session.__index = Session
+GameSession = {}
+GameSession.__index = GameSession
 
----@return Session
-function Session:New()
+---@return GameSession
+function GameSession:New()
   local o = {
     cursor = Cursor:New(),
     start = Point:New(0, 0),
@@ -33,7 +33,7 @@ function Session:New()
     player_life = 20,
   }
 
-  local instance = --[[---@type Session]] setmetatable(o, self)
+  local instance = --[[---@type GameSession]] setmetatable(o, self)
 
   instance:SearchSpecialPoints()
   assert(instance:CalculateNewPath())
@@ -43,13 +43,13 @@ function Session:New()
 end
 
 ---@param wave_list Wave[]
-function Session:AddWaves(wave_list)
+function GameSession:AddWaves(wave_list)
   for wave in all(wave_list) do
     add(self.wave_list, wave)
   end
 end
 
-function Session:SearchSpecialPoints()
+function GameSession:SearchSpecialPoints()
   self:DrawMap()
   Map:SetWalkwayMode(false)
 
@@ -70,7 +70,7 @@ function Session:SearchSpecialPoints()
 end
 
 ---@return boolean
-function Session:PlaceTower()
+function GameSession:PlaceTower()
   if self:AnyEnemies() then
     return false
   end
@@ -91,7 +91,7 @@ function Session:PlaceTower()
   return false
 end
 
-function Session:RemoveTower()
+function GameSession:RemoveTower()
   local tower = --[[---@type Tower]] self.tower_selected
   tower:Destroy()
   del(self.tower_list, tower)
@@ -100,7 +100,7 @@ function Session:RemoveTower()
   self:CalculateNewPath()
 end
 
-function Session:PrepareCursorMenu()
+function GameSession:PrepareCursorMenu()
   ---@param menu_index number
   local function CursorMenuHandler(menu_index)
     if menu_index == 0 then
@@ -142,7 +142,7 @@ function Session:PrepareCursorMenu()
 end
 
 ---@param menu_index number
-function Session:UpgradeTower(menu_index)
+function GameSession:UpgradeTower(menu_index)
   local tower = --[[---@type Tower]] self.tower_selected
   assert(tower)
 
@@ -165,7 +165,7 @@ function Session:UpgradeTower(menu_index)
   return true
 end
 
-function Session:StartNextWave()
+function GameSession:StartNextWave()
   if #self.enemy_path == 0 or #self.wave_list == 0 then
     return
   end
@@ -179,7 +179,7 @@ function Session:StartNextWave()
   add(self.active_wave_list, next_wave)
 end
 
-function Session:TrySpawnEnemy()
+function GameSession:TrySpawnEnemy()
   for wave in all(self.active_wave_list) do
     if not wave:IsActive() then
       del(self.active_wave_list, wave)
@@ -190,12 +190,12 @@ function Session:TrySpawnEnemy()
 end
 
 ---@return boolean
-function Session:AnyEnemies()
+function GameSession:AnyEnemies()
   return #self.enemy_list > 0
 end
 
 ---@return boolean
-function Session:CalculateNewPath()
+function GameSession:CalculateNewPath()
   local function is_coord_reachable(x, y)
     local tile_pos = Point:New(x, y)
     return Map:IsTileWalkable(tile_pos)
@@ -217,7 +217,7 @@ function Session:CalculateNewPath()
   return true
 end
 
-function Session:DrawMapBorder()
+function GameSession:DrawMapBorder()
   ---@type number
   local border_color = 6
   line(0, kTileSize, 127, kTileSize, border_color)
@@ -226,11 +226,11 @@ function Session:DrawMapBorder()
   line(0, 127, 127, 127, border_color)
 end
 
-function Session:DrawMap()
+function GameSession:DrawMap()
   Map:Draw()
 end
 
-function Session:DrawPath()
+function GameSession:DrawPath()
   if not g_show_debug_info then
     return
   end
@@ -240,7 +240,7 @@ function Session:DrawPath()
   end
 end
 
-function Session:DrawStats()
+function GameSession:DrawStats()
   for x = 0, 15 do
     spr(9, x * kTileSize, 0)
   end
@@ -260,31 +260,31 @@ function Session:DrawStats()
   PrintRight(self.cash, 128, 1, 7)
 end
 
-function Session:MoveUp()
+function GameSession:MoveUp()
   self.cursor:MoveUp()
 end
 
-function Session:MoveDown()
+function GameSession:MoveDown()
   self.cursor:MoveDown()
 end
 
-function Session:MoveLeft()
+function GameSession:MoveLeft()
   self.cursor:MoveLeft()
 end
 
-function Session:MoveRight()
+function GameSession:MoveRight()
   self.cursor:MoveRight()
 end
 
-function Session:PressO()
+function GameSession:PressO()
   self:StartNextWave()
 end
 
-function Session:PressX()
+function GameSession:PressX()
   self.cursor:Press()
 end
 
-function Session:Update()
+function GameSession:Update()
   self:ClearModifications()
   self:TrySpawnEnemy()
 
@@ -316,7 +316,7 @@ function Session:Update()
   end
 end
 
-function Session:ClearModifications()
+function GameSession:ClearModifications()
   for tower in all(self.tower_list) do
     tower:ClearModifications()
   end
@@ -325,7 +325,7 @@ function Session:ClearModifications()
   end
 end
 
-function Session:Draw()
+function GameSession:Draw()
   if self.player_life <= 0 then
     map(0, 16)
     return

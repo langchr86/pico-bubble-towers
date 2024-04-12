@@ -25,7 +25,7 @@ __lua__
 #include src/tower_area_animation.lua
 #include src/tower.lua
 #include src/wave.lua
-#include src/session.lua
+#include src/game_session.lua
 #include src/pico-proto.lua
 
 __gfx__

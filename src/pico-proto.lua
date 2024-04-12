@@ -15,7 +15,7 @@ end
 map_index = 0
 Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_index / kMapRowSize) * kMapSizeInTiles))
 
-local session = Session:New()
+local session = GameSession:New()
 session:AddWaves(CreateWaveList(100))
 
 ---@type boolean

@@ -13,6 +13,7 @@ __lua__
 #include libs/lua-star.lua
 
 #include src/utils.lua
+#include src/map.lua
 #include src/menu.lua
 #include src/point.lua
 #include src/cursor.lua

@@ -16,11 +16,10 @@
 Session = {}
 Session.__index = Session
 
----@param cursor Cursor
 ---@return Session
-function Session:New(cursor)
+function Session:New()
   local o = {
-    cursor = cursor,
+    cursor = Cursor:New(),
     start = Point:New(0, 0),
     goal = Point:New(0, 0),
     enemy_path = {},
@@ -261,6 +260,30 @@ function Session:DrawStats()
   PrintRight(self.cash, 128, 1, 7)
 end
 
+function Session:MoveUp()
+  self.cursor:MoveUp()
+end
+
+function Session:MoveDown()
+  self.cursor:MoveDown()
+end
+
+function Session:MoveLeft()
+  self.cursor:MoveLeft()
+end
+
+function Session:MoveRight()
+  self.cursor:MoveRight()
+end
+
+function Session:PressO()
+  self:StartNextWave()
+end
+
+function Session:PressX()
+  self.cursor:Press()
+end
+
 function Session:Update()
   self:ClearModifications()
   self:TrySpawnEnemy()
@@ -302,8 +325,7 @@ function Session:ClearModifications()
   end
 end
 
----@param cursor Cursor
-function Session:Draw(cursor)
+function Session:Draw()
   if self.player_life <= 0 then
     map(0, 16)
     return
@@ -318,10 +340,10 @@ function Session:Draw(cursor)
   self:DrawPath()
 
   for tower in all(self.modifier_tower_list) do
-    tower:Draw(cursor)
+    tower:Draw(self.cursor)
   end
   for tower in all(self.tower_list) do
-    tower:Draw(cursor)
+    tower:Draw(self.cursor)
   end
 
   for enemy in all(self.enemy_list) do
@@ -330,4 +352,6 @@ function Session:Draw(cursor)
 
   self:DrawMapBorder()
   self:DrawStats()
+
+  self.cursor:Draw()
 end

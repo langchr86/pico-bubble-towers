@@ -17,12 +17,7 @@ Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_ind
 
 local cursor = Cursor:New()
 local session = Session:New(cursor)
-session:AddWaves(CreateWaveList(5))
-
-local function AddNewWaves()
-  session:AddWaves(CreateWaveList(5))
-end
-menu:SetWaveHandler(AddNewWaves)
+session:AddWaves(CreateWaveList(100))
 
 ---@type boolean
 g_show_debug_info = false

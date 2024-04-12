@@ -155,7 +155,7 @@ end
 function Tower:Draw(cursor)
   local center = self.pos + Point:New(kTileSize, kTileSize)
   if cursor.pos == self.pos then
-    DrawRealCircle(center, self.range:Get(), 5)
+    DrawRealCircle(center, self.range:Get(), 6)
     self:DrawDebug()
   end
 

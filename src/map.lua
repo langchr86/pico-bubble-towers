@@ -74,6 +74,14 @@ function Map:GetSprite(tile_pos)
   return mget(pos.x, pos.y)
 end
 
+---@param sprite number
+---@return number
+function Map:GetSpriteMainColor(sprite)
+  local x = (sprite % kSpriteRowSize) * kSpriteSize
+  local y = flr(sprite / kSpriteRowSize) * kSpriteSize
+  return sget(x, y)
+end
+
 ---@param tile_pos Point
 ---@param sprite number
 function Map:TileSet4(tile_pos, sprite)

@@ -27,7 +27,7 @@ Tower.MaxLevel = 4
 ---@return Tower
 function Tower:New(pos)
   local o = {
-    sprite = 128,
+    sprite = 64,
     pos = pos:Clone(),
     logical_pos = pos + Point:New(4, 4),
     type = TowerType.BASE,
@@ -124,7 +124,7 @@ end
 
 ---@return number
 function Tower.GetDestroySprite()
-  return 160
+  return 96
 end
 
 ---@return number

@@ -17,7 +17,7 @@ function Bullet:New(pos, dest, damage)
   local o = {
     pos = pos:Clone(),
     dest = dest, -- this is a always updated reference to the target
-    sprite = 48,
+    sprite = 20,
     speed = 3,
     damage = damage,
   }

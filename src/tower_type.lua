@@ -77,83 +77,83 @@ end
 UPGRADE_TABLE = {
   [TowerType.BASE] = {
     [TowerType.NORMAL_SNIPER_L1] = {
-      preview_sprite = 162,
+      preview_sprite = 98,
       cost = 18,
-      sprite = 130,
+      sprite = 66,
       range = 20,
     },
     [TowerType.GHOST_SNIPER_L1] = {
-      preview_sprite = 166,
+      preview_sprite = 102,
       cost = 20,
-      sprite = 134,
+      sprite = 70,
     },
     [TowerType.AREA_SNIPER_L1] = {
-      preview_sprite = 164,
+      preview_sprite = 100,
       cost = 35,
-      sprite = 132,
+      sprite = 68,
     },
     [TowerType.BOOST_DAMAGE_L1] = {
-      preview_sprite = 168,
+      preview_sprite = 104,
       cost = 40,
-      sprite = 136,
+      sprite = 72,
       damage_factor = 2,
     },
   },
   [TowerType.NORMAL_SNIPER_L1] = {
     [TowerType.NORMAL_SNIPER_L2] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 32,
       range = 30,
     },
     [TowerType.NORMAL_FAST_L2] = {
-      preview_sprite = 181,
+      preview_sprite = 117,
       cost = 32,
       reload = 10,
     },
     [TowerType.NORMAL_SPLASH_L2] = {
-      preview_sprite = 183,
+      preview_sprite = 119,
       cost = 32,
       damage = 15,
     },
   },
   [TowerType.NORMAL_SNIPER_L2] = {
     [TowerType.NORMAL_SNIPER_L3] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 90,
       range = 40,
     },
   },
   [TowerType.NORMAL_SNIPER_L3] = {
     [TowerType.NORMAL_SNIPER_L4] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 225,
       range = 70,
     },
   },
   [TowerType.NORMAL_FAST_L2] = {
     [TowerType.NORMAL_FAST_L3] = {
-      preview_sprite = 181,
+      preview_sprite = 117,
       cost = 32,
       reload = 7,
     },
   },
   [TowerType.NORMAL_FAST_L3] = {
     [TowerType.NORMAL_FAST_L4] = {
-      preview_sprite = 181,
+      preview_sprite = 117,
       cost = 32,
       reload = 4,
     },
   },
   [TowerType.NORMAL_SPLASH_L2] = {
     [TowerType.NORMAL_SPLASH_L3] = {
-      preview_sprite = 183,
+      preview_sprite = 119,
       cost = 32,
       damage = 20,
     },
   },
   [TowerType.NORMAL_SPLASH_L3] = {
     [TowerType.NORMAL_SPLASH_L4] = {
-      preview_sprite = 183,
+      preview_sprite = 119,
       cost = 32,
       damage = 30,
     },
@@ -161,40 +161,40 @@ UPGRADE_TABLE = {
   [TowerType.GHOST_SNIPER_L1] = {},
   [TowerType.AREA_SNIPER_L1] = {
     [TowerType.AREA_SNIPER_L2] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 32,
       range = 20,
     },
     [TowerType.AREA_SLOW_L2] = {
-      preview_sprite = 182,
+      preview_sprite = 118,
       cost = 32,
-      sprite = 140,
+      sprite = 76,
       slow_down_factor = 0.9,
     },
     [TowerType.AREA_WEAK_L2] = {
-      preview_sprite = 184,
+      preview_sprite = 120,
       cost = 32,
-      sprite = 138,
+      sprite = 74,
       weaken_factor = 1.5,
     },
   },
   [TowerType.AREA_SNIPER_L2] = {
     [TowerType.AREA_SNIPER_L3] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 90,
       range = 30,
     },
   },
   [TowerType.AREA_SNIPER_L3] = {
     [TowerType.AREA_SNIPER_L4] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 250,
       range = 40,
     },
   },
   [TowerType.AREA_SLOW_L2] = {
     [TowerType.AREA_SLOW_L3] = {
-      preview_sprite = 182,
+      preview_sprite = 118,
       cost = 90,
       range = 30,
       slow_down_factor = 0.7,
@@ -202,7 +202,7 @@ UPGRADE_TABLE = {
   },
   [TowerType.AREA_SLOW_L3] = {
     [TowerType.AREA_SLOW_L4] = {
-      preview_sprite = 182,
+      preview_sprite = 118,
       cost = 250,
       range = 40,
       slow_down_factor = 0.5,
@@ -210,7 +210,7 @@ UPGRADE_TABLE = {
   },
   [TowerType.AREA_WEAK_L2] = {
     [TowerType.AREA_WEAK_L3] = {
-      preview_sprite = 184,
+      preview_sprite = 120,
       cost = 90,
       range = 30,
       weaken_factor = 2,
@@ -218,7 +218,7 @@ UPGRADE_TABLE = {
   },
   [TowerType.AREA_WEAK_L3] = {
     [TowerType.AREA_WEAK_L4] = {
-      preview_sprite = 184,
+      preview_sprite = 120,
       cost = 250,
       range = 40,
       weaken_factor = 3,
@@ -226,18 +226,18 @@ UPGRADE_TABLE = {
   },
   [TowerType.BOOST_DAMAGE_L1] = {
     [TowerType.BOOST_DAMAGE_L2] = {
-      preview_sprite = 168,
+      preview_sprite = 104,
       cost = 70,
       damage_factor = 3,
     },
     [TowerType.BOOST_FAST_L2] = {
-      preview_sprite = 181,
+      preview_sprite = 117,
       cost = 70,
       damage_factor = 0,
       reload_factor = 0.8,
     },
     [TowerType.BOOST_RANGE_L2] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 70,
       damage_factor = 0,
       range_factor = 1.3,
@@ -245,42 +245,42 @@ UPGRADE_TABLE = {
   },
   [TowerType.BOOST_DAMAGE_L2] = {
     [TowerType.BOOST_DAMAGE_L3] = {
-      preview_sprite = 168,
+      preview_sprite = 104,
       cost = 150,
       damage_factor = 4,
     },
   },
   [TowerType.BOOST_DAMAGE_L3] = {
     [TowerType.BOOST_DAMAGE_L4] = {
-      preview_sprite = 168,
+      preview_sprite = 104,
       cost = 250,
       damage_factor = 5,
     },
   },
   [TowerType.BOOST_FAST_L2] = {
     [TowerType.BOOST_FAST_L3] = {
-      preview_sprite = 181,
+      preview_sprite = 117,
       cost = 150,
       reload_factor = 0.5,
     },
   },
   [TowerType.BOOST_FAST_L3] = {
     [TowerType.BOOST_FAST_L4] = {
-      preview_sprite = 181,
+      preview_sprite = 117,
       cost = 250,
       reload_factor = 0.2,
     },
   },
   [TowerType.BOOST_RANGE_L2] = {
     [TowerType.BOOST_RANGE_L3] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 150,
       range_factor = 1.7,
     },
   },
   [TowerType.BOOST_RANGE_L3] = {
     [TowerType.BOOST_RANGE_L4] = {
-      preview_sprite = 179,
+      preview_sprite = 115,
       cost = 250,
       range_factor = 2.0,
     },

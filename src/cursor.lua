@@ -13,8 +13,8 @@
 ---@field menu_handler function
 ---@field menu_sprite_getter function
 Cursor = {
-  sprite = 64,
-  small_sprite = 96,
+  sprite = 5,
+  small_sprite = 19,
   pos = Point:New(8, 16),
   min = Point:New(0, 8),
   max = Point:New(112, 112),

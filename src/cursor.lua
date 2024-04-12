@@ -180,10 +180,10 @@ function Cursor:DrawDebug()
     return
   end
 
-  ---@type number
-  cursor_sprite = Map:GetSprite(Point:New(self.pos.x / self.inc, self.pos.y / self.inc))
-  print(cursor_sprite, 2, 121, 10)
-  print(fget(cursor_sprite, 0), 17, 121, 10)
+  local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
+  print(Map:GetSprite(tile_pos), 2, 121, 10)
+  print(Map:IsTileBuildable(tile_pos), 18, 121, 10)
+  print(Map:IsTileWalkable(tile_pos), 50, 121, 10)
 end
 
 ---@param index number

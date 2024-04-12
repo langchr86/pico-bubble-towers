@@ -51,7 +51,7 @@ end
 
 function Tower:Destroy()
   local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
-  Map:TileClear4(tile_pos, 10)
+  Map:TileClear4(tile_pos, 3)
 end
 
 ---@param upgrade_type TowerType

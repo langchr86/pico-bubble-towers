@@ -37,7 +37,7 @@ function Session:New(cursor)
   local instance = --[[---@type Session]] setmetatable(o, self)
 
   instance:SearchSpecialPoints()
-  instance:CalculateNewPath()
+  assert(instance:CalculateNewPath())
   instance:PrepareCursorMenu()
 
   return instance
@@ -52,6 +52,7 @@ end
 
 function Session:SearchSpecialPoints()
   self:DrawMap()
+  Map:SetWalkwayMode(false)
 
   for x = 0, kMapSizeInTiles - 1 do
     for y = 0, kMapSizeInTiles - 1 do
@@ -60,6 +61,10 @@ function Session:SearchSpecialPoints()
         self.start = tile_pos
       elseif Map:IsTileGoal(tile_pos) then
         self.goal = tile_pos
+      end
+
+      if Map:IsTileWalkWay(tile_pos) then
+        Map:SetWalkwayMode(true)
       end
     end
   end

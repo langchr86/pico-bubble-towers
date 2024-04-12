@@ -2,14 +2,21 @@
 
 ---@class Map
 ---@field offset Point
+---@field walk_way_mode boolean
 Map = {
   offset = nil,
+  walk_way_mode = false,
 }
 Map.__index = Map
 
 ---@param offset Point
 function Map:SetOffset(offset)
   self.offset = offset:Clone()
+end
+
+---@param offset Point
+function Map:SetWalkwayMode(walk_way)
+  self.walk_way_mode = walk_way
 end
 
 function Map:Draw()
@@ -19,15 +26,23 @@ end
 ---@param tile_pos Point
 ---@return boolean
 function Map:IsTileWalkable(tile_pos)
-  local massive = fget(Map:GetSprite(tile_pos), 0)
-  return not massive
+  if not self.walk_way_mode then
+    return fget(Map:GetSprite(tile_pos), 0)
+  else
+    return fget(Map:GetSprite(tile_pos), 0) and not Map:IsTileBuildable(tile_pos)
+  end
 end
 
 ---@param tile_pos Point
 ---@return boolean
 function Map:IsTileBuildable(tile_pos)
-  local massive = fget(Map:GetSprite(tile_pos), 0)
-  return not massive
+  return fget(Map:GetSprite(tile_pos), 1)
+end
+
+---@param tile_pos Point
+---@return boolean
+function Map:IsTileWalkWay(tile_pos)
+  return Map:GetSprite(tile_pos) == 4
 end
 
 ---@param tile_pos Point
@@ -37,14 +52,6 @@ function Map:CanBuildOnTile4(tile_pos)
       and self:IsTileBuildable(tile_pos + Point:New(1, 0))
       and self:IsTileBuildable(tile_pos + Point:New(0, 1))
       and self:IsTileBuildable(tile_pos + Point:New(1, 1))
-      and not self:IsTileStart(tile_pos)
-      and not self:IsTileStart(tile_pos + Point:New(1, 0))
-      and not self:IsTileStart(tile_pos + Point:New(0, 1))
-      and not self:IsTileStart(tile_pos + Point:New(1, 1))
-      and not self:IsTileGoal(tile_pos)
-      and not self:IsTileGoal(tile_pos + Point:New(1, 0))
-      and not self:IsTileGoal(tile_pos + Point:New(0, 1))
-      and not self:IsTileGoal(tile_pos + Point:New(1, 1))
 end
 
 ---@param tile_pos Point

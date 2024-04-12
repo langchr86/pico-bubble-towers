@@ -12,11 +12,7 @@ function _init()
   menu:Update()
 end
 
-map_index = 0
-Map:SetOffset(Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_index / kMapRowSize) * kMapSizeInTiles))
-
-local active_session = GameSession:New()
-active_session:AddWaves(CreateWaveList(100))
+local active_session = LevelSelectionSession:New()
 
 ---@type boolean
 g_show_debug_info = false

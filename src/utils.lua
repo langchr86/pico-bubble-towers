@@ -23,6 +23,11 @@ function PrintRight(text, x, y, color)
   print(text, x - length, y, color)
 end
 
+function PrintCenterX(text, y, color)
+  local length = print(text, 0, -kTileSize)
+  print(text, 64 - length / 2, y, color)
+end
+
 ---@param center Point
 ---@param radius number
 ---@param color number

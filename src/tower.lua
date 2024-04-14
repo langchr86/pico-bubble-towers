@@ -153,9 +153,16 @@ function Tower:UpdateMap()
 end
 
 function Tower:Draw(cursor)
-  local center = self.pos + Point:New(kTileSize, kTileSize)
+  local tile_size = Point:New(kTileSize, kTileSize)
+  local center = self.pos + tile_size
   if cursor.pos == self.pos then
-    DrawRealCircle(center, self.range:Get(), 6)
+    if self.modifiers:HasTowerModifications() then
+      local top_left = self.pos - tile_size
+      local bottom_right = self.pos + 3 * tile_size
+      rect(top_left.x, top_left.y, bottom_right.x - 1, bottom_right.y - 1, 6)
+    else
+      DrawRealCircle(center, self.range:Get(), 6)
+    end
     self:DrawDebug()
   end
 

@@ -6,6 +6,7 @@
 ---@field reload number
 ---@field weaken number
 ---@field slow_down number
+---@field has_enemy_modifications boolean
 TowerModifiers = {}
 TowerModifiers.__index = TowerModifiers
 
@@ -17,6 +18,7 @@ function TowerModifiers:New()
     reload = 0,
     weaken = 0,
     slow_down = 0,
+    has_enemy_modifications = false,
   }
 
   local instance = --[[---@type TowerModifiers]] setmetatable(o, self)
@@ -40,9 +42,17 @@ function TowerModifiers:Upgrade(upgrade)
   if upgrade.slow_down_factor then
     self.slow_down = upgrade.slow_down_factor
   end
+
+  self:CheckModificationTypes()
+end
+
+function TowerModifiers:CheckModificationTypes()
+  if self.weaken ~= 0 or self.slow_down ~= 0 then
+    self.has_enemy_modifications = true
+  end
 end
 
 ---@return boolean
 function TowerModifiers:HasEnemyModifications()
-  return self.weaken ~= 0 or self.slow_down ~= 0
+  return self.has_enemy_modifications
 end

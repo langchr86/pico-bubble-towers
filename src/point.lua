@@ -86,6 +86,13 @@ function Point.__sub(lhs, rhs)
   return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
 end
 
+---@param scalar number
+---@param point Point
+---@return Point
+function Point.__mul(scalar, point)
+  return Point:New(scalar * point.x, scalar * point.y)
+end
+
 ---@param lhs Point
 ---@param rhs Point
 ---@return boolean

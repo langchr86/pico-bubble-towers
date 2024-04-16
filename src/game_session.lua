@@ -173,7 +173,7 @@ function GameSession:StartNextWave()
   ---@type Point
   local start_point = ConvertTileToPixel(self.start)
 
-  local next_wave = deli(self.wave_list, 1)
+  local next_wave = --[[---@type Wave]] deli(self.wave_list, 1)
   next_wave:Start(start_point, self.enemy_path)
 
   add(self.active_wave_list, next_wave)

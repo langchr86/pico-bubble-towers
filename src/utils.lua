@@ -8,6 +8,17 @@ kMapSizeInTiles = 16
 kMapRowSize = 8
 kTopRowYCoordinate = 8
 
+---@param tile_path Point[]|boolean
+---@return Point[]
+function ConvertTileToPixelPath(tile_path)
+  local pixel_path = {}
+  for pos in all(tile_path) do
+    local pixel_pos = ConvertTileToPixel(pos)
+    add(pixel_path, pixel_pos)
+  end
+  return pixel_path
+end
+
 ---@param tile_pos Point
 ---@return Point
 function ConvertTileToPixel(tile_pos)

@@ -207,13 +207,7 @@ function GameSession:CalculateNewPath()
     return false
   end
 
-  self.enemy_path = {}
-  for pos in all(path) do
-    ---@type Point
-    local pixel_pos = ConvertTileToPixel(pos)
-    add(self.enemy_path, pixel_pos)
-  end
-
+  self.enemy_path = ConvertTileToPixelPath(path)
   return true
 end
 

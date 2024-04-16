@@ -24,10 +24,17 @@ end
 
 ---@param start Point
 ---@param enemy_path Point[]
-function Wave:Start(start, enemy_path)
+---@param ghost_path Point[]
+function Wave:Start(start, enemy_path, ghost_path)
   for i = 1, self.enemy_count do
     local enemy = self.enemy_template:Clone()
-    enemy:Activate(start, enemy_path)
+
+    if enemy:IsGhost() then
+      enemy:Activate(start, ghost_path)
+    else
+      enemy:Activate(start, enemy_path)
+    end
+
     add(self.baby_list, enemy)
   end
 end

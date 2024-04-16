@@ -69,6 +69,11 @@ function Enemy:Clone()
   return Enemy:New(self.type, self.life)
 end
 
+---@return boolean
+function Enemy:IsGhost()
+  return self.type == 0
+end
+
 ---@param pos Point
 ---@param path Point[]
 function Enemy:Activate(pos, path)

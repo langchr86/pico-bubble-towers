@@ -5,6 +5,7 @@
 ---@field start Point
 ---@field goal Point
 ---@field enemy_path Point[]
+---@field ghost_path Point[]
 ---@field tower_list Tower[]
 ---@field modifier_tower_list Tower[]
 ---@field tower_selected Tower|nil
@@ -23,6 +24,7 @@ function GameSession:New()
     start = Point:New(0, 0),
     goal = Point:New(0, 0),
     enemy_path = {},
+    ghost_path = {},
     tower_list = {},
     modifier_tower_list = {},
     tower_selected = nil,
@@ -37,6 +39,7 @@ function GameSession:New()
 
   instance:SearchSpecialPoints()
   assert(instance:CalculateNewPath())
+  assert(instance:CalculateGhostPath())
   instance:PrepareCursorMenu()
 
   return instance
@@ -174,7 +177,7 @@ function GameSession:StartNextWave()
   local start_point = ConvertTileToPixel(self.start)
 
   local next_wave = --[[---@type Wave]] deli(self.wave_list, 1)
-  next_wave:Start(start_point, self.enemy_path)
+  next_wave:Start(start_point, self.enemy_path, self.ghost_path)
 
   add(self.active_wave_list, next_wave)
 end
@@ -211,6 +214,22 @@ function GameSession:CalculateNewPath()
   return true
 end
 
+---@return boolean
+function GameSession:CalculateGhostPath()
+  local function is_coord_reachable(x, y)
+    return y ~= 0
+  end
+
+  ---@type Point[]|boolean
+  local path = LuaStar:Find(15, 15, self.start, self.goal, is_coord_reachable)
+  if path == false then
+    return false
+  end
+
+  self.ghost_path = ConvertTileToPixelPath(path)
+  return true
+end
+
 function GameSession:DrawMapBorder()
   ---@type number
   local border_color = 6
@@ -231,6 +250,10 @@ function GameSession:DrawPath()
 
   for pos in all(self.enemy_path) do
     spr(16, pos.x, pos.y)
+  end
+
+  for pos in all(self.ghost_path) do
+    spr(23, pos.x, pos.y)
   end
 end
 

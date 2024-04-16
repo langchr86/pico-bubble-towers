@@ -56,6 +56,20 @@ function IsAreaDamageUpgrade(type)
   return type == TowerType.AREA_SNIPER_L1
 end
 
+---@param type TowerType
+---@return boolean
+function IsNoGhostUpgrade(type)
+  return type == TowerType.NORMAL_SPLASH_L2
+      or type == TowerType.AREA_SNIPER_L1
+      or type == TowerType.BOOST_DAMAGE_L1
+end
+
+---@param type TowerType
+---@return boolean
+function IsGhostOnlyUpgrade(type)
+  return type == TowerType.GHOST_SNIPER_L1
+end
+
 ---@class TowerUpgrade
 ---@field sprite number
 ---@field preview_sprite number
@@ -86,6 +100,7 @@ UPGRADE_TABLE = {
       preview_sprite = 102,
       cost = 20,
       sprite = 70,
+      damage = 15,
     },
     [TowerType.AREA_SNIPER_L1] = {
       preview_sprite = 100,
@@ -158,7 +173,46 @@ UPGRADE_TABLE = {
       damage = 30,
     },
   },
-  [TowerType.GHOST_SNIPER_L1] = {},
+  [TowerType.GHOST_SNIPER_L1] = {
+    [TowerType.GHOST_SNIPER_L2] = {
+      preview_sprite = 115,
+      cost = 32,
+      range = 30,
+    },
+    [TowerType.GHOST_SPLASH_L2] = {
+      preview_sprite = 119,
+      cost = 32,
+      damage = 20,
+    },
+  },
+  [TowerType.GHOST_SNIPER_L2] = {
+    [TowerType.GHOST_SNIPER_L3] = {
+      preview_sprite = 115,
+      cost = 90,
+      range = 40,
+    },
+  },
+  [TowerType.GHOST_SNIPER_L3] = {
+    [TowerType.GHOST_SNIPER_L4] = {
+      preview_sprite = 115,
+      cost = 150,
+      range = 50,
+    },
+  },
+  [TowerType.GHOST_SPLASH_L2] = {
+    [TowerType.GHOST_SPLASH_L3] = {
+      preview_sprite = 119,
+      cost = 120,
+      damage = 30,
+    },
+  },
+  [TowerType.GHOST_SPLASH_L3] = {
+    [TowerType.GHOST_SPLASH_L4] = {
+      preview_sprite = 119,
+      cost = 250,
+      damage = 40,
+    },
+  },
   [TowerType.AREA_SNIPER_L1] = {
     [TowerType.AREA_SNIPER_L2] = {
       preview_sprite = 115,

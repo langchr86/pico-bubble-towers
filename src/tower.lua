@@ -13,6 +13,8 @@
 ---@field reload_level number
 ---@field modifiers TowerModifiers
 ---@field is_area_damage boolean
+---@field can_attack_ghost boolean
+---@field can_attack_normal boolean
 ---@field area_animation TowerAreaAnimation
 Tower = {}
 Tower.__index = Tower
@@ -39,6 +41,8 @@ function Tower:New(pos)
     reload_level = 0,
     modifiers = TowerModifiers:New(),
     is_area_damage = false,
+    can_attack_ghost = true,
+    can_attack_normal = true,
     area_animation = TowerAreaAnimation:New(),
   }
 
@@ -79,6 +83,16 @@ function Tower:Upgrade(upgrade_type)
 
   if IsAreaDamageUpgrade(upgrade_type) then
     self.is_area_damage = true
+    self.can_attack_normal = false
+    self.can_attack_ghost = false
+  end
+
+  if IsNoGhostUpgrade(upgrade_type) then
+    self.can_attack_ghost = false
+  end
+
+  if IsGhostOnlyUpgrade(upgrade_type) then
+    self.can_attack_normal = false
   end
 
   self.modifiers:Upgrade(upgrade)
@@ -189,6 +203,9 @@ function Tower:DrawDebug()
   x = print(" *", x, y, 6)
   x = print(self.modifiers.damage, x, y, 6)
 
+  x = print(" norm:", x, y, 6)
+  x = print(self.can_attack_normal, x, y, 6)
+
   x = 2
   y = 93
   x = print("rang: ", x, y, 6)
@@ -196,12 +213,18 @@ function Tower:DrawDebug()
   x = print(" *", x, y, 6)
   x = print(self.modifiers.range, x, y, 6)
 
+  x = print(" ghst:", x, y, 6)
+  x = print(self.can_attack_ghost, x, y, 6)
+
   x = 2
   y = 100
   x = print("reld: ", x, y, 6)
   x = print(self.reload:Get(), x, y, 6)
   x = print(" *", x, y, 6)
   x = print(self.modifiers.reload, x, y, 6)
+
+  x = print(" area:", x, y, 6)
+  x = print(self.is_area_damage, x, y, 6)
 
   x = 2
   y = 107
@@ -270,15 +293,17 @@ function Tower:ShotOnNearestEnemy(enemy_list)
   local nearest_distance
 
   for enemy in all(enemy_list) do
-    local distance = self.logical_pos:Distance(enemy.pos)
+    if (not enemy:IsGhost() and self.can_attack_normal) or (enemy:IsGhost() and self.can_attack_ghost) then
+      local distance = self.logical_pos:Distance(enemy.pos)
 
-    if distance <= self.range:Get() then
-      if not nearest_distance then
-        nearest_distance = distance
-        nearest_enemy_in_reach = enemy
-      elseif distance < nearest_distance then
-        nearest_distance = distance
-        nearest_enemy_in_reach = enemy
+      if distance <= self.range:Get() then
+        if not nearest_distance then
+          nearest_distance = distance
+          nearest_enemy_in_reach = enemy
+        elseif distance < nearest_distance then
+          nearest_distance = distance
+          nearest_enemy_in_reach = enemy
+        end
       end
     end
   end
@@ -298,7 +323,7 @@ function Tower:DamageEnemiesInRange(enemy_list)
   local triggered = false
 
   for enemy in all(enemy_list) do
-    if self.logical_pos:IsNear(enemy.pos, self.range:Get()) then
+    if not enemy:IsGhost() and self.logical_pos:IsNear(enemy.pos, self.range:Get()) then
       enemy:Damage(self.damage:Get())
       triggered = true
     end

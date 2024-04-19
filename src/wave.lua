@@ -62,7 +62,7 @@ function Wave:TrySpawnBaby(existing_enemies)
   local last_enemy = self.active_list[#self.active_list]
   ---@type Enemy
   local new_enemy = self.baby_list[1]
-  if not last_enemy.pos:IsNear(new_enemy.pos, 8) then
+  if last_enemy:IsDead() or not last_enemy.pos:IsNear(new_enemy.pos, 8) then
     SpawnEnemy()
   end
 end

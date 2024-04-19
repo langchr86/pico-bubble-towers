@@ -261,7 +261,7 @@ end
 
 function GameSession:DrawStats()
   for x = 0, 15 do
-    spr(9, x * kTileSize, 0)
+    spr(1, x * kTileSize, 0)
   end
 
   print("life: ", 1, 1, 12)

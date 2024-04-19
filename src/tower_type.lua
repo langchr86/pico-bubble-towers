@@ -22,26 +22,26 @@ TowerType = {
   GHOST_SPLASH_L2 = 222,
   GHOST_SPLASH_L3 = 223,
   GHOST_SPLASH_L4 = 224,
-  AREA_SNIPER_L1 = 311,
-  AREA_SNIPER_L2 = 312,
-  AREA_SNIPER_L3 = 313,
-  AREA_SNIPER_L4 = 314,
-  AREA_SLOW_L2 = 322,
-  AREA_SLOW_L3 = 323,
-  AREA_SLOW_L4 = 324,
-  AREA_WEAK_L2 = 332,
-  AREA_WEAK_L3 = 333,
-  AREA_WEAK_L4 = 334,
-  BOOST_DAMAGE_L1 = 411,
-  BOOST_DAMAGE_L2 = 412,
-  BOOST_DAMAGE_L3 = 413,
-  BOOST_DAMAGE_L4 = 414,
-  BOOST_FAST_L2 = 422,
-  BOOST_FAST_L3 = 423,
-  BOOST_FAST_L4 = 424,
-  BOOST_RANGE_L2 = 432,
-  BOOST_RANGE_L3 = 433,
-  BOOST_RANGE_L4 = 434,
+  BOOST_RANGE_L2 = 312,
+  BOOST_RANGE_L3 = 313,
+  BOOST_RANGE_L4 = 314,
+  BOOST_FAST_L2 = 322,
+  BOOST_FAST_L3 = 323,
+  BOOST_FAST_L4 = 324,
+  BOOST_DAMAGE_L1 = 331,
+  BOOST_DAMAGE_L2 = 332,
+  BOOST_DAMAGE_L3 = 333,
+  BOOST_DAMAGE_L4 = 334,
+  AREA_SNIPER_L1 = 411,
+  AREA_SNIPER_L2 = 412,
+  AREA_SNIPER_L3 = 413,
+  AREA_SNIPER_L4 = 414,
+  AREA_SLOW_L2 = 422,
+  AREA_SLOW_L3 = 423,
+  AREA_SLOW_L4 = 424,
+  AREA_WEAK_L2 = 432,
+  AREA_WEAK_L3 = 433,
+  AREA_WEAK_L4 = 434,
 }
 
 ---@param type TowerType
@@ -91,13 +91,13 @@ end
 UPGRADE_TABLE = {
   [TowerType.BASE] = {
     [TowerType.NORMAL_SNIPER_L1] = {
-      preview_sprite = 98,
+      preview_sprite = 114,
       cost = 18,
       sprite = 66,
       range = 20,
     },
     [TowerType.GHOST_SNIPER_L1] = {
-      preview_sprite = 102,
+      preview_sprite = 32,
       cost = 20,
       sprite = 70,
       damage = 15,
@@ -108,7 +108,7 @@ UPGRADE_TABLE = {
       sprite = 68,
     },
     [TowerType.BOOST_DAMAGE_L1] = {
-      preview_sprite = 104,
+      preview_sprite = 99,
       cost = 40,
       sprite = 72,
       damage_factor = 2,
@@ -280,7 +280,7 @@ UPGRADE_TABLE = {
   },
   [TowerType.BOOST_DAMAGE_L1] = {
     [TowerType.BOOST_DAMAGE_L2] = {
-      preview_sprite = 104,
+      preview_sprite = 117,
       cost = 70,
       damage_factor = 3,
     },
@@ -299,14 +299,14 @@ UPGRADE_TABLE = {
   },
   [TowerType.BOOST_DAMAGE_L2] = {
     [TowerType.BOOST_DAMAGE_L3] = {
-      preview_sprite = 104,
+      preview_sprite = 117,
       cost = 150,
       damage_factor = 4,
     },
   },
   [TowerType.BOOST_DAMAGE_L3] = {
     [TowerType.BOOST_DAMAGE_L4] = {
-      preview_sprite = 104,
+      preview_sprite = 117,
       cost = 250,
       damage_factor = 5,
     },

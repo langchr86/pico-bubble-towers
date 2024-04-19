@@ -14,6 +14,7 @@
 ---@field active_wave_list Wave[]
 ---@field cash number
 ---@field player_life number
+---@field shake number
 GameSession = {}
 GameSession.__index = GameSession
 
@@ -33,6 +34,7 @@ function GameSession:New()
     active_wave_list = {},
     cash = 5000,
     player_life = 20,
+    shake = 0,
   }
 
   local instance = --[[---@type GameSession]] setmetatable(o, self)
@@ -329,6 +331,7 @@ function GameSession:Update()
     if enemy:InTarget() then
       del(self.enemy_list, enemy)
       self.player_life = self.player_life - 1
+      self:StartScreenshake()
     end
   end
 
@@ -345,6 +348,8 @@ function GameSession:ClearModifications()
 end
 
 function GameSession:Draw()
+  self:DrawScreenshake()
+
   if self.player_life <= 0 then
     map(0, 16)
     return
@@ -373,4 +378,20 @@ function GameSession:Draw()
   self:DrawStats()
 
   self.cursor:Draw()
+end
+
+function GameSession:StartScreenshake()
+  self.shake = 0.2
+end
+
+function GameSession:DrawScreenshake()
+  local x = (8 - rnd(16)) * self.shake
+  local y = (8 - rnd(16)) * self.shake
+
+  camera(x, y)
+
+  self.shake = self.shake * 0.8
+  if self.shake < 0.1 then
+    self.shake = 0
+  end
 end

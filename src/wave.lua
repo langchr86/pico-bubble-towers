@@ -70,15 +70,15 @@ end
 ---@param wave_count number
 ---@return Wave[]
 function CreateWaveList(wave_count)
-  ---@type number
-  local type = 0
+  ---@type EnemyType
+  local type = 1
   ---@type Wave[]
   local list = {}
   for i = 1, wave_count do
     add(list, Wave:New(4, Enemy:New(type, 100)))
     type = type + 1
-    if type > 1 then
-      type = 0
+    if type > 2 then
+      type = 1
     end
   end
   return list

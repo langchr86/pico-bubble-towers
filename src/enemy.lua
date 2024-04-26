@@ -1,7 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 ---@class Enemy
----@field type number
+---@field type EnemyType
 ---@field sprite number
 ---@field sprite_count number
 ---@field sprite_index number
@@ -21,7 +21,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
----@param type number
+---@param type EnemyType
 ---@param life number
 ---@return Enemy
 function Enemy:New(type, life)
@@ -47,13 +47,13 @@ function Enemy:New(type, life)
 
   local e = --[[---@type Enemy]] o
 
-  if type == 0 then
+  if type == EnemyType.GHOST then
     e.sprite = 32
     e.sprite_count = 2
     e.frame_count = 10
     e.speed = 1.0
     e.value = flr(e.speed * e.life / 10)
-  elseif type == 1 then
+  elseif type == EnemyType.FAST then
     e.sprite = 34
     e.sprite_count = 4
     e.frame_count = 6
@@ -71,7 +71,7 @@ end
 
 ---@return boolean
 function Enemy:IsGhost()
-  return self.type == 0
+  return self.type == EnemyType.GHOST
 end
 
 ---@param pos Point

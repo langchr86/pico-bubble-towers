@@ -75,7 +75,7 @@ function CreateWaveList(wave_count)
   ---@type Wave[]
   local list = {}
   for i = 1, wave_count do
-    add(list, Wave:New(4, Enemy:New(type, 100)))
+    add(list, Wave:New(4, Enemy:New(type)))
     type = type + 1
     if type > 2 then
       type = 1

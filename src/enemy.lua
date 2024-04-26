@@ -2,76 +2,52 @@
 
 ---@class Enemy
 ---@field type EnemyType
----@field sprite number
----@field sprite_count number
+---@field props EnemyProperties
 ---@field sprite_index number
----@field frame_count number
 ---@field frame_index number
 ---@field pos Point
 ---@field path Point[]
 ---@field next_pos Point
 ---@field next_pos_index number
----@field speed number
----@field max_life number
 ---@field life number
 ---@field damage_factor ModifiableValue
 ---@field speed_factor ModifiableValue
----@field value number
 ---@field bullet_list Bullet[]
 Enemy = {}
 Enemy.__index = Enemy
 
 ---@param type EnemyType
----@param life number
+---@param props EnemyProperties
 ---@return Enemy
-function Enemy:New(type, life)
+function Enemy:New(type)
   local o = {
     type = type,
-    sprite = 0,
-    sprite_count = 1,
+    props = ENEMY_TABLE[type],
     sprite_index = 0,
-    frame_count = 10,
     frame_index = 0,
     pos = Point:Zero(),
     path = {},
-    next_pos = pos,
+    next_pos = Point:Zero(),
     next_pos_index = 1,
-    speed = 1,
-    max_life = life,
-    life = life,
+    life = ENEMY_TABLE[type].life,
     damage_factor = ModifiableValue:New(1),
     speed_factor = ModifiableValue:New(1),
-    value = 10,
     bullet_list = {},
   }
 
   local e = --[[---@type Enemy]] o
-
-  if type == EnemyType.GHOST then
-    e.sprite = 32
-    e.sprite_count = 2
-    e.frame_count = 10
-    e.speed = 1.0
-    e.value = flr(e.speed * e.life / 10)
-  elseif type == EnemyType.FAST then
-    e.sprite = 34
-    e.sprite_count = 4
-    e.frame_count = 6
-    e.speed = 1.4
-    e.value = flr(e.speed * e.life / 10)
-  end
 
   return setmetatable(e, self)
 end
 
 ---@return Enemy
 function Enemy:Clone()
-  return Enemy:New(self.type, self.life)
+  return Enemy:New(self.type)
 end
 
 ---@return number
 function Enemy:GetSprite()
-  return self.sprite
+  return self.props.sprite
 end
 
 ---@return boolean
@@ -118,7 +94,8 @@ end
 
 ---@return number
 function Enemy:GetValue()
-  return self.value
+  local base_value = flr(self.props.speed * self.props.life / 10)
+  return base_value + self.props.value_bonus
 end
 
 function Enemy:Update()
@@ -132,7 +109,7 @@ function Enemy:Update()
     self.next_pos = self.path[self.next_pos_index]
   end
 
-  self.pos:Move(self.next_pos, self.speed * self.speed_factor:Get())
+  self.pos:Move(self.next_pos, self.props.speed * self.speed_factor:Get())
 
   for bullet in all(self.bullet_list) do
     if bullet:InTarget() then
@@ -160,7 +137,7 @@ function Enemy:Draw()
   spr(self:Animate(), rounded.x, rounded.y)
 
   local life_bar_length = 5
-  local life_bar = self.life / self.max_life * life_bar_length
+  local life_bar = self.life / self.props.life * life_bar_length
 
   local start_x = rounded.x + 1
   local corrected_y = rounded.y
@@ -179,12 +156,12 @@ end
 ---@return number
 function Enemy:Animate()
   self.frame_index = self.frame_index + 1
-  if self.frame_index >= self.frame_count then
+  if self.frame_index >= self.props.frame_count then
     self.frame_index = 0
     self.sprite_index = self.sprite_index + 1
-    if self.sprite_index >= self.sprite_count then
+    if self.sprite_index >= self.props.sprite_count then
       self.sprite_index = 0
     end
   end
-  return self.sprite + self.sprite_index
+  return self.props.sprite + self.sprite_index
 end

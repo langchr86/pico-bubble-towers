@@ -22,6 +22,14 @@ EnemyType = {
 ---@class ENEMY_TABLE
 ---@field [EnemyType] EnemyProperties
 ENEMY_TABLE = {
+  [EnemyType.NORMAL] = {
+    sprite = 8,
+    sprite_count = 4,
+    frame_count = 8,
+    speed = 1.0,
+    life = 100,
+    value_bonus = 0,
+  },
   [EnemyType.GHOST] = {
     sprite = 32,
     sprite_count = 2,
@@ -31,7 +39,7 @@ ENEMY_TABLE = {
     value_bonus = 0,
   },
   [EnemyType.FAST] = {
-    sprite = 34,
+    sprite = 12,
     sprite_count = 4,
     frame_count = 6,
     speed = 1.4,
@@ -39,11 +47,19 @@ ENEMY_TABLE = {
     value_bonus = 0,
   },
   [EnemyType.REGENERATE] = {
-    sprite = 0,
-    sprite_count = 1,
-    frame_count = 100,
-    speed = 0.8,
+    sprite = 28,
+    sprite_count = 4,
+    frame_count = 6,
+    speed = 1.0,
     life = 100,
     value_bonus = 10,
+  },
+  [EnemyType.HEAVY] = {
+    sprite = 24,
+    sprite_count = 4,
+    frame_count = 3,
+    speed = 0.6,
+    life = 200,
+    value_bonus = 20,
   },
 }

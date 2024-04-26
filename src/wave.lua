@@ -71,14 +71,14 @@ end
 ---@return Wave[]
 function CreateWaveList(wave_count)
   ---@type EnemyType
-  local type = 1
+  local type = EnemyType.NORMAL
   ---@type Wave[]
   local list = {}
   for i = 1, wave_count do
     add(list, Wave:New(4, Enemy:New(type)))
     type = type + 1
-    if type > 2 then
-      type = 1
+    if type > EnemyType.HEAVY then
+      type = EnemyType.NORMAL
     end
   end
   return list

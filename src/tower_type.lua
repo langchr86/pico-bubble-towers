@@ -97,7 +97,7 @@ UPGRADE_TABLE = {
       range = 20,
     },
     [TowerType.GHOST_SNIPER_L1] = {
-      preview_sprite = 32,
+      preview_sprite = 98,
       cost = 20,
       sprite = 70,
       damage = 15,
@@ -226,7 +226,7 @@ UPGRADE_TABLE = {
       slow_down_factor = 0.9,
     },
     [TowerType.AREA_WEAK_L2] = {
-      preview_sprite = 118,
+      preview_sprite = 101,
       cost = 32,
       sprite = 74,
       weaken_factor = 1.5,
@@ -264,7 +264,7 @@ UPGRADE_TABLE = {
   },
   [TowerType.AREA_WEAK_L2] = {
     [TowerType.AREA_WEAK_L3] = {
-      preview_sprite = 118,
+      preview_sprite = 101,
       cost = 90,
       range = 30,
       weaken_factor = 2,
@@ -272,7 +272,7 @@ UPGRADE_TABLE = {
   },
   [TowerType.AREA_WEAK_L3] = {
     [TowerType.AREA_WEAK_L4] = {
-      preview_sprite = 118,
+      preview_sprite = 101,
       cost = 250,
       range = 40,
       weaken_factor = 3,

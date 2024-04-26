@@ -38,4 +38,12 @@ ENEMY_TABLE = {
     life = 100,
     value_bonus = 0,
   },
+  [EnemyType.REGENERATE] = {
+    sprite = 0,
+    sprite_count = 1,
+    frame_count = 100,
+    speed = 0.8,
+    life = 100,
+    value_bonus = 10,
+  },
 }

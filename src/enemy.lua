@@ -5,6 +5,7 @@
 ---@field props EnemyProperties
 ---@field sprite_index number
 ---@field frame_index number
+---@field regenerate_index number
 ---@field pos Point
 ---@field path Point[]
 ---@field next_pos Point
@@ -25,6 +26,7 @@ function Enemy:New(type)
     props = ENEMY_TABLE[type],
     sprite_index = 0,
     frame_index = 0,
+    regenerate_index = 0,
     pos = Point:Zero(),
     path = {},
     next_pos = Point:Zero(),
@@ -82,6 +84,19 @@ function Enemy:Damage(damage)
   end
 end
 
+function Enemy:Regenerate()
+  if self.regenerate_index < 60 then
+    self.regenerate_index = self.regenerate_index + 1
+    return
+  end
+  self.regenerate_index = 0
+
+  self.life = self.life + self.props.life / 10
+  if self.life > self.props.life then
+    self.life = self.props.life
+  end
+end
+
 ---@return boolean
 function Enemy:IsDead()
   return self.life <= 0
@@ -117,6 +132,10 @@ function Enemy:Update()
     else
       bullet:Update()
     end
+  end
+
+  if self.type == EnemyType.REGENERATE then
+    self:Regenerate()
   end
 end
 

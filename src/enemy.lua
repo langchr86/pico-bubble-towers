@@ -69,6 +69,11 @@ function Enemy:Clone()
   return Enemy:New(self.type, self.life)
 end
 
+---@return number
+function Enemy:GetSprite()
+  return self.sprite
+end
+
 ---@return boolean
 function Enemy:IsGhost()
   return self.type == EnemyType.GHOST

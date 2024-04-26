@@ -272,7 +272,7 @@ function GameSession:DrawStats()
   local x = 54
   for i = 1, min(4, #self.wave_list) do
     local wave = self.wave_list[i]
-    spr(wave.enemy_template:GetSprite(), x, 0)
+    wave.enemy_template:DrawWaveSprite(x, 0)
     x = x + 8
   end
 

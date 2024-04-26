@@ -47,9 +47,10 @@ function Enemy:Clone()
   return Enemy:New(self.type)
 end
 
----@return number
-function Enemy:GetSprite()
-  return self.props.sprite
+---@param x number
+---@param y number
+function Enemy:DrawWaveSprite(x, y)
+  spr(self.props.sprite, x, y)
 end
 
 ---@return boolean

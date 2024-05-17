@@ -12,7 +12,7 @@ MapSelection.__index = MapSelection
 function MapSelection:New()
   local o = {
     map_index = 0,
-    map_count = 4,
+    map_count = 16,
     minimaps = {},
     level_selection = nil,
   }
@@ -31,22 +31,26 @@ function MapSelection:Init()
 end
 
 function MapSelection:MoveUp()
+  if self.map_index > 3 then
+    self.map_index = self.map_index - 4
+  end
 end
 
 function MapSelection:MoveDown()
+  if self.map_index < 12 then
+    self.map_index = self.map_index + 4
+  end
 end
 
 function MapSelection:MoveLeft()
-  self.map_index = self.map_index - 1
-  if self.map_index < 0 then
-    self.map_index = self.map_count - 1
+  if self.map_index % 4 > 0 then
+    self.map_index = self.map_index - 1
   end
 end
 
 function MapSelection:MoveRight()
-  self.map_index = self.map_index + 1
-  if self.map_index >= self.map_count then
-    self.map_index = 0
+  if self.map_index % 4 < 3 then
+    self.map_index = self.map_index + 1
   end
 end
 
@@ -73,23 +77,27 @@ function MapSelection:Draw()
   rect(0, 0, 127, 127, 12)
   PrintCenterX("select map", 4, 12)
 
-  local minimap_offsets = kMapSizeInTiles + kTileSize
-
-  local map_pos = Point:New(20, 32)
-
-  local cursor_pos = Point:New(map_pos.x + kTileSize / 2 + self.map_index * minimap_offsets, map_pos.y - kTileSize)
-
-  for l = 0, self.map_count - 1 do
-    self.minimaps[l]:Draw(map_pos)
-    map_pos.x = map_pos.x + minimap_offsets
+  for m = 0, self.map_count - 1 do
+    local map_pos = self.CalculateMinimapOrigin(m)
+    self.minimaps[m]:Draw(map_pos)
   end
 
+  local cursor_pos = self.CalculateMinimapOrigin(self.map_index) + Point:New(kTileSize / 2, -kTileSize)
   spr(7, cursor_pos.x, cursor_pos.y)
-  rect(cursor_pos.x - 5, cursor_pos.y + 7, cursor_pos.x + 12, cursor_pos.y + 23, 12)
+
+  local border_pos = self.CalculateMinimapOrigin(self.map_index) + Point:New(-1, -1)
+  rect(border_pos.x, border_pos.y, border_pos.x + kMapSizeInTiles + 1, border_pos.y + kMapSizeInTiles, 12)
 end
 
 ---@param map_index number
 ---@return Point
 function MapSelection.CalculateLevelOrigin(map_index)
   return Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_index / kMapRowSize) * kMapSizeInTiles)
+end
+
+---@param map_index number
+---@return Point
+function MapSelection.CalculateMinimapOrigin(map_index)
+  local minimap_offset = kMapSizeInTiles + kTileSize
+  return Point:New(20 + (map_index % 4) * minimap_offset, 24 + flr(map_index / 4) * minimap_offset)
 end

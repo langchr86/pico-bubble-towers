@@ -348,12 +348,12 @@ function GameSession:Draw()
   self:DrawScreenshake()
 
   if self.player_life <= 0 then
-    map(0, 16)
+    PrintCenterX("game over", 56, 6)
     return
   end
 
   if #self.wave_list == 0 and self:AnyEnemies() == false then
-    map(16, 16)
+    PrintCenterX("you win", 56, 6)
     return
   end
 

@@ -88,8 +88,8 @@ function MapSelection:Draw()
   rect(cursor_pos.x - 5, cursor_pos.y + 7, cursor_pos.x + 12, cursor_pos.y + 23, 12)
 end
 
----@param level_index number
+---@param map_index number
 ---@return Point
-function MapSelection.CalculateLevelOrigin(level_index)
-  return Point:New((level_index % kMapRowSize) * kMapSizeInTiles, flr(level_index / kMapRowSize) * kMapSizeInTiles)
+function MapSelection.CalculateLevelOrigin(map_index)
+  return Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_index / kMapRowSize) * kMapSizeInTiles)
 end

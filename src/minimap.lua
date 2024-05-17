@@ -46,4 +46,5 @@ function Minimap:Draw(pixel_pos)
       pset(x + pixel_pos.x, y + pixel_pos.y, color)
     end
   end
+  rect(pixel_pos.x - 1, pixel_pos.y - 1, pixel_pos.x + self.width, pixel_pos.y + self.height, 6)
 end

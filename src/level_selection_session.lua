@@ -30,11 +30,6 @@ function LevelSelectionSession:Init()
   end
 end
 
-function LevelSelectionSession:Reset()
-  self.level_index = 0
-  self.next_game_session = nil
-end
-
 function LevelSelectionSession:MoveUp()
 end
 

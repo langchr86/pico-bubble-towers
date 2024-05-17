@@ -107,17 +107,18 @@ function DifficultySelection:Update()
 end
 
 function DifficultySelection:Draw()
-  rectfill(0, 0, 128, 128, 6)
-  PrintCenterX("select difficulty level", 4, 5)
+  rectfill(0, 0, 127, 127, 1)
+  rect(0, 0, 127, 127, 12)
+  PrintCenterX("select difficulty level", 4, 12)
 
-  print("mode:", 16, 24, 5)
-  print("normal", 56, 24, 5)
-  print("procedural", 56, 36, 5)
+  print("mode:", 16, 24, 12)
+  print("normal", 56, 24, 12)
+  print("procedural", 56, 36, 12)
 
   if self.procedural then
-    rect(54, 34, 96, 42, 5)
+    rect(54, 34, 96, 42, 12)
   else
-    rect(54, 22, 96, 30, 5)
+    rect(54, 22, 96, 30, 12)
   end
 
   if self.mode > 0 then
@@ -129,34 +130,34 @@ function DifficultySelection:Draw()
   end
 
   if self.mode > 1 then
-    PrintCenterX("start?", 98, 5)
-    rect(48, 96, 78, 104, 5)
+    PrintCenterX("start?", 98, 12)
+    rect(48, 96, 78, 104, 12)
   end
 end
 
 function DifficultySelection:DrawNormal()
-  print("level:", 16, 54, 5)
-  print("easy", 56, 54, 5)
-  print("medium", 56, 62, 5)
-  print("hard", 56, 70, 5)
+  print("level:", 16, 54, 12)
+  print("easy", 56, 54, 12)
+  print("medium", 56, 62, 12)
+  print("hard", 56, 70, 12)
 
   local y = 52 + self.level * 8
-  rect(54, y, 96, y + 8, 5)
+  rect(54, y, 96, y + 8, 12)
 end
 
 function DifficultySelection:DrawProcedural()
-  print("seed:", 16, 54, 5)
+  print("seed:", 16, 54, 12)
 
   if self.level < 1000 then
-    print("0", 56, 54, 5)
+    print("0", 56, 54, 12)
   end
   if self.level < 100 then
-    print("0", 60, 54, 5)
+    print("0", 60, 54, 12)
   end
   if self.level < 10 then
-    print("0", 64, 54, 5)
+    print("0", 64, 54, 12)
   end
-  PrintRight(self.level, 72, 54, 5)
+  PrintRight(self.level, 72, 54, 12)
 
   local x = 68 - self.digit * 4
   spr(39, x, 45)

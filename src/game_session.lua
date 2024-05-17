@@ -234,12 +234,7 @@ function GameSession:CalculateGhostPath()
 end
 
 function GameSession:DrawMapBorder()
-  ---@type number
-  local border_color = 6
-  line(0, kTileSize, 127, kTileSize, border_color)
-  line(0, kTileSize, 0, 127, border_color)
-  line(127, kTileSize, 127, 127, border_color)
-  line(0, 127, 127, 127, border_color)
+  rect(0, kTileSize, 127, 127, 6)
 end
 
 function GameSession:DrawMap()

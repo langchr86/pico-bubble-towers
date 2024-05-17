@@ -69,20 +69,23 @@ function MapSelection:Update()
 end
 
 function MapSelection:Draw()
-  rectfill(0, 0, 128, 128, 6)
-  PrintCenterX("select map", 4, 5)
+  rectfill(0, 0, 127, 127, 1)
+  rect(0, 0, 127, 127, 12)
+  PrintCenterX("select map", 4, 12)
 
   local minimap_offsets = kMapSizeInTiles + kTileSize
 
   local map_pos = Point:New(20, 32)
 
   local cursor_pos = Point:New(map_pos.x + kTileSize / 2 + self.map_index * minimap_offsets, map_pos.y - kTileSize)
-  spr(7, cursor_pos.x, cursor_pos.y)
 
   for l = 0, self.map_count - 1 do
     self.minimaps[l]:Draw(map_pos)
     map_pos.x = map_pos.x + minimap_offsets
   end
+
+  spr(7, cursor_pos.x, cursor_pos.y)
+  rect(cursor_pos.x - 5, cursor_pos.y + 7, cursor_pos.x + 12, cursor_pos.y + 23, 12)
 end
 
 ---@param level_index number

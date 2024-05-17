@@ -28,7 +28,7 @@ __lua__
 #include src/tower.lua
 #include src/wave.lua
 #include src/game_session.lua
-#include src/level_selection_session.lua
+#include src/map_selection.lua
 #include src/pico-proto.lua
 
 __gfx__

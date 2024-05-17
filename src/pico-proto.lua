@@ -12,7 +12,7 @@ function _init()
   menu:Update()
 end
 
-local active_session = LevelSelectionSession:New()
+local active_session = MapSelection:New()
 
 ---@type boolean
 g_show_debug_info = false

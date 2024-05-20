@@ -19,6 +19,7 @@ Used third-party
 ----------------
 
 * A* algorithm based on: [github.com/wesleywerner/lua-star](https://github.com/wesleywerner/lua-star)
+* Background music "Arpument" written by Robby Duguay:  [https://www.lexaloffle.com/bbs/?tid=2619](https://www.lexaloffle.com/bbs/?tid=2619)
 
 
 License

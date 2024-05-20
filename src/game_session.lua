@@ -182,7 +182,7 @@ function GameSession:StartNextWave()
   next_wave:Start(start_point, self.enemy_path, self.ghost_path)
 
   add(self.active_wave_list, next_wave)
-  sfx(01)
+  sfx(0x11)
 end
 
 function GameSession:TrySpawnEnemy()
@@ -328,7 +328,7 @@ function GameSession:Update()
       del(self.enemy_list, enemy)
       self.player_life = self.player_life - 1
       self:StartScreenshake()
-      sfx(00)
+      sfx(0x10)
     end
   end
 

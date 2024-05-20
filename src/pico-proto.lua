@@ -10,6 +10,8 @@ function _init()
   poke(0x5f5d, 2) -- set the repeating delay.
 
   menu:Update()
+
+  music(0,120)
 end
 
 local active_session = MapSelection:New()

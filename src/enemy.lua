@@ -75,7 +75,7 @@ end
 function Enemy:Hit(bullet)
   del(self.bullet_list, bullet)
   self:Damage(bullet.damage)
-  sfx(02)
+  sfx(0x12)
 end
 
 ---@param damage number

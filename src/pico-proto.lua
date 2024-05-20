@@ -10,11 +10,9 @@ function _init()
   poke(0x5f5d, 2) -- set the repeating delay.
 
   menu:Update()
-
-  music(0,120)
 end
 
-local active_session = MapSelection:New()
+local active_session = StartScreen:New()
 
 ---@type boolean
 g_show_debug_info = false

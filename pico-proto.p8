@@ -30,6 +30,7 @@ __lua__
 #include src/game_session.lua
 #include src/difficulty_selection.lua
 #include src/map_selection.lua
+#include src/start_screen.lua
 #include src/pico-proto.lua
 
 __gfx__
@@ -295,4 +296,17 @@ __music__
 00 00020305
 00 00020305
 02 01060740
+01 00404040
+00 00034040
+00 00034040
+00 06054040
+00 00034040
+00 00034040
+00 06054040
+00 00034040
+00 00034040
+00 06054040
+00 00034040
+00 00034040
+02 00404040
 

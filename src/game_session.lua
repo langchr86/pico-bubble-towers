@@ -44,6 +44,8 @@ function GameSession:New()
   assert(instance:CalculateGhostPath())
   instance:PrepareCursorMenu()
 
+  music(11,120)
+
   return instance
 end
 
@@ -182,7 +184,7 @@ function GameSession:StartNextWave()
   next_wave:Start(start_point, self.enemy_path, self.ghost_path)
 
   add(self.active_wave_list, next_wave)
-  sfx(0x11)
+  sfx(0x11, -1)
 end
 
 function GameSession:TrySpawnEnemy()
@@ -328,7 +330,7 @@ function GameSession:Update()
       del(self.enemy_list, enemy)
       self.player_life = self.player_life - 1
       self:StartScreenshake()
-      sfx(0x10)
+      sfx(0x10, -1)
     end
   end
 

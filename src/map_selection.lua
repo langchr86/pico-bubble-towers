@@ -4,7 +4,7 @@
 ---@field map_index number
 ---@field map_count number
 ---@field minimaps Minimap[]
----@field level_selection DifficultySelection
+---@field next_session any
 MapSelection = {}
 MapSelection.__index = MapSelection
 
@@ -55,18 +55,19 @@ function MapSelection:MoveRight()
 end
 
 function MapSelection:PressO()
+  self.next_session = StartScreen:New()
 end
 
 function MapSelection:PressX()
   local top_left_tile = self.CalculateLevelOrigin(self.map_index)
   Map:SetOffset(top_left_tile)
 
-  self.level_selection = DifficultySelection:New()
+  self.next_session = DifficultySelection:New()
 end
 
 function MapSelection:Update()
-  if self.level_selection then
-    return self.level_selection
+  if self.next_session then
+    return self.next_session
   else
     return self
   end

@@ -113,7 +113,7 @@ function LuaStar:Find(max_x, max_y, start, goal, positionIsOpenFunc)
     while not success and #open > 0 do
 
         -- sort by score: high to low
-        table.isort(open, function(a, b) return a.score > b.score end)
+        InsertionSort(open, function(a, b) return a.score > b.score end)
 
         local current = deli(open)
 

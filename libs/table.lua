@@ -2,9 +2,7 @@
 
 -- table sort algorithms based on https://www.lexaloffle.com/bbs/?pid=50453
 
-table = {}
-
-function table.isort(arr, comp)
+function InsertionSort(arr, comp)
   for i=1,#arr do
       local j = i
       while j > 1 and not comp(arr[j-1], arr[j]) do

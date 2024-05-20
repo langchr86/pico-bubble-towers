@@ -51,11 +51,15 @@ function Point:Floor()
   return Point:New(flr(self.x), flr(self.y))
 end
 
+---@param other Point
+---@param radius number
 ---@return boolean
 function Point:IsNear(other, radius)
   return self:Distance(other) <= radius
 end
 
+---@param other Point
+---@param distance number
 ---@return boolean
 function Point:Is8Adjacent(other, distance)
   return self.x <= other.x + distance

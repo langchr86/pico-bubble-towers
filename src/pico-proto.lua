@@ -66,6 +66,6 @@ function _draw()
     return
   end
 
-  fps = stat(7)
+  local fps = stat(7)
   print(fps, 119, 121, 10)
 end

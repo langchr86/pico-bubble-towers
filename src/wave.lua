@@ -26,7 +26,7 @@ end
 ---@param enemy_path Point[]
 ---@param ghost_path Point[]
 function Wave:Start(start, enemy_path, ghost_path)
-  for i = 1, self.enemy_count do
+  for _ = 1, self.enemy_count do
     local enemy = self.enemy_template:Clone()
 
     if enemy:IsGhost() then
@@ -74,7 +74,7 @@ function CreateWaveList(wave_count)
   local type = EnemyType.NORMAL
   ---@type Wave[]
   local list = {}
-  for i = 1, wave_count do
+  for _ = 1, wave_count do
     add(list, Wave:New(1, Enemy:New(type)))
     type = type + 1
     if type > EnemyType.HEAVY_BOSS then

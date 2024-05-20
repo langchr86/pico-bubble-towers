@@ -154,12 +154,9 @@ function LuaStar:Find(max_x, max_y, start, goal, positionIsOpenFunc)
     local node = listItem(closed, closed[#closed])
     local path = { }
 
-    iter = 1
     while node do
         add(path, { x = node.x, y = node.y }, 1 )
         node = listItem(closed, node.parent)
-        iter += 1
-        
     end
 
 

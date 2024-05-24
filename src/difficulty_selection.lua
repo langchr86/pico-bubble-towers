@@ -93,8 +93,11 @@ function DifficultySelection:PressX()
   elseif self.mode == 1 then
     self.mode = 2
   else
-    self.next_session = GameSession:New()
-    self.next_session:AddWaves(CreateWaveList(100))
+    if self.procedural then
+      self.next_session = GameSession:New(CreateProceduralWaveList(self.level))
+    else
+      self.next_session = GameSession:New(CreateWaveList(100))
+    end
   end
 end
 

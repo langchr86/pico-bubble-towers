@@ -18,8 +18,9 @@
 GameSession = {}
 GameSession.__index = GameSession
 
+---@param wave_list Wave[]
 ---@return GameSession
-function GameSession:New()
+function GameSession:New(wave_list)
   local o = {
     cursor = Cursor:New(),
     start = Point:New(0, 0),
@@ -30,7 +31,7 @@ function GameSession:New()
     modifier_tower_list = {},
     tower_selected = nil,
     enemy_list = {},
-    wave_list = {},
+    wave_list = wave_list,
     active_wave_list = {},
     cash = 5000,
     player_life = 20,
@@ -47,13 +48,6 @@ function GameSession:New()
   music(11,120)
 
   return instance
-end
-
----@param wave_list Wave[]
-function GameSession:AddWaves(wave_list)
-  for wave in all(wave_list) do
-    add(self.wave_list, wave)
-  end
 end
 
 function GameSession:SearchSpecialPoints()

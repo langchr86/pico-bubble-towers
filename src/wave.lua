@@ -83,3 +83,35 @@ function CreateWaveList(wave_count)
   end
   return list
 end
+
+---@param seed number
+---@return Wave[]
+function CreateProceduralWaveList(seed)
+  srand(seed)
+
+  ---@type number
+  local wave_count = flr(10 + rnd(91))
+
+  ---@type Wave[]
+  local list = {}
+
+  local last_type = EnemyType.NORMAL
+
+  for wave_index = 1, wave_count do
+    ---@type EnemyType
+    local type = flr(rnd(EnemyType.HEAVY_BOSS + 1))
+    if wave_index <= 10 or IsBossEnemy(last_type) then
+      type = flr(rnd(EnemyType.NORMAL_BOSS))
+    end
+    last_type = type
+
+    local enemy_count = flr(1 + rnd(8))
+    if IsBossEnemy(type) then
+      enemy_count = flr(1 + rnd(3))
+    end
+
+    add(list, Wave:New(enemy_count, Enemy:New(type)))
+  end
+
+  return list
+end

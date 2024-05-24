@@ -16,6 +16,12 @@ EnemyType = {
   HEAVY_BOSS = 9,
 }
 
+---@param type EnemyType
+---@return boolean
+function IsBossEnemy(type)
+  return type >= EnemyType.NORMAL_BOSS
+end
+
 ---@class EnemyProperties
 ---@field sprite number
 ---@field sprite_count number

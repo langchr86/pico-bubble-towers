@@ -22,6 +22,12 @@ function IsBossEnemy(type)
   return type >= EnemyType.NORMAL_BOSS
 end
 
+---@param type EnemyType
+---@return boolean
+function IsHeavyEnemy(type)
+  return type == EnemyType.HEAVY or type == EnemyType.HEAVY_BOSS
+end
+
 ---@class EnemyProperties
 ---@field sprite number
 ---@field sprite_count number

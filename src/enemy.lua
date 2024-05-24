@@ -144,7 +144,9 @@ end
 ---@param modifiers TowerModifiers
 function Enemy:Modify(modifiers)
   self.damage_factor:Modify(modifiers.weaken)
-  self.speed_factor:Modify(modifiers.slow_down)
+  if not IsHeavyEnemy(self.type) then
+    self.speed_factor:Modify(modifiers.slow_down)
+  end
 end
 
 function Enemy:ClearModifications()

@@ -67,20 +67,32 @@ function Wave:TrySpawnBaby(existing_enemies)
   end
 end
 
----@param wave_count number
+---@param level number
 ---@return Wave[]
-function CreateWaveList(wave_count)
-  ---@type EnemyType
-  local type = EnemyType.NORMAL
+function CreatePredefinedWaveList(level)
   ---@type Wave[]
   local list = {}
-  for _ = 1, wave_count do
-    add(list, Wave:New(1, Enemy:New(type)))
-    type = type + 1
-    if type > EnemyType.HEAVY_BOSS then
-      type = EnemyType.NORMAL
-    end
+
+  -- easy
+  if level == 0 then
+    AddEnemyToList(list, 2, EnemyType.NORMAL)
+    AddEnemyToList(list, 4, EnemyType.NORMAL)
+    AddEnemyToList(list, 3, EnemyType.FAST)
+    AddEnemyToList(list, 4, EnemyType.HEAVY)
+    AddEnemyToList(list, 5, EnemyType.FAST)
+    AddEnemyToList(list, 3, EnemyType.GHOST)
+    AddEnemyToList(list, 7, EnemyType.NORMAL)
+    AddEnemyToList(list, 5, EnemyType.GHOST)
+    AddEnemyToList(list, 3, EnemyType.REGENERATE)
+    AddEnemyToList(list, 2, EnemyType.NORMAL_BOSS)
+  -- medium
+  elseif level == 1 then
+
+  -- hard
+  else
+
   end
+
   return list
 end
 
@@ -110,8 +122,15 @@ function CreateProceduralWaveList(seed)
       enemy_count = flr(1 + rnd(3))
     end
 
-    add(list, Wave:New(enemy_count, Enemy:New(type)))
+    AddEnemyToList(list, enemy_count, type)
   end
 
   return list
+end
+
+---@param list Wave[]
+---@param count number
+---@param type EnemyType
+function AddEnemyToList(list, count, type)
+  add(list, Wave:New(count, Enemy:New(type)))
 end

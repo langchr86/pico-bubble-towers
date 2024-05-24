@@ -134,10 +134,9 @@ function Cursor:ShowMenu()
     return
   end
 
-  self.menu_sprite_list[1] = self.menu_sprite_getter(1)
-  self.menu_sprite_list[2] = self.menu_sprite_getter(2)
-  self.menu_sprite_list[3] = self.menu_sprite_getter(3)
-  self.menu_sprite_list[4] = self.menu_sprite_getter(4)
+  for i=1,4 do
+    self.menu_sprite_list[i] = self.menu_sprite_getter(i)
+  end
 end
 
 function Cursor:HideMenu()

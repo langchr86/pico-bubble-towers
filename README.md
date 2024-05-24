@@ -19,7 +19,8 @@ Used third-party
 ----------------
 
 * A* algorithm based on: [github.com/wesleywerner/lua-star](https://github.com/wesleywerner/lua-star)
-* Background music "Arpument" written by Robby Duguay:  [https://www.lexaloffle.com/bbs/?tid=2619](https://www.lexaloffle.com/bbs/?tid=2619)
+* Background music "Arpument" written by Robby Duguay: [https://www.lexaloffle.com/bbs/?tid=2619](https://www.lexaloffle.com/bbs/?tid=2619)
+* `shrinko8` for statistics and better exports: [github.com/thisismypassport/shrinko8](https://github.com/thisismypassport/shrinko8)
 
 
 License

@@ -1,6 +1,10 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-local menu = Menu:New()
+---@type boolean
+g_show_debug_info = false
+local function ToggleDebugInfo()
+  g_show_debug_info = not g_show_debug_info
+end
 
 function _init()
   cls()
@@ -9,7 +13,8 @@ function _init()
   poke(0x5f5c, 8) -- set the initial delay before repeating. 255 means never repeat.
   poke(0x5f5d, 2) -- set the repeating delay.
 
-  menu:Update()
+  -- menu
+  menuitem(1, "toggle debg info", ToggleDebugInfo)
 
   -- decompress title image from spritemap and store in general purpose memory 0x8000
   px9_decomp(0, 0, 0x1000, pget, pset)
@@ -17,13 +22,6 @@ function _init()
 end
 
 local active_session = StartScreen:New()
-
----@type boolean
-g_show_debug_info = false
-local function ToggleDebugInfo()
-  g_show_debug_info = not g_show_debug_info
-end
-menu:SetDebugInfoHandler(ToggleDebugInfo)
 
 function _update()
   if btnp(⬆️) then
@@ -42,12 +40,6 @@ function _update()
     active_session:MoveRight()
   end
 
-  if btn(🅾️) then
-    if not menu.running then
-      active_session:Update()
-    end
-  end
-
   if btnp(🅾️) then
     active_session:PressO()
   end
@@ -56,9 +48,7 @@ function _update()
     active_session:PressX()
   end
 
-  if menu.running then
-    active_session = active_session:Update()
-  end
+  active_session = active_session:Update()
 end
 
 function _draw()

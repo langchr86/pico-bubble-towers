@@ -16,7 +16,6 @@ __lua__
 #include src/minimap.lua
 #include src/utils.lua
 #include src/map.lua
-#include src/menu.lua
 #include src/point.lua
 #include src/cursor.lua
 #include src/modifiable_value.lua

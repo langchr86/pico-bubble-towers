@@ -7,9 +7,9 @@
 ---@field type TowerType
 ---@field level number
 ---@field spent_cash number
----@field damage ModifiableValue
----@field range ModifiableValue
----@field reload ModifiableValue
+---@field damage ModVal
+---@field range ModVal
+---@field reload ModVal
 ---@field reload_level number
 ---@field modifiers TowerModifiers
 ---@field is_area_damage boolean
@@ -35,9 +35,9 @@ function Tower:New(pos)
     type = TowerType.BASE,
     level = 0,
     spent_cash = 10,
-    damage = ModifiableValue:New(10),
-    range = ModifiableValue:New(16),
-    reload = ModifiableValue:New(20),
+    damage = ModVal:New(10),
+    range = ModVal:New(16),
+    reload = ModVal:New(20),
     reload_level = 0,
     modifiers = TowerModifiers:New(),
     is_area_damage = false,

@@ -11,8 +11,8 @@
 ---@field next_pos Point
 ---@field next_pos_index number
 ---@field life number
----@field damage_factor ModifiableValue
----@field speed_factor ModifiableValue
+---@field damage_factor ModVal
+---@field speed_factor ModVal
 ---@field bullet_list Bullet[]
 Enemy = {}
 Enemy.__index = Enemy
@@ -32,8 +32,8 @@ function Enemy:New(type)
     next_pos = Point:Zero(),
     next_pos_index = 1,
     life = ENEMY_TABLE[type].life,
-    damage_factor = ModifiableValue:New(1),
-    speed_factor = ModifiableValue:New(1),
+    damage_factor = ModVal:New(1),
+    speed_factor = ModVal:New(1),
     bullet_list = {},
   }
 

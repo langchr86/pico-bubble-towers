@@ -30,25 +30,25 @@ function MapSelection:Init()
   end
 end
 
-function MapSelection:MoveUp()
+function MapSelection:Up()
   if self.map_index > 3 then
     self.map_index = self.map_index - 4
   end
 end
 
-function MapSelection:MoveDown()
+function MapSelection:Down()
   if self.map_index < 12 then
     self.map_index = self.map_index + 4
   end
 end
 
-function MapSelection:MoveLeft()
+function MapSelection:Left()
   if self.map_index % 4 > 0 then
     self.map_index = self.map_index - 1
   end
 end
 
-function MapSelection:MoveRight()
+function MapSelection:Right()
   if self.map_index % 4 < 3 then
     self.map_index = self.map_index + 1
   end

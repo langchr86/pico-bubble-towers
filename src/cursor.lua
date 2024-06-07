@@ -39,7 +39,7 @@ function Cursor:New()
   return --[[---@type Cursor]] setmetatable(o, self)
 end
 
-function Cursor:MoveUp()
+function Cursor:Up()
   if self.show_menu then
     self:HandleMenuSelect(2, 4)
     return
@@ -51,7 +51,7 @@ function Cursor:MoveUp()
   end
 end
 
-function Cursor:MoveDown()
+function Cursor:Down()
   if self.show_menu then
     self:HandleMenuSelect(4, 2)
     return
@@ -63,7 +63,7 @@ function Cursor:MoveDown()
   end
 end
 
-function Cursor:MoveLeft()
+function Cursor:Left()
   if self.show_menu then
     self:HandleMenuSelect(1, 3)
     return
@@ -75,7 +75,7 @@ function Cursor:MoveLeft()
   end
 end
 
-function Cursor:MoveRight()
+function Cursor:Right()
   if self.show_menu then
     self:HandleMenuSelect(3, 1)
     return

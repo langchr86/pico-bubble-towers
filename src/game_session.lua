@@ -271,20 +271,20 @@ function GameSession:DrawStats()
   PrintRight(self.cash, 128, 1, 7)
 end
 
-function GameSession:MoveUp()
-  self.cursor:MoveUp()
+function GameSession:Up()
+  self.cursor:Up()
 end
 
-function GameSession:MoveDown()
-  self.cursor:MoveDown()
+function GameSession:Down()
+  self.cursor:Down()
 end
 
-function GameSession:MoveLeft()
-  self.cursor:MoveLeft()
+function GameSession:Left()
+  self.cursor:Left()
 end
 
-function GameSession:MoveRight()
-  self.cursor:MoveRight()
+function GameSession:Right()
+  self.cursor:Right()
 end
 
 function GameSession:PressO()

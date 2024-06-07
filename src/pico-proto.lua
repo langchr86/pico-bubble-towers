@@ -24,20 +24,20 @@ end
 local active_session = StartScreen:New()
 
 function _update()
-  if btnp(⬆️) and active_session.MoveUp then
-    active_session:MoveUp()
+  if btnp(⬆️) and active_session.Up then
+    active_session:Up()
   end
 
-  if btnp(⬇️) and active_session.MoveDown then
-    active_session:MoveDown()
+  if btnp(⬇️) and active_session.Down then
+    active_session:Down()
   end
 
-  if btnp(⬅️) and active_session.MoveLeft then
-    active_session:MoveLeft()
+  if btnp(⬅️) and active_session.Left then
+    active_session:Left()
   end
 
-  if btnp(➡️) and active_session.MoveRight then
-    active_session:MoveRight()
+  if btnp(➡️) and active_session.Right then
+    active_session:Right()
   end
 
   if btnp(🅾️) and active_session.PressO then

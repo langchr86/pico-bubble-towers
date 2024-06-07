@@ -23,7 +23,7 @@ function DifficultySelection:New()
   return instance
 end
 
-function DifficultySelection:MoveUp()
+function DifficultySelection:Up()
   if self.mode == 0 then
     self.procedural = not self.procedural
 
@@ -42,7 +42,7 @@ function DifficultySelection:MoveUp()
   end
 end
 
-function DifficultySelection:MoveDown()
+function DifficultySelection:Down()
   if self.mode == 0 then
     self.procedural = not self.procedural
 
@@ -61,7 +61,7 @@ function DifficultySelection:MoveDown()
   end
 end
 
-function DifficultySelection:MoveLeft()
+function DifficultySelection:Left()
   if self.mode == 1 then
     if self.procedural and self.digit < 3 then
       self.digit = self.digit + 1
@@ -69,7 +69,7 @@ function DifficultySelection:MoveLeft()
   end
 end
 
-function DifficultySelection:MoveRight()
+function DifficultySelection:Right()
   if self.mode == 1 then
     if self.procedural and self.digit > 0 then
       self.digit = self.digit - 1

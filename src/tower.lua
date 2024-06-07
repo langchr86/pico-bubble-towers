@@ -15,7 +15,7 @@
 ---@field is_area_damage boolean
 ---@field can_attack_ghost boolean
 ---@field can_attack_normal boolean
----@field area_animation TowerAreaAnimation
+---@field area_animation CircleAnimation
 Tower = {}
 Tower.__index = Tower
 
@@ -43,7 +43,7 @@ function Tower:New(pos)
     is_area_damage = false,
     can_attack_ghost = true,
     can_attack_normal = true,
-    area_animation = TowerAreaAnimation:New(),
+    area_animation = CircleAnimation:New(),
   }
 
   local instance = --[[---@type Tower]] setmetatable(o, self)

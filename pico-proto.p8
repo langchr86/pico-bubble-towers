@@ -23,8 +23,8 @@ __lua__
 #include src/enemy_type.lua
 #include src/enemy.lua
 #include src/bullet.lua
+#include src/circle_animation.lua
 #include src/tower_type.lua
-#include src/tower_area_animation.lua
 #include src/tower.lua
 #include src/wave.lua
 #include src/game_session.lua

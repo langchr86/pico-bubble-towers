@@ -237,18 +237,18 @@ function GameSession:DrawMap()
   Map:Draw()
 end
 
-function GameSession:DrawPath()
-  if not g_show_debug_info then
-    return
-  end
-
-  for pos in all(self.enemy_path) do
-    spr(16, pos.x, pos.y)
-  end
-
-  for pos in all(self.ghost_path) do
-    spr(23, pos.x, pos.y)
-  end
+function GameSession:DrawDebug()
+  --if not g_show_debug_info then
+  --  return
+  --end
+  --
+  --for pos in all(self.enemy_path) do
+  --  spr(16, pos.x, pos.y)
+  --end
+  --
+  --for pos in all(self.ghost_path) do
+  --  spr(23, pos.x, pos.y)
+  --end
 end
 
 function GameSession:DrawStats()
@@ -354,7 +354,7 @@ function GameSession:Draw()
   end
 
   self:DrawMap()
-  self:DrawPath()
+  self:DrawDebug()
 
   for tower in all(self.modifier_tower_list) do
     tower:Draw(self.cursor)

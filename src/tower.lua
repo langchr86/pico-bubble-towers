@@ -192,49 +192,49 @@ function Tower:Draw(cursor)
 end
 
 function Tower:DrawDebug()
-  if not g_show_debug_info then
-    return
-  end
-
-  local x = 2
-  local y = 86
-  x = print("damg: ", x, y, 6)
-  x = print(self.damage:Get(), x, y, 6)
-  x = print(" *", x, y, 6)
-  x = print(self.modifiers.damage, x, y, 6)
-
-  x = print(" norm:", x, y, 6)
-  x = print(self.can_attack_normal, x, y, 6)
-
-  x = 2
-  y = 93
-  x = print("rang: ", x, y, 6)
-  x = print(self.range:Get(), x, y, 6)
-  x = print(" *", x, y, 6)
-  x = print(self.modifiers.range, x, y, 6)
-
-  x = print(" ghst:", x, y, 6)
-  x = print(self.can_attack_ghost, x, y, 6)
-
-  x = 2
-  y = 100
-  x = print("reld: ", x, y, 6)
-  x = print(self.reload:Get(), x, y, 6)
-  x = print(" *", x, y, 6)
-  x = print(self.modifiers.reload, x, y, 6)
-
-  x = print(" area:", x, y, 6)
-  x = print(self.is_area_damage, x, y, 6)
-
-  x = 2
-  y = 107
-  x = print("weak: ", x, y, 6)
-  x = print(self.modifiers.weaken, x, y, 6)
-
-  x = 2
-  y = 114
-  x = print("slow: ", x, y, 6)
-  x = print(self.modifiers.slow_down, x, y, 6)
+  --if not g_show_debug_info then
+  --  return
+  --end
+  --
+  --local x = 2
+  --local y = 86
+  --x = print("damg: ", x, y, 6)
+  --x = print(self.damage:Get(), x, y, 6)
+  --x = print(" *", x, y, 6)
+  --x = print(self.modifiers.damage, x, y, 6)
+  --
+  --x = print(" norm:", x, y, 6)
+  --x = print(self.can_attack_normal, x, y, 6)
+  --
+  --x = 2
+  --y = 93
+  --x = print("rang: ", x, y, 6)
+  --x = print(self.range:Get(), x, y, 6)
+  --x = print(" *", x, y, 6)
+  --x = print(self.modifiers.range, x, y, 6)
+  --
+  --x = print(" ghst:", x, y, 6)
+  --x = print(self.can_attack_ghost, x, y, 6)
+  --
+  --x = 2
+  --y = 100
+  --x = print("reld: ", x, y, 6)
+  --x = print(self.reload:Get(), x, y, 6)
+  --x = print(" *", x, y, 6)
+  --x = print(self.modifiers.reload, x, y, 6)
+  --
+  --x = print(" area:", x, y, 6)
+  --x = print(self.is_area_damage, x, y, 6)
+  --
+  --x = 2
+  --y = 107
+  --x = print("weak: ", x, y, 6)
+  --x = print(self.modifiers.weaken, x, y, 6)
+  --
+  --x = 2
+  --y = 114
+  --x = print("slow: ", x, y, 6)
+  --x = print(self.modifiers.slow_down, x, y, 6)
 end
 
 ---@param enemy_list Enemy[]

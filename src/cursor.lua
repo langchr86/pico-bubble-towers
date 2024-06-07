@@ -175,14 +175,14 @@ function Cursor:Draw()
 end
 
 function Cursor:DrawDebug()
-  if not g_show_debug_info then
-    return
-  end
-
-  local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
-  print(Map:GetSprite(tile_pos), 2, 121, 10)
-  print(Map:IsTileBuildable(tile_pos), 18, 121, 10)
-  print(Map:IsTileWalkable(tile_pos), 50, 121, 10)
+  --if not g_show_debug_info then
+  --  return
+  --end
+  --
+  --local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
+  --print(Map:GetSprite(tile_pos), 2, 121, 10)
+  --print(Map:IsTileBuildable(tile_pos), 18, 121, 10)
+  --print(Map:IsTileWalkable(tile_pos), 50, 121, 10)
 end
 
 ---@param index number

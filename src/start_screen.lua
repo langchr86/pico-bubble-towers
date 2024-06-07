@@ -48,9 +48,6 @@ function StartScreen:Update()
 end
 
 function StartScreen:Draw()
-  rectfill(0, 0, 127, 127, 1)
+  memcpy(0x6000, 0x8000, 128 * 64)
   rect(0, 0, 127, 127, 12)
-  PrintCenterX("bubble towers", 50, 12)
-  PrintCenterX("pRESS ❎ TO CONFIRM", 80, 12)
-  PrintCenterX("pRESS 🅾️ TO ABORT", 88, 12)
 end

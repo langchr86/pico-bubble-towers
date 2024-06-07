@@ -10,6 +10,10 @@ function _init()
   poke(0x5f5d, 2) -- set the repeating delay.
 
   menu:Update()
+
+  -- decompress title image from spritemap and store in general purpose memory 0x8000
+  px9_decomp(0, 0, 0x1000, pget, pset)
+  memcpy(0x8000, 0x6000, 128 * 64)
 end
 
 local active_session = StartScreen:New()

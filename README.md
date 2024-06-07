@@ -21,6 +21,8 @@ Used third-party
 * A* algorithm based on: [github.com/wesleywerner/lua-star](https://github.com/wesleywerner/lua-star)
 * Background music "Arpument" written by Robby Duguay: [https://www.lexaloffle.com/bbs/?tid=2619](https://www.lexaloffle.com/bbs/?tid=2619)
 * `shrinko8` for statistics and better exports: [github.com/thisismypassport/shrinko8](https://github.com/thisismypassport/shrinko8)
+* `depict` for demake any image into a pico-8 image: [github.com/bikibird/depict](https://github.com/bikibird/depict)
+* `PX9` for compressing title image: [PX9 Data Compression](https://www.lexaloffle.com/bbs/?tid=34058)
 
 
 License

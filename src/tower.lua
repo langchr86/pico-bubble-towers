@@ -148,7 +148,7 @@ end
 
 ---@param enemy_list Enemy[]
 function Tower:Update(enemy_list)
-  if self.modifiers:HasEnemyModifications() then
+  if self.modifiers.enemy_mods then
     self:ModifyEnemies(enemy_list)
   else
     self:Shot(enemy_list)
@@ -170,7 +170,7 @@ function Tower:Draw(cursor)
   local tile_size = Point:New(kTileSize, kTileSize)
   local center = self.pos + tile_size
   if cursor.pos == self.pos then
-    if self.modifiers:HasTowerModifications() then
+    if self.modifiers.tower_mods then
       local top_left = self.pos - tile_size
       local bottom_right = self.pos + 3 * tile_size
       rect(top_left.x, top_left.y, bottom_right.x - 1, bottom_right.y - 1, 6)

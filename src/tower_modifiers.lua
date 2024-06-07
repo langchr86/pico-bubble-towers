@@ -6,8 +6,8 @@
 ---@field reload number
 ---@field weaken number
 ---@field slow_down number
----@field has_tower_modifications boolean
----@field has_enemy_modifications boolean
+---@field tower_mods boolean
+---@field enemy_mods boolean
 TowerModifiers = {}
 TowerModifiers.__index = TowerModifiers
 
@@ -19,12 +19,10 @@ function TowerModifiers:New()
     reload = 0,
     weaken = 0,
     slow_down = 0,
-    has_tower_modifications = false,
-    has_enemy_modifications = false,
+    tower_mods = false,
+    enemy_mods = false,
   }
-
-  local instance = --[[---@type TowerModifiers]] setmetatable(o, self)
-  return instance
+  return setmetatable(o, self)
 end
 
 ---@param upgrade TowerUpgrade
@@ -50,19 +48,9 @@ end
 
 function TowerModifiers:CheckModificationTypes()
   if self.damage ~= 0 or self.range ~= 0 or self.reload ~= 0 then
-    self.has_tower_modifications = true
+    self.tower_mods = true
   end
   if self.weaken ~= 0 or self.slow_down ~= 0 then
-    self.has_enemy_modifications = true
+    self.enemy_mods = true
   end
-end
-
----@return boolean
-function TowerModifiers:HasTowerModifications()
-  return self.has_tower_modifications
-end
-
----@return boolean
-function TowerModifiers:HasEnemyModifications()
-  return self.has_enemy_modifications
 end

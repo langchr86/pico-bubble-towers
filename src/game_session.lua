@@ -45,7 +45,7 @@ function GameSession:New(wave_list)
   assert(instance:CalculateGhostPath())
   instance:PrepareCursorMenu()
 
-  music(11,120)
+  music(11, 120)
 
   return instance
 end

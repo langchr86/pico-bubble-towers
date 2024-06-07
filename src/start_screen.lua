@@ -17,7 +17,8 @@ function StartScreen:New()
 end
 
 function StartScreen:Init()
-  music(0,120)
+  music(0, 120)
+
 end
 
 function StartScreen:MoveUp()
@@ -40,7 +41,7 @@ function StartScreen:PressX()
 end
 
 function StartScreen:Update()
-    if self.next_session then
+  if self.next_session then
     return self.next_session
   else
     return self

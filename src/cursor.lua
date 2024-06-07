@@ -12,19 +12,7 @@
 ---@field menu_sprite_list number[]
 ---@field menu_handler function
 ---@field menu_sprite_getter function
-Cursor = {
-  sprite = 5,
-  small_sprite = 19,
-  pos = Point:New(8, 16),
-  min = Point:New(0, 8),
-  max = Point:New(112, 112),
-  inc = kTileSize,
-  show_menu = false,
-  menu_index = 0,
-  menu_sprite_list = {},
-  menu_handler = nil,
-  menu_sprite_getter = nil,
-}
+Cursor = {}
 Cursor.__index = Cursor
 
 ---@type number
@@ -35,8 +23,17 @@ Cursor.AbortShowMenu = 255
 ---@return Cursor
 function Cursor:New()
   local o = {
+    sprite = 5,
+    small_sprite = 19,
+    pos = Point:New(8, 16),
+    min = Point:New(0, 8),
+    max = Point:New(112, 112),
+    inc = kTileSize,
+    show_menu = false,
+    menu_index = 0,
+    menu_sprite_list = {},
   }
-  return --[[---@type Cursor]] setmetatable(o, self)
+  return setmetatable(o, self)
 end
 
 function Cursor:Up()

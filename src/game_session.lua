@@ -29,7 +29,6 @@ function GameSession:New(wave_list)
     ghost_path = {},
     tower_list = {},
     modifier_tower_list = {},
-    tower_selected = nil,
     enemy_list = {},
     wave_list = wave_list,
     active_wave_list = {},

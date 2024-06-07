@@ -14,7 +14,7 @@ function Point:New(x, y)
     x = x;
     y = y;
   }
-  return --[[---@type Point]] setmetatable(o, self)
+  return setmetatable(o, self)
 end
 
 ---@return Point

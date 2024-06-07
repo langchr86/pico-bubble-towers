@@ -7,11 +7,7 @@ StartScreen.__index = StartScreen
 
 ---@return StartScreen
 function StartScreen:New()
-  local o = {
-    next_session = nil,
-  }
-
-  local instance = --[[---@type StartScreen]] setmetatable(o, self)
+  local instance = --[[---@type StartScreen]] setmetatable({}, self)
   instance:Init()
   return instance
 end

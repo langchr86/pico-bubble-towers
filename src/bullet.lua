@@ -21,7 +21,7 @@ function Bullet:New(pos, dest, damage)
     speed = 3,
     damage = damage,
   }
-  return --[[---@type Bullet]] setmetatable(o, self)
+  return setmetatable(o, self)
 end
 
 ---@return boolean

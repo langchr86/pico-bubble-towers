@@ -16,11 +16,8 @@ function DifficultySelection:New()
     procedural = false,
     level = 0,
     digit = 0,
-    next_session = nil,
   }
-
-  local instance = --[[---@type DifficultySelection]] setmetatable(o, self)
-  return instance
+  return setmetatable(o, self)
 end
 
 function DifficultySelection:Up()

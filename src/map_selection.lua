@@ -14,7 +14,6 @@ function MapSelection:New()
     map_index = 0,
     map_count = 16,
     minimaps = {},
-    level_selection = nil,
   }
 
   local instance = --[[---@type MapSelection]] setmetatable(o, self)

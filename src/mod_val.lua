@@ -9,12 +9,8 @@ ModVal.__index = ModVal
 ---@param base number
 ---@return ModVal
 function ModVal:New(base)
-  local o = {}
-
-  local instance = --[[---@type ModVal]] setmetatable(o, self)
-
+  local instance = --[[---@type ModVal]] setmetatable({}, self)
   instance:SetBase(base)
-
   return instance
 end
 

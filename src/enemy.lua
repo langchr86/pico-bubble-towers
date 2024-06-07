@@ -36,10 +36,7 @@ function Enemy:New(type)
     speed_factor = ModVal:New(1),
     bullet_list = {},
   }
-
-  local e = --[[---@type Enemy]] o
-
-  return setmetatable(e, self)
+  return setmetatable(o, self)
 end
 
 ---@return Enemy

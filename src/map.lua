@@ -4,7 +4,6 @@
 ---@field offset Point
 ---@field walk_way_mode boolean
 Map = {
-  offset = nil,
   walk_way_mode = false,
 }
 Map.__index = Map

@@ -19,7 +19,7 @@ function Wave:New(enemy_count, enemy_template)
     active_list = {},
   }
 
-  return --[[---@type Wave]] setmetatable(o, self)
+  return setmetatable(o, self)
 end
 
 ---@param start Point

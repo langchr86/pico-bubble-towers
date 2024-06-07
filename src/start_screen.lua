@@ -18,22 +18,6 @@ end
 
 function StartScreen:Init()
   music(0, 120)
-
-end
-
-function StartScreen:MoveUp()
-end
-
-function StartScreen:MoveDown()
-end
-
-function StartScreen:MoveLeft()
-end
-
-function StartScreen:MoveRight()
-end
-
-function StartScreen:PressO()
 end
 
 function StartScreen:PressX()

@@ -32,7 +32,7 @@ function GameSession:New(wave_list)
     enemy_list = {},
     wave_list = wave_list,
     active_wave_list = {},
-    cash = 5000,
+    cash = 100,
     player_life = 20,
     shake = 0,
   }
@@ -287,7 +287,11 @@ function GameSession:Right()
 end
 
 function GameSession:PressO()
-  self:StartNextWave()
+  if self.cursor.show_menu then
+    self.cursor:HideMenu()
+  else
+    self:StartNextWave()
+  end
 end
 
 function GameSession:PressX()

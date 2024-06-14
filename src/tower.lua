@@ -36,8 +36,8 @@ function Tower:New(pos)
     level = 0,
     spent_cash = 10,
     damage = ModVal:New(10),
-    range = ModVal:New(16),
-    reload = ModVal:New(20),
+    range = ModVal:New(16),         --- divisor 3.75
+    reload = ModVal:New(10),        --- divisor 1.5
     reload_level = 0,
     modifiers = TowerModifiers:New(),
     is_area_damage = false,

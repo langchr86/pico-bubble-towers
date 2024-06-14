@@ -4,7 +4,7 @@
 ---@field sprite number
 ---@field pos Point
 ---@field logical_pos Point
----@field type TowerType
+---@field type TT
 ---@field level number
 ---@field spent_cash number
 ---@field damage ModVal
@@ -32,7 +32,7 @@ function Tower:New(pos)
     sprite = 64,
     pos = pos:Clone(),
     logical_pos = pos + Point:New(4, 4),
-    type = TowerType.BASE,
+    type = TT.BASE,
     level = 0,
     spent_cash = 10,
     damage = ModVal:New(10),
@@ -58,7 +58,7 @@ function Tower:Destroy()
   Map:TileClear4(tile_pos, 3)
 end
 
----@param upgrade_type TowerType
+---@param upgrade_type TT
 function Tower:Upgrade(upgrade_type)
   ---@type TowerUpgrade
   local upgrade = UPGRADE_TABLE[self.type][upgrade_type]
@@ -108,7 +108,7 @@ end
 ---@class TowerMenu
 ---@field cost number
 ---@field sprite number
----@field type TowerType
+---@field type TT
 
 ---@param menu_index number
 ---@return TowerMenu|nil
@@ -117,7 +117,7 @@ function Tower:GetUpgradeMenuEntry(menu_index)
 
   for type, upgrade in pairs(UPGRADE_TABLE[self.type]) do
     local calculated_menu_index = 0
-    if self.type == TowerType.BASE then
+    if self.type == TT.BASE then
       calculated_menu_index = flr(type / 100)
     else
       calculated_menu_index = flr(type % 100 / 10)

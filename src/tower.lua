@@ -126,7 +126,7 @@ function Tower:GetUpgradeMenuEntry(menu_index)
     if calculated_menu_index == menu_index then
       local menu = --[[---@type TowerMenu]] {
         cost = upgrade.cost,
-        sprite = upgrade.preview_sprite,
+        sprite = upgrade.psprite,
         type = type,
       }
       return menu

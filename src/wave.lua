@@ -75,16 +75,16 @@ function CreatePredefinedWaveList(level)
 
   -- easy
   if level == 0 then
-    AddEnemyToList(list, 2, ET.NORMAL)
-    AddEnemyToList(list, 4, ET.NORMAL)
-    AddEnemyToList(list, 3, ET.FAST)
-    AddEnemyToList(list, 4, ET.HEAVY)
-    AddEnemyToList(list, 5, ET.FAST)
-    AddEnemyToList(list, 3, ET.GHOST)
-    AddEnemyToList(list, 7, ET.NORMAL)
-    AddEnemyToList(list, 5, ET.GHOST)
-    AddEnemyToList(list, 3, ET.REGENERATE)
-    AddEnemyToList(list, 2, ET.NORMAL_BOSS)
+    AddEnemy(list, 2, ET.NORMAL)
+    AddEnemy(list, 4, ET.NORMAL)
+    AddEnemy(list, 3, ET.FAST)
+    AddEnemy(list, 4, ET.HEAVY)
+    AddEnemy(list, 5, ET.FAST)
+    AddEnemy(list, 3, ET.GHOST)
+    AddEnemy(list, 7, ET.NORMAL)
+    AddEnemy(list, 5, ET.GHOST)
+    AddEnemy(list, 3, ET.REGENERATE)
+    AddEnemy(list, 2, ET.NORMAL_BOSS)
   -- medium
   elseif level == 1 then
 
@@ -122,7 +122,7 @@ function CreateProceduralWaveList(seed)
       enemy_count = flr(1 + rnd(3))
     end
 
-    AddEnemyToList(list, enemy_count, type)
+    AddEnemy(list, enemy_count, type)
   end
 
   return list
@@ -131,6 +131,6 @@ end
 ---@param list Wave[]
 ---@param count number
 ---@param type ET
-function AddEnemyToList(list, count, type)
+function AddEnemy(list, count, type)
   add(list, Wave:New(count, Enemy:New(type)))
 end

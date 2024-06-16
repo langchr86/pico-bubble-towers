@@ -294,15 +294,17 @@ function Tower:ShotBullet(enemy_list)
 
   for enemy in all(enemy_list) do
     if (not enemy:IsGhost() and self.can_attack_normal) or (enemy:IsGhost() and self.can_attack_ghost) then
-      local distance = self.logical_pos:Distance(enemy.pos)
+      if not enemy:IsGoingToDie() then
+        local distance = self.logical_pos:Distance(enemy.pos)
 
-      if distance <= self.range:Get() then
-        if not nearest_distance then
-          nearest_distance = distance
-          best_enemy = enemy
-        elseif distance < nearest_distance then
-          nearest_distance = distance
-          best_enemy = enemy
+        if distance <= self.range:Get() then
+          if not nearest_distance then
+            nearest_distance = distance
+            best_enemy = enemy
+          elseif distance < nearest_distance then
+            nearest_distance = distance
+            best_enemy = enemy
+          end
         end
       end
     end

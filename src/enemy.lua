@@ -79,7 +79,7 @@ end
 
 ---@param damage number
 function Enemy:Damage(damage)
-  self.life = self.life - damage * self.damage_factor:Get()
+  self.life -= damage * self.damage_factor:Get()
   if self.life < 0 then
     self.life = 0
   end
@@ -96,6 +96,15 @@ function Enemy:Regenerate()
   if self.life > self.props.life then
     self.life = self.props.life
   end
+end
+
+---@return boolean
+function Enemy:IsGoingToDie()
+  local bullet_sum = 0
+  for bullet in all(self.bullet_list) do
+    bullet_sum += bullet.damage * self.damage_factor:Get()
+  end
+  return self.life - bullet_sum <= 0
 end
 
 ---@return boolean

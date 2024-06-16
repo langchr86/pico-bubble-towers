@@ -73,24 +73,45 @@ function CreatePredefinedWaveList(level)
   ---@type Wave[]
   local list = {}
 
-  -- easy
   if level == 0 then
-    AddEnemy(list, 2, ET.NORMAL)
-    AddEnemy(list, 4, ET.NORMAL)
-    AddEnemy(list, 3, ET.FAST)
-    AddEnemy(list, 4, ET.HEAVY)
-    AddEnemy(list, 5, ET.FAST)
-    AddEnemy(list, 3, ET.GHOST)
-    AddEnemy(list, 7, ET.NORMAL)
-    AddEnemy(list, 5, ET.GHOST)
-    AddEnemy(list, 3, ET.REGENERATE)
-    AddEnemy(list, 2, ET.NORMAL_BOSS)
-  -- medium
+    -- easy
+    AddEnemy(list, 2, ET.NORMAL, 2)
+    AddEnemy(list, 4, ET.NORMAL, 2)
+    AddEnemy(list, 3, ET.FAST, 2)
+    AddEnemy(list, 1, ET.HEAVY, 2)
+    AddEnemy(list, 5, ET.FAST, 2)
+    AddEnemy(list, 3, ET.GHOST, 2)
+    AddEnemy(list, 6, ET.NORMAL, 2)
+    AddEnemy(list, 5, ET.GHOST, 2)
+    AddEnemy(list, 3, ET.REGENERATE, 2)
+    AddEnemy(list, 2, ET.NORMAL_BOSS, 2)
   elseif level == 1 then
-
-  -- hard
+    -- medium
+    AddEnemy(list, 2, ET.NORMAL, 1.5)
+    AddEnemy(list, 4, ET.NORMAL, 1.5)
+    AddEnemy(list, 3, ET.FAST, 1.5)
+    AddEnemy(list, 1, ET.HEAVY, 1.5)
+    AddEnemy(list, 5, ET.FAST, 1.5)
+    AddEnemy(list, 3, ET.GHOST, 1.5)
+    AddEnemy(list, 6, ET.NORMAL, 1.5)
+    AddEnemy(list, 5, ET.GHOST, 1.5)
+    AddEnemy(list, 3, ET.REGENERATE, 1.5)
+    AddEnemy(list, 2, ET.NORMAL_BOSS, 2)
+    AddEnemy(list, 5, ET.FAST, 1.5)
+    AddEnemy(list, 2, ET.HEAVY, 2)
+    AddEnemy(list, 4, ET.HEAVY, 2)
+    AddEnemy(list, 5, ET.GHOST, 1.5)
+    AddEnemy(list, 4, ET.REGENERATE, 1.5)
+    AddEnemy(list, 6, ET.GHOST, 1.5)
+    AddEnemy(list, 8, ET.NORMAL, 1)
+    AddEnemy(list, 12, ET.NORMAL, 1)
+    AddEnemy(list, 3, ET.HEAVY_BOSS, 1.5)
+    AddEnemy(list, 10, ET.FAST, 1.5)
+    AddEnemy(list, 5, ET.FAST_BOSS, 1.5)
+    AddEnemy(list, 6, ET.REGENERATE, 1)
   else
-
+    -- hard
+    AddEnemy(list, 2, ET.NORMAL, 1)
   end
 
   return list
@@ -122,7 +143,9 @@ function CreateProceduralWaveList(seed)
       enemy_count = flr(1 + rnd(3))
     end
 
-    AddEnemy(list, enemy_count, type)
+    local value_mul = flr(1 + rnd(2))
+
+    AddEnemy(list, enemy_count, type, value_mul)
   end
 
   return list
@@ -131,6 +154,7 @@ end
 ---@param list Wave[]
 ---@param count number
 ---@param type ET
-function AddEnemy(list, count, type)
-  add(list, Wave:New(count, Enemy:New(type)))
+---@param value_mul number
+function AddEnemy(list, count, type, value_mul)
+  add(list, Wave:New(count, Enemy:New(type, value_mul)))
 end

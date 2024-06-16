@@ -11,6 +11,7 @@
 ---@field next_pos Point
 ---@field next_pos_index number
 ---@field life number
+---@field value_mul number
 ---@field damage_factor ModVal
 ---@field speed_factor ModVal
 ---@field bullet_list Bullet[]
@@ -18,9 +19,9 @@ Enemy = {}
 Enemy.__index = Enemy
 
 ---@param type ET
----@param props EnemyProperties
+---@param value_mul number
 ---@return Enemy
-function Enemy:New(type)
+function Enemy:New(type, value_mul)
   local o = {
     type = type,
     props = ENEMY_TABLE[type],
@@ -32,6 +33,7 @@ function Enemy:New(type)
     next_pos = Point:Zero(),
     next_pos_index = 1,
     life = ENEMY_TABLE[type].life,
+    value_mul = value_mul,
     damage_factor = ModVal:New(1),
     speed_factor = ModVal:New(1),
     bullet_list = {},
@@ -41,7 +43,7 @@ end
 
 ---@return Enemy
 function Enemy:Clone()
-  return Enemy:New(self.type)
+  return Enemy:New(self.type, self.value_mul)
 end
 
 ---@param x number
@@ -108,7 +110,7 @@ end
 
 ---@return number
 function Enemy:GetValue()
-  return flr(self.props.value)
+  return flr(self.props.value * self.value_mul)
 end
 
 function Enemy:Update()

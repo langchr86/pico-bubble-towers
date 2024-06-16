@@ -75,40 +75,12 @@ function CreatePredefinedWaveList(level)
 
   if level == 0 then
     -- easy
-    AddEnemy(list, 2, ET.NORMAL, 2)
-    AddEnemy(list, 4, ET.NORMAL, 2)
-    AddEnemy(list, 3, ET.FAST, 2)
-    AddEnemy(list, 1, ET.HEAVY, 2)
-    AddEnemy(list, 5, ET.FAST, 2)
-    AddEnemy(list, 3, ET.GHOST, 2)
-    AddEnemy(list, 6, ET.NORMAL, 2)
-    AddEnemy(list, 5, ET.GHOST, 2)
-    AddEnemy(list, 3, ET.REGENERATE, 2)
-    AddEnemy(list, 2, ET.NORMAL_BOSS, 2)
+    ParseWaveString(list, "0204,0404,0324,0144,0524,0314,0604,0514,0334,0254")
   elseif level == 1 then
     -- medium
-    AddEnemy(list, 2, ET.NORMAL, 1.5)
-    AddEnemy(list, 4, ET.NORMAL, 1.5)
-    AddEnemy(list, 3, ET.FAST, 1.5)
-    AddEnemy(list, 1, ET.HEAVY, 1.5)
-    AddEnemy(list, 5, ET.FAST, 1.5)
-    AddEnemy(list, 3, ET.GHOST, 1.5)
-    AddEnemy(list, 6, ET.NORMAL, 1.5)
-    AddEnemy(list, 5, ET.GHOST, 1.5)
-    AddEnemy(list, 3, ET.REGENERATE, 1.5)
-    AddEnemy(list, 2, ET.NORMAL_BOSS, 2)
-    AddEnemy(list, 5, ET.FAST, 1.5)
-    AddEnemy(list, 2, ET.HEAVY, 2)
-    AddEnemy(list, 4, ET.HEAVY, 2)
-    AddEnemy(list, 5, ET.GHOST, 1.5)
-    AddEnemy(list, 4, ET.REGENERATE, 1.5)
-    AddEnemy(list, 6, ET.GHOST, 1.5)
-    AddEnemy(list, 8, ET.NORMAL, 1)
-    AddEnemy(list, 12, ET.NORMAL, 1)
-    AddEnemy(list, 3, ET.HEAVY_BOSS, 1.5)
-    AddEnemy(list, 10, ET.FAST, 1.5)
-    AddEnemy(list, 5, ET.FAST_BOSS, 1.5)
-    AddEnemy(list, 6, ET.REGENERATE, 1)
+    ParseWaveString(list, "0203,0403,0323,0143,0523,0313,0603,0513,0333,0253")
+    ParseWaveString(list, "0254,0523,0244,0444,0513,0433,0613,0802,1202,0393")
+    ParseWaveString(list, "1023,0573,0681")
   else
     -- hard
     AddEnemy(list, 2, ET.NORMAL, 1)
@@ -149,6 +121,39 @@ function CreateProceduralWaveList(seed)
   end
 
   return list
+end
+
+--- Parse quadruples in form of "cctv" separated with a ",".
+---@param list Wave[]
+---@param data string
+function ParseWaveString(list, data)
+  local enemy_count = 0
+  local enemy_type = 0
+
+  for i = 1, #data do
+    local current_num = char2num(sub(data, i, i))
+    local mode = (i - 1) % 5
+
+    if mode == 0 then
+      enemy_count = 10 * current_num    --- c
+    elseif mode == 1 then
+      enemy_count += current_num        --- c
+    elseif mode == 2 then
+      enemy_type = current_num          --- t
+    elseif mode == 3 then
+      local value_mul = current_num / 2 --- v
+      AddEnemy(list, enemy_count, enemy_type, value_mul)
+    end
+  end
+end
+
+---@param char string
+function char2num(char)
+  for num = 1, 10 do
+    if char == sub("0123456789", num, num) then
+      return num - 1
+    end
+  end
 end
 
 ---@param list Wave[]

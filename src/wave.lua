@@ -75,16 +75,16 @@ function CreatePredefinedWaveList(level)
 
   -- easy
   if level == 0 then
-    AddEnemyToList(list, 2, EnemyType.NORMAL)
-    AddEnemyToList(list, 4, EnemyType.NORMAL)
-    AddEnemyToList(list, 3, EnemyType.FAST)
-    AddEnemyToList(list, 4, EnemyType.HEAVY)
-    AddEnemyToList(list, 5, EnemyType.FAST)
-    AddEnemyToList(list, 3, EnemyType.GHOST)
-    AddEnemyToList(list, 7, EnemyType.NORMAL)
-    AddEnemyToList(list, 5, EnemyType.GHOST)
-    AddEnemyToList(list, 3, EnemyType.REGENERATE)
-    AddEnemyToList(list, 2, EnemyType.NORMAL_BOSS)
+    AddEnemyToList(list, 2, ET.NORMAL)
+    AddEnemyToList(list, 4, ET.NORMAL)
+    AddEnemyToList(list, 3, ET.FAST)
+    AddEnemyToList(list, 4, ET.HEAVY)
+    AddEnemyToList(list, 5, ET.FAST)
+    AddEnemyToList(list, 3, ET.GHOST)
+    AddEnemyToList(list, 7, ET.NORMAL)
+    AddEnemyToList(list, 5, ET.GHOST)
+    AddEnemyToList(list, 3, ET.REGENERATE)
+    AddEnemyToList(list, 2, ET.NORMAL_BOSS)
   -- medium
   elseif level == 1 then
 
@@ -107,13 +107,13 @@ function CreateProceduralWaveList(seed)
   ---@type Wave[]
   local list = {}
 
-  local last_type = EnemyType.NORMAL
+  local last_type = ET.NORMAL
 
   for wave_index = 1, wave_count do
-    ---@type EnemyType
-    local type = flr(rnd(EnemyType.HEAVY_BOSS + 1))
+    ---@type ET
+    local type = flr(rnd(ET.HEAVY_BOSS + 1))
     if wave_index <= 10 or IsBossEnemy(last_type) then
-      type = flr(rnd(EnemyType.NORMAL_BOSS))
+      type = flr(rnd(ET.NORMAL_BOSS))
     end
     last_type = type
 
@@ -130,7 +130,7 @@ end
 
 ---@param list Wave[]
 ---@param count number
----@param type EnemyType
+---@param type ET
 function AddEnemyToList(list, count, type)
   add(list, Wave:New(count, Enemy:New(type)))
 end

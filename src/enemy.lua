@@ -1,7 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 ---@class Enemy
----@field type EnemyType
+---@field type ET
 ---@field props EnemyProperties
 ---@field sprite_index number
 ---@field frame_index number
@@ -17,7 +17,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
----@param type EnemyType
+---@param type ET
 ---@param props EnemyProperties
 ---@return Enemy
 function Enemy:New(type)
@@ -52,8 +52,8 @@ end
 
 ---@return boolean
 function Enemy:IsGhost()
-  return self.type == EnemyType.GHOST
-      or self.type == EnemyType.GHOST_BOSS
+  return self.type == ET.GHOST
+      or self.type == ET.GHOST_BOSS
 end
 
 ---@param pos Point
@@ -132,7 +132,7 @@ function Enemy:Update()
     end
   end
 
-  if self.type == EnemyType.REGENERATE or self.type == EnemyType.REGENERATE_BOSS then
+  if self.type == ET.REGENERATE or self.type == ET.REGENERATE_BOSS then
     self:Regenerate()
   end
 end

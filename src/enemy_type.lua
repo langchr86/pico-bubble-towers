@@ -1,9 +1,9 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
----@alias EnemyType number
+---@alias ET number
 
----@type table<string, EnemyType>
-EnemyType = {
+---@type table<string, ET>
+ET = {
   NORMAL = 0,
   GHOST = 1,
   FAST = 2,
@@ -16,16 +16,16 @@ EnemyType = {
   HEAVY_BOSS = 9,
 }
 
----@param type EnemyType
+---@param type ET
 ---@return boolean
 function IsBossEnemy(type)
-  return type >= EnemyType.NORMAL_BOSS
+  return type >= ET.NORMAL_BOSS
 end
 
----@param type EnemyType
+---@param type ET
 ---@return boolean
 function IsHeavyEnemy(type)
-  return type == EnemyType.HEAVY or type == EnemyType.HEAVY_BOSS
+  return type == ET.HEAVY or type == ET.HEAVY_BOSS
 end
 
 ---@class EnemyProperties
@@ -37,9 +37,9 @@ end
 ---@field value_bonus number
 
 ---@class ENEMY_TABLE
----@field [EnemyType] EnemyProperties
+---@field [ET] EnemyProperties
 ENEMY_TABLE = {
-  [EnemyType.NORMAL] = {
+  [ET.NORMAL] = {
     sprite = 8,
     sprite_count = 4,
     frame_count = 8,
@@ -47,7 +47,7 @@ ENEMY_TABLE = {
     life = 120,
     value = 4,
   },
-  [EnemyType.GHOST] = {
+  [ET.GHOST] = {
     sprite = 32,
     sprite_count = 2,
     frame_count = 10,
@@ -55,7 +55,7 @@ ENEMY_TABLE = {
     life = 100,
     value = 6,
   },
-  [EnemyType.FAST] = {
+  [ET.FAST] = {
     sprite = 12,
     sprite_count = 4,
     frame_count = 4,
@@ -63,7 +63,7 @@ ENEMY_TABLE = {
     life = 100,
     value = 4,
   },
-  [EnemyType.REGENERATE] = {
+  [ET.REGENERATE] = {
     sprite = 28,
     sprite_count = 3,
     frame_count = 6,
@@ -71,7 +71,7 @@ ENEMY_TABLE = {
     life = 150,
     value = 6,
   },
-  [EnemyType.HEAVY] = {
+  [ET.HEAVY] = {
     sprite = 24,
     sprite_count = 4,
     frame_count = 6,
@@ -79,7 +79,7 @@ ENEMY_TABLE = {
     life = 300,
     value = 6,
   },
-  [EnemyType.NORMAL_BOSS] = {
+  [ET.NORMAL_BOSS] = {
     sprite = 40,
     sprite_count = 4,
     frame_count = 8,
@@ -87,7 +87,7 @@ ENEMY_TABLE = {
     life = 360,
     value = 20,
   },
-  [EnemyType.GHOST_BOSS] = {
+  [ET.GHOST_BOSS] = {
     sprite = 48,
     sprite_count = 2,
     frame_count = 10,
@@ -95,7 +95,7 @@ ENEMY_TABLE = {
     life = 300,
     value = 30,
   },
-  [EnemyType.FAST_BOSS] = {
+  [ET.FAST_BOSS] = {
     sprite = 44,
     sprite_count = 4,
     frame_count = 4,
@@ -103,7 +103,7 @@ ENEMY_TABLE = {
     life = 300,
     value = 20,
   },
-  [EnemyType.REGENERATE_BOSS] = {
+  [ET.REGENERATE_BOSS] = {
     sprite = 60,
     sprite_count = 3,
     frame_count = 6,
@@ -111,7 +111,7 @@ ENEMY_TABLE = {
     life = 450,
     value = 30,
   },
-  [EnemyType.HEAVY_BOSS] = {
+  [ET.HEAVY_BOSS] = {
     sprite = 56,
     sprite_count = 4,
     frame_count = 6,

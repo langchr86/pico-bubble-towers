@@ -33,7 +33,7 @@ function GameSession:New(wave_list)
     wave_list = wave_list,
     active_wave_list = {},
     cash = 100,
-    player_life = 20,
+    player_life = 10,
     shake = 0,
   }
 

@@ -108,8 +108,7 @@ end
 
 ---@return number
 function Enemy:GetValue()
-  local base_value = flr(self.props.speed * self.props.life / 10)
-  return base_value + self.props.value_bonus
+  return flr(self.props.value)
 end
 
 function Enemy:Update()

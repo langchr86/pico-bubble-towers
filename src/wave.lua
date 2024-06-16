@@ -80,10 +80,13 @@ function CreatePredefinedWaveList(level)
     -- medium
     ParseWaveString(list, "0203,0403,0323,0143,0523,0313,0603,0513,0333,0253")
     ParseWaveString(list, "0254,0523,0244,0444,0513,0433,0613,0802,1202,0393")
-    ParseWaveString(list, "1023,0573,0681")
+    ParseWaveString(list, "1023,0573,0681,1003,0813")
   else
     -- hard
-    AddEnemy(list, 2, ET.NORMAL, 1)
+    ParseWaveString(list, "0202,0402,0322,0142,0522,0312,0602,0512,0332,0252")
+    ParseWaveString(list, "0253,0522,0243,0443,0512,0432,0612,0802,1202,0392")
+    ParseWaveString(list, "1023,0574,0684,1003,0812,1033,0642,0662,1222,0872")
+    ParseWaveString(list, "1602,1043,1212,2003,1543,1052,1062,1072,1092,1082")
   end
 
   return list

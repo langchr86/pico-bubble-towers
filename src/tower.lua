@@ -276,7 +276,7 @@ function Tower:Shot(enemy_list)
       self.area_animation:Start(self.range:Get())
     end
   else
-    triggered = self:ShotOnNearestEnemy(enemy_list)
+    triggered = self:ShotBullet(enemy_list)
   end
 
   if triggered then
@@ -286,9 +286,9 @@ end
 
 ---@param enemy_list Enemy[]
 ---@return boolean
-function Tower:ShotOnNearestEnemy(enemy_list)
+function Tower:ShotBullet(enemy_list)
   ---@type Enemy
-  local nearest_enemy_in_reach
+  local best_enemy
   ---@type number
   local nearest_distance
 
@@ -299,18 +299,18 @@ function Tower:ShotOnNearestEnemy(enemy_list)
       if distance <= self.range:Get() then
         if not nearest_distance then
           nearest_distance = distance
-          nearest_enemy_in_reach = enemy
+          best_enemy = enemy
         elseif distance < nearest_distance then
           nearest_distance = distance
-          nearest_enemy_in_reach = enemy
+          best_enemy = enemy
         end
       end
     end
   end
 
-  if nearest_enemy_in_reach then
-    local bullet = Bullet:New(self.logical_pos, nearest_enemy_in_reach.pos, self.damage:Get())
-    nearest_enemy_in_reach:Shot(bullet)
+  if best_enemy then
+    local bullet = Bullet:New(self.logical_pos, best_enemy.pos, self.damage:Get())
+    best_enemy:Shot(bullet)
     return true
   end
 

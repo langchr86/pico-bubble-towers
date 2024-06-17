@@ -138,7 +138,11 @@ function GameSession:PrepareCursorMenu()
     local menu_entry = tower:GetUpgradeMenuEntry(menu_index)
     if menu_entry then
       local upgrade = --[[---@type TowerMenu]] menu_entry
-      return upgrade.sprite
+      if upgrade.cost > self.cash then
+        return upgrade.sprite + 4
+      else
+        return upgrade.sprite
+      end
     end
 
     return Cursor.ShowNoSprite
@@ -156,7 +160,6 @@ function GameSession:UpgradeTower(menu_index)
   local upgrade = --[[---@type TowerMenu]] menu_entry
 
   if upgrade.cost > self.cash then
-    ---TODO: user feedback: too low on cash
     return false
   end
 

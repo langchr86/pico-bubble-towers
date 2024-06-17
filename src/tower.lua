@@ -10,6 +10,7 @@
 ---@field range ModVal
 ---@field reload ModVal
 ---@field reload_level number
+---@field best_enemy Enemy
 ---@field modifiers TowerModifiers
 ---@field is_area_damage boolean
 ---@field can_attack_ghost boolean
@@ -256,6 +257,10 @@ end
 
 ---@param enemy_list Enemy[]
 function Tower:Shot(enemy_list)
+  if not self.is_area_damage then
+    self:UpdateBestEnemy(enemy_list)
+  end
+
   if self.reload_level < self.reload:Get() then
     self.reload_level = self.reload_level + 1
     return
@@ -268,7 +273,7 @@ function Tower:Shot(enemy_list)
       self.area_animation:Start(self.range:Get())
     end
   else
-    triggered = self:ShotBullet(enemy_list)
+    triggered = self:ShotBulletOnBestEnemy()
   end
 
   if triggered then
@@ -277,10 +282,9 @@ function Tower:Shot(enemy_list)
 end
 
 ---@param enemy_list Enemy[]
----@return boolean
-function Tower:ShotBullet(enemy_list)
-  ---@type Enemy
-  local best_enemy
+function Tower:UpdateBestEnemy(enemy_list)
+  self.best_enemy = nil
+
   ---@type number
   local nearest_distance
 
@@ -292,16 +296,20 @@ function Tower:ShotBullet(enemy_list)
         if distance <= self.range:Get() then
           if not nearest_distance then
             nearest_distance = distance
-            best_enemy = enemy
+            self.best_enemy = enemy
           elseif distance < nearest_distance then
             nearest_distance = distance
-            best_enemy = enemy
+            self.best_enemy = enemy
           end
         end
       end
     end
   end
+end
 
+---@return boolean
+function Tower:ShotBulletOnBestEnemy()
+  local best_enemy = self.best_enemy
   if best_enemy then
     local bullet = Bullet:New(self.logical_pos, best_enemy.pos, self.damage:Get())
     best_enemy:Shot(bullet)

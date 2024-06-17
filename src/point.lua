@@ -36,14 +36,29 @@ end
 ---@param dest Point
 ---@param speed number
 function Point:Move(dest, speed)
+  local next = self:Trajectory(self:Angle(dest), speed)
+  self.x = next.x
+  self.y = next.y
+end
+
+---@param dest Point
+---@return number
+function Point:Angle(dest)
   ---@type Point
   local diff = dest - self
 
   ---@type number
   local alpha = atan2(diff.x, -diff.y)
+  return alpha
+end
 
-  self.x = self.x + cos(alpha) * speed
-  self.y = self.y + cos(0.25 - alpha) * speed
+---@param alpha number
+---@param length number
+---@return Point
+function Point:Trajectory(alpha, length)
+  local x = self.x + cos(alpha) * length
+  local y = self.y + cos(0.25 - alpha) * length
+  return Point:New(x, y)
 end
 
 ---@return Point

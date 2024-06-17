@@ -181,7 +181,17 @@ function Tower:Draw(cursor)
     end
   end
 
-  self.area_animation:Animate(center)
+  if self.is_area_damage then
+    self.area_animation:Animate(center)
+  else
+    local angle = 0
+    if self.best_enemy then
+      angle = self.logical_pos:Angle(self.best_enemy.pos)
+    end
+
+    local pos = self.logical_pos + Point:New(3, 3)
+    DrawDoubleLine(pos, pos:Trajectory(angle, 4), 14)
+  end
 end
 
 function Tower:DrawDebug()
@@ -312,6 +322,7 @@ function Tower:ShotBulletOnBestEnemy()
   local best_enemy = self.best_enemy
   if best_enemy then
     local bullet = Bullet:New(self.logical_pos, best_enemy.pos, self.damage:Get())
+    bullet:Update()
     best_enemy:Shot(bullet)
     return true
   end

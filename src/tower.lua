@@ -6,7 +6,6 @@
 ---@field logical_pos Point
 ---@field type TT
 ---@field level number
----@field spent_cash number
 ---@field damage ModVal
 ---@field range ModVal
 ---@field reload ModVal
@@ -34,7 +33,6 @@ function Tower:New(pos)
     logical_pos = pos + Point:New(4, 4),
     type = TT.BASE,
     level = 0,
-    spent_cash = 10,
     damage = ModVal:New(10),
     range = ModVal:New(16),         --- divisor 3.75
     reload = ModVal:New(10),        --- divisor 1.5
@@ -65,7 +63,6 @@ function Tower:Upgrade(upgrade_type)
 
   self.type = upgrade_type
   self.level = self.level + 1
-  self.spent_cash = self.spent_cash + flr(upgrade.cost * 0.75)
 
   if upgrade.sprite then
     self.sprite = upgrade.sprite
@@ -139,11 +136,6 @@ end
 ---@return number
 function Tower.GetDestroySprite()
   return 96
-end
-
----@return number
-function Tower:GetValue()
-  return self.spent_cash
 end
 
 ---@param enemy_list Enemy[]

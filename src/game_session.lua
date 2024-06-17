@@ -96,16 +96,22 @@ function GameSession:RemoveTower()
   tower:Destroy()
   del(self.tower_list, tower)
   del(self.modifier_tower_list, tower)
-  self.cash = self.cash + tower:GetValue()
+  self.cash += Tower.BuyCost
   self:CalculateNewPath()
 end
 
 function GameSession:PrepareCursorMenu()
   ---@param menu_index number
   local function CursorMenuHandler(menu_index)
+    local tower = --[[---@type Tower]] self.tower_selected
+
     if menu_index == 0 then
-      self:RemoveTower()
-      return true
+      if tower.level == 0 then
+        self:RemoveTower()
+        return true
+      else
+        return false
+      end
     end
 
     return self:UpgradeTower(menu_index)
@@ -125,7 +131,7 @@ function GameSession:PrepareCursorMenu()
       return Cursor.AbortShowMenu
     end
 
-    if menu_index == 0 then
+    if menu_index == 0 and tower.level == 0 then
       return Tower.GetDestroySprite()
     end
 

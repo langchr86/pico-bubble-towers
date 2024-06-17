@@ -11,6 +11,7 @@
 ---@field reload ModVal
 ---@field reload_level number
 ---@field best_enemy Enemy
+---@field canon_angle number
 ---@field modifiers TowerModifiers
 ---@field is_area_damage boolean
 ---@field can_attack_ghost boolean
@@ -38,6 +39,7 @@ function Tower:New(pos)
     range = ModVal:New(16),         --- divisor 3.75
     reload = ModVal:New(10),        --- divisor 1.5
     reload_level = 0,
+    canon_angle = 0,
     modifiers = TowerModifiers:New(),
     is_area_damage = false,
     can_attack_ghost = true,
@@ -184,13 +186,12 @@ function Tower:Draw(cursor)
   if self.is_area_damage then
     self.area_animation:Animate(center)
   else
-    local angle = 0
     if self.best_enemy then
-      angle = self.logical_pos:Angle(self.best_enemy.pos)
+      self.canon_angle = self.logical_pos:Angle(self.best_enemy.pos)
     end
 
     local pos = self.logical_pos + Point:New(3, 3)
-    DrawDoubleLine(pos, pos:Trajectory(angle, 4), 14)
+    DrawDoubleLine(pos, pos:Trajectory(self.canon_angle, 4), 14)
   end
 end
 

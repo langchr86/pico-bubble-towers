@@ -316,26 +316,36 @@ function GameSession:PressO()
 end
 
 function GameSession:PressX()
+  self:UpdateSelectedTower()
   self.cursor:Press()
 end
 
-function GameSession:Update()
-  self:ClearModifications()
-  self:TrySpawnEnemy()
-
+function GameSession:UpdateSelectedTower()
   self.tower_selected = nil
+
   for tower in all(self.modifier_tower_list) do
-    tower:ModifyTowers(self.tower_list)
     if tower.pos == self.cursor.pos then
       self.tower_selected = tower
     end
   end
 
   for tower in all(self.tower_list) do
-    tower:Update(self.enemy_list)
     if tower.pos == self.cursor.pos then
       self.tower_selected = tower
     end
+  end
+end
+
+function GameSession:Update()
+  self:ClearModifications()
+  self:TrySpawnEnemy()
+
+  for tower in all(self.modifier_tower_list) do
+    tower:ModifyTowers(self.tower_list)
+  end
+
+  for tower in all(self.tower_list) do
+    tower:Update(self.enemy_list)
   end
 
   for enemy in all(self.enemy_list) do

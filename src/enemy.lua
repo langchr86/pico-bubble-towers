@@ -86,7 +86,7 @@ function Enemy:Damage(damage)
 end
 
 function Enemy:Regenerate()
-  if self.regenerate_index < 60 then
+  if self.regenerate_index < 45 then
     self.regenerate_index = self.regenerate_index + 1
     return
   end

@@ -331,6 +331,7 @@ function GameSession:Update()
     if enemy:IsDead() then
       del(self.enemy_list, enemy)
       self.cash = self.cash + enemy:GetValue()
+      self.cursor:UpdateMenuSpriteList()
     end
     if enemy:InTarget() then
       del(self.enemy_list, enemy)

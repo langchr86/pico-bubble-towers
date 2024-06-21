@@ -131,8 +131,14 @@ function Cursor:ShowMenu()
     return
   end
 
-  for i = 1, 4 do
-    self.menu_sprite_list[i] = self.menu_sprite_getter(i)
+  self:UpdateMenuSpriteList()
+end
+
+function Cursor:UpdateMenuSpriteList()
+  if self.show_menu then
+    for i = 1, 4 do
+      self.menu_sprite_list[i] = self.menu_sprite_getter(i)
+    end
   end
 end
 

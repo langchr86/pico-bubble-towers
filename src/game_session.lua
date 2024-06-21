@@ -71,11 +71,18 @@ end
 
 ---@return boolean
 function GameSession:PlaceTower()
+  if not self.cursor:IsFreeToBuildTower() then
+    sfx(0x13, -1)
+    return false
+  end
+
   if self:AnyEnemies() then
+    sfx(0x13, -1)
     return false
   end
 
   if self.cash < Tower.BuyCost then
+    sfx(0x13, -1)
     return false
   end
 
@@ -84,10 +91,12 @@ function GameSession:PlaceTower()
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
     self.cash = self.cash - Tower.BuyCost
+    sfx(0x15, -1)
     return true
   end
 
   new_tower:Destroy()
+  sfx(0x13, -1)
   return false
 end
 
@@ -98,6 +107,7 @@ function GameSession:RemoveTower()
   del(self.modifier_tower_list, tower)
   self.cash += Tower.BuyCost
   self:CalculateNewPath()
+  sfx(0x15, -1)
 end
 
 function GameSession:PrepareCursorMenu()
@@ -110,6 +120,7 @@ function GameSession:PrepareCursorMenu()
         self:RemoveTower()
         return true
       else
+        sfx(0x13, -1)
         return false
       end
     end
@@ -120,14 +131,13 @@ function GameSession:PrepareCursorMenu()
   ---@param menu_index number
   local function CursorMenuSpriteGetter(menu_index)
     if self.tower_selected == nil then
-      if self.cursor:IsFreeToBuildTower() then
-        self:PlaceTower()
-      end
+      self:PlaceTower()
       return Cursor.AbortShowMenu
     end
 
     local tower = --[[---@type Tower]] self.tower_selected
     if tower:HasMaxLevel() then
+      sfx(0x13, -1)
       return Cursor.AbortShowMenu
     end
 
@@ -160,6 +170,7 @@ function GameSession:UpgradeTower(menu_index)
   local upgrade = --[[---@type TowerMenu]] menu_entry
 
   if upgrade.cost > self.cash then
+    sfx(0x13, -1)
     return false
   end
 
@@ -171,6 +182,7 @@ function GameSession:UpgradeTower(menu_index)
     add(self.modifier_tower_list, tower)
   end
 
+  sfx(0x14, -1)
   return true
 end
 

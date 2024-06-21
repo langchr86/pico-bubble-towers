@@ -98,6 +98,11 @@ function Enemy:Regenerate()
   end
 end
 
+---@return number
+function Enemy:DistanceToGoal()
+  return (#self.path - self.next_pos_index) * kTileSize + self.pos:Distance(self.next_pos)
+end
+
 ---@return boolean
 function Enemy:IsGoingToDie()
   local bullet_sum = 0

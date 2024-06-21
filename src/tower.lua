@@ -297,19 +297,24 @@ function Tower:UpdateBestEnemy(enemy_list)
   self.best_enemy = nil
 
   ---@type number
-  local nearest_distance
+  local best_score
 
   for enemy in all(enemy_list) do
     if (not enemy:IsGhost() and self.can_attack_normal) or (enemy:IsGhost() and self.can_attack_ghost) then
       if not enemy:IsGoingToDie() then
-        local distance = self.logical_pos:Distance(enemy.pos)
+        local dist_to_tower = self.logical_pos:Distance(enemy.pos)
 
-        if distance <= self.range:Get() then
-          if not nearest_distance then
-            nearest_distance = distance
+        if dist_to_tower <= self.range:Get() then
+          local dist_to_goal = enemy:DistanceToGoal()
+          local health = enemy.life
+
+          local score = dist_to_tower + dist_to_goal + health / 8
+
+          if not best_score then
+            best_score = score
             self.best_enemy = enemy
-          elseif distance < nearest_distance then
-            nearest_distance = distance
+          elseif score < best_score then
+            best_score = score
             self.best_enemy = enemy
           end
         end

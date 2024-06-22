@@ -91,7 +91,7 @@ end
 UPGRADE_TABLE = {
   [TT.BASE] = {
     [TT.NORMAL_SNIPER_L1] = {
-      sprite = 66,
+      sprite = 64,
       psprite = 114,
       cost = 18,
       damage = 15,
@@ -105,13 +105,13 @@ UPGRADE_TABLE = {
       range = 24,
     },
     [TT.AREA_SNIPER_L1] = {
-      sprite = 68,
+      sprite = 74,
       psprite = 100,
       cost = 35,
       range = 13.3,
     },
     [TT.BOOST_DAMAGE_L1] = {
-      sprite = 72,
+      sprite = 106,
       psprite = 99,
       cost = 40,
       damage_factor = 1.25,
@@ -125,12 +125,14 @@ UPGRADE_TABLE = {
       range = 21.3,
     },
     [TT.NORMAL_FAST_L2] = {
+      sprite = 68,
       psprite = 115,
       cost = 40,
       damage = 20,
       reload = 6.6,
     },
     [TT.NORMAL_SPLASH_L2] = {
+      sprite = 66,
       psprite = 117,
       cost = 50,
       damage = 35,
@@ -196,6 +198,7 @@ UPGRADE_TABLE = {
       range = 26.6,
     },
     [TT.GHOST_SPLASH_L2] = {
+      sprite = 72,
       psprite = 117,
       cost = 50,
       damage = 50,
@@ -250,7 +253,7 @@ UPGRADE_TABLE = {
       slow_down_factor = 0.8,
     },
     [TT.AREA_WEAK_L2] = {
-      sprite = 74,
+      sprite = 78,
       psprite = 101,
       cost = 80,
       range = 14,
@@ -312,12 +315,14 @@ UPGRADE_TABLE = {
       damage_factor = 1.3,
     },
     [TT.BOOST_FAST_L2] = {
+      sprite = 110,
       psprite = 115,
       cost = 60,
       damage_factor = 0,
       reload_factor = 0.8,
     },
     [TT.BOOST_RANGE_L2] = {
+      sprite = 108,
       psprite = 114,
       cost = 40,
       damage_factor = 0,

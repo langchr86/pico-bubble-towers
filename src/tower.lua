@@ -30,7 +30,7 @@ Tower.MaxLevel = 4
 ---@return Tower
 function Tower:New(pos)
   local o = {
-    sprite = 64,
+    sprite = 34,
     pos = pos:Clone(),
     logical_pos = pos + Point:New(4, 4),
     type = TT.BASE,
@@ -185,13 +185,13 @@ function Tower:Draw(cursor)
 
   if self.is_area_damage then
     self.area_animation:Animate(center)
-  else
+  elseif not self.modifiers.tower_mods and not self.modifiers.enemy_mods then
     if self.best_enemy then
       self.canon_angle = self.logical_pos:Angle(self.best_enemy.pos)
     end
 
     local pos = self.logical_pos + Point:New(3, 3)
-    DrawDoubleLine(pos, pos:Trajectory(self.canon_angle, 4), 14)
+    DrawDoubleLine(pos, pos:Trajectory(self.canon_angle, 4), 9)
   end
 end
 

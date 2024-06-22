@@ -15,6 +15,7 @@
 ---@field damage_factor ModVal
 ---@field speed_factor ModVal
 ---@field bullet_list Bullet[]
+---@field particle_list Particle[]
 Enemy = {}
 Enemy.__index = Enemy
 
@@ -37,6 +38,7 @@ function Enemy:New(type, value_mul)
     damage_factor = ModVal:New(1),
     speed_factor = ModVal:New(1),
     bullet_list = {},
+    particle_list = {}
   }
   return setmetatable(o, self)
 end
@@ -80,8 +82,13 @@ end
 ---@param damage number
 function Enemy:Damage(damage)
   self.life -= damage * self.damage_factor:Get()
-  if self.life < 0 then
-    self.life = 0
+  if self.life <= 0 then
+    self.life = -Particle.kDuration
+
+    for i = 1, 15 do
+      add(self.particle_list, Particle:New(self.pos + Point:New(3, 3)))
+    end
+    sfx(15, -1)
   end
 end
 
@@ -114,7 +121,12 @@ end
 
 ---@return boolean
 function Enemy:IsDead()
-  return self.life <= 0
+  return self.life == 0
+end
+
+---@return boolean
+function Enemy:IsExploding()
+  return self.life < 0
 end
 
 ---@return boolean
@@ -129,6 +141,14 @@ end
 
 function Enemy:Update()
   if self:InTarget() then
+    return
+  end
+
+  if self:IsExploding() then
+    for part in all(self.particle_list) do
+      part:Update()
+    end
+    self.life += 1
     return
   end
 
@@ -167,6 +187,13 @@ function Enemy:ClearModifications()
 end
 
 function Enemy:Draw()
+  if self:IsExploding() then
+    for part in all(self.particle_list) do
+      part:Draw()
+    end
+    return
+  end
+
   ---@type Point
   local rounded = self.pos:Floor()
   spr(self:Animate(), rounded.x, rounded.y)

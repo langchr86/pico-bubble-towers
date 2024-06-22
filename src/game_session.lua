@@ -10,6 +10,7 @@
 ---@field modifier_tower_list Tower[]
 ---@field tower_selected Tower|nil
 ---@field enemy_list Enemy[]
+---@field explosion_list Enemy[]
 ---@field wave_list Wave[]
 ---@field active_wave_list Wave[]
 ---@field cash number
@@ -30,6 +31,7 @@ function GameSession:New(wave_list)
     tower_list = {},
     modifier_tower_list = {},
     enemy_list = {},
+    explosion_list = {},
     wave_list = wave_list,
     active_wave_list = {},
     cash = 100,
@@ -348,14 +350,21 @@ function GameSession:Update()
     tower:Update(self.enemy_list)
   end
 
-  for enemy in all(self.enemy_list) do
+  for enemy in all(self.explosion_list) do
     enemy:Update()
     if enemy:IsDead() then
-      del(self.enemy_list, enemy)
+      del(self.explosion_list, enemy)
       self.cash = self.cash + enemy:GetValue()
       self.cursor:UpdateMenuSpriteList()
     end
-    if enemy:InTarget() then
+  end
+
+  for enemy in all(self.enemy_list) do
+    enemy:Update()
+    if enemy:IsExploding() then
+      del(self.enemy_list, enemy)
+      add(self.explosion_list, enemy)
+    elseif enemy:InTarget() then
       del(self.enemy_list, enemy)
       self.player_life = self.player_life - 1
       self:StartScreenshake()
@@ -399,6 +408,10 @@ function GameSession:Draw()
   end
 
   for enemy in all(self.enemy_list) do
+    enemy:Draw()
+  end
+
+  for enemy in all(self.explosion_list) do
     enemy:Draw()
   end
 

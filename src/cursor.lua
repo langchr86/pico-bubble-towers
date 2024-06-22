@@ -6,7 +6,6 @@
 ---@field pos Point
 ---@field min Point
 ---@field max Point
----@field inc number
 ---@field show_menu boolean
 ---@field menu_index number
 ---@field menu_sprite_list number[]
@@ -28,7 +27,6 @@ function Cursor:New()
     pos = Point:New(8, 16),
     min = Point:New(0, 8),
     max = Point:New(112, 112),
-    inc = kTileSize,
     show_menu = false,
     menu_index = 0,
     menu_sprite_list = {},
@@ -42,7 +40,7 @@ function Cursor:Up()
     return
   end
 
-  self.pos.y = self.pos.y - self.inc
+  self.pos.y = self.pos.y - kTileSize
   if (self.pos.y < self.min.y) then
     self.pos.y = self.min.y
   end
@@ -54,7 +52,7 @@ function Cursor:Down()
     return
   end
 
-  self.pos.y = self.pos.y + self.inc
+  self.pos.y = self.pos.y + kTileSize
   if (self.pos.y > self.max.y) then
     self.pos.y = self.max.y
   end
@@ -66,7 +64,7 @@ function Cursor:Left()
     return
   end
 
-  self.pos.x = self.pos.x - self.inc
+  self.pos.x = self.pos.x - kTileSize
   if (self.pos.x < self.min.x) then
     self.pos.x = self.min.x
   end
@@ -78,7 +76,7 @@ function Cursor:Right()
     return
   end
 
-  self.pos.x = self.pos.x + self.inc
+  self.pos.x = self.pos.x + kTileSize
   if (self.pos.x > self.max.x) then
     self.pos.x = self.max.x
   end
@@ -98,7 +96,7 @@ end
 
 ---@return boolean
 function Cursor:IsFreeToBuildTower()
-  local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
+  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
   return Map:CanBuildOnTile4(tile_pos)
 end
 
@@ -182,7 +180,7 @@ function Cursor:DrawDebug()
   --  return
   --end
   --
-  --local tile_pos = Point:New(self.pos.x / self.inc, self.pos.y / self.inc)
+  --local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
   --print(Map:GetSprite(tile_pos), 2, 121, 10)
   --print(Map:IsTileBuildable(tile_pos), 18, 121, 10)
   --print(Map:IsTileWalkable(tile_pos), 50, 121, 10)

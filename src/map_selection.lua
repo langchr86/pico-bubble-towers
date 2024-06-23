@@ -4,16 +4,18 @@
 ---@field map_index number
 ---@field map_count number
 ---@field minimaps Minimap[]
+---@field wave_list Wave[]
 ---@field next_session any
 MapSelection = {}
 MapSelection.__index = MapSelection
 
 ---@return MapSelection
-function MapSelection:New()
+function MapSelection:New(wave_list)
   local o = {
     map_index = 0,
     map_count = 16,
     minimaps = {},
+    wave_list = wave_list
   }
 
   local instance = --[[---@type MapSelection]] setmetatable(o, self)
@@ -54,14 +56,14 @@ function MapSelection:Right()
 end
 
 function MapSelection:PressO()
-  self.next_session = StartScreen:New()
+  self.next_session = DifficultySelection:New()
 end
 
 function MapSelection:PressX()
   local top_left_tile = self.CalculateLevelOrigin(self.map_index)
   Map:SetOffset(top_left_tile)
 
-  self.next_session = DifficultySelection:New()
+  self.next_session = GameSession:New(self.wave_list)
 end
 
 function MapSelection:Update()

@@ -42,7 +42,7 @@ end
 
 function DifficultySelection:PressO()
   if self.mode == 0 then
-    self.next_session = MapSelection:New()
+    self.next_session = StartScreen:New()
   else
     self.mode = self.mode - 1
   end
@@ -59,7 +59,7 @@ function DifficultySelection:PressX()
   elseif self.mode == 1 then
     self.mode = 2
   else
-    self.next_session = GameSession:New(CreatePredefinedWaveList(self.level))
+    self.next_session = MapSelection:New(CreatePredefinedWaveList(self.level))
   end
 end
 

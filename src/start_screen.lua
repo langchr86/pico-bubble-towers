@@ -17,7 +17,7 @@ function StartScreen:Init()
 end
 
 function StartScreen:PressX()
-  self.next_session = MapSelection:New()
+  self.next_session = DifficultySelection:New()
 end
 
 function StartScreen:Update()

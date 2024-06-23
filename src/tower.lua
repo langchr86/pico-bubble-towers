@@ -118,9 +118,9 @@ function Tower:GetUpgradeMenuEntry(menu_index)
   for type, upgrade in pairs(UPGRADE_TABLE[self.type]) do
     local calculated_menu_index = 0
     if self.type == TT.BASE then
-      calculated_menu_index = flr(type / 100)
+      calculated_menu_index = type \ 100
     else
-      calculated_menu_index = flr(type % 100 / 10)
+      calculated_menu_index = (type % 100) \ 10
     end
 
     if calculated_menu_index == menu_index then

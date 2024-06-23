@@ -94,12 +94,12 @@ end
 ---@param map_index number
 ---@return Point
 function MapSelection.CalculateLevelOrigin(map_index)
-  return Point:New((map_index % kMapRowSize) * kMapSizeInTiles, flr(map_index / kMapRowSize) * kMapSizeInTiles)
+  return Point:New((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles)
 end
 
 ---@param map_index number
 ---@return Point
 function MapSelection.CalculateMinimapOrigin(map_index)
   local minimap_offset = kMapSizeInTiles + kTileSize
-  return Point:New(20 + (map_index % 4) * minimap_offset, 24 + flr(map_index / 4) * minimap_offset)
+  return Point:New(20 + (map_index % 4) * minimap_offset, 24 + (map_index \ 4) * minimap_offset)
 end

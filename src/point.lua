@@ -56,11 +56,6 @@ function Point:Trajectory(alpha, length)
   return Point:New(x, y)
 end
 
----@return Point
-function Point:Floor()
-  return Point:New(flr(self.x), flr(self.y))
-end
-
 ---@param other Point
 ---@param radius number
 ---@return boolean

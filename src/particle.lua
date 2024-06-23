@@ -30,6 +30,5 @@ function Particle:Update()
 end
 
 function Particle:Draw()
-  local rounded = self.pos:Floor()
-  circfill(rounded.x, rounded.y, self.rad, self.colors[1 + self.age \ 3])
+  circfill(self.pos.x, self.pos.y, self.rad, self.colors[1 + self.age \ 3])
 end

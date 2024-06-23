@@ -35,6 +35,5 @@ end
 
 function Bullet:Draw()
   ---@type Point
-  local rounded = self.pos:Floor()
-  spr(self.sprite, rounded.x, rounded.y)
+  spr(self.sprite, self.pos.x, self.pos.y)
 end

@@ -193,15 +193,14 @@ function Enemy:Draw()
   end
 
   ---@type Point
-  local rounded = self.pos:Floor()
-  spr(self:Animate(), rounded.x, rounded.y)
+  spr(self:Animate(), self.pos.x, self.pos.y)
 
   local life_bar_length = 5
   local life_bar = self.life / self.props.life * life_bar_length
 
-  local start_x = rounded.x + 1
-  local corrected_y = rounded.y
-  if corrected_y == kTopRowYCoordinate then
+  local start_x = self.pos.x + 1
+  local corrected_y = self.pos.y
+  if corrected_y <= kTopRowYCoordinate then
     corrected_y = kTopRowYCoordinate + 1
   end
 

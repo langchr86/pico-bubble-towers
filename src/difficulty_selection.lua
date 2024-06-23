@@ -51,7 +51,7 @@ end
 function DifficultySelection:PressX()
   if self.mode == 0 then
     if self.manual then
-      --- TODO self.next_session = Manual:New()
+      self.next_session = Manual:New()
     else
       self.level = 0
       self.mode = 1
@@ -76,14 +76,13 @@ function DifficultySelection:Draw()
   rect(0, 0, 127, 127, 12)
   PrintCenterX("select difficulty level", 4, 12)
 
-  print("mode:", 16, 24, 12)
-  print("normal", 56, 24, 12)
-  print("manual", 56, 36, 12)
+  print("start game", 32, 24, 12)
+  print("read the manual", 32, 36, 12)
 
   if self.manual then
-    rect(54, 34, 96, 42, 12)
+    rect(30, 34, 96, 42, 12)
   else
-    rect(54, 22, 96, 30, 12)
+    rect(30, 22, 96, 30, 12)
   end
 
   if self.mode > 0 then

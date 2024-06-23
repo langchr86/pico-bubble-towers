@@ -29,6 +29,7 @@ __lua__
 #include src/tower.lua
 #include src/wave.lua
 #include src/game_session.lua
+#include src/manual.lua
 #include src/difficulty_selection.lua
 #include src/map_selection.lua
 #include src/start_screen.lua

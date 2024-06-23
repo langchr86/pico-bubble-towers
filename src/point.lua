@@ -18,11 +18,6 @@ function Point:New(x, y)
 end
 
 ---@return Point
-function Point:Zero()
-  return Point:New(0, 0)
-end
-
----@return Point
 function Point:Clone()
   return Point:New(self.x, self.y)
 end

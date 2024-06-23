@@ -24,7 +24,7 @@ function DifficultySelection:Up()
 
   elseif self.mode == 1 then
     if self.level > 0 then
-      self.level = self.level - 1
+      self.level -= 1
     end
   end
 end
@@ -35,7 +35,7 @@ function DifficultySelection:Down()
 
   elseif self.mode == 1 then
     if self.level < 2 then
-      self.level = self.level + 1
+      self.level += 1
     end
   end
 end
@@ -44,7 +44,7 @@ function DifficultySelection:PressO()
   if self.mode == 0 then
     self.next_session = StartScreen:New()
   else
-    self.mode = self.mode - 1
+    self.mode -= 1
   end
 end
 

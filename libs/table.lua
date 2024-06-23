@@ -7,7 +7,7 @@ function InsertionSort(arr, comp)
       local j = i
       while j > 1 and not comp(arr[j-1], arr[j]) do
         arr[j],arr[j-1] = arr[j-1],arr[j]
-          j = j - 1
+          j -= 1
       end
   end
 end

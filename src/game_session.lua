@@ -92,7 +92,7 @@ function GameSession:PlaceTower()
 
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
-    self.cash = self.cash - Tower.BuyCost
+    self.cash -= Tower.BuyCost
     sfx(0x15, -1)
     return true
   end
@@ -278,7 +278,7 @@ function GameSession:DrawStats()
   for i = 1, min(4, #self.wave_list) do
     local wave = self.wave_list[i]
     wave.enemy_template:DrawWaveSprite(x, 0)
-    x = x + 8
+    x += 8
   end
 
   print("cash: ", 92, 1, 12)
@@ -346,7 +346,7 @@ function GameSession:Update()
     enemy:Update()
     if enemy:IsDead() then
       del(self.explosion_list, enemy)
-      self.cash = self.cash + enemy:GetValue()
+      self.cash += enemy:GetValue()
       self.cursor:UpdateMenuSpriteList()
     end
   end
@@ -358,7 +358,7 @@ function GameSession:Update()
       add(self.explosion_list, enemy)
     elseif enemy:InTarget() then
       del(self.enemy_list, enemy)
-      self.player_life = self.player_life - 1
+      self.player_life -= 1
       self:StartScreenshake()
       sfx(0x10, -1)
     end

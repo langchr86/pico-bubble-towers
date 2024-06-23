@@ -94,7 +94,7 @@ end
 
 function Enemy:Regenerate()
   if self.regenerate_index < 45 then
-    self.regenerate_index = self.regenerate_index + 1
+    self.regenerate_index += 1
     return
   end
   self.regenerate_index = 0
@@ -154,7 +154,7 @@ function Enemy:Update()
 
   if self.pos:IsNear(self.next_pos, 0.5) then
     self.pos:Assign(self.next_pos)
-    self.next_pos_index = self.next_pos_index + 1
+    self.next_pos_index += 1
     self.next_pos = self.path[self.next_pos_index]
   end
 
@@ -217,10 +217,10 @@ end
 
 ---@return number
 function Enemy:Animate()
-  self.frame_index = self.frame_index + 1
+  self.frame_index += 1
   if self.frame_index >= self.props.frame_count then
     self.frame_index = 0
-    self.sprite_index = self.sprite_index + 1
+    self.sprite_index += 1
     if self.sprite_index >= self.props.sprite_count then
       self.sprite_index = 0
     end

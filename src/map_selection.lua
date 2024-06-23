@@ -26,32 +26,32 @@ end
 function MapSelection:Init()
   for l = 0, self.map_count - 1 do
     local top_left_tile = self.CalculateLevelOrigin(l)
-    top_left_tile.y = top_left_tile.y + 1
+    top_left_tile.y += 1
     self.minimaps[l] = Minimap:New(top_left_tile, kMapSizeInTiles, kMapSizeInTiles - 1)
   end
 end
 
 function MapSelection:Up()
   if self.map_index > 3 then
-    self.map_index = self.map_index - 4
+    self.map_index -= 4
   end
 end
 
 function MapSelection:Down()
   if self.map_index < 12 then
-    self.map_index = self.map_index + 4
+    self.map_index += 4
   end
 end
 
 function MapSelection:Left()
   if self.map_index % 4 > 0 then
-    self.map_index = self.map_index - 1
+    self.map_index -= 1
   end
 end
 
 function MapSelection:Right()
   if self.map_index % 4 < 3 then
-    self.map_index = self.map_index + 1
+    self.map_index += 1
   end
 end
 

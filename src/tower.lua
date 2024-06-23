@@ -65,7 +65,7 @@ function Tower:Upgrade(upgrade_type)
   local upgrade = UPGRADE_TABLE[self.type][upgrade_type]
 
   self.type = upgrade_type
-  self.level = self.level + 1
+  self.level += 1
 
   if upgrade.sprite then
     self.sprite = upgrade.sprite
@@ -273,7 +273,7 @@ function Tower:Shot(enemy_list)
   end
 
   if self.reload_level < self.reload:Get() then
-    self.reload_level = self.reload_level + 1
+    self.reload_level += 1
     return
   end
 

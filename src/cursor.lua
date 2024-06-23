@@ -40,7 +40,7 @@ function Cursor:Up()
     return
   end
 
-  self.pos.y = self.pos.y - kTileSize
+  self.pos.y -= kTileSize
   if (self.pos.y < self.min.y) then
     self.pos.y = self.min.y
   end
@@ -52,7 +52,7 @@ function Cursor:Down()
     return
   end
 
-  self.pos.y = self.pos.y + kTileSize
+  self.pos.y += kTileSize
   if (self.pos.y > self.max.y) then
     self.pos.y = self.max.y
   end
@@ -64,7 +64,7 @@ function Cursor:Left()
     return
   end
 
-  self.pos.x = self.pos.x - kTileSize
+  self.pos.x -= kTileSize
   if (self.pos.x < self.min.x) then
     self.pos.x = self.min.x
   end
@@ -76,7 +76,7 @@ function Cursor:Right()
     return
   end
 
-  self.pos.x = self.pos.x + kTileSize
+  self.pos.x += kTileSize
   if (self.pos.x > self.max.x) then
     self.pos.x = self.max.x
   end
@@ -206,15 +206,15 @@ function Cursor:CalcMenuPositionAndSize(index)
     menu_size.x = 2
     menu_size.y = 2
   elseif index == 1 then
-    menu_pos.x = menu_pos.x - 8
+    menu_pos.x -= 8
   elseif index == 2 then
-    menu_pos.x = menu_pos.x + 8
-    menu_pos.y = menu_pos.y - 8
+    menu_pos.x += 8
+    menu_pos.y -= 8
   elseif index == 3 then
-    menu_pos.x = menu_pos.x + 16
-    menu_pos.y = menu_pos.y + 8
+    menu_pos.x += 16
+    menu_pos.y += 8
   elseif index == 4 then
-    menu_pos.y = menu_pos.y + 16
+    menu_pos.y += 16
   end
 
   if menu_pos.x < self.min.x then

@@ -52,7 +52,7 @@ function GameSession:New(wave_list)
 end
 
 function GameSession:SearchSpecialPoints()
-  self:DrawMap()
+  Map:Draw()
   Map:SetWalkwayMode(false)
 
   for x = 0, kMapSizeInTiles - 1 do
@@ -251,14 +251,6 @@ function GameSession:CalculateGhostPath()
   return true
 end
 
-function GameSession:DrawMapBorder()
-  rect(0, kTileSize, 127, 127, 6)
-end
-
-function GameSession:DrawMap()
-  Map:Draw()
-end
-
 function GameSession:DrawDebug()
   --if not g_show_debug_info then
   --  return
@@ -397,7 +389,7 @@ function GameSession:Draw()
     return
   end
 
-  self:DrawMap()
+  Map:Draw()
   self:DrawDebug()
 
   for tower in all(self.modifier_tower_list) do
@@ -415,7 +407,7 @@ function GameSession:Draw()
     enemy:Draw()
   end
 
-  self:DrawMapBorder()
+  rect(0, kTileSize, 127, 127, 6)
   self:DrawStats()
 
   self.cursor:Draw()

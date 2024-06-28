@@ -15,6 +15,7 @@
 ---@field active_wave_list Wave[]
 ---@field cash number
 ---@field player_life number
+---@field stats EndScreen
 ---@field shake number
 GameSession = {}
 GameSession.__index = GameSession
@@ -36,6 +37,7 @@ function GameSessionNew(wave_list)
     active_wave_list = {},
     cash = 100,
     player_life = 10,
+    stats = EndScreenNew(),
     shake = 0,
   }
 
@@ -93,6 +95,7 @@ function GameSession:PlaceTower()
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
     self.cash -= Tower.BuyCost
+    self.stats.spent += Tower.BuyCost
     sfx(21, -1)
     return true
   end
@@ -108,6 +111,7 @@ function GameSession:RemoveTower()
   del(self.tower_list, tower)
   del(self.modifier_tower_list, tower)
   self.cash += Tower.BuyCost
+  self.stats.spent -= Tower.BuyCost
   self:CalculateNewPath()
   sfx(21, -1)
 end
@@ -176,7 +180,8 @@ function GameSession:UpgradeTower(menu_index)
     return false
   end
 
-  self.cash = self.cash - upgrade.cost
+  self.cash -= upgrade.cost
+  self.stats.spent += upgrade.cost
   tower:Upgrade(upgrade.type)
 
   if IsTowerModifierUpgrade(upgrade.type) then
@@ -356,12 +361,18 @@ function GameSession:Update()
       del(self.enemy_list, enemy)
       add(self.explosion_list, enemy)
       self.cash += enemy:GetValue()
+      self.stats.killed += 1
     elseif enemy:InTarget() then
       del(self.enemy_list, enemy)
       self.player_life -= 1
+      self.stats.lost += 1
       self:StartScreenshake()
       sfx(16, -1)
     end
+  end
+
+  if self.player_life <= 0 or (#self.wave_list == 0 and self:AnyEnemies() == false) then
+    return self.stats
   end
 
   return self
@@ -378,16 +389,6 @@ end
 
 function GameSession:Draw()
   self:DrawScreenshake()
-
-  if self.player_life <= 0 then
-    PrintCenterX("game over", 56, 6)
-    return
-  end
-
-  if #self.wave_list == 0 and self:AnyEnemies() == false then
-    PrintCenterX("you win", 56, 6)
-    return
-  end
 
   Map:Draw()
   self:DrawDebug()

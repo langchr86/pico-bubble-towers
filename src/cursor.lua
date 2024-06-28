@@ -20,18 +20,18 @@ Cursor.ShowNoSprite = 0
 Cursor.AbortShowMenu = 255
 
 ---@return Cursor
-function Cursor:New()
+function CursorNew()
   local o = {
     sprite = 5,
     small_sprite = 19,
-    pos = Point:New(8, 16),
-    min = Point:New(0, 8),
-    max = Point:New(112, 112),
+    pos = PointNew(8, 16),
+    min = PointNew(0, 8),
+    max = PointNew(112, 112),
     show_menu = false,
     menu_index = 0,
     menu_sprite_list = {},
   }
-  return setmetatable(o, self)
+  return setmetatable(o, Cursor)
 end
 
 function Cursor:Up()
@@ -96,7 +96,7 @@ end
 
 ---@return boolean
 function Cursor:IsFreeToBuildTower()
-  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
+  local tile_pos = PointNew(self.pos.x / kTileSize, self.pos.y / kTileSize)
   return Map:CanBuildOnTile4(tile_pos)
 end
 
@@ -180,7 +180,7 @@ function Cursor:DrawDebug()
   --  return
   --end
   --
-  --local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
+  --local tile_pos = PointNew(self.pos.x / kTileSize, self.pos.y / kTileSize)
   --print(Map:GetSprite(tile_pos), 2, 121, 10)
   --print(Map:IsTileBuildable(tile_pos), 18, 121, 10)
   --print(Map:IsTileWalkable(tile_pos), 50, 121, 10)
@@ -200,7 +200,7 @@ end
 ---@param index number
 function Cursor:CalcMenuPositionAndSize(index)
   local menu_pos = self.pos:Clone()
-  local menu_size = Point:New(1, 1)
+  local menu_size = PointNew(1, 1)
 
   if index == 0 then
     menu_size.x = 2

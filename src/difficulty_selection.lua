@@ -9,13 +9,13 @@ DifficultySelection = {}
 DifficultySelection.__index = DifficultySelection
 
 ---@return DifficultySelection
-function DifficultySelection:New()
+function DifficultySelectionNew()
   local o = {
     mode = 0,
     manual = false,
     level = 0,
   }
-  return setmetatable(o, self)
+  return setmetatable(o, DifficultySelection)
 end
 
 function DifficultySelection:Up()
@@ -42,7 +42,7 @@ end
 
 function DifficultySelection:PressO()
   if self.mode == 0 then
-    self.next_session = StartScreen:New()
+    self.next_session = StartScreenNew()
   else
     self.mode -= 1
   end
@@ -51,7 +51,7 @@ end
 function DifficultySelection:PressX()
   if self.mode == 0 then
     if self.manual then
-      self.next_session = Manual:New()
+      self.next_session = ManualNew()
     else
       self.level = 0
       self.mode = 1
@@ -59,7 +59,7 @@ function DifficultySelection:PressX()
   elseif self.mode == 1 then
     self.mode = 2
   else
-    self.next_session = MapSelection:New(CreatePredefinedWaveList(self.level))
+    self.next_session = MapSelectionNew(CreatePredefinedWaveList(self.level))
   end
 end
 

@@ -12,7 +12,7 @@ TowerModifiers = {}
 TowerModifiers.__index = TowerModifiers
 
 ---@return TowerModifiers
-function TowerModifiers:New()
+function TowerModifiersNew()
   local o = {
     damage = 0,
     range = 0,
@@ -22,7 +22,7 @@ function TowerModifiers:New()
     tower_mods = false,
     enemy_mods = false,
   }
-  return setmetatable(o, self)
+  return setmetatable(o, TowerModifiers)
 end
 
 ---@param upgrade TowerUpgrade

@@ -8,8 +8,8 @@ ModVal.__index = ModVal
 
 ---@param base number
 ---@return ModVal
-function ModVal:New(base)
-  local instance = --[[---@type ModVal]] setmetatable({}, self)
+function ModValNew(base)
+  local instance = --[[---@type ModVal]] setmetatable({}, ModVal)
   instance:SetBase(base)
   return instance
 end

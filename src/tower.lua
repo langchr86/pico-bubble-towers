@@ -28,26 +28,26 @@ Tower.MaxLevel = 4
 
 ---@param pos Point
 ---@return Tower
-function Tower:New(pos)
+function TowerNew(pos)
   local o = {
     sprite = 34,
     pos = pos:Clone(),
-    logical_pos = pos + Point:New(4, 4),
+    logical_pos = pos + PointNew(4, 4),
     type = TT.BASE,
     level = 0,
-    damage = ModVal:New(10),
-    range = ModVal:New(16),         --- divisor 3.75
-    reload = ModVal:New(10),        --- divisor 1.5
+    damage = ModValNew(10),
+    range = ModValNew(16),         --- divisor 3.75
+    reload = ModValNew(10),        --- divisor 1.5
     reload_level = 0,
     canon_angle = 0,
-    modifiers = TowerModifiers:New(),
+    modifiers = TowerModifiersNew(),
     is_area_damage = false,
     can_attack_ghost = true,
     can_attack_normal = true,
-    area_animation = CircleAnimation:New(),
+    area_animation = CircleAnimationNew(),
   }
 
-  local instance = --[[---@type Tower]] setmetatable(o, self)
+  local instance = --[[---@type Tower]] setmetatable(o, Tower)
 
   instance:UpdateMap()
 
@@ -55,7 +55,7 @@ function Tower:New(pos)
 end
 
 function Tower:Destroy()
-  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
+  local tile_pos = PointNew(self.pos.x / kTileSize, self.pos.y / kTileSize)
   Map:TileClear4(tile_pos, 3)
 end
 
@@ -157,12 +157,12 @@ function Tower:ClearModifications()
 end
 
 function Tower:UpdateMap()
-  local tile_pos = Point:New(self.pos.x / kTileSize, self.pos.y / kTileSize)
+  local tile_pos = PointNew(self.pos.x / kTileSize, self.pos.y / kTileSize)
   Map:TileSet4(tile_pos, self.sprite)
 end
 
 function Tower:Draw(cursor)
-  local tile_size = Point:New(kTileSize, kTileSize)
+  local tile_size = PointNew(kTileSize, kTileSize)
   local center = self.pos + tile_size
   if cursor.pos == self.pos then
     if self.modifiers.tower_mods then
@@ -190,7 +190,7 @@ function Tower:Draw(cursor)
       self.canon_angle = self.logical_pos:Angle(self.best_enemy.pos)
     end
 
-    local pos = self.logical_pos + Point:New(3, 3)
+    local pos = self.logical_pos + PointNew(3, 3)
     DrawDoubleLine(pos, pos:Trajectory(self.canon_angle, 4), 9)
   end
 end
@@ -327,7 +327,7 @@ end
 function Tower:ShotBulletOnBestEnemy()
   local best_enemy = self.best_enemy
   if best_enemy then
-    local bullet = Bullet:New(self.logical_pos, best_enemy.pos, self.damage:Get())
+    local bullet = BulletNew(self.logical_pos, best_enemy.pos, self.damage:Get())
     bullet:Update()
     best_enemy:Shot(bullet)
     return true

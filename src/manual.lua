@@ -6,11 +6,11 @@ Manual = {}
 Manual.__index = Manual
 
 ---@return Manual
-function Manual:New()
+function ManualNew()
   local o = {
     page = 0
   }
-  return setmetatable(o, self)
+  return setmetatable(o, Manual)
 end
 
 function Manual:PressO()
@@ -23,7 +23,7 @@ end
 
 function Manual:Update()
   if self.page < 0 or self.page > 3 then
-    return DifficultySelection:New()
+    return DifficultySelectionNew()
   end
   return self
 end

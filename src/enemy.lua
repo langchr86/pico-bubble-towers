@@ -22,7 +22,7 @@ Enemy.__index = Enemy
 ---@param type ET
 ---@param value_mul number
 ---@return Enemy
-function Enemy:New(type, value_mul)
+function EnemyNew(type, value_mul)
   local o = {
     type = type,
     props = ENEMY_TABLE[type],
@@ -33,17 +33,17 @@ function Enemy:New(type, value_mul)
     next_pos_index = 1,
     life = ENEMY_TABLE[type].life,
     value_mul = value_mul,
-    damage_factor = ModVal:New(1),
-    speed_factor = ModVal:New(1),
+    damage_factor = ModValNew(1),
+    speed_factor = ModValNew(1),
     bullet_list = {},
     particle_list = {}
   }
-  return setmetatable(o, self)
+  return setmetatable(o, Enemy)
 end
 
 ---@return Enemy
 function Enemy:Clone()
-  return Enemy:New(self.type, self.value_mul)
+  return EnemyNew(self.type, self.value_mul)
 end
 
 ---@param x number
@@ -84,7 +84,7 @@ function Enemy:Damage(damage)
     self.life = -Particle.kDuration
 
     for i = 1, 15 do
-      add(self.particle_list, Particle:New(self.pos + Point:New(3, 3)))
+      add(self.particle_list, ParticleNew(self.pos + PointNew(3, 3)))
     end
     sfx(15, -1)
   end

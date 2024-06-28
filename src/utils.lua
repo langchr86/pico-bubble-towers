@@ -22,13 +22,13 @@ end
 ---@param tile_pos Point
 ---@return Point
 function ConvertTileToPixel(tile_pos)
-  return Point:New(tile_pos.x * kTileSize, tile_pos.y * kTileSize)
+  return PointNew(tile_pos.x * kTileSize, tile_pos.y * kTileSize)
 end
 
 ---@param pos Point
 ---@return Point
 function ConvertPixelToTile(pos)
-  return Point:New(pos.x / kTileSize, pos.y / kTileSize)
+  return PointNew(pos.x / kTileSize, pos.y / kTileSize)
 end
 
 function PrintRight(text, x, y, color)

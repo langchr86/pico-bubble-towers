@@ -48,9 +48,9 @@ end
 ---@return boolean
 function Map:CanBuildOnTile4(tile_pos)
   return self:IsTileBuildable(tile_pos)
-      and self:IsTileBuildable(tile_pos + Point:New(1, 0))
-      and self:IsTileBuildable(tile_pos + Point:New(0, 1))
-      and self:IsTileBuildable(tile_pos + Point:New(1, 1))
+      and self:IsTileBuildable(tile_pos + PointNew(1, 0))
+      and self:IsTileBuildable(tile_pos + PointNew(0, 1))
+      and self:IsTileBuildable(tile_pos + PointNew(1, 1))
 end
 
 ---@param tile_pos Point

@@ -11,14 +11,14 @@ Minimap.__index = Minimap
 ---@param width number
 ---@param height number
 ---@return Minimap
-function Minimap:New(top_left_tile, width, height)
+function MinimapNew(top_left_tile, width, height)
   local o = {
     width = width,
     height = height,
     color_data = {},
   }
 
-  local instance = --[[---@type Minimap]] setmetatable(o, self)
+  local instance = --[[---@type Minimap]] setmetatable(o, Minimap)
   instance:Init(top_left_tile)
   return instance
 end
@@ -30,7 +30,7 @@ function Minimap:Init(top_left_tile)
   for x = 0, self.width - 1 do
     self.color_data[x] = {}
     for y = 0, self.height - 1 do
-      local tile_pos = Point:New(x, y)
+      local tile_pos = PointNew(x, y)
       local sprite = Map:GetSprite(tile_pos)
       local color = Map:GetSpriteMainColor(sprite)
       self.color_data[x][y] = color

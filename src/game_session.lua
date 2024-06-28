@@ -21,11 +21,11 @@ GameSession.__index = GameSession
 
 ---@param wave_list Wave[]
 ---@return GameSession
-function GameSession:New(wave_list)
+function GameSessionNew(wave_list)
   local o = {
-    cursor = Cursor:New(),
-    start = Point:New(0, 0),
-    goal = Point:New(0, 0),
+    cursor = CursorNew(),
+    start = PointNew(0, 0),
+    goal = PointNew(0, 0),
     enemy_path = {},
     ghost_path = {},
     tower_list = {},
@@ -39,7 +39,7 @@ function GameSession:New(wave_list)
     shake = 0,
   }
 
-  local instance = --[[---@type GameSession]] setmetatable(o, self)
+  local instance = --[[---@type GameSession]] setmetatable(o, GameSession)
 
   instance:SearchSpecialPoints()
   assert(instance:CalculateNewPath())
@@ -57,7 +57,7 @@ function GameSession:SearchSpecialPoints()
 
   for x = 0, kMapSizeInTiles - 1 do
     for y = 0, kMapSizeInTiles - 1 do
-      local tile_pos = Point:New(x, y)
+      local tile_pos = PointNew(x, y)
       if Map:IsTileStart(tile_pos) then
         self.start = tile_pos
       elseif Map:IsTileGoal(tile_pos) then
@@ -88,7 +88,7 @@ function GameSession:PlaceTower()
     return false
   end
 
-  local new_tower = Tower:New(self.cursor.pos)
+  local new_tower = TowerNew(self.cursor.pos)
 
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
@@ -221,7 +221,7 @@ end
 ---@return boolean
 function GameSession:CalculateNewPath()
   local function is_coord_reachable(x, y)
-    local tile_pos = Point:New(x, y)
+    local tile_pos = PointNew(x, y)
     return Map:IsTileWalkable(tile_pos)
   end
 

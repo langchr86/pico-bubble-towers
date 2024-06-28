@@ -8,12 +8,12 @@ CircleAnimation = {}
 CircleAnimation.__index = CircleAnimation
 
 ---@return CircleAnimation
-function CircleAnimation:New()
+function CircleAnimationNew()
   local o = {
     radius = 0,
   }
 
-  return setmetatable(o, self)
+  return setmetatable(o, CircleAnimation)
 end
 
 ---@param radius number

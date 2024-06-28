@@ -11,7 +11,7 @@ Wave.__index = Wave
 ---@param enemy_count number
 ---@param enemy_template Enemy
 ---@return Wave
-function Wave:New(enemy_count, enemy_template)
+function WaveNew(enemy_count, enemy_template)
   local o = {
     enemy_count = enemy_count,
     enemy_template = enemy_template,
@@ -19,7 +19,7 @@ function Wave:New(enemy_count, enemy_template)
     active_list = {},
   }
 
-  return setmetatable(o, self)
+  return setmetatable(o, Wave)
 end
 
 ---@param start Point
@@ -130,5 +130,5 @@ end
 ---@param type ET
 ---@param value_mul number
 function AddEnemy(list, count, type, value_mul)
-  add(list, Wave:New(count, Enemy:New(type, value_mul)))
+  add(list, WaveNew(count, EnemyNew(type, value_mul)))
 end

@@ -13,7 +13,7 @@ Bullet.__index = Bullet
 ---@param dest Point
 ---@param damage number
 ---@return Bullet
-function Bullet:New(pos, dest, damage)
+function BulletNew(pos, dest, damage)
   local o = {
     pos = pos:Clone(),
     dest = dest, -- this is a always updated reference to the target
@@ -21,7 +21,7 @@ function Bullet:New(pos, dest, damage)
     speed = 3,
     damage = damage,
   }
-  return setmetatable(o, self)
+  return setmetatable(o, Bullet)
 end
 
 ---@return boolean

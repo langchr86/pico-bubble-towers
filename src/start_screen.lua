@@ -6,8 +6,8 @@ StartScreen = {}
 StartScreen.__index = StartScreen
 
 ---@return StartScreen
-function StartScreen:New()
-  local instance = --[[---@type StartScreen]] setmetatable({}, self)
+function StartScreenNew()
+  local instance = --[[---@type StartScreen]] setmetatable({}, StartScreen)
   instance:Init()
   return instance
 end
@@ -17,7 +17,7 @@ function StartScreen:Init()
 end
 
 function StartScreen:PressX()
-  self.next_session = DifficultySelection:New()
+  self.next_session = DifficultySelectionNew()
 end
 
 function StartScreen:Update()

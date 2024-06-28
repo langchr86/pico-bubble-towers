@@ -9,17 +9,17 @@ Point.__index = Point
 ---@param x number
 ---@param y number
 ---@return Point
-function Point:New(x, y)
+function PointNew(x, y)
   local o = {
     x = x;
     y = y;
   }
-  return setmetatable(o, self)
+  return setmetatable(o, Point)
 end
 
 ---@return Point
 function Point:Clone()
-  return Point:New(self.x, self.y)
+  return PointNew(self.x, self.y)
 end
 
 ---@param other Point
@@ -53,7 +53,7 @@ end
 function Point:Trajectory(alpha, length)
   local x = self.x + cos(alpha) * length
   local y = self.y + cos(0.25 - alpha) * length
-  return Point:New(x, y)
+  return PointNew(x, y)
 end
 
 ---@param other Point
@@ -85,21 +85,21 @@ end
 ---@param rhs Point
 ---@return Point
 function Point.__add(lhs, rhs)
-  return Point:New(lhs.x + rhs.x, lhs.y + rhs.y)
+  return PointNew(lhs.x + rhs.x, lhs.y + rhs.y)
 end
 
 ---@param lhs Point
 ---@param rhs Point
 ---@return Point
 function Point.__sub(lhs, rhs)
-  return Point:New(lhs.x - rhs.x, lhs.y - rhs.y)
+  return PointNew(lhs.x - rhs.x, lhs.y - rhs.y)
 end
 
 ---@param scalar number
 ---@param point Point
 ---@return Point
 function Point.__mul(scalar, point)
-  return Point:New(scalar * point.x, scalar * point.y)
+  return PointNew(scalar * point.x, scalar * point.y)
 end
 
 ---@param lhs Point

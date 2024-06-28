@@ -21,7 +21,7 @@ function _init()
   memcpy(0x8000, 0x6000, 128 * 64)
 end
 
-local active_session = StartScreen:New()
+local active_session = StartScreenNew()
 
 function _update()
   if btnp(⬆️) and active_session.Up then

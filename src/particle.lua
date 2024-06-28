@@ -13,15 +13,15 @@ Particle.kDuration = 18
 
 ---@param pos Point
 ---@return Particle
-function Particle:New(pos)
+function ParticleNew(pos)
   local o = {
     pos = pos:Clone(),
-    speed = Point:New(rnd(1) - 0.5, rnd(1) - 0.5),
+    speed = PointNew(rnd(1) - 0.5, rnd(1) - 0.5),
     age = 0,
     colors = { 7, 10, 9, 8, 2, 5 },
     rad = rnd(2)
   }
-  return setmetatable(o, self)
+  return setmetatable(o, Particle)
 end
 
 function Particle:Update()

@@ -1,8 +1,6 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 ---@class Cursor
----@field sprite number
----@field small_sprite number
 ---@field pos Point
 ---@field min Point
 ---@field max Point
@@ -22,8 +20,6 @@ Cursor.AbortShowMenu = 255
 ---@return Cursor
 function CursorNew()
   local o = {
-    sprite = 5,
-    small_sprite = 19,
     pos = PointNew(8, 16),
     min = PointNew(0, 8),
     max = PointNew(112, 112),
@@ -160,9 +156,9 @@ function Cursor:Draw()
 
     local menu_pos, menu_size = self:CalcMenuPositionAndSize(self.menu_index)
 
-    local selection_sprite = self.small_sprite
+    local selection_sprite = 19
     if self.menu_index == 0 then
-      selection_sprite = self.sprite
+      selection_sprite = 5
     end
 
     spr(selection_sprite, menu_pos.x, menu_pos.y, menu_size.x, menu_size.y)
@@ -170,7 +166,7 @@ function Cursor:Draw()
     return
   end
 
-  spr(self.sprite, self.pos.x, self.pos.y, 2, 2)
+  spr(5, self.pos.x, self.pos.y, 2, 2)
 
   self:DrawDebug()
 end

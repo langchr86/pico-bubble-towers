@@ -3,8 +3,6 @@
 ---@class Bullet
 ---@field pos Point
 ---@field dest Point
----@field sprite number
----@field speed number
 ---@field damage number
 Bullet = {}
 Bullet.__index = Bullet
@@ -17,8 +15,6 @@ function BulletNew(pos, dest, damage)
   local o = {
     pos = pos:Clone(),
     dest = dest, -- this is a always updated reference to the target
-    sprite = 20,
-    speed = 3,
     damage = damage,
   }
   return setmetatable(o, Bullet)
@@ -30,10 +26,10 @@ function Bullet:InTarget()
 end
 
 function Bullet:Update()
-  self.pos:Move(self.dest, self.speed)
+  self.pos:Move(self.dest, 3)
 end
 
 function Bullet:Draw()
   ---@type Point
-  spr(self.sprite, self.pos.x, self.pos.y)
+  spr(20, self.pos.x, self.pos.y)
 end

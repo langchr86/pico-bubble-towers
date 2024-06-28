@@ -74,17 +74,17 @@ end
 ---@return boolean
 function GameSession:PlaceTower()
   if not self.cursor:IsFreeToBuildTower() then
-    sfx(0x13, -1)
+    sfx(19, -1)
     return false
   end
 
   if self:AnyEnemies() then
-    sfx(0x13, -1)
+    sfx(19, -1)
     return false
   end
 
   if self.cash < Tower.BuyCost then
-    sfx(0x13, -1)
+    sfx(19, -1)
     return false
   end
 
@@ -93,12 +93,12 @@ function GameSession:PlaceTower()
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
     self.cash -= Tower.BuyCost
-    sfx(0x15, -1)
+    sfx(21, -1)
     return true
   end
 
   new_tower:Destroy()
-  sfx(0x13, -1)
+  sfx(19, -1)
   return false
 end
 
@@ -109,7 +109,7 @@ function GameSession:RemoveTower()
   del(self.modifier_tower_list, tower)
   self.cash += Tower.BuyCost
   self:CalculateNewPath()
-  sfx(0x15, -1)
+  sfx(21, -1)
 end
 
 function GameSession:PrepareCursorMenu()
@@ -122,7 +122,7 @@ function GameSession:PrepareCursorMenu()
         self:RemoveTower()
         return true
       else
-        sfx(0x13, -1)
+        sfx(19, -1)
         return false
       end
     end
@@ -139,7 +139,7 @@ function GameSession:PrepareCursorMenu()
 
     local tower = --[[---@type Tower]] self.tower_selected
     if tower:HasMaxLevel() then
-      sfx(0x13, -1)
+      sfx(19, -1)
       return Cursor.AbortShowMenu
     end
 
@@ -172,7 +172,7 @@ function GameSession:UpgradeTower(menu_index)
   local upgrade = --[[---@type TowerMenu]] menu_entry
 
   if upgrade.cost > self.cash then
-    sfx(0x13, -1)
+    sfx(19, -1)
     return false
   end
 
@@ -184,7 +184,7 @@ function GameSession:UpgradeTower(menu_index)
     add(self.modifier_tower_list, tower)
   end
 
-  sfx(0x14, -1)
+  sfx(20, -1)
   return true
 end
 
@@ -200,7 +200,7 @@ function GameSession:StartNextWave()
   next_wave:Start(start_point, self.enemy_path, self.ghost_path)
 
   add(self.active_wave_list, next_wave)
-  sfx(0x11, -1)
+  sfx(17, -1)
 end
 
 function GameSession:TrySpawnEnemy()
@@ -360,7 +360,7 @@ function GameSession:Update()
       del(self.enemy_list, enemy)
       self.player_life -= 1
       self:StartScreenshake()
-      sfx(0x10, -1)
+      sfx(16, -1)
     end
   end
 

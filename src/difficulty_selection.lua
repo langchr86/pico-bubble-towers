@@ -72,8 +72,7 @@ function DifficultySelection:Update()
 end
 
 function DifficultySelection:Draw()
-  rectfill(0, 0, 127, 127, 1)
-  rect(0, 0, 127, 127, 12)
+  DrawBackground()
   PrintCenterX("select difficulty level", 4, 12)
 
   print("start game", 32, 24, 12)

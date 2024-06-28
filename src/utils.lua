@@ -41,6 +41,12 @@ function PrintCenterX(text, y, color)
   print(text, 64 - length / 2, y, color)
 end
 
+function DrawBackground()
+  camera(0, 0)
+  rectfill(0, 0, 127, 127, 1)
+  rect(0, 0, 127, 127, 12)
+end
+
 ---@param center Point
 ---@param radius number
 ---@param color number

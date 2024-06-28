@@ -75,8 +75,7 @@ function MapSelection:Update()
 end
 
 function MapSelection:Draw()
-  rectfill(0, 0, 127, 127, 1)
-  rect(0, 0, 127, 127, 12)
+  DrawBackground()
   PrintCenterX("select map", 4, 12)
 
   for m = 0, self.map_count - 1 do

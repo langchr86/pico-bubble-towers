@@ -29,8 +29,7 @@ function Manual:Update()
 end
 
 function Manual:Draw()
-  rectfill(0, 0, 127, 127, 1)
-  rect(0, 0, 127, 127, 12)
+  DrawBackground()
 
   local function TextLine(text, y)
     print(text, 18, y, 12)

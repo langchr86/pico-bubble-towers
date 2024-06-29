@@ -63,3 +63,9 @@ function DrawDoubleLine(orig, dest, color)
   line(orig.x, orig.y + 1, dest.x, dest.y + 1, color)
   line(orig.x + 1, orig.y, dest.x + 1, dest.y, color)
 end
+
+function StartFullTheme()
+  if not stat(57) then
+    music(0, 250)
+  end
+end

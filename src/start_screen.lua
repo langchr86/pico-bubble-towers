@@ -8,7 +8,7 @@ StartScreen.__index = StartScreen
 ---@return StartScreen
 function StartScreenNew()
   local instance = --[[---@type StartScreen]] setmetatable({}, StartScreen)
-  music(0, 120)
+  StartFullTheme()
   return instance
 end
 

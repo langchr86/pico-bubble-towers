@@ -64,6 +64,8 @@ function DifficultySelection:PressX()
 end
 
 function DifficultySelection:Update()
+  StartFullTheme()
+
   if self.next_session then
     return self.next_session
   else

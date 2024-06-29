@@ -48,7 +48,7 @@ function GameSessionNew(wave_list)
   assert(instance:CalculateGhostPath())
   instance:PrepareCursorMenu()
 
-  music(11, 120)
+  music(11, 250)
 
   return instance
 end
@@ -371,7 +371,11 @@ function GameSession:Update()
     end
   end
 
-  if self.player_life <= 0 or (#self.wave_list == 0 and self:AnyEnemies() == false) then
+  if self.player_life <= 0 then
+    music(25, 250)
+    return self.stats
+  elseif #self.wave_list == 0 and self:AnyEnemies() == false then
+    music(24, 250)
     return self.stats
   end
 

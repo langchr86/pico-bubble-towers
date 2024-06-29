@@ -8,12 +8,8 @@ StartScreen.__index = StartScreen
 ---@return StartScreen
 function StartScreenNew()
   local instance = --[[---@type StartScreen]] setmetatable({}, StartScreen)
-  instance:Init()
-  return instance
-end
-
-function StartScreen:Init()
   music(0, 120)
+  return instance
 end
 
 function StartScreen:PressX()

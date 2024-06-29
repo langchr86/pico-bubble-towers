@@ -74,7 +74,7 @@ end
 function Enemy:Hit(bullet)
   del(self.bullet_list, bullet)
   self:Damage(bullet.damage)
-  sfx(18, -1)
+  sfx(18)
 end
 
 ---@param damage number
@@ -86,7 +86,7 @@ function Enemy:Damage(damage)
     for i = 1, 15 do
       add(self.particle_list, ParticleNew(self.pos + PointNew(3, 3)))
     end
-    sfx(15, -1)
+    sfx(15)
   end
 end
 

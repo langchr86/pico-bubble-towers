@@ -76,17 +76,17 @@ end
 ---@return boolean
 function GameSession:PlaceTower()
   if not self.cursor:IsFreeToBuildTower() then
-    sfx(19, -1)
+    sfx(19)
     return false
   end
 
   if self:AnyEnemies() then
-    sfx(19, -1)
+    sfx(19)
     return false
   end
 
   if self.cash < Tower.BuyCost then
-    sfx(19, -1)
+    sfx(19)
     return false
   end
 
@@ -96,12 +96,12 @@ function GameSession:PlaceTower()
     add(self.tower_list, new_tower)
     self.cash -= Tower.BuyCost
     self.stats.spent += Tower.BuyCost
-    sfx(21, -1)
+    sfx(21)
     return true
   end
 
   new_tower:Destroy()
-  sfx(19, -1)
+  sfx(19)
   return false
 end
 
@@ -113,7 +113,7 @@ function GameSession:RemoveTower()
   self.cash += Tower.BuyCost
   self.stats.spent -= Tower.BuyCost
   self:CalculateNewPath()
-  sfx(21, -1)
+  sfx(21)
 end
 
 function GameSession:PrepareCursorMenu()
@@ -126,7 +126,7 @@ function GameSession:PrepareCursorMenu()
         self:RemoveTower()
         return true
       else
-        sfx(19, -1)
+        sfx(19)
         return false
       end
     end
@@ -143,7 +143,7 @@ function GameSession:PrepareCursorMenu()
 
     local tower = --[[---@type Tower]] self.tower_selected
     if tower:HasMaxLevel() then
-      sfx(19, -1)
+      sfx(19)
       return Cursor.AbortShowMenu
     end
 
@@ -176,7 +176,7 @@ function GameSession:UpgradeTower(menu_index)
   local upgrade = --[[---@type TowerMenu]] menu_entry
 
   if upgrade.cost > self.cash then
-    sfx(19, -1)
+    sfx(19)
     return false
   end
 
@@ -189,7 +189,7 @@ function GameSession:UpgradeTower(menu_index)
     add(self.modifier_tower_list, tower)
   end
 
-  sfx(20, -1)
+  sfx(20)
   return true
 end
 
@@ -205,7 +205,7 @@ function GameSession:StartNextWave()
   next_wave:Start(start_point, self.enemy_path, self.ghost_path)
 
   add(self.active_wave_list, next_wave)
-  sfx(17, -1)
+  sfx(17)
 end
 
 function GameSession:TrySpawnEnemy()
@@ -367,7 +367,7 @@ function GameSession:Update()
       self.player_life -= 1
       self.stats.lost += 1
       self:StartScreenshake()
-      sfx(16, -1)
+      sfx(16)
     end
   end
 

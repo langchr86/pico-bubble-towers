@@ -2,30 +2,27 @@
 
 ---@alias ET number
 
----@type table<string, ET>
-ET = {
-  NORMAL = 0,
-  GHOST = 1,
-  FAST = 2,
-  REGENERATE = 3,
-  HEAVY = 4,
-  NORMAL_BOSS = 5,
-  GHOST_BOSS = 6,
-  FAST_BOSS = 7,
-  REGENERATE_BOSS = 8,
-  HEAVY_BOSS = 9,
-}
+ET_NORMAL = 0
+ET_GHOST = 1
+ET_FAST = 2
+ET_REGENERATE = 3
+ET_HEAVY = 4
+ET_NORMAL_BOSS = 5
+ET_GHOST_BOSS = 6
+ET_FAST_BOSS = 7
+ET_REGENERATE_BOSS = 8
+ET_HEAVY_BOSS = 9
 
 ---@param type ET
 ---@return boolean
 function IsBossEnemy(type)
-  return type >= ET.NORMAL_BOSS
+  return type >= ET_NORMAL_BOSS
 end
 
 ---@param type ET
 ---@return boolean
 function IsHeavyEnemy(type)
-  return type == ET.HEAVY or type == ET.HEAVY_BOSS
+  return type == ET_HEAVY or type == ET_HEAVY_BOSS
 end
 
 ---@class EnemyProperties
@@ -39,7 +36,7 @@ end
 ---@class ENEMY_TABLE
 ---@field [ET] EnemyProperties
 ENEMY_TABLE = {
-  [ET.NORMAL] = {
+  [ET_NORMAL] = {
     sprite = 8,
     sprite_count = 4,
     frame_count = 8,
@@ -47,7 +44,7 @@ ENEMY_TABLE = {
     life = 120,
     value = 4,
   },
-  [ET.GHOST] = {
+  [ET_GHOST] = {
     sprite = 32,
     sprite_count = 2,
     frame_count = 10,
@@ -55,7 +52,7 @@ ENEMY_TABLE = {
     life = 100,
     value = 6,
   },
-  [ET.FAST] = {
+  [ET_FAST] = {
     sprite = 12,
     sprite_count = 4,
     frame_count = 4,
@@ -63,7 +60,7 @@ ENEMY_TABLE = {
     life = 100,
     value = 4,
   },
-  [ET.REGENERATE] = {
+  [ET_REGENERATE] = {
     sprite = 28,
     sprite_count = 3,
     frame_count = 6,
@@ -71,7 +68,7 @@ ENEMY_TABLE = {
     life = 150,
     value = 6,
   },
-  [ET.HEAVY] = {
+  [ET_HEAVY] = {
     sprite = 24,
     sprite_count = 4,
     frame_count = 6,
@@ -79,7 +76,7 @@ ENEMY_TABLE = {
     life = 300,
     value = 6,
   },
-  [ET.NORMAL_BOSS] = {
+  [ET_NORMAL_BOSS] = {
     sprite = 40,
     sprite_count = 4,
     frame_count = 8,
@@ -87,7 +84,7 @@ ENEMY_TABLE = {
     life = 360,
     value = 20,
   },
-  [ET.GHOST_BOSS] = {
+  [ET_GHOST_BOSS] = {
     sprite = 48,
     sprite_count = 2,
     frame_count = 10,
@@ -95,7 +92,7 @@ ENEMY_TABLE = {
     life = 300,
     value = 30,
   },
-  [ET.FAST_BOSS] = {
+  [ET_FAST_BOSS] = {
     sprite = 44,
     sprite_count = 4,
     frame_count = 4,
@@ -103,7 +100,7 @@ ENEMY_TABLE = {
     life = 300,
     value = 20,
   },
-  [ET.REGENERATE_BOSS] = {
+  [ET_REGENERATE_BOSS] = {
     sprite = 60,
     sprite_count = 3,
     frame_count = 6,
@@ -111,7 +108,7 @@ ENEMY_TABLE = {
     life = 450,
     value = 30,
   },
-  [ET.HEAVY_BOSS] = {
+  [ET_HEAVY_BOSS] = {
     sprite = 56,
     sprite_count = 4,
     frame_count = 6,

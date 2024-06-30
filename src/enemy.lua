@@ -54,8 +54,8 @@ end
 
 ---@return boolean
 function Enemy:IsGhost()
-  return self.type == ET.GHOST
-      or self.type == ET.GHOST_BOSS
+  return self.type == ET_GHOST
+      or self.type == ET_GHOST_BOSS
 end
 
 ---@param pos Point
@@ -166,7 +166,7 @@ function Enemy:Update()
     end
   end
 
-  if self.type == ET.REGENERATE or self.type == ET.REGENERATE_BOSS then
+  if self.type == ET_REGENERATE or self.type == ET_REGENERATE_BOSS then
     self:Regenerate()
   end
 end

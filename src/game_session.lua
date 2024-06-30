@@ -138,13 +138,13 @@ function GameSession:PrepareCursorMenu()
   local function CursorMenuSpriteGetter(menu_index)
     if self.tower_selected == nil then
       self:PlaceTower()
-      return Cursor.AbortShowMenu
+      return MenuAbort
     end
 
     local tower = --[[---@type Tower]] self.tower_selected
     if tower:HasMaxLevel() then
       sfx(19)
-      return Cursor.AbortShowMenu
+      return MenuAbort
     end
 
     if menu_index == 0 and tower.level == 0 then
@@ -161,7 +161,7 @@ function GameSession:PrepareCursorMenu()
       end
     end
 
-    return Cursor.ShowNoSprite
+    return MenuNoSprite
   end
 
   self.cursor:RegisterMenuHandler(CursorMenuHandler, CursorMenuSpriteGetter)

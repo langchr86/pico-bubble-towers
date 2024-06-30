@@ -12,17 +12,17 @@
 Cursor = {}
 Cursor.__index = Cursor
 
----@type number
-Cursor.ShowNoSprite = 0
----@type number
-Cursor.AbortShowMenu = 255
+MenuNoSprite = 0
+MenuAbort = 255
+
+CursorMinX = 0
+CursorMinY = 8
+CursorMax = 112
 
 ---@return Cursor
 function CursorNew()
   local o = {
     pos = PointNew(8, 16),
-    min = PointNew(0, 8),
-    max = PointNew(112, 112),
     show_menu = false,
     menu_index = 0,
     menu_sprite_list = {},
@@ -37,8 +37,8 @@ function Cursor:Up()
   end
 
   self.pos.y -= kTileSize
-  if (self.pos.y < self.min.y) then
-    self.pos.y = self.min.y
+  if (self.pos.y < CursorMinY) then
+    self.pos.y = CursorMinY
   end
 end
 
@@ -49,8 +49,8 @@ function Cursor:Down()
   end
 
   self.pos.y += kTileSize
-  if (self.pos.y > self.max.y) then
-    self.pos.y = self.max.y
+  if (self.pos.y > CursorMax) then
+    self.pos.y = CursorMax
   end
 end
 
@@ -61,8 +61,8 @@ function Cursor:Left()
   end
 
   self.pos.x -= kTileSize
-  if (self.pos.x < self.min.x) then
-    self.pos.x = self.min.x
+  if (self.pos.x < CursorMinX) then
+    self.pos.x = CursorMinX
   end
 end
 
@@ -73,41 +73,37 @@ function Cursor:Right()
   end
 
   self.pos.x += kTileSize
-  if (self.pos.x > self.max.x) then
-    self.pos.x = self.max.x
+  if (self.pos.x > CursorMax) then
+    self.pos.x = CursorMax
   end
 end
 
----@param move_direction number
----@param opposite_direction number
-function Cursor:HandleMenuSelect(move_direction, opposite_direction)
-  if self.menu_index == opposite_direction then
+---@param move_dir number
+---@param opposite_dir number
+function Cursor:HandleMenuSelect(move_dir, opposite_dir)
+  if self.menu_index == opposite_dir then
     self.menu_index = 0
-  elseif self.menu_sprite_list[move_direction] ~= Cursor.ShowNoSprite then
-    self.menu_index = move_direction
-  else
-    --- do not change anything
+  elseif self.menu_sprite_list[move_dir] != CursorShowNoSprite then
+    self.menu_index = move_dir
   end
 end
 
 ---@return boolean
 function Cursor:IsFreeToBuildTower()
-  local tile_pos = PointNew(self.pos.x / kTileSize, self.pos.y / kTileSize)
-  return Map:CanBuildOnTile4(tile_pos)
+  return Map:CanBuildOnTile4(PointNew(self.pos.x / kTileSize, self.pos.y / kTileSize))
 end
 
----@param handler function
----@param sprite_getter function
-function Cursor:RegisterMenuHandler(handler, sprite_getter)
-  self.menu_handler = handler
-  self.menu_sprite_getter = sprite_getter
+---@param h function
+---@param g function
+function Cursor:RegisterMenuHandler(h, g)
+  self.menu_handler = h
+  self.menu_sprite_getter = g
 end
 
 function Cursor:Press()
   if self.show_menu then
-    local handler = self.menu_handler
-    if handler then
-      if handler(self.menu_index) then
+    if self.menu_handler then
+      if self.menu_handler(self.menu_index) then
         self:HideMenu()
       end
     end
@@ -120,7 +116,7 @@ function Cursor:ShowMenu()
   self.show_menu = true
   self.menu_sprite_list[0] = self.menu_sprite_getter(0)
 
-  if self.menu_sprite_list[0] == Cursor.AbortShowMenu then
+  if self.menu_sprite_list[0] == MenuAbort then
     self:HideMenu()
     return
   end
@@ -154,14 +150,14 @@ function Cursor:Draw()
     self:DrawMenuItem(3)
     self:DrawMenuItem(4)
 
-    local menu_pos, menu_size = self:CalcMenuPositionAndSize(self.menu_index)
+    local x, y, size = self:CalcMenuPos(self.menu_index)
 
     local selection_sprite = 19
     if self.menu_index == 0 then
       selection_sprite = 5
     end
 
-    spr(selection_sprite, menu_pos.x, menu_pos.y, menu_size.x, menu_size.y)
+    spr(selection_sprite, x, y, size, size)
 
     return
   end
@@ -169,49 +165,47 @@ function Cursor:Draw()
   spr(5, self.pos.x, self.pos.y, 2, 2)
 end
 
----@param index number
-function Cursor:DrawMenuItem(index)
-  local sprite = self.menu_sprite_list[index]
-  if sprite == 0 then
-    return
+---@param i number
+function Cursor:DrawMenuItem(i)
+  local sprite = self.menu_sprite_list[i]
+  if sprite != MenuNoSprite then
+    local x, y, size = self:CalcMenuPos(i)
+    spr(sprite, x, y, size, size)
   end
-
-  local menu_pos, menu_size = self:CalcMenuPositionAndSize(index)
-  spr(sprite, menu_pos.x, menu_pos.y, menu_size.x, menu_size.y)
 end
 
----@param index number
-function Cursor:CalcMenuPositionAndSize(index)
-  local menu_pos = self.pos:Clone()
-  local menu_size = PointNew(1, 1)
+---@param i number
+function Cursor:CalcMenuPos(i)
+  local x = self.pos.x
+  local y = self.pos.y
+  local size = 1
 
-  if index == 0 then
-    menu_size.x = 2
-    menu_size.y = 2
-  elseif index == 1 then
-    menu_pos.x -= 8
-  elseif index == 2 then
-    menu_pos.x += 8
-    menu_pos.y -= 8
-  elseif index == 3 then
-    menu_pos.x += 16
-    menu_pos.y += 8
-  elseif index == 4 then
-    menu_pos.y += 16
-  end
-
-  if menu_pos.x < self.min.x then
-    menu_pos.x = self.min.x
-  end
-  if menu_pos.x > self.max.x then
-    menu_pos.x = self.max.x + 8
-  end
-  if menu_pos.y < self.min.y then
-    menu_pos.y = self.min.y
-  end
-  if menu_pos.y > self.max.y then
-    menu_pos.y = self.max.y + 8
+  if i == 0 then
+    size = 2
+  elseif i == 1 then
+    x -= 8
+  elseif i == 2 then
+    x += 8
+    y -= 8
+  elseif i == 3 then
+    x += 16
+    y += 8
+  elseif i == 4 then
+    y += 16
   end
 
-  return menu_pos, menu_size
+  if x < CursorMinX then
+    x = CursorMinX
+  end
+  if x > CursorMax then
+    x = CursorMax + 8
+  end
+  if y < CursorMinY then
+    y = CursorMinY
+  end
+  if y > CursorMax then
+    y = CursorMax + 8
+  end
+
+  return x, y, size
 end

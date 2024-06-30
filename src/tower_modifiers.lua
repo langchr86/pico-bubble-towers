@@ -36,11 +36,11 @@ function TowerModifiers:Upgrade(upgrade)
   if upgrade.reload_f then
     self.reload = upgrade.reload_f
   end
-  if upgrade.weaken_f then
-    self.weaken = upgrade.weaken_f
+  if upgrade.weak_f then
+    self.weaken = upgrade.weak_f
   end
-  if upgrade.slow_down_f then
-    self.slow_down = upgrade.slow_down_f
+  if upgrade.slow_f then
+    self.slow_down = upgrade.slow_f
   end
 
   self:CheckModificationTypes()

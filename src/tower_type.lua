@@ -74,8 +74,8 @@ end
 ---@field range number
 ---@field reload number
 ---@field damage number
----@field weaken_f number
----@field slow_down_f number
+---@field weak_f number
+---@field slow_f number
 ---@field damage_f number
 ---@field reload_f number
 ---@field range_f number
@@ -247,14 +247,14 @@ UPGRADE_TABLE = {
       psprite = 116,
       cost = 35,
       range = 14,
-      slow_down_f = 0.8,
+      slow_f = 0.8,
     },
     [TT_AREA_WEAK_L2] = {
       sprite = 78,
       psprite = 101,
       cost = 80,
       range = 14,
-      weaken_f = 1.2,
+      weak_f = 1.2,
     },
   },
   [TT_AREA_SNIPER_L2] = {
@@ -278,7 +278,7 @@ UPGRADE_TABLE = {
       psprite = 116,
       cost = 90,
       range = 18.6,
-      slow_down_f = 0.7,
+      slow_f = 0.7,
     },
   },
   [TT_AREA_SLOW_L3] = {
@@ -286,7 +286,7 @@ UPGRADE_TABLE = {
       psprite = 116,
       cost = 180,
       range = 24,
-      slow_down_f = 0.6,
+      slow_f = 0.6,
     },
   },
   [TT_AREA_WEAK_L2] = {
@@ -294,7 +294,7 @@ UPGRADE_TABLE = {
       psprite = 101,
       cost = 130,
       range = 16,
-      weaken_f = 1.5,
+      weak_f = 1.5,
     },
   },
   [TT_AREA_WEAK_L3] = {
@@ -302,7 +302,7 @@ UPGRADE_TABLE = {
       psprite = 101,
       cost = 220,
       range = 20,
-      weaken_f = 2,
+      weak_f = 2,
     },
   },
   [TT_BOOST_DAMAGE_L1] = {

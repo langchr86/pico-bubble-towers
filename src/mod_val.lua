@@ -26,10 +26,10 @@ function ModVal:SetBase(base)
   self.current = base
 end
 
----@param factor number
-function ModVal:Modify(factor)
-  if factor > 0 then
-    self.current = self.current * factor
+---@param f number
+function ModVal:Modify(f)
+  if f > 0 then
+    self.current = self.current * f
   end
   assert(self.current > 0)
 end

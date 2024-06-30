@@ -74,11 +74,11 @@ end
 ---@field range number
 ---@field reload number
 ---@field damage number
----@field weaken_factor number
----@field slow_down_factor number
----@field damage_factor number
----@field reload_factor number
----@field range_factor number
+---@field weaken_f number
+---@field slow_down_f number
+---@field damage_f number
+---@field reload_f number
+---@field range_f number
 
 ---@alias TowerUpgradeMap TowerUpgrade[]
 
@@ -111,7 +111,7 @@ UPGRADE_TABLE = {
       sprite = 106,
       psprite = 99,
       cost = 40,
-      damage_factor = 1.25,
+      damage_f = 1.25,
     },
   },
   [TT_NORMAL_SNIPER_L1] = {
@@ -247,14 +247,14 @@ UPGRADE_TABLE = {
       psprite = 116,
       cost = 35,
       range = 14,
-      slow_down_factor = 0.8,
+      slow_down_f = 0.8,
     },
     [TT_AREA_WEAK_L2] = {
       sprite = 78,
       psprite = 101,
       cost = 80,
       range = 14,
-      weaken_factor = 1.2,
+      weaken_f = 1.2,
     },
   },
   [TT_AREA_SNIPER_L2] = {
@@ -278,7 +278,7 @@ UPGRADE_TABLE = {
       psprite = 116,
       cost = 90,
       range = 18.6,
-      slow_down_factor = 0.7,
+      slow_down_f = 0.7,
     },
   },
   [TT_AREA_SLOW_L3] = {
@@ -286,7 +286,7 @@ UPGRADE_TABLE = {
       psprite = 116,
       cost = 180,
       range = 24,
-      slow_down_factor = 0.6,
+      slow_down_f = 0.6,
     },
   },
   [TT_AREA_WEAK_L2] = {
@@ -294,7 +294,7 @@ UPGRADE_TABLE = {
       psprite = 101,
       cost = 130,
       range = 16,
-      weaken_factor = 1.5,
+      weaken_f = 1.5,
     },
   },
   [TT_AREA_WEAK_L3] = {
@@ -302,70 +302,70 @@ UPGRADE_TABLE = {
       psprite = 101,
       cost = 220,
       range = 20,
-      weaken_factor = 2,
+      weaken_f = 2,
     },
   },
   [TT_BOOST_DAMAGE_L1] = {
     [TT_BOOST_DAMAGE_L2] = {
       psprite = 117,
       cost = 50,
-      damage_factor = 1.3,
+      damage_f = 1.3,
     },
     [TT_BOOST_FAST_L2] = {
       sprite = 110,
       psprite = 115,
       cost = 60,
-      damage_factor = 0,
-      reload_factor = 0.8,
+      damage_f = 0,
+      reload_f = 0.8,
     },
     [TT_BOOST_RANGE_L2] = {
       sprite = 108,
       psprite = 114,
       cost = 40,
-      damage_factor = 0,
-      range_factor = 1.4,
+      damage_f = 0,
+      range_f = 1.4,
     },
   },
   [TT_BOOST_DAMAGE_L2] = {
     [TT_BOOST_DAMAGE_L3] = {
       psprite = 117,
       cost = 90,
-      damage_factor = 1.35,
+      damage_f = 1.35,
     },
   },
   [TT_BOOST_DAMAGE_L3] = {
     [TT_BOOST_DAMAGE_L4] = {
       psprite = 117,
       cost = 190,
-      damage_factor = 1.5,
+      damage_f = 1.5,
     },
   },
   [TT_BOOST_FAST_L2] = {
     [TT_BOOST_FAST_L3] = {
       psprite = 115,
       cost = 115,
-      reload_factor = 0.7,
+      reload_f = 0.7,
     },
   },
   [TT_BOOST_FAST_L3] = {
     [TT_BOOST_FAST_L4] = {
       psprite = 115,
       cost = 225,
-      reload_factor = 0.5,
+      reload_f = 0.5,
     },
   },
   [TT_BOOST_RANGE_L2] = {
     [TT_BOOST_RANGE_L3] = {
       psprite = 114,
       cost = 75,
-      range_factor = 1.6,
+      range_f = 1.6,
     },
   },
   [TT_BOOST_RANGE_L3] = {
     [TT_BOOST_RANGE_L4] = {
       psprite = 114,
       cost = 175,
-      range_factor = 2.0,
+      range_f = 2.0,
     },
   },
 }

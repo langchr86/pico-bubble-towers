@@ -12,8 +12,8 @@
 ---@field next_pos_index number
 ---@field life number
 ---@field value_mul number
----@field damage_factor ModVal
----@field speed_factor ModVal
+---@field damage_f ModVal
+---@field speed_f ModVal
 ---@field bullet_list Bullet[]
 ---@field particle_list Particle[]
 Enemy = {}
@@ -33,8 +33,8 @@ function EnemyNew(type, value_mul)
     next_pos_index = 1,
     life = ENEMY_TABLE[type].life,
     value_mul = value_mul,
-    damage_factor = ModValNew(1),
-    speed_factor = ModValNew(1),
+    damage_f = ModValNew(1),
+    speed_f = ModValNew(1),
     bullet_list = {},
     particle_list = {}
   }
@@ -79,7 +79,7 @@ end
 
 ---@param damage number
 function Enemy:Damage(damage)
-  self.life -= damage * self.damage_factor:Get()
+  self.life -= damage * self.damage_f:Get()
   if self.life <= 0 then
     self.life = -Particle.kDuration
 
@@ -112,7 +112,7 @@ end
 function Enemy:IsGoingToDie()
   local bullet_sum = 0
   for bullet in all(self.bullet_list) do
-    bullet_sum += bullet.damage * self.damage_factor:Get()
+    bullet_sum += bullet.damage * self.damage_f:Get()
   end
   return self.life - bullet_sum <= 0
 end
@@ -156,7 +156,7 @@ function Enemy:Update()
     self.next_pos = self.path[self.next_pos_index]
   end
 
-  self.pos:Move(self.next_pos, self.props.speed * self.speed_factor:Get())
+  self.pos:Move(self.next_pos, self.props.speed * self.speed_f:Get())
 
   for bullet in all(self.bullet_list) do
     if bullet:InTarget() then
@@ -173,15 +173,15 @@ end
 
 ---@param modifiers TowerModifiers
 function Enemy:Modify(modifiers)
-  self.damage_factor:Modify(modifiers.weaken)
+  self.damage_f:Modify(modifiers.weaken)
   if not IsHeavyEnemy(self.type) then
-    self.speed_factor:Modify(modifiers.slow_down)
+    self.speed_f:Modify(modifiers.slow_down)
   end
 end
 
 function Enemy:ClearModifications()
-  self.speed_factor:Reset()
-  self.damage_factor:Reset()
+  self.speed_f:Reset()
+  self.damage_f:Reset()
 end
 
 function Enemy:Draw()

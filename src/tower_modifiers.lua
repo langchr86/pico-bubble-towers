@@ -27,20 +27,20 @@ end
 
 ---@param upgrade TowerUpgrade
 function TowerModifiers:Upgrade(upgrade)
-  if upgrade.damage_factor then
-    self.damage = upgrade.damage_factor
+  if upgrade.damage_f then
+    self.damage = upgrade.damage_f
   end
-  if upgrade.range_factor then
-    self.range = upgrade.range_factor
+  if upgrade.range_f then
+    self.range = upgrade.range_f
   end
-  if upgrade.reload_factor then
-    self.reload = upgrade.reload_factor
+  if upgrade.reload_f then
+    self.reload = upgrade.reload_f
   end
-  if upgrade.weaken_factor then
-    self.weaken = upgrade.weaken_factor
+  if upgrade.weaken_f then
+    self.weaken = upgrade.weaken_f
   end
-  if upgrade.slow_down_factor then
-    self.slow_down = upgrade.slow_down_factor
+  if upgrade.slow_down_f then
+    self.slow_down = upgrade.slow_down_f
   end
 
   self:CheckModificationTypes()

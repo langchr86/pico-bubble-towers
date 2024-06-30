@@ -256,20 +256,6 @@ function GameSession:CalculateGhostPath()
   return true
 end
 
-function GameSession:DrawDebug()
-  --if not g_show_debug_info then
-  --  return
-  --end
-  --
-  --for pos in all(self.enemy_path) do
-  --  spr(16, pos.x, pos.y)
-  --end
-  --
-  --for pos in all(self.ghost_path) do
-  --  spr(23, pos.x, pos.y)
-  --end
-end
-
 function GameSession:DrawStats()
   for x = 0, 15 do
     spr(1, x * kTileSize, 0)
@@ -395,7 +381,6 @@ function GameSession:Draw()
   self:DrawScreenshake()
 
   Map:Draw()
-  self:DrawDebug()
 
   for tower in all(self.modifier_tower_list) do
     tower:Draw(self.cursor)

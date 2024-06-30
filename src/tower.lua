@@ -33,7 +33,7 @@ function TowerNew(pos)
     sprite = 34,
     pos = pos:Clone(),
     logical_pos = pos + PointNew(4, 4),
-    type = TT.BASE,
+    type = TT_BASE,
     level = 0,
     damage = ModValNew(10),
     range = ModValNew(16),         --- divisor 3.75
@@ -117,7 +117,7 @@ function Tower:GetUpgradeMenuEntry(menu_index)
 
   for type, upgrade in pairs(UPGRADE_TABLE[self.type]) do
     local calculated_menu_index = 0
-    if self.type == TT.BASE then
+    if self.type == TT_BASE then
       calculated_menu_index = type \ 100
     else
       calculated_menu_index = (type % 100) \ 10

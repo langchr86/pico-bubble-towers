@@ -1,8 +1,8 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
 ---@class CircleAnimation
----@field max_radius number
----@field radius number
+---@field max_r number
+---@field r number
 ---@field inc number
 CircleAnimation = {}
 CircleAnimation.__index = CircleAnimation
@@ -10,31 +10,31 @@ CircleAnimation.__index = CircleAnimation
 ---@return CircleAnimation
 function CircleAnimationNew()
   local o = {
-    radius = 0,
+    r = 0,
   }
 
   return setmetatable(o, CircleAnimation)
 end
 
----@param radius number
-function CircleAnimation:Start(radius)
-  if self.radius == 0 then
-    self.max_radius = radius
-    self.radius = kTileSize
-    self.inc = (self.max_radius - self.radius) / 6 + 1
+---@param max number
+function CircleAnimation:Start(max)
+  if self.r == 0 then
+    self.max_r = max
+    self.r = kTileSize
+    self.inc = (self.max_r - self.r) / 6 + 1
   end
 end
 
 ---@param center Point
 function CircleAnimation:Animate(center)
-  if self.radius == 0 or self.radius >= self.max_radius then
-    self.radius = 0
+  if self.r == 0 or self.r >= self.max_r then
+    self.r = 0
     return
   end
 
-  DrawRealCircle(center, self.radius - 2, 15)
-  DrawRealCircle(center, self.radius - 1, 10)
-  DrawRealCircle(center, self.radius, 9)
+  DrawRealCircle(center, self.r - 2, 15)
+  DrawRealCircle(center, self.r - 1, 10)
+  DrawRealCircle(center, self.r, 9)
 
-  self.radius += self.inc
+  self.r += self.inc
 end

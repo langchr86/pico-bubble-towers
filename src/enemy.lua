@@ -81,7 +81,7 @@ end
 function Enemy:Damage(damage)
   self.life -= damage * self.damage_f:Get()
   if self.life <= 0 then
-    self.life = -Particle.kDuration
+    self.life = -ParticleDuration
 
     for i = 1, 15 do
       add(self.particle_list, ParticleNew(self.pos + PointNew(3, 3)))

@@ -9,7 +9,7 @@
 Particle = {}
 Particle.__index = Particle
 
-Particle.kDuration = 18
+ParticleDuration = 18
 
 ---@param pos Point
 ---@return Particle

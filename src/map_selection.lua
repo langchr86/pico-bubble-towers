@@ -2,7 +2,7 @@
 
 ---@class MapSelection
 ---@field map_index number
----@field map_count number
+---@field map_cnt number
 ---@field minimaps Minimap[]
 ---@field wave_list Wave[]
 ---@field next_session any
@@ -13,7 +13,7 @@ MapSelection.__index = MapSelection
 function MapSelectionNew(wave_list)
   local o = {
     map_index = 0,
-    map_count = 16,
+    map_cnt = 16,
     minimaps = {},
     wave_list = wave_list
   }
@@ -24,7 +24,7 @@ function MapSelectionNew(wave_list)
 end
 
 function MapSelection:Init()
-  for l = 0, self.map_count - 1 do
+  for l = 0, self.map_cnt - 1 do
     local top_left_tile = self.CalculateLevelOrigin(l)
     top_left_tile.y += 1
     self.minimaps[l] = MinimapNew(top_left_tile, kMapSizeInTiles, kMapSizeInTiles - 1)
@@ -78,7 +78,7 @@ function MapSelection:Draw()
   DrawBackground()
   PrintCenterX("select map", 4, 12)
 
-  for m = 0, self.map_count - 1 do
+  for m = 0, self.map_cnt - 1 do
     local map_pos = self.CalculateMinimapOrigin(m)
     self.minimaps[m]:Draw(map_pos)
   end

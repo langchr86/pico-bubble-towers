@@ -214,10 +214,10 @@ end
 ---@return number
 function Enemy:Animate()
   self.frame_index += 1
-  if self.frame_index >= self.props.frame_count then
+  if self.frame_index >= self.props.frame_cnt then
     self.frame_index = 0
     self.sprite_index += 1
-    if self.sprite_index >= self.props.sprite_count then
+    if self.sprite_index >= self.props.sprite_cnt then
       self.sprite_index = 0
     end
   end

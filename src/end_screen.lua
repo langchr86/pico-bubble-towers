@@ -25,8 +25,6 @@ function EndScreen:PressX()
 end
 
 function EndScreen:Update()
-  StartFullTheme()
-
   if self.finished then
     reload()
     return DifficultySelectionNew()

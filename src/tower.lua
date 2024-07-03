@@ -21,10 +21,7 @@ Tower = {}
 Tower.__index = Tower
 
 ---@type number
-Tower.BuyCost = 10
-
----@type number
-Tower.MaxLevel = 4
+TowerCost = 10
 
 ---@param pos Point
 ---@return Tower
@@ -101,7 +98,7 @@ end
 
 ---@return boolean
 function Tower:HasMaxLevel()
-  return self.level >= Tower.MaxLevel
+  return self.level >= 4
 end
 
 ---@class TowerMenu

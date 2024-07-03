@@ -85,7 +85,7 @@ function GameSession:PlaceTower()
     return false
   end
 
-  if self.cash < Tower.BuyCost then
+  if self.cash < TowerCost then
     sfx(19)
     return false
   end
@@ -94,8 +94,8 @@ function GameSession:PlaceTower()
 
   if self:CalculateNewPath() then
     add(self.tower_list, new_tower)
-    self.cash -= Tower.BuyCost
-    self.stats.spent += Tower.BuyCost
+    self.cash -= TowerCost
+    self.stats.spent += TowerCost
     sfx(21)
     return true
   end
@@ -110,8 +110,8 @@ function GameSession:RemoveTower()
   tower:Destroy()
   del(self.tower_list, tower)
   del(self.modifier_tower_list, tower)
-  self.cash += Tower.BuyCost
-  self.stats.spent -= Tower.BuyCost
+  self.cash += TowerCost
+  self.stats.spent -= TowerCost
   self:CalculateNewPath()
   sfx(21)
 end

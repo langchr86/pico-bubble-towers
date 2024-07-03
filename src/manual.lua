@@ -44,18 +44,21 @@ function Manual:Draw()
   if self.page == 0 then
     TextLine("mission:", 4)
     TextLine("do not allow enemies", 20)
-    TextLine("to enter the goal.", 30)
-    TextLine("place defence towers", 50)
-    TextLine("to shape the", 60)
-    TextLine("enemies path.", 70)
-    TextLine("upgrade towers with", 90)
-    TextLine("the earned cash by", 100)
-    TextLine("destroying enemies.", 110)
+    TextLine("to enter the goal   .", 29)
+    TextLine("start enemy wave with 🅾️.", 38)
+
+    TextLine("place defence towers", 54)
+    TextLine("with ❎ to shape", 63)
+    TextLine("the enemies path.", 72)
+
+    TextLine("upgrade towers with", 88)
+    TextLine("the cash earned by", 97)
+    TextLine("destroying enemies.", 106)
 
     spr(8, 100, 18)
-    spr(18, 100, 28)
-    spr(34, 100, 50, 2, 2)
-    spr(110, 100, 90, 2, 2)
+    spr(18, 90, 27)
+    spr(34, 100, 54, 2, 2)
+    spr(110, 100, 88, 2, 2)
 
   elseif self.page == 1 then
     TextLine("enemies:", 4)

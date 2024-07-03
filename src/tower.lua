@@ -112,8 +112,6 @@ end
 ---@param menu_index number
 ---@return TowerMenu|nil
 function Tower:GetUpgradeMenuEntry(menu_index)
-  assert(menu_index < 5)
-
   for type, upgrade in pairs(UPGRADE_TABLE[self.type]) do
     local calculated_menu_index = 0
     if self.type == TT_BASE then

@@ -44,8 +44,8 @@ function GameSessionNew(wave_list)
   local instance = --[[---@type GameSession]] setmetatable(o, GameSession)
 
   instance:SearchSpecialPoints()
-  assert(instance:CalculateNewPath())
-  assert(instance:CalculateGhostPath())
+  instance:CalculateNewPath()
+  instance:CalculateGhostPath()
   instance:PrepareCursorMenu()
 
   music(11, 250)
@@ -170,7 +170,6 @@ end
 ---@param menu_index number
 function GameSession:UpgradeTower(menu_index)
   local tower = --[[---@type Tower]] self.tower_selected
-  assert(tower)
 
   local menu_entry = tower:GetUpgradeMenuEntry(menu_index)
   local upgrade = --[[---@type TowerMenu]] menu_entry

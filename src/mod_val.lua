@@ -16,12 +16,10 @@ end
 
 function ModVal:Reset()
   self.current = self.base
-  assert(self.current > 0)
 end
 
 ---@param base number
 function ModVal:SetBase(base)
-  assert(base > 0)
   self.base = base
   self.current = base
 end
@@ -31,7 +29,6 @@ function ModVal:Modify(f)
   if f > 0 then
     self.current = self.current * f
   end
-  assert(self.current > 0)
 end
 
 ---@return number

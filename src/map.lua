@@ -84,9 +84,7 @@ end
 ---@param tile_pos Point
 ---@param sprite number
 function Map:TileSet4(tile_pos, sprite)
-  ---@type number
   local x = tile_pos.x + self.offset.x
-  ---@type number
   local y = tile_pos.y + self.offset.y
   mset(x, y, sprite)
   mset(x + 1, y, sprite + 1)
@@ -97,9 +95,7 @@ end
 ---@param tile_pos Point
 ---@param sprite number
 function Map:TileClear4(tile_pos, sprite)
-  ---@type number
   local x = tile_pos.x + self.offset.x
-  ---@type number
   local y = tile_pos.y + self.offset.y
   mset(x, y, sprite)
   mset(x + 1, y, sprite)

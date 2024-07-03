@@ -61,7 +61,6 @@ end
 
 ---@param upgrade_type TT
 function Tower:Upgrade(upgrade_type)
-  ---@type TowerUpgrade
   local upgrade = UPGRADE_TABLE[self.type][upgrade_type]
 
   self.type = upgrade_type
@@ -249,7 +248,6 @@ end
 function Tower:UpdateBestEnemy(enemy_list)
   self.best_enemy = nil
 
-  ---@type number
   local best_score
 
   for enemy in all(enemy_list) do

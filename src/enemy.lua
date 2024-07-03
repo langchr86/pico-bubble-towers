@@ -192,7 +192,6 @@ function Enemy:Draw()
     return
   end
 
-  ---@type Point
   spr(self:Animate(), self.pos.x, self.pos.y)
 
   local life_bar_length = 5

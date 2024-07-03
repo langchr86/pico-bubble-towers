@@ -198,7 +198,6 @@ function GameSession:StartNextWave()
     return
   end
 
-  ---@type Point
   local start_point = ConvertTileToPixel(self.start)
 
   local next_wave = --[[---@type Wave]] deli(self.wave_list, 1)
@@ -230,7 +229,6 @@ function GameSession:CalculateNewPath()
     return Map:IsTileWalkable(tile_pos)
   end
 
-  ---@type Point[]|boolean
   local path = LuaStar:Find(15, 15, self.start, self.goal, is_coord_reachable)
   if path == false then
     return false
@@ -246,7 +244,6 @@ function GameSession:CalculateGhostPath()
     return y ~= 0
   end
 
-  ---@type Point[]|boolean
   local path = LuaStar:Find(15, 15, self.start, self.goal, is_coord_reachable)
   if path == false then
     return false

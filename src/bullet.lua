@@ -30,6 +30,5 @@ function Bullet:Update()
 end
 
 function Bullet:Draw()
-  ---@type Point
   spr(20, self.pos.x, self.pos.y)
 end

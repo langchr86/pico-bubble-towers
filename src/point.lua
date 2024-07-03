@@ -39,12 +39,8 @@ end
 ---@param dest Point
 ---@return number
 function Point:Angle(dest)
-  ---@type Point
   local diff = dest - self
-
-  ---@type number
-  local alpha = atan2(diff.x, -diff.y)
-  return alpha
+  return atan2(diff.x, -diff.y)
 end
 
 ---@param alpha number
@@ -76,7 +72,6 @@ end
 ---@param other Point
 ---@return number
 function Point:Distance(other)
-  ---@type Point
   local diff = other - self
   return sqrt(diff.x * diff.x + diff.y * diff.y)
 end

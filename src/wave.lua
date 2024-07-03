@@ -47,7 +47,6 @@ end
 ---@param existing_enemies Enemy[]
 function Wave:TrySpawnBaby(existing_enemies)
   local function SpawnEnemy()
-    ---@type Enemy
     local new_enemy = deli(self.baby_list, 1)
     add(existing_enemies, new_enemy)
     add(self.active_list, new_enemy)
@@ -58,9 +57,7 @@ function Wave:TrySpawnBaby(existing_enemies)
     return
   end
 
-  ---@type Enemy
   local last_enemy = self.active_list[#self.active_list]
-  ---@type Enemy
   local new_enemy = self.baby_list[1]
   if last_enemy:IsDead() or not last_enemy.pos:IsNear(new_enemy.pos, 8) then
     SpawnEnemy()

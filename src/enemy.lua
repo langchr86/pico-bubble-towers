@@ -171,7 +171,7 @@ function Enemy:Update()
   end
 end
 
----@param modifiers TowerModifiers
+---@param modifiers TowerMods
 function Enemy:Modify(modifiers)
   self.damage_f:Modify(modifiers.weaken)
   if not IsHeavyEnemy(self.type) then

@@ -13,7 +13,7 @@ function StartScreenNew()
 end
 
 function StartScreen:PressX()
-  self.next_session = DifficultySelectionNew()
+  self.next_session = DiffSelectNew()
 end
 
 function StartScreen:Update()

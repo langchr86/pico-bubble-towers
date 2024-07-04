@@ -1,6 +1,6 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
----@class TowerModifiers
+---@class TowerMods
 ---@field damage number
 ---@field range number
 ---@field reload number
@@ -8,11 +8,11 @@
 ---@field slow_down number
 ---@field tower_mods boolean
 ---@field enemy_mods boolean
-TowerModifiers = {}
-TowerModifiers.__index = TowerModifiers
+TowerMods = {}
+TowerMods.__index = TowerMods
 
----@return TowerModifiers
-function TowerModifiersNew()
+---@return TowerMods
+function TowerModsNew()
   local o = {
     damage = 0,
     range = 0,
@@ -22,11 +22,11 @@ function TowerModifiersNew()
     tower_mods = false,
     enemy_mods = false,
   }
-  return setmetatable(o, TowerModifiers)
+  return setmetatable(o, TowerMods)
 end
 
 ---@param upgrade TowerUpgrade
-function TowerModifiers:Upgrade(upgrade)
+function TowerMods:Upgrade(upgrade)
   if upgrade.damage_f then
     self.damage = upgrade.damage_f
   end
@@ -46,7 +46,7 @@ function TowerModifiers:Upgrade(upgrade)
   self:CheckModificationTypes()
 end
 
-function TowerModifiers:CheckModificationTypes()
+function TowerMods:CheckModificationTypes()
   if self.damage ~= 0 or self.range ~= 0 or self.reload ~= 0 then
     self.tower_mods = true
   end

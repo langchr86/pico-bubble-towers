@@ -12,11 +12,11 @@
 ---@field reload_level number
 ---@field best_enemy Enemy
 ---@field canon_angle number
----@field modifiers TowerModifiers
+---@field modifiers TowerMods
 ---@field is_area_damage boolean
 ---@field can_attack_ghost boolean
 ---@field can_attack_normal boolean
----@field area_animation CircleAnimation
+---@field area_animation CircleAnim
 Tower = {}
 Tower.__index = Tower
 
@@ -37,11 +37,11 @@ function TowerNew(pos)
     reload = ModValNew(10),        --- divisor 1.5
     reload_level = 0,
     canon_angle = 0,
-    modifiers = TowerModifiersNew(),
+    modifiers = TowerModsNew(),
     is_area_damage = false,
     can_attack_ghost = true,
     can_attack_normal = true,
-    area_animation = CircleAnimationNew(),
+    area_animation = CircleAnimNew(),
   }
 
   local instance = --[[---@type Tower]] setmetatable(o, Tower)
@@ -206,7 +206,7 @@ function Tower:ModifyTowers(tower_list)
   end
 end
 
----@param modifiers TowerModifiers
+---@param modifiers TowerMods
 function Tower:Modify(modifiers)
   self.damage:Modify(modifiers.damage)
   self.range:Modify(modifiers.range)

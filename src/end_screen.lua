@@ -27,7 +27,7 @@ end
 function EndScreen:Update()
   if self.finished then
     reload()
-    return DifficultySelectionNew()
+    return DiffSelectNew()
   end
   return self
 end

@@ -23,7 +23,7 @@ end
 
 function Manual:Update()
   if self.page < 0 or self.page > 3 then
-    return DifficultySelectionNew()
+    return DiffSelectNew()
   end
   return self
 end

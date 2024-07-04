@@ -1,24 +1,24 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
----@class DifficultySelection
+---@class DiffSelect
 ---@field mode number
 ---@field manual boolean
 ---@field level number
 ---@field next_session any
-DifficultySelection = {}
-DifficultySelection.__index = DifficultySelection
+DiffSelect = {}
+DiffSelect.__index = DiffSelect
 
----@return DifficultySelection
-function DifficultySelectionNew()
+---@return DiffSelect
+function DiffSelectNew()
   local o = {
     mode = 0,
     manual = false,
     level = 0,
   }
-  return setmetatable(o, DifficultySelection)
+  return setmetatable(o, DiffSelect)
 end
 
-function DifficultySelection:Up()
+function DiffSelect:Up()
   if self.mode == 0 then
     self.manual = not self.manual
 
@@ -29,7 +29,7 @@ function DifficultySelection:Up()
   end
 end
 
-function DifficultySelection:Down()
+function DiffSelect:Down()
   if self.mode == 0 then
     self.manual = not self.manual
 
@@ -40,7 +40,7 @@ function DifficultySelection:Down()
   end
 end
 
-function DifficultySelection:PressO()
+function DiffSelect:PressO()
   if self.mode == 0 then
     self.next_session = StartScreenNew()
   else
@@ -48,7 +48,7 @@ function DifficultySelection:PressO()
   end
 end
 
-function DifficultySelection:PressX()
+function DiffSelect:PressX()
   if self.mode == 0 then
     if self.manual then
       self.next_session = ManualNew()
@@ -59,11 +59,11 @@ function DifficultySelection:PressX()
   elseif self.mode == 1 then
     self.mode = 2
   else
-    self.next_session = MapSelectionNew(CreatePredefinedWaveList(self.level))
+    self.next_session = MapSelectNew(CreatePredefinedWaveList(self.level))
   end
 end
 
-function DifficultySelection:Update()
+function DiffSelect:Update()
   StartFullTheme()
 
   if self.next_session then
@@ -73,7 +73,7 @@ function DifficultySelection:Update()
   end
 end
 
-function DifficultySelection:Draw()
+function DiffSelect:Draw()
   DrawBackground()
 
   print("start game", 32, 36, 12)
@@ -95,7 +95,7 @@ function DifficultySelection:Draw()
   end
 end
 
-function DifficultySelection:DrawNormal()
+function DiffSelect:DrawNormal()
   print("level:", 16, 54, 12)
   print("easy", 56, 54, 12)
   print("medium", 56, 62, 12)

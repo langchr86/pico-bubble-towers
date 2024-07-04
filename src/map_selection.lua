@@ -1,72 +1,72 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
----@class MapSelection
+---@class MapSelect
 ---@field map_index number
 ---@field minimaps Minimap[]
 ---@field wave_list Wave[]
 ---@field next_session any
-MapSelection = {}
-MapSelection.__index = MapSelection
+MapSelect = {}
+MapSelect.__index = MapSelect
 
-MapSelectionLastIndex = 15
+MapSelectLastIndex = 15
 
----@return MapSelection
-function MapSelectionNew(wave_list)
+---@return MapSelect
+function MapSelectNew(wave_list)
   local o = {
     map_index = 0,
     minimaps = {},
     wave_list = wave_list
   }
 
-  local instance = --[[---@type MapSelection]] setmetatable(o, MapSelection)
+  local instance = --[[---@type MapSelect]] setmetatable(o, MapSelect)
   instance:Init()
   return instance
 end
 
-function MapSelection:Init()
-  for l = 0, MapSelectionLastIndex do
+function MapSelect:Init()
+  for l = 0, MapSelectLastIndex do
     local top_left_tile = self.CalculateLevelOrigin(l)
     top_left_tile.y += 1
     self.minimaps[l] = MinimapNew(top_left_tile, kMapSizeInTiles, kMapSizeInTiles - 1)
   end
 end
 
-function MapSelection:Up()
+function MapSelect:Up()
   if self.map_index > 3 then
     self.map_index -= 4
   end
 end
 
-function MapSelection:Down()
+function MapSelect:Down()
   if self.map_index < 12 then
     self.map_index += 4
   end
 end
 
-function MapSelection:Left()
+function MapSelect:Left()
   if self.map_index % 4 > 0 then
     self.map_index -= 1
   end
 end
 
-function MapSelection:Right()
+function MapSelect:Right()
   if self.map_index % 4 < 3 then
     self.map_index += 1
   end
 end
 
-function MapSelection:PressO()
-  self.next_session = DifficultySelectionNew()
+function MapSelect:PressO()
+  self.next_session = DiffSelectNew()
 end
 
-function MapSelection:PressX()
+function MapSelect:PressX()
   local top_left_tile = self.CalculateLevelOrigin(self.map_index)
   Map:SetOffset(top_left_tile)
 
   self.next_session = GameSessionNew(self.wave_list)
 end
 
-function MapSelection:Update()
+function MapSelect:Update()
   if self.next_session then
     return self.next_session
   else
@@ -74,11 +74,11 @@ function MapSelection:Update()
   end
 end
 
-function MapSelection:Draw()
+function MapSelect:Draw()
   DrawBackground()
   PrintCenterX("select map", 4, 12)
 
-  for m = 0, MapSelectionLastIndex do
+  for m = 0, MapSelectLastIndex do
     local map_pos = self.CalculateMinimapOrigin(m)
     self.minimaps[m]:Draw(map_pos)
   end
@@ -92,13 +92,13 @@ end
 
 ---@param map_index number
 ---@return Point
-function MapSelection.CalculateLevelOrigin(map_index)
+function MapSelect.CalculateLevelOrigin(map_index)
   return PointNew((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles)
 end
 
 ---@param map_index number
 ---@return Point
-function MapSelection.CalculateMinimapOrigin(map_index)
+function MapSelect.CalculateMinimapOrigin(map_index)
   local minimap_offset = kMapSizeInTiles + kTileSize
   return PointNew(20 + (map_index % 4) * minimap_offset, 24 + (map_index \ 4) * minimap_offset)
 end

@@ -1,23 +1,23 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
----@class CircleAnimation
+---@class CircleAnim
 ---@field max_r number
 ---@field r number
 ---@field inc number
-CircleAnimation = {}
-CircleAnimation.__index = CircleAnimation
+CircleAnim = {}
+CircleAnim.__index = CircleAnim
 
----@return CircleAnimation
-function CircleAnimationNew()
+---@return CircleAnim
+function CircleAnimNew()
   local o = {
     r = 0,
   }
 
-  return setmetatable(o, CircleAnimation)
+  return setmetatable(o, CircleAnim)
 end
 
 ---@param max number
-function CircleAnimation:Start(max)
+function CircleAnim:Start(max)
   if self.r == 0 then
     self.max_r = max
     self.r = kTileSize
@@ -26,7 +26,7 @@ function CircleAnimation:Start(max)
 end
 
 ---@param center Point
-function CircleAnimation:Animate(center)
+function CircleAnim:Animate(center)
   if self.r == 0 or self.r >= self.max_r then
     self.r = 0
     return

@@ -35,9 +35,12 @@ function Manual:Draw()
     print(text, 18, y, 12)
   end
 
-  local function TowerDescription(sprite, psprite, text, y)
+  local function TowerDesc(sprite, psprite, spsprite, text, y)
     spr(sprite, 8, y, 2, 2)
-    spr(psprite, 26, y + 1)
+    spr(psprite, 26, y)
+    if spsprite != 0 then
+      spr(spsprite, 26, y + 8)
+    end
     print(text, 38, y + 2, 12)
   end
 
@@ -86,19 +89,19 @@ function Manual:Draw()
   elseif self.page == 2 then
     TextLine("attacking towers:", 4)
 
-    TowerDescription(64, 114, "better range & damage", 18)
-    TowerDescription(66, 117, "more damage", 38)
-    TowerDescription(68, 115, "higher fire rate", 58)
-    TowerDescription(70, 98, "can only shot flying", 78)
-    TowerDescription(74, 100, "area damage", 98)
+    TowerDesc(64, 114, 0, "better range & damage", 18)
+    TowerDesc(66, 117, 0, "more damage", 38)
+    TowerDesc(68, 115, 0, "higher fire rate", 58)
+    TowerDesc(70, 98, 0, "can only shot flying", 78)
+    TowerDesc(74, 100, 0, "area damage", 98)
 
   elseif self.page == 3 then
     TextLine("special towers:", 4)
 
-    TowerDescription(76, 116, "slow down enemies", 18)
-    TowerDescription(78, 101, "weaken enemies", 38)
-    TowerDescription(106, 117, "increase tower damage", 58)
-    TowerDescription(108, 114, "increase tower range", 78)
-    TowerDescription(110, 115, "increase tower rate", 98)
+    TowerDesc(76, 100, 116, "slow down enemies", 18)
+    TowerDesc(78, 100, 101, "weaken enemies", 38)
+    TowerDesc(106, 99, 117, "increase tower damage", 58)
+    TowerDesc(108, 99, 114, "increase tower range", 78)
+    TowerDesc(110, 99, 115, "increase tower rate", 98)
   end
 end

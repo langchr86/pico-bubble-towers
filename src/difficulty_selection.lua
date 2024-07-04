@@ -75,15 +75,14 @@ end
 
 function DifficultySelection:Draw()
   DrawBackground()
-  PrintCenterX("select difficulty level", 4, 12)
 
-  print("start game", 32, 24, 12)
-  print("read the manual", 32, 36, 12)
+  print("start game", 32, 36, 12)
+  print("read the manual", 32, 24, 12)
 
   if self.manual then
-    rect(30, 34, 96, 42, 12)
-  else
     rect(30, 22, 96, 30, 12)
+  else
+    rect(30, 34, 96, 42, 12)
   end
 
   if self.mode > 0 then

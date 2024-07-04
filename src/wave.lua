@@ -103,7 +103,7 @@ function ParseWaveString(list, data)
       enemy_type = current_num          --- t
     elseif mode == 3 then
       local value_mul = current_num / 4 --- v
-      AddEnemy(list, enemy_cnt, enemy_type, value_mul)
+      add(list, WaveNew(enemy_cnt, EnemyNew(type, value_mul)))
     end
   end
 end
@@ -115,12 +115,4 @@ function char2num(char)
       return num - 1
     end
   end
-end
-
----@param list Wave[]
----@param cnt number
----@param type ET
----@param value_mul number
-function AddEnemy(list, cnt, type, value_mul)
-  add(list, WaveNew(cnt, EnemyNew(type, value_mul)))
 end

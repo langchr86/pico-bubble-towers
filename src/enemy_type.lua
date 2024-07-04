@@ -38,7 +38,6 @@ end
 ENEMY_TABLE = {
   [ET_NORMAL] = {
     sprite = 8,
-    sprite_cnt = 4,
     frame_cnt = 8,
     speed = 1.0,
     life = 120,
@@ -46,7 +45,6 @@ ENEMY_TABLE = {
   },
   [ET_GHOST] = {
     sprite = 32,
-    sprite_cnt = 2,
     frame_cnt = 10,
     speed = 1.0,
     life = 100,
@@ -54,7 +52,6 @@ ENEMY_TABLE = {
   },
   [ET_FAST] = {
     sprite = 12,
-    sprite_cnt = 4,
     frame_cnt = 4,
     speed = 1.4,
     life = 100,
@@ -62,7 +59,6 @@ ENEMY_TABLE = {
   },
   [ET_REGENERATE] = {
     sprite = 28,
-    sprite_cnt = 3,
     frame_cnt = 6,
     speed = 1.0,
     life = 150,
@@ -70,7 +66,6 @@ ENEMY_TABLE = {
   },
   [ET_HEAVY] = {
     sprite = 24,
-    sprite_cnt = 4,
     frame_cnt = 6,
     speed = 0.6,
     life = 300,
@@ -78,7 +73,6 @@ ENEMY_TABLE = {
   },
   [ET_NORMAL_BOSS] = {
     sprite = 40,
-    sprite_cnt = 4,
     frame_cnt = 8,
     speed = 1.0,
     life = 360,
@@ -86,7 +80,6 @@ ENEMY_TABLE = {
   },
   [ET_GHOST_BOSS] = {
     sprite = 48,
-    sprite_cnt = 2,
     frame_cnt = 10,
     speed = 1.0,
     life = 300,
@@ -94,7 +87,6 @@ ENEMY_TABLE = {
   },
   [ET_FAST_BOSS] = {
     sprite = 44,
-    sprite_cnt = 4,
     frame_cnt = 4,
     speed = 1.4,
     life = 300,
@@ -102,7 +94,6 @@ ENEMY_TABLE = {
   },
   [ET_REGENERATE_BOSS] = {
     sprite = 60,
-    sprite_cnt = 3,
     frame_cnt = 6,
     speed = 1.0,
     life = 450,
@@ -110,7 +101,6 @@ ENEMY_TABLE = {
   },
   [ET_HEAVY_BOSS] = {
     sprite = 56,
-    sprite_cnt = 4,
     frame_cnt = 6,
     speed = 0.6,
     life = 900,

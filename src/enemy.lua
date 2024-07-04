@@ -217,7 +217,7 @@ function Enemy:Animate()
   if self.frame_index >= self.props.frame_cnt then
     self.frame_index = 0
     self.sprite_index += 1
-    if self.sprite_index >= self.props.sprite_cnt then
+    if self.sprite_index >= 4 then
       self.sprite_index = 0
     end
   end

@@ -27,7 +27,7 @@ TowerCost = 10
 ---@return Tower
 function TowerNew(pos)
   local o = {
-    sprite = 34,
+    sprite = 36,
     pos = pos:Clone(),
     logical_pos = pos + PointNew(4, 4),
     type = TT_BASE,

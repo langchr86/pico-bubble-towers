@@ -57,7 +57,7 @@ function Manual:Draw()
 
     spr(8, 100, 18)
     spr(18, 90, 27)
-    spr(34, 100, 54, 2, 2)
+    spr(36, 100, 54, 2, 2)
     spr(110, 100, 88, 2, 2)
 
   elseif self.page == 1 then

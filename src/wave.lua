@@ -72,18 +72,18 @@ function CreatePredefinedWaveList(level)
 
   if level == 0 then
     -- easy
-    ParseWaveString(list, "0204,0404,0324,0144,0524,0314,0604,0514,0334,0254")
+    ParseWaveString(list, "0208,0408,0328,0148,0528,0318,0608,0518,0338,0258")
   elseif level == 1 then
     -- medium
-    ParseWaveString(list, "0203,0403,0323,0143,0523,0313,0603,0513,0333,0253")
-    ParseWaveString(list, "0254,0523,0244,0444,0513,0433,0613,0802,1202,0393")
-    ParseWaveString(list, "1023,0573,0681,1003,0813")
+    ParseWaveString(list, "0206,0406,0326,0146,0526,0316,0606,0516,0336,0256")
+    ParseWaveString(list, "0258,0526,0248,0448,0516,0436,0616,0804,1204,0396")
+    ParseWaveString(list, "1026,0576,0684,1006,0816")
   else
     -- hard
-    ParseWaveString(list, "0202,0402,0322,0142,0522,0312,0602,0512,0332,0252")
-    ParseWaveString(list, "0253,0522,0243,0443,0512,0432,0612,0802,1202,0392")
-    ParseWaveString(list, "1023,0574,0684,1003,0812,1033,0642,0662,1222,0872")
-    ParseWaveString(list, "1602,1043,1212,2003,1543,1052,1062,1072,1092,1082")
+    ParseWaveString(list, "0204,0404,0324,0144,0524,0314,0604,0514,0334,0254")
+    ParseWaveString(list, "0256,0524,0246,0446,0514,0434,0614,0804,1204,0394")
+    ParseWaveString(list, "1026,0578,0688,1006,0814,1036,0644,0664,1224,0874")
+    ParseWaveString(list, "1604,1046,1214,2006,1546,1054,1064,1074,1094,1084")
   end
 
   return list
@@ -107,7 +107,7 @@ function ParseWaveString(list, data)
     elseif mode == 2 then
       enemy_type = current_num          --- t
     elseif mode == 3 then
-      local value_mul = current_num / 2 --- v
+      local value_mul = current_num / 4 --- v
       AddEnemy(list, enemy_cnt, enemy_type, value_mul)
     end
   end

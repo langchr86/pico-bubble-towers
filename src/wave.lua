@@ -88,22 +88,22 @@ end
 ---@param list Wave[]
 ---@param data string
 function ParseWaveString(list, data)
-  local enemy_cnt = 0
-  local enemy_type = 0
+  local cnt = 0
+  local type = 0
 
   for i = 1, #data do
-    local current_num = char2num(sub(data, i, i))
+    local num = char2num(sub(data, i, i))
     local mode = (i - 1) % 5
 
     if mode == 0 then
-      enemy_cnt = 10 * current_num    --- c
+      cnt = 10 * num            --- c
     elseif mode == 1 then
-      enemy_cnt += current_num        --- c
+      cnt += num                --- c
     elseif mode == 2 then
-      enemy_type = current_num          --- t
+      type = num                --- t
     elseif mode == 3 then
-      local value_mul = current_num / 4 --- v
-      add(list, WaveNew(enemy_cnt, EnemyNew(type, value_mul)))
+      local value_mul = num / 4 --- v
+      add(list, WaveNew(cnt, EnemyNew(type, value_mul)))
     end
   end
 end

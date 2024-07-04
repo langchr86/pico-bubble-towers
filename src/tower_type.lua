@@ -141,7 +141,7 @@ UPGRADE_TABLE = {
     [TT_N_SNP_3] = {
       psprite = 114,
       cost = 90,
-      damage = 70,
+      damage = 50,
       range = 26.6,
     },
   },
@@ -149,7 +149,7 @@ UPGRADE_TABLE = {
     [TT_N_SNP_4] = {
       psprite = 114,
       cost = 225,
-      damage = 180,
+      damage = 70,
       range = 60,
     },
   },
@@ -157,7 +157,7 @@ UPGRADE_TABLE = {
     [TT_N_FST_3] = {
       psprite = 115,
       cost = 100,
-      damage = 45,
+      damage = 35,
       range = 21.3,
       reload = 5.3,
     },
@@ -166,7 +166,7 @@ UPGRADE_TABLE = {
     [TT_N_FST_4] = {
       psprite = 115,
       cost = 190,
-      damage = 75,
+      damage = 50,
       range = 26.6,
       reload = 4,
     },
@@ -183,7 +183,7 @@ UPGRADE_TABLE = {
     [TT_N_DMG_4] = {
       psprite = 117,
       cost = 250,
-      damage = 200,
+      damage = 150,
       range = 29.3,
     },
   },
@@ -191,14 +191,14 @@ UPGRADE_TABLE = {
     [TT_G_SNP_2] = {
       psprite = 114,
       cost = 40,
-      damage = 40,
+      damage = 30,
       range = 26.6,
     },
     [TT_G_DMG_2] = {
       sprite = 72,
       psprite = 117,
       cost = 50,
-      damage = 50,
+      damage = 40,
       range = 18.6,
       reload = 13.3,
     },
@@ -207,7 +207,7 @@ UPGRADE_TABLE = {
     [TT_G_SNP_3] = {
       psprite = 114,
       cost = 100,
-      damage = 100,
+      damage = 50,
       range = 33.3,
     },
   },
@@ -215,7 +215,7 @@ UPGRADE_TABLE = {
     [TT_G_SNP_4] = {
       psprite = 114,
       cost = 250,
-      damage = 250,
+      damage = 70,
       range = 45,
     },
   },
@@ -223,7 +223,7 @@ UPGRADE_TABLE = {
     [TT_G_DMG_3] = {
       psprite = 117,
       cost = 130,
-      damage = 130,
+      damage = 60,
       range = 24,
     },
   },
@@ -231,7 +231,7 @@ UPGRADE_TABLE = {
     [TT_G_DMG_4] = {
       psprite = 117,
       cost = 325,
-      damage = 325,
+      damage = 120,
       range = 40,
     },
   },
@@ -269,7 +269,7 @@ UPGRADE_TABLE = {
     [TT_A_SNP_4] = {
       psprite = 114,
       cost = 350,
-      damage = 160,
+      damage = 80,
       range = 24,
     },
   },

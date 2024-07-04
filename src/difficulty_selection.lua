@@ -34,7 +34,7 @@ function DifficultySelection:Down()
     self.manual = not self.manual
 
   elseif self.mode == 1 then
-    if self.level < 2 then
+    if self.level < 3 then
       self.level += 1
     end
   end
@@ -100,6 +100,7 @@ function DifficultySelection:DrawNormal()
   print("easy", 56, 54, 12)
   print("medium", 56, 62, 12)
   print("hard", 56, 70, 12)
+  print("insane", 56, 78, 12)
 
   local y = 52 + self.level * 8
   rect(54, y, 96, y + 8, 12)

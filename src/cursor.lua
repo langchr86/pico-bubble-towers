@@ -83,7 +83,7 @@ end
 function Cursor:HandleMenuSelect(move_dir, opposite_dir)
   if self.menu_index == opposite_dir then
     self.menu_index = 0
-  elseif self.menu_sprite_list[move_dir] != CursorShowNoSprite then
+  elseif self.menu_sprite_list[move_dir] != MenuNoSprite then
     self.menu_index = move_dir
   end
 end

@@ -34,7 +34,7 @@ __lua__
 #include src/difficulty_selection.lua
 #include src/map_selection.lua
 #include src/start_screen.lua
-#include src/pico-proto.lua
+#include src/bubble-towers.lua
 
 __gfx__
 000000001111111144444444dddddddd22222222ccc0000000000ccc000000000000000000000000000000000000000000000000000000000000000000000000

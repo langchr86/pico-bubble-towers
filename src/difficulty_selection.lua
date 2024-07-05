@@ -20,7 +20,7 @@ end
 
 function DiffSelect:Up()
   if self.mode == 0 then
-    self.manual = not self.manual
+    self.manual = true
 
   elseif self.mode == 1 then
     if self.level > 0 then
@@ -31,7 +31,7 @@ end
 
 function DiffSelect:Down()
   if self.mode == 0 then
-    self.manual = not self.manual
+    self.manual = false
 
   elseif self.mode == 1 then
     if self.level < 3 then
@@ -56,8 +56,6 @@ function DiffSelect:PressX()
       self.level = 0
       self.mode = 1
     end
-  elseif self.mode == 1 then
-    self.mode = 2
   else
     self.next_session = MapSelectNew(CreatePredefinedWaveList(self.level))
   end
@@ -76,8 +74,8 @@ end
 function DiffSelect:Draw()
   DrawBackground()
 
-  print("start game", 32, 36, 12)
   print("read the manual", 32, 24, 12)
+  print("play the game", 32, 36, 12)
 
   if self.manual then
     rect(30, 22, 96, 30, 12)
@@ -86,22 +84,13 @@ function DiffSelect:Draw()
   end
 
   if self.mode > 0 then
-    self:DrawNormal()
+    print("level:", 16, 54, 12)
+    print("easy", 56, 54, 12)
+    print("medium", 56, 62, 12)
+    print("hard", 56, 70, 12)
+    print("insane", 56, 78, 12)
+
+    local y = 52 + self.level * 8
+    rect(54, y, 96, y + 8, 12)
   end
-
-  if self.mode > 1 then
-    PrintCenterX("start?", 98, 12)
-    rect(48, 96, 78, 104, 12)
-  end
-end
-
-function DiffSelect:DrawNormal()
-  print("level:", 16, 54, 12)
-  print("easy", 56, 54, 12)
-  print("medium", 56, 62, 12)
-  print("hard", 56, 70, 12)
-  print("insane", 56, 78, 12)
-
-  local y = 52 + self.level * 8
-  rect(54, y, 96, y + 8, 12)
 end

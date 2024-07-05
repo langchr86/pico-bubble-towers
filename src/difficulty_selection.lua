@@ -57,7 +57,7 @@ function DiffSelect:PressX()
       self.mode = 1
     end
   else
-    self.next_session = MapSelectNew(CreatePredefinedWaveList(self.level))
+    self.next_session = MapSelectNew(self.level)
   end
 end
 

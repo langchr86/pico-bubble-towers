@@ -3,19 +3,20 @@
 ---@class MapSelect
 ---@field map_index number
 ---@field minimaps Minimap[]
----@field wave_list Wave[]
+---@field level number
 ---@field next_session any
 MapSelect = {}
 MapSelect.__index = MapSelect
 
 MapSelectLastIndex = 15
 
+---@param level number
 ---@return MapSelect
-function MapSelectNew(wave_list)
+function MapSelectNew(level)
   local o = {
     map_index = 0,
     minimaps = {},
-    wave_list = wave_list
+    level = level
   }
 
   local instance = --[[---@type MapSelect]] setmetatable(o, MapSelect)
@@ -63,7 +64,7 @@ function MapSelect:PressX()
   local top_left_tile = self.CalculateLevelOrigin(self.map_index)
   Map:SetOffset(top_left_tile)
 
-  self.next_session = GameSessionNew(self.wave_list)
+  self.next_session = GameSessionNew(CreatePredefinedWaveList(self.level), self.level)
 end
 
 function MapSelect:Update()

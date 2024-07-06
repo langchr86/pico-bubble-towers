@@ -74,8 +74,8 @@ end
 function DiffSelect:Draw()
   DrawBackground()
 
-  print("read the manual", 32, 24, 12)
-  print("play the game", 32, 36, 12)
+  PrintLeft("read the manual", 32, 24)
+  PrintLeft("play the game", 32, 36)
 
   if self.manual then
     rect(30, 22, 96, 30, 12)
@@ -84,11 +84,11 @@ function DiffSelect:Draw()
   end
 
   if self.mode > 0 then
-    print("level:", 16, 54, 12)
-    print("easy", 56, 54, 12)
-    print("medium", 56, 62, 12)
-    print("hard", 56, 70, 12)
-    print("insane", 56, 78, 12)
+    PrintLeft("level:", 16, 54)
+    PrintLeft("easy", 56, 54)
+    PrintLeft("medium", 56, 62)
+    PrintLeft("hard", 56, 70)
+    PrintLeft("insane", 56, 78)
 
     local y = 52 + self.level * 8
     rect(54, y, 96, y + 8, 12)

@@ -258,10 +258,10 @@ function GameSession:DrawStats()
     spr(1, x * kTileSize, 0)
   end
 
-  print("life: ", 1, 1, 12)
+  PrintLeft("life: ", 1, 1)
   PrintRight(self.player_life, 29, 1, 7)
 
-  print("next: ", 35, 1, 12)
+  PrintLeft("next: ", 35, 1)
   local x = 54
   for i = 1, min(4, #self.wave_list) do
     local wave = self.wave_list[i]
@@ -269,7 +269,7 @@ function GameSession:DrawStats()
     x += 8
   end
 
-  print("cash: ", 92, 1, 12)
+  PrintLeft("cash: ", 92, 1)
   PrintRight(self.cash, 128, 1, 7)
 end
 

@@ -56,8 +56,8 @@ function EndScreen:Draw()
   end
 
   local function PrintStat(text, value, y)
-    print(text, 20, y, 12)
-    print(value, 90, y, 12)
+    PrintLeft(text, 20, y)
+    PrintLeft(value, 90, y)
   end
 
   PrintStat("killed enemies: ", self.killed, 60)

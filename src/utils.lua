@@ -31,6 +31,10 @@ function ConvertPixelToTile(pos)
   return PointNew(pos.x / kTileSize, pos.y / kTileSize)
 end
 
+function PrintLeft(text, x, y)
+  return print(text, x, y, 12)
+end
+
 function PrintRight(text, x, y, color)
   local length = print(text, 0, -kTileSize)
   print(text, x - length, y, color)

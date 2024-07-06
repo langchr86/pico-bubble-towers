@@ -32,7 +32,7 @@ function Manual:Draw()
   DrawBackground()
 
   local function TextLine(text, y)
-    print(text, 18, y, 12)
+    PrintLeft(text, 18, y)
   end
 
   local function TowerDesc(sprite, psprite, spsprite, text, y)
@@ -41,7 +41,7 @@ function Manual:Draw()
     if spsprite != 0 then
       spr(spsprite, 26, y + 8)
     end
-    print(text, 38, y + 2, 12)
+    PrintLeft(text, 38, y + 2)
   end
 
   if self.page == 1 then

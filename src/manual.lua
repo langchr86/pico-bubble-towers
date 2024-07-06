@@ -45,7 +45,8 @@ function Manual:Draw()
   end
 
   if self.page == 1 then
-    TextLine("mission:", 4)
+    PrintCenterX("mission", 6, 12)
+
     TextLine("do not allow enemies", 20)
     TextLine("to enter the goal   .", 29)
     TextLine("start enemy wave with 🅾️.", 38)
@@ -64,7 +65,7 @@ function Manual:Draw()
     spr(110, 100, 88, 2, 2)
 
   elseif self.page == 2 then
-    TextLine("enemies:", 4)
+    PrintCenterX("enemies", 6, 12)
 
     spr(8, 8, 18)
     TextLine("normal", 20)
@@ -86,7 +87,7 @@ function Manual:Draw()
     PrintCenterX("are much stronger", 104, 12)
 
   elseif self.page == 3 then
-    TextLine("attacking towers:", 4)
+    PrintCenterX("attacking towers", 6, 12)
 
     TowerDesc(64, 114, 0, "better range & damage", 18)
     TowerDesc(66, 117, 0, "more damage", 38)
@@ -95,7 +96,7 @@ function Manual:Draw()
     TowerDesc(74, 100, 0, "area damage", 98)
 
   elseif self.page == 4 then
-    TextLine("special towers:", 4)
+    PrintCenterX("special towers", 6, 12)
 
     TowerDesc(76, 100, 116, "slow down enemies", 18)
     TowerDesc(78, 100, 101, "weaken enemies", 38)

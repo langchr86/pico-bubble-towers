@@ -138,15 +138,15 @@ function Enemy:GetValue()
 end
 
 function Enemy:Update()
-  if self:InTarget() then
-    return
-  end
-
   if self:IsExploding() then
     for part in all(self.particle_list) do
       part:Update()
     end
     self.life += 1
+    return
+  end
+
+  if self:InTarget() then
     return
   end
 

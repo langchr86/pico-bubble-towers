@@ -1,12 +1,7 @@
 -- Copyright 2024 by Christian Lang is licensed under CC BY-NC-SA 4.0
 
-kSpriteSize = 8
-kSpriteRowSize = 16
 kTileSize = 8
-kTowerSize = 16
 kMapSizeInTiles = 16
-kMapRowSize = 8
-kTopRowYCoordinate = 8
 
 ---@param tile_path Point[]|boolean
 ---@return Point[]

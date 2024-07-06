@@ -199,8 +199,8 @@ function Enemy:Draw()
 
   local start_x = self.pos.x + 1
   local corrected_y = self.pos.y
-  if corrected_y <= kTopRowYCoordinate then
-    corrected_y = kTopRowYCoordinate + 1
+  if corrected_y <= 8 then
+    corrected_y = 9
   end
 
   line(start_x, corrected_y, start_x + life_bar_length, corrected_y, 8)

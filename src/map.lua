@@ -76,8 +76,8 @@ end
 ---@param sprite number
 ---@return number
 function Map:GetSpriteMainColor(sprite)
-  local x = (sprite % kSpriteRowSize) * kSpriteSize
-  local y = (sprite \ kSpriteRowSize) * kSpriteSize
+  local x = (sprite % 16) * 8
+  local y = (sprite \ 16) * 8
   return sget(x, y)
 end
 

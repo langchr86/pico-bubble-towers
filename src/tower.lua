@@ -200,7 +200,7 @@ end
 ---@param tower_list Tower[]
 function Tower:ModifyTowers(tower_list)
   for tower in all(tower_list) do
-    if tower.pos:Is8Adjacent(self.pos, kTowerSize) then
+    if tower.pos:Is8Adjacent(self.pos, 16) then
       tower:Modify(self.modifiers)
     end
   end

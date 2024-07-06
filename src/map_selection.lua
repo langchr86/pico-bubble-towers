@@ -94,7 +94,7 @@ end
 ---@param map_index number
 ---@return Point
 function MapSelect.CalculateLevelOrigin(map_index)
-  return PointNew((map_index % kMapRowSize) * kMapSizeInTiles, (map_index \ kMapRowSize) * kMapSizeInTiles)
+  return PointNew((map_index % 8) * kMapSizeInTiles, (map_index \ 8) * kMapSizeInTiles)
 end
 
 ---@param map_index number

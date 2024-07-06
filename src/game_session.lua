@@ -108,6 +108,11 @@ function GameSession:PlaceTower()
 end
 
 function GameSession:RemoveTower()
+  if self:AnyEnemies() then
+    sfx(19)
+    return false
+  end
+
   local tower = --[[---@type Tower]] self.tower_selected
   tower:Destroy()
   del(self.tower_list, tower)
@@ -116,6 +121,7 @@ function GameSession:RemoveTower()
   self.stats.spent -= TowerCost
   self:CalculateNewPath()
   sfx(21)
+  return true
 end
 
 function GameSession:PrepareCursorMenu()
@@ -125,8 +131,7 @@ function GameSession:PrepareCursorMenu()
 
     if menu_index == 0 then
       if tower.level == 0 then
-        self:RemoveTower()
-        return true
+        return self:RemoveTower()
       else
         sfx(19)
         return false

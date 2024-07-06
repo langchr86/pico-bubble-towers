@@ -8,7 +8,7 @@ Manual.__index = Manual
 ---@return Manual
 function ManualNew()
   local o = {
-    page = 0
+    page = 1
   }
   return setmetatable(o, Manual)
 end
@@ -22,7 +22,7 @@ function Manual:PressX()
 end
 
 function Manual:Update()
-  if self.page < 0 or self.page > 3 then
+  if self.page < 1 or self.page > 4 then
     return DiffSelectNew()
   end
   return self
@@ -44,7 +44,7 @@ function Manual:Draw()
     print(text, 38, y + 2, 12)
   end
 
-  if self.page == 0 then
+  if self.page == 1 then
     TextLine("mission:", 4)
     TextLine("do not allow enemies", 20)
     TextLine("to enter the goal   .", 29)
@@ -63,7 +63,7 @@ function Manual:Draw()
     spr(36, 100, 54, 2, 2)
     spr(110, 100, 88, 2, 2)
 
-  elseif self.page == 1 then
+  elseif self.page == 2 then
     TextLine("enemies:", 4)
 
     spr(8, 8, 18)
@@ -85,8 +85,7 @@ function Manual:Draw()
     PrintCenterX("boss variants", 94, 12)
     PrintCenterX("are much stronger", 104, 12)
 
-
-  elseif self.page == 2 then
+  elseif self.page == 3 then
     TextLine("attacking towers:", 4)
 
     TowerDesc(64, 114, 0, "better range & damage", 18)
@@ -95,7 +94,7 @@ function Manual:Draw()
     TowerDesc(70, 98, 0, "can only shot flying", 78)
     TowerDesc(74, 100, 0, "area damage", 98)
 
-  elseif self.page == 3 then
+  elseif self.page == 4 then
     TextLine("special towers:", 4)
 
     TowerDesc(76, 100, 116, "slow down enemies", 18)
@@ -104,4 +103,7 @@ function Manual:Draw()
     TowerDesc(108, 99, 114, "increase tower range", 78)
     TowerDesc(110, 99, 115, "increase tower rate", 98)
   end
+
+  local x = PrintRight("/4", 126, 120, 12)
+  PrintRight(self.page, x, 120, 12)
 end

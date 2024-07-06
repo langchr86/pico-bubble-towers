@@ -64,7 +64,7 @@ function MapSelect:PressX()
   local top_left_tile = self.CalculateLevelOrigin(self.map_index)
   Map:SetOffset(top_left_tile)
 
-  self.next_session = GameSessionNew(CreatePredefinedWaveList(self.level), self.level)
+  self.next_session = GameSessionNew(CreatePredefinedWaveList(self.level), self.level, self.map_index + 1)
 end
 
 function MapSelect:Update()

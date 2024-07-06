@@ -22,8 +22,9 @@ GameSession.__index = GameSession
 
 ---@param wave_list Wave[]
 ---@param level number
+---@param map number
 ---@return GameSession
-function GameSessionNew(wave_list, level)
+function GameSessionNew(wave_list, level, map)
   local o = {
     cursor = CursorNew(),
     start = PointNew(0, 0),
@@ -38,7 +39,7 @@ function GameSessionNew(wave_list, level)
     active_wave_list = {},
     cash = 100,
     player_life = 10,
-    stats = EndScreenNew(level),
+    stats = EndScreenNew(level, map),
     shake = 0,
   }
 

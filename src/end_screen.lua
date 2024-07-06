@@ -5,18 +5,21 @@
 ---@field lost number
 ---@field spent number
 ---@field level number
+---@field map number
 ---@field finished boolean
 EndScreen = {}
 EndScreen.__index = EndScreen
 
 ---@param level number
+---@param map number
 ---@return EndScreen
-function EndScreenNew(level)
+function EndScreenNew(level, map)
   local o = {
     killed = 0,
     lost = 0,
     spent = 0,
     level = level,
+    map = map,
     finished = false
   }
 
@@ -55,12 +58,15 @@ function EndScreen:Draw()
     PrintCenterX("level: insane", 40)
   end
 
+  local x = PrintLeft("map: ", 50, 50)
+  PrintLeft(self.map, x, 50)
+
   local function PrintStat(text, value, y)
     PrintLeft(text, 20, y)
     PrintLeft(value, 90, y)
   end
 
-  PrintStat("killed enemies: ", self.killed, 60)
-  PrintStat("lost enemies: ", self.lost, 70)
-  PrintStat("cash spent: ", self.spent, 80)
+  PrintStat("killed enemies: ", self.killed, 70)
+  PrintStat("lost enemies: ", self.lost, 80)
+  PrintStat("cash spent: ", self.spent, 90)
 end

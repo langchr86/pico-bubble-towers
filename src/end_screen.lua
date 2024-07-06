@@ -39,20 +39,20 @@ function EndScreen:Draw()
   DrawBackground()
 
   if self.lost >= 10 then
-    PrintCenterX("you lost", 20, 12)
+    PrintCenterX("you lost", 20)
     self.lost = 10
   else
-    PrintCenterX("you won", 20, 12)
+    PrintCenterX("you won", 20)
   end
 
   if self.level == 0 then
-    PrintCenterX("level: easy", 40, 12)
+    PrintCenterX("level: easy", 40)
   elseif self.level == 1 then
-    PrintCenterX("level: medium", 40, 12)
+    PrintCenterX("level: medium", 40)
   elseif self.level == 2 then
-    PrintCenterX("level: hard", 40, 12)
+    PrintCenterX("level: hard", 40)
   else
-    PrintCenterX("level: insane", 40, 12)
+    PrintCenterX("level: insane", 40)
   end
 
   local function PrintStat(text, value, y)

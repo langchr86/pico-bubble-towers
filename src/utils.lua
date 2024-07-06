@@ -37,9 +37,9 @@ function PrintRight(text, x, y, color)
   return x - length
 end
 
-function PrintCenterX(text, y, color)
+function PrintCenterX(text, y)
   local length = print(text, 0, -kTileSize)
-  print(text, 64 - length / 2, y, color)
+  print(text, 64 - length / 2, y, 12)
 end
 
 function DrawBackground()

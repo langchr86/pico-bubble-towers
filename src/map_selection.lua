@@ -77,7 +77,7 @@ end
 
 function MapSelect:Draw()
   DrawBackground()
-  PrintCenterX("select map", 4, 12)
+  PrintCenterX("select map", 4)
 
   for m = 0, MapSelectLastIndex do
     local map_pos = self.CalculateMinimapOrigin(m)

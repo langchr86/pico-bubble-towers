@@ -45,7 +45,7 @@ function Manual:Draw()
   end
 
   if self.page == 1 then
-    PrintCenterX("mission", 6, 12)
+    PrintCenterX("mission", 6)
 
     TextLine("do not allow enemies", 20)
     TextLine("to enter the goal   .", 29)
@@ -65,7 +65,7 @@ function Manual:Draw()
     spr(110, 100, 88, 2, 2)
 
   elseif self.page == 2 then
-    PrintCenterX("enemies", 6, 12)
+    PrintCenterX("enemies", 6)
 
     spr(8, 8, 18)
     TextLine("normal", 20)
@@ -83,11 +83,11 @@ function Manual:Draw()
     spr(56, 59, 80)
     spr(60, 69, 80)
     spr(48, 79, 80)
-    PrintCenterX("boss variants", 94, 12)
-    PrintCenterX("are much stronger", 104, 12)
+    PrintCenterX("boss variants", 94)
+    PrintCenterX("are much stronger", 104)
 
   elseif self.page == 3 then
-    PrintCenterX("attacking towers", 6, 12)
+    PrintCenterX("attacking towers", 6)
 
     TowerDesc(64, 114, 0, "better range & damage", 18)
     TowerDesc(66, 117, 0, "more damage", 38)
@@ -96,7 +96,7 @@ function Manual:Draw()
     TowerDesc(74, 100, 0, "area damage", 98)
 
   elseif self.page == 4 then
-    PrintCenterX("special towers", 6, 12)
+    PrintCenterX("special towers", 6)
 
     TowerDesc(76, 100, 116, "slow down enemies", 18)
     TowerDesc(78, 100, 101, "weaken enemies", 38)

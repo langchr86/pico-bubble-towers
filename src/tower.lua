@@ -172,7 +172,7 @@ function Tower:Draw(cursor)
     local x = self.pos.x + 5
     local y = self.pos.y + 14
     for i = 1, self.level do
-      pset(x + i, y, 1)
+      pset(x + i, y, 8)
     end
   end
 

@@ -95,6 +95,13 @@ Used third-party tools and libraries
 * Awesome list for pico-8: [awesome-PICO-8](https://github.com/pico-8/awesome-PICO-8?tab=readme-ov-file#tutorials)
 
 
+Special thanks to
+-----------------
+
+* [martinxyz](https://github.com/martinxyz) for his in-depth play testing and feedback.
+* [Krystman](https://github.com/Krystman) for his extensive tutorial [YouTube series](https://www.lexaloffle.com/bbs/?tid=28030) and some inspiration.
+
+
 License
 -------
 

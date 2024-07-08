@@ -3,6 +3,8 @@ pico-bubble-towers
 
 Tower Defense Game for Pico-8.
 
+![title_image](assets/title_image.png)
+
 Official game thread: TBD
 
 

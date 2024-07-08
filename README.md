@@ -12,8 +12,8 @@ Description
 -----------
 
 This is not the usual tower defence game you are used to.
-Sure, you have to build towers to defend against enemy waves.
-And also earn cash by destroying enemies to update your towers.
+Sure, you have to build towers to defend against enemy waves
+and also earn cash by destroying enemies to update your towers.
 
 What is special here is that we not only can build defence towers to destroy enemies
 but also to define the path the enemies can take.
@@ -28,7 +28,7 @@ To skip the title image just press `X`
 and you can choose your difficulty level you want to play.
 Alternatively you can read a small in-game manual that describes most of the core concepts.
 After this first selection screen you can choose one of the 16 different maps.
-Each step done before starting the game can always be undone by pressing `O`.
+Each selection can always be undone by pressing `O` before starting the game.
 
 After map selection the game is started and allows you to either
 place, remove or upgrade towers (all controlled with the cursor).
@@ -37,12 +37,12 @@ By pressing `O` you can start the next enemy wave (symbolized at the top center 
 Place towers with `X`.
 Hover over it to see its shot or manipulation range.
 Selecting it with `X` opens the upgrade menu.
-Here too you can always close the menu with `O` if you do not want to do anything with the selected tower.
+Here you can always close the menu with `O` if you do not want to do anything with the selected tower.
 The upgrade menu gives you many options to progress your towers.
 There are attacking towers that can be improved in terms of range, fire rate or damage.
 The green towers are specialized for flying enemies.
 Special towers can also deal area damage.
-This yellow tower then can also be upgraded to enemy modifiers like reducing of movement speed or armor.
+This yellow tower can also be upgraded to enemy modifiers like reducing of movement speed or armor.
 Modifier towers are the last category that does not fire at enemies
 but improve the properties of all surrounding towers.
 Here again we can improve fire rate, range or damage.
@@ -67,7 +67,7 @@ Customization
 If you like this game and want to play more maps you can easily build your own.
 Simply open the map editor in pico-8 and change the existing maps to your liking.
 No coding is needed.
-The only thins you need to ensure is to only use the 3 map sprites and always place exactly 1 start and 1 goal per map.
+The only thing you need to ensure is to only use the 3 map sprites and always place exactly 1 start and 1 goal per map.
 
 If you want to tweak the difficulty levels
 you can manipulate the corresponding wave definition strings in `CreatePredefinedWaveList`.

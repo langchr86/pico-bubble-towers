@@ -53,7 +53,7 @@ ENEMY_TABLE = {
   [ET_FAST] = {
     sprite = 12,
     frame_cnt = 4,
-    speed = 1.4,
+    speed = 1.5,
     life = 100,
     value = 4,
   },
@@ -68,7 +68,7 @@ ENEMY_TABLE = {
     sprite = 24,
     frame_cnt = 6,
     speed = 0.6,
-    life = 300,
+    life = 330,
     value = 6,
   },
   [ET_NORMAL_BOSS] = {
@@ -82,13 +82,13 @@ ENEMY_TABLE = {
     sprite = 48,
     frame_cnt = 10,
     speed = 1.0,
-    life = 300,
+    life = 280,
     value = 30,
   },
   [ET_FAST_BOSS] = {
     sprite = 44,
     frame_cnt = 4,
-    speed = 1.4,
+    speed = 1.5,
     life = 300,
     value = 20,
   },

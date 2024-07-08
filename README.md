@@ -92,6 +92,7 @@ Used third-party tools and libraries
 * `depict` for demake any image into a pico-8 image: [github.com/bikibird/depict](https://github.com/bikibird/depict)
 * `PX9` for compressing title image: [PX9 Data Compression](https://www.lexaloffle.com/bbs/?tid=34058)
 * `Luanalysis` for static code analysis in PyCharm: [IntelliJ-Luanalysis](https://github.com/Benjamin-Dobell/IntelliJ-Luanalysis)
+* Awesome list for pico-8: [awesome-PICO-8](https://github.com/pico-8/awesome-PICO-8?tab=readme-ov-file#tutorials)
 
 
 License

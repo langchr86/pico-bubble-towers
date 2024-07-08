@@ -46,9 +46,17 @@ but improve the properties of all surrounding towers.
 Here again we can improve fire rate, range or damage.
 
 Best way to learn all those tower types is to play an easy game and try all possible upgrades.
-See what works best for you or the selected level.
+See how expensive upgrades are and what works best for you or the selected level.
 And then try the next harder level or map.
 Good luck!
+
+
+Tower upgrades
+--------------
+
+The attached table shows all tower upgrades and their costs and stats.
+
+[tower_upgrades.pdf](assets/tower_upgrades.pdf)
 
 
 Customization

@@ -90,8 +90,8 @@ function Manual:Draw()
     PrintCenterX("attacking towers", 6)
 
     TowerDesc(64, 114, 0, "better range & damage", 18)
-    TowerDesc(66, 117, 0, "more damage", 38)
-    TowerDesc(68, 115, 0, "higher fire rate", 58)
+    TowerDesc(66, 117, 0, "much more damage", 38)
+    TowerDesc(68, 115, 0, "higher speed & damage", 58)
     TowerDesc(70, 98, 0, "can only shot flying", 78)
     TowerDesc(74, 100, 0, "area damage", 98)
 
@@ -102,7 +102,7 @@ function Manual:Draw()
     TowerDesc(78, 100, 101, "weaken enemies", 38)
     TowerDesc(106, 99, 117, "increase tower damage", 58)
     TowerDesc(108, 99, 114, "increase tower range", 78)
-    TowerDesc(110, 99, 115, "increase tower rate", 98)
+    TowerDesc(110, 99, 115, "increase tower speed", 98)
   end
 
   local x = PrintRight("/4", 126, 120, 12)

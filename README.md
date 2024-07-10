@@ -16,10 +16,11 @@ Description
 
 This is not the usual tower defence game you are used to.
 Sure, you have to build towers to defend against enemy waves
-and also earn cash by destroying enemies to update your towers.
+and also earn cash by destroying them to update your towers.
 
 What is special here is that we not only can build defence towers to destroy enemies
 but also to define the path the enemies can take.
+Where the enemies have different skills like self-healing or flying over towers.
 In addition, we have various different maps where some may have blockades,
 are limited in space or have already predefined fixed paths.
 

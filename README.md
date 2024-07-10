@@ -1,7 +1,7 @@
 pico-bubble-towers
 ==================
 
-Tower Defense Game for Pico-8.
+Tower Defense Game for [Pico-8](https://www.lexaloffle.com/pico-8.php).
 
 ![title_image](assets/title_image.png)
 

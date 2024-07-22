@@ -10,7 +10,7 @@ Tower Defense Game for [Pico-8](https://www.lexaloffle.com/pico-8.php).
 
 Official game thread where you can **play** or **download** the game directly:
 
-TBD
+[lexaloffle.com/bbs/?pid=151651](https://www.lexaloffle.com/bbs/?pid=151651)
 
 This is also the place to give **feedback** or just say thanks for the game.
 I very appreciate any comments there.
@@ -98,7 +98,7 @@ or in the [folder `releases`](/releases).
 
 There you can also find all alpha stage releases named as `pico-proto-xx.p8.png`.
 
-You can play the game directly in the official BBS thread: TBD
+You can play the game directly in the official BBS thread: [lexaloffle.com/bbs/?pid=151651](https://www.lexaloffle.com/bbs/?pid=151651)
 
 Any changes since the first official release can be found in the [CHANGELOG](CHANGELOG.md).
 

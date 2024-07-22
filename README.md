@@ -32,24 +32,25 @@ To skip the title image just press `X`
 and you can choose your difficulty level you want to play.
 Alternatively you can read a small in-game manual that describes most of the core concepts.
 After this first selection screen you can choose one of the 16 different maps.
-Each selection can always be undone by pressing `O` before starting the game.
+Each selection can always be undone by pressing `O`.
 
 After map selection the game is started and allows you to either
-place, remove or upgrade towers (all controlled with the cursor).
+place or upgrade towers (all controlled with the cursor).
+Basic towers can always be removed and sold for the same amount of cash as they are bought.
 By pressing `O` you can start the next enemy wave (symbolized at the top center of the screen).
 
 Place towers with `X`.
-Hover over it to see its shot or manipulation range.
+Hover over it to see its shot range (visualized by a circle) or manipulation range (rectangle).
 Selecting it with `X` opens the upgrade menu.
-Here you can always close the menu with `O` if you do not want to do anything with the selected tower.
-The upgrade menu gives you many options to progress your towers.
+The upgrade menu gives you many options to develop your towers.
 There are attacking towers that can be improved in terms of range, fire rate or damage.
 The green towers are specialized for flying enemies.
-Special towers can also deal area damage.
-This yellow tower can also be upgraded to enemy modifiers like reducing of movement speed or armor.
-Modifier towers are the last category that does not fire at enemies
+The yellow towers can deal area damage.
+Area damage towers can also be upgraded to enemy modifiers like reducing of movement speed or armor.
+Tower modifiers (gray rectangle) are the category that do not fire at enemies
 but improve the properties of all surrounding towers.
-Here again we can improve fire rate, range or damage.
+The available properties to improve are: fire rate, range or damage.
+You can always close the upgrade menu with `O` if you do not want to change the selected tower.
 
 Best way to learn all those tower types is to play an easy game and try all possible upgrades.
 See how expensive upgrades are and what works best for you or the selected level.

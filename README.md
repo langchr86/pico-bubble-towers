@@ -16,13 +16,6 @@ This is also the place to give **feedback** or just say thanks for the game.
 I very appreciate any comments there.
 
 
-Game Play
----------
-
-![demo_gameplay_1](assets/demo_gameplay_1.gif)
-![demo_gameplay_2](assets/demo_gameplay_2.gif)
-
-
 Description
 -----------
 
@@ -35,6 +28,13 @@ but also to define the path the enemies can take.
 Where the enemies have different skills like self-healing or flying over towers.
 In addition, we have various different maps where some may have blockades,
 are limited in space or have already predefined fixed paths.
+
+
+Game Play
+---------
+
+![demo_gameplay_1](assets/demo_gameplay_1.gif)
+![demo_gameplay_2](assets/demo_gameplay_2.gif)
 
 
 How to play

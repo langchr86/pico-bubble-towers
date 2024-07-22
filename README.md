@@ -8,7 +8,12 @@ Tower Defense Game for [Pico-8](https://www.lexaloffle.com/pico-8.php).
 ![gameplay_2](assets/gameplay_2.png)
 ![end_screen](assets/end_screen.png)
 
-Official game thread: TBD
+Official game thread where you can **play** or **download** the game directly:
+
+TBD
+
+This is also the place to give **feedback** or just say thanks for the game.
+I very appreciate any comments there.
 
 
 Game Play

@@ -90,6 +90,19 @@ If you want to tweak the difficulty levels
 you can manipulate the corresponding wave definition strings in `CreatePredefinedWaveList`.
 
 
+Releases
+--------
+
+You can find the official releases for download under [Releases](https://github.com/langchr86/pico-bubble-towers/releases)
+or in the [folder `releases`](/releases).
+
+There you can also find all alpha stage releases named as `pico-proto-xx.p8.png`.
+
+You can play the game directly in the official BBS thread: TBD
+
+Any changes since the first official release can be found in the [CHANGELOG](CHANGELOG.md).
+
+
 Inspiration
 -----------
 

@@ -92,7 +92,7 @@ function Manual:Draw()
     TowerDesc(64, 114, 0, "better range & damage", 18)
     TowerDesc(66, 117, 0, "much more damage", 38)
     TowerDesc(68, 115, 0, "higher speed & damage", 58)
-    TowerDesc(70, 98, 0, "can only shot flying", 78)
+    TowerDesc(70, 98, 0, "can only shoot flying", 78)
     TowerDesc(74, 100, 0, "area damage", 98)
 
   elseif self.page == 4 then

@@ -246,7 +246,7 @@ UPGRADE_TABLE = {
       sprite = 76,
       psprite = 116,
       cost = 35,
-      range = 14,
+      range = 14.5,
       slow_f = 0.8,
     },
     [TT_A_WEA_2] = {
@@ -277,7 +277,7 @@ UPGRADE_TABLE = {
     [TT_A_SLW_3] = {
       psprite = 116,
       cost = 90,
-      range = 18.6,
+      range = 19,
       slow_f = 0.7,
     },
   },

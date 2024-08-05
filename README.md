@@ -134,6 +134,18 @@ Special thanks to
 * [Krystman](https://github.com/Krystman) for his extensive tutorial [YouTube series](https://www.lexaloffle.com/bbs/?tid=28030) and some inspiration.
 
 
+Presentation
+------------
+
+This game was part of a presentation that shows the core concepts of Lua,
+how we can use Lua for object-oriented programming
+and some basics of game development for PICO-8.
+
+Slides: [pico8_bubble_tanks.pdf](presentation/pico8_bubble_tanks.pdf)
+
+Raw markdown: [pico8_bubble_tanks.md](presentation/pico8_bubble_tanks.md)
+
+
 License
 -------
 

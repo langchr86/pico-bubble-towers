@@ -67,6 +67,18 @@ function IsGhostOnlyUpgrade(type)
   return type == TT_G_SNP_1
 end
 
+---@field [number] string
+UPGRADE_DESC_TABLE = {
+  [98]  = "only shoot flying; but better",
+  [99]  = "improves nearby towers: damage+",
+  [100] = "area damage",
+  [101] = "  weaken  enemies in range",
+  [116] = "slow down enemies in range",
+  [114] = " range+++ (damage++)",         -- sniper
+  [115] = " speed+++ (damage+ range+)",   -- fast
+  [117] = "damage+++ (range++ speed-)",   -- damage
+}
+
 ---@class TowerUpgrade
 ---@field sprite number
 ---@field psprite number

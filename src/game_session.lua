@@ -142,33 +142,34 @@ function GameSession:PrepareCursorMenu()
   end
 
   ---@param menu_index number
+  ---@return number, string
   local function CursorMenuSpriteGetter(menu_index)
     if self.tower_selected == nil then
       self:PlaceTower()
-      return MenuAbort
+      return MenuAbort, ""
     end
 
     local tower = --[[---@type Tower]] self.tower_selected
     if tower:HasMaxLevel() then
       sfx(19)
-      return MenuAbort
+      return MenuAbort, ""
     end
 
     if menu_index == 0 and tower.level == 0 then
-      return Tower.GetDestroySprite()
+      return Tower.GetDestroySprite(), "remove tower and get cash back"
     end
 
     local menu_entry = tower:GetUpgradeMenuEntry(menu_index)
     if menu_entry then
       local upgrade = --[[---@type TowerMenu]] menu_entry
       if upgrade.cost > self.cash then
-        return upgrade.sprite + 4
+        return upgrade.sprite + 4, UPGRADE_DESC_TABLE[upgrade.sprite]
       else
-        return upgrade.sprite
+        return upgrade.sprite, UPGRADE_DESC_TABLE[upgrade.sprite]
       end
     end
 
-    return MenuNoSprite
+    return MenuNoSprite, ""
   end
 
   self.cursor:RegisterMenuHandler(CursorMenuHandler, CursorMenuSpriteGetter)

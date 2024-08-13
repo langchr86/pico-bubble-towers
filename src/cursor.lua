@@ -7,6 +7,7 @@
 ---@field show_menu boolean
 ---@field menu_index number
 ---@field menu_sprite_list number[]
+---@field menu_desc_list string[]
 ---@field menu_handler function
 ---@field menu_sprite_getter function
 Cursor = {}
@@ -26,6 +27,7 @@ function CursorNew()
     show_menu = false,
     menu_index = 0,
     menu_sprite_list = {},
+    menu_desc_list = {},
   }
   return setmetatable(o, Cursor)
 end
@@ -114,7 +116,7 @@ end
 
 function Cursor:ShowMenu()
   self.show_menu = true
-  self.menu_sprite_list[0] = self.menu_sprite_getter(0)
+  self.menu_sprite_list[0], _ = self.menu_sprite_getter(0)
 
   if self.menu_sprite_list[0] == MenuAbort then
     self:HideMenu()
@@ -126,8 +128,8 @@ end
 
 function Cursor:UpdateMenuSpriteList()
   if self.show_menu then
-    for i = 1, 4 do
-      self.menu_sprite_list[i] = self.menu_sprite_getter(i)
+    for i = 0, 4 do
+      self.menu_sprite_list[i], self.menu_desc_list[i] = self.menu_sprite_getter(i)
     end
   end
 end
@@ -135,6 +137,7 @@ end
 function Cursor:HideMenu()
   self.show_menu = false
   self.menu_sprite_list = {}
+  self.menu_desc_list = {}
   self.menu_index = 0
 end
 
@@ -158,6 +161,8 @@ function Cursor:Draw()
     end
 
     spr(selection_sprite, x, y, size, size)
+
+    self:DrawDescriptionPopUp()
 
     return
   end
@@ -208,4 +213,19 @@ function Cursor:CalcMenuPos(i)
   end
 
   return x, y, size
+end
+
+function Cursor:DrawDescriptionPopUp()
+  if self.menu_desc_list[self.menu_index] != "" then
+    local popup_y_top = 8
+    local popup_y_bottom = 16
+    if self.pos.y < 64 then
+      popup_y_top = 119
+      popup_y_bottom = 127
+    end
+
+    rectfill(0, popup_y_top, 127, popup_y_bottom, 1)
+    rect(0, popup_y_top, 127, popup_y_bottom, 12)
+    print(self.menu_desc_list[self.menu_index], 2, popup_y_top + 2, 12)
+  end
 end

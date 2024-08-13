@@ -8,6 +8,7 @@
 ---@field menu_index number
 ---@field menu_sprite_list number[]
 ---@field menu_desc_list string[]
+---@field menu_cost_list number[]
 ---@field menu_handler function
 ---@field menu_sprite_getter function
 Cursor = {}
@@ -28,6 +29,7 @@ function CursorNew()
     menu_index = 0,
     menu_sprite_list = {},
     menu_desc_list = {},
+    menu_cost_list = {},
   }
   return setmetatable(o, Cursor)
 end
@@ -116,7 +118,7 @@ end
 
 function Cursor:ShowMenu()
   self.show_menu = true
-  self.menu_sprite_list[0], _ = self.menu_sprite_getter(0)
+  self.menu_sprite_list[0], _, _ = self.menu_sprite_getter(0)
 
   if self.menu_sprite_list[0] == MenuAbort then
     self:HideMenu()
@@ -129,7 +131,7 @@ end
 function Cursor:UpdateMenuSpriteList()
   if self.show_menu then
     for i = 0, 4 do
-      self.menu_sprite_list[i], self.menu_desc_list[i] = self.menu_sprite_getter(i)
+      self.menu_sprite_list[i], self.menu_desc_list[i], self.menu_cost_list[i] = self.menu_sprite_getter(i)
     end
   end
 end
@@ -138,6 +140,7 @@ function Cursor:HideMenu()
   self.show_menu = false
   self.menu_sprite_list = {}
   self.menu_desc_list = {}
+  self.menu_cost_list = {}
   self.menu_index = 0
 end
 
@@ -227,5 +230,19 @@ function Cursor:DrawDescriptionPopUp()
     rectfill(0, popup_y_top, 127, popup_y_bottom, 1)
     rect(0, popup_y_top, 127, popup_y_bottom, 12)
     print(self.menu_desc_list[self.menu_index], 2, popup_y_top + 2, 12)
+  end
+
+  if self.menu_cost_list[self.menu_index] != 0 then
+    local popup_y_top = 16
+    local popup_y_bottom = 24
+    if self.pos.y < 64 then
+      popup_y_top = 111
+      popup_y_bottom = 119
+    end
+
+    rectfill(89, popup_y_top, 127, popup_y_bottom, 1)
+    rect(89, popup_y_top, 127, popup_y_bottom, 12)
+    print("cost: ", 91, popup_y_top + 2, 12)
+    print(self.menu_cost_list[self.menu_index], 114, popup_y_top + 2, 12)
   end
 end
